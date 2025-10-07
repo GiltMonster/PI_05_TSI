@@ -1,0 +1,44 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+}
+
+.login_left {
+  position: relative;
+  flex: 1 1 60vw;
+  background: #004aad;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 21vh;
+  overflow: hidden;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 2px);
+  background-size: 20px 20px;
+}
+
+.login_left h1 {
+  max-width: 28ch;
+  margin: 0 8px 40vh 0;
+  text-align: center;
+  font-weight: normal;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-size: 5.2vh;
+}
+
+.login_left h1 span {
+  font-weight: bold;
+  color: #fff;
+}
+
+.login_left img {
+  position: absolute;
+  left: 37vh;
+  bottom: 0;
+  height: 60vh;
+  width: auto;
+  user-select: none;
+  pointer-events: none;
+}

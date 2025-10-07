@@ -1,0 +1,160 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f7f7fb;
+}
+
+.login-right {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  width: 40vw;
+  background-color: #fff;
+  box-shadow: -2px 0 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5vh 4vw;
+  box-sizing: border-box;
+}
+
+.form-login {
+  width: 30vw;
+}
+
+.login-right img {
+  width: 25vh;
+}
+
+.titulo h2{
+  font-size: 1.5rem;
+  font-weight: normal;
+  color: #949494;
+}
+
+.titulo h2 span{
+  font-weight: bold;
+  color: #004AAD;
+}
+
+.titulo p {
+  font-size: 1rem;
+  color: #949494;
+  margin-top: -1vh;
+}
+
+form {
+  width: 100%;
+}
+
+
+.input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 35px;
+
+
+  input {
+    width: 100%;
+    height: 56px;
+    border: none;
+    box-shadow: 0 8px 9px rgba(0, 0, 0, 0.120);
+    border-radius: 12px;
+    padding: 0 50px;
+    font-size: 15px;
+    color: #333;
+    background-color: #fafafa;
+    transition: all 0.3s ease;
+
+
+    &::placeholder {
+      color: #b8b8b8;
+      font-size: 15px;
+    }
+
+
+    &:focus {
+      outline: none;
+      border-color: #004AAD;
+      background-color: #fff;
+      box-shadow: 0 2px 12px rgba(92, 139, 197, 0.15);
+    }
+  }
+
+
+  .icon-left {
+    position: absolute;
+    left: 18px;
+    width: 18px;
+    height: 18px;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+
+  .icon-right {
+    position: absolute;
+    right: 18px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+    img {
+      width: 18px;
+      height: 18px;
+      opacity: 0.5;
+    }
+  }
+}
+
+.forgot-password {
+  text-align: right;
+  margin-bottom: -2vh;
+}
+
+.forgot-password a {
+  color: #004AAD;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    color: #FF914D;
+  }
+}
+
+.btn-login {
+  width: 100%;
+  height: 56px;
+  background: #004AAD;
+  border: none;
+  border-radius: 9px;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  margin-top: 30px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(92, 139, 197, 0.3);
+
+
+  &:hover {
+    background: #FF914D;
+  }
+
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
