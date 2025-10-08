@@ -1,0 +1,23 @@
+<section class="header_container">
+  <img class="logo" src="{{ logo }}" alt="Logo" />
+
+  <div class="bloco2">
+    <div class="whats">
+      <a href="https://api.whatsapp.com/send?phone=55{{ telefone }}" target="_blank">
+        <fa-icon [icon]="icon_whats"></fa-icon>
+        <p>Fale Conosco</p>
+      </a>
+    </div>
+
+<div class="profile">
+  <img src="{{ profile }}" alt="Meu Perfil" />
+
+  <div class="user-info">
+    <a routerLink="/meu_perfil"> 
+      <p>Olá, {{ userName }}</p>
+      <span>{{ tipo_usuario }}</span>
+    </a>
+  </div>
+</div>
+  </div>
+</section>

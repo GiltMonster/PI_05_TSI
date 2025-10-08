@@ -1,0 +1,152 @@
+.header_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.120);
+  height: 12%;
+  font-family: poppins;
+}
+
+.logo{
+  margin: 0;
+  width: 17vh;
+  margin-bottom: -5px;
+}
+
+.bloco2 {
+  display: flex;
+  align-items: center;
+  gap: 90px;
+}
+
+.whats {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #333;
+  font-weight: 500;
+}
+
+.whats fa-icon {
+  font-size: 2.0rem;
+}
+
+.whats a{
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  background-color: #7CC350;
+  color: #fff;
+  padding: 0 11px 0 9px;
+  border-radius: 9px;
+  gap: 5px;
+  font-size: 1.0rem;
+}
+
+.whats a:hover {
+  background-color: #66b140;
+  transition: background-color 0.3s ease;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    img {
+        width: 9vh; 
+        height: 9vh;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .user-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+
+    .user-info a {
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        line-height: 1.2;
+    }
+
+    .user-info p {
+        font-size: 1.2rem;
+        color: #004AAD;
+        font-weight: bold;
+        margin: 0;
+        padding: 0;
+    }
+
+    .user-info span {
+        font-size: 0.9rem;
+        color: #949494;
+        font-weight: normal;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+
+@media (max-width: 1014px) {
+    .bloco2 {
+        gap: 70px;
+    }
+    
+    .logo {
+        width: 170px;
+    }
+
+    .whats a{
+      font-size: 1.1rem;
+    }
+
+    .whats fa-icon {
+      font-size: 1.9rem;
+    }
+
+    .profile img {
+        width: 40px; 
+        height: 40px;
+    }
+
+    .profile .user-info p {
+        font-size: 1.3rem; 
+        margin-bottom: 2px;
+    }
+
+        .profile .user-info span{
+        font-size: 0.9rem; 
+    }
+}
+
+
+@media (max-width: 576px) {
+    .header_container {
+        padding: 10px 15px;
+    }
+    
+    .logo {
+        width: 100px; 
+    }
+
+    .bloco2 {
+        gap: 15px; 
+    }
+    
+    .whats a p {
+        display: none; 
+    }
+    .whats a {
+        padding: 7px; 
+    }
+    .profile .user-info  {
+        display: none; 
+    }
+}
