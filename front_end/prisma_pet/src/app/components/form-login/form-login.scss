@@ -58,6 +58,18 @@ form {
   width: 100%;
   margin-bottom: 35px;
 
+  .icon-left {
+    position: absolute;
+    opacity: 0.6;
+    pointer-events: none;
+    
+    fa-icon {
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+    }
+  }
+
 
   input {
     width: 100%;
@@ -107,13 +119,6 @@ form {
     display: flex;
     align-items: center;
     justify-content: center;
-
-
-    img {
-      width: 18px;
-      height: 18px;
-      opacity: 0.5;
-    }
   }
 }
 
