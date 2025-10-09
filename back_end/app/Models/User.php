@@ -5,13 +5,15 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
 
-    use HasFactory, HasRoles;
+    use HasFactory, HasRoles, HasApiTokens;
 
+    protected $table = 'users';
     protected $fillable = [
         'type',
         'name',
@@ -30,30 +32,28 @@ class User extends Authenticatable
     ];
 
     protected $guard_name = 'api';
+    public $timestamps = false;
 
-    protected $hidden = ['password'];
+    protected $hidden = ['password', 'remember_token'];
 
-    // 🔹 Polimorfismo: decide qual classe usar conforme o campo "type"
     public function newFromBuilder($attributes = [], $connection = null)
     {
         $model = parent::newFromBuilder($attributes, $connection);
 
-        switch ($model->type) {
-            case 'admin':
-                return (new Admin)->newFromBuilder($attributes, $connection);
-            case 'vet':
-                return (new Vet)->newFromBuilder($attributes, $connection);
-            case 'user':
-                return (new Client)->newFromBuilder($attributes, $connection);
-            default:
-                return $model;
+        if (get_class($this) === self::class) {
+            switch ($model->type) {
+                case 'admin':
+                    return (new Admin)->newFromBuilder($attributes, $connection);
+                case 'vet':
+                    return (new Vet)->newFromBuilder($attributes, $connection);
+                case 'user':
+                    return (new Client)->newFromBuilder($attributes, $connection);
+                default:
+                    return $model;
+            }
         }
-    }
 
-    // Relação com pets (só usada no tipo "user")
-    public function pets(): HasMany
-    {
-        return $this->hasMany(Pet::class);
+        return $model;
     }
 
 }

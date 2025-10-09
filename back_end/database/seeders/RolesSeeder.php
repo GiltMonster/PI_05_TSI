@@ -1,4 +1,5 @@
 <?php
+
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -9,10 +10,9 @@ class RolesSeeder extends Seeder
 {
     public function run(): void
     {
-        // Cria as roles principais
-        $admin = Role::firstOrCreate(['name' => 'admin']);
-        $vet   = Role::firstOrCreate(['name' => 'vet']);
-        $user  = Role::firstOrCreate(['name' => 'user']);
+        $admin = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'api']);
+        $vet   = Role::firstOrCreate(['name' => 'vet', 'guard_name' => 'api']);
+        $user  = Role::firstOrCreate(['name' => 'user', 'guard_name' => 'api']);
 
         // Exemplo de permissões
         $permissions = [
@@ -26,7 +26,7 @@ class RolesSeeder extends Seeder
         ];
 
         foreach ($permissions as $permission) {
-            Permission::firstOrCreate(['name' => $permission]);
+            Permission::firstOrCreate(['name' => $permission, 'guard_name' => 'api']);
         }
 
         // Vincula permissões aos cargos
