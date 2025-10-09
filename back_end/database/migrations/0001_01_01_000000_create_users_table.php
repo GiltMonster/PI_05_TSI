@@ -13,27 +13,25 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('type'); // admin | vet | user
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
-        });
 
-        Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
-        });
+            // Campos opcionais (vet e user)
+            $table->string('phone')->nullable();
+            $table->string('cep')->nullable();
+            $table->string('endereco')->nullable();
+            $table->string('cidade')->nullable();
+            $table->string('estado')->nullable();
+            $table->string('bairro')->nullable();
+            $table->string('complemento')->nullable();
+            $table->string('cpf')->nullable();
 
-        Schema::create('sessions', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->foreignId('user_id')->nullable()->index();
-            $table->string('ip_address', 45)->nullable();
-            $table->text('user_agent')->nullable();
-            $table->longText('payload');
-            $table->integer('last_activity')->index();
+            // Campos exclusivos de veterinário
+            $table->string('crmv')->nullable();
+            $table->string('pix')->nullable();
+
         });
     }
 
@@ -43,7 +41,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
-        Schema::dropIfExists('sessions');
     }
 };
