@@ -39,9 +39,15 @@ class AuthController extends Controller
                         'email' => $validated['email'],
                         'password' => bcrypt($validated['password']),
                         'crmv' => $request->crmv,
-                        'chave_pix' => $request->chave_pix,
+                        'pix' => $request->chave_pix,
                         'cpf' => $request->cpf,
                         'phone' => $request->phone,
+                        'cep' => $request->cep,
+                        'endereco' => $request->endereco,
+                        'cidade' => $request->cidade,
+                        'estado' => $request->estado,
+                        'bairro' => $request->bairro,
+                        'complemento' => $request->complemento,
                     ]);
                     $user->assignRole('vet');
                     break;
@@ -53,6 +59,12 @@ class AuthController extends Controller
                         'password' => bcrypt($validated['password']),
                         'cpf' => $request->cpf,
                         'phone' => $request->phone,
+                        'cep' => $request->cep,
+                        'endereco' => $request->endereco,
+                        'cidade' => $request->cidade,
+                        'estado' => $request->estado,
+                        'bairro' => $request->bairro,
+                        'complemento' => $request->complemento,
                     ]);
                     $user->assignRole('user');
                     break;
