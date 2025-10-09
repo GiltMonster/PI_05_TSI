@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
 
-    use HasFactory;
+    use HasFactory, HasRoles;
 
     protected $fillable = [
         'type',
@@ -27,6 +28,8 @@ class User extends Authenticatable
         'crmv',
         'pix',
     ];
+
+    protected $guard_name = 'api';
 
     protected $hidden = ['password'];
 
