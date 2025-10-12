@@ -1,0 +1,41 @@
+<header class="header">
+  <div class="header-container">
+    <div class="logo-section">
+      <div class="logo">
+        <img src="/logo.png" alt="JA Médicos Veterinários" class="logo-image">
+      </div>
+    </div>
+
+    <div class="search-section">
+      <div class="search-container">
+        <input 
+          type="text" 
+          class="search-input" 
+          placeholder="Buscar Animal"
+          [(ngModel)]="searchTerm"
+          (keyup.enter)="onSearch()"
+        >
+        <button class="search-button" (click)="onSearch()">
+          <img src="/icon_search.png" alt="Buscar" class="search-icon">
+        </button>
+      </div>
+    </div>
+
+    <div class="actions-section">
+      <button class="contact-button" (click)="onContact()">
+        <img src="/icon_whats.png" alt="WhatsApp" class="whatsapp-icon">
+        Fale Conosco
+      </button>
+
+      <div class="user-info" (click)="onProfile()">
+        <div class="user-avatar">
+          <img src="/user_icon.png" alt="Avatar do usuário" class="user-avatar-image">
+        </div>
+        <div class="user-details">
+          <span class="user-name">Olá, {{ userName }}</span>
+          <span class="user-type">{{ getUserTypeLabel() }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

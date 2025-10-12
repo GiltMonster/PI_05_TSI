@@ -1,0 +1,37 @@
+<div class="pet-card">
+  <div class="pet-content">
+    <div class="pet-icon">
+      <img [src]="getSpeciesIcon()" [alt]="pet.especie" class="species-icon">
+    </div>
+
+    <div class="pet-info">
+      <h3 class="pet-name">{{ pet.nome }}</h3>
+      <p class="pet-details">
+        {{ getSexoLabel() }} | {{ pet.idade }} {{ pet.idade === 1 ? 'Ano' : 'Anos' }}
+      </p>
+      <p class="pet-tutor">
+        Tutor(a): {{ pet.tutor_nome }}
+      </p>
+    </div>
+  </div>
+
+  @if (showActions) {
+    <div class="pet-actions">
+      <button 
+        class="action-button edit-button" 
+        (click)="onEdit()"
+        title="Editar pet"
+      >
+        <img src="/icon_edit.png" alt="Editar" class="action-icon">
+      </button>
+      
+      <button 
+        class="action-button delete-button" 
+        (click)="onDelete()"
+        title="Excluir pet"
+      >
+        <img src="/icon_delete.png" alt="Excluir" class="action-icon">
+      </button>
+    </div>
+  }
+</div>

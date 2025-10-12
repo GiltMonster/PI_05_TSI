@@ -1,0 +1,270 @@
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alatsi&display=swap');
+
+.home-page {
+  min-height: 100vh;
+  background-color: #ffffff !important;
+  padding: 24px 24px 0 24px;
+  font-family: 'ABeeZee', sans-serif;
+  width: 100%;
+}
+
+.info-cards-section {
+  margin-bottom: 0;
+  margin-top: 60px;
+}
+
+.info-cards-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  justify-items: center;
+}
+
+.info-card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  text-align: center;
+  width: 262px;
+  height: 233px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.card-image {
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.card-content {
+  text-align: center;
+}
+
+.card-step {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 5px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #537FC0;
+  font-family: 'ABeeZee', sans-serif;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #949494;
+  margin: 0 0 6px 0;
+  line-height: 1.2;
+  font-family: 'ABeeZee', sans-serif;
+}
+
+.card-description {
+  font-size: 12px;
+  color: #949494;
+  line-height: 1.4;
+  margin: 0;
+  font-family: 'ABeeZee', sans-serif;
+}
+
+.main-content-section {
+  background: transparent;
+  padding: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.main-content-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  align-items: center;
+  justify-items: center;
+}
+
+.image-section {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.main-image {
+  width: 100%;
+  max-width: 350px;
+  height: calc(100vh - 120px);
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.text-section {
+  padding: 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.main-title {
+  font-size: 28px;
+  font-weight: 400;
+  color: #537FC0;
+  margin: 0 0 20px 0;
+  line-height: 1.2;
+  font-family: 'Alatsi', sans-serif;
+}
+
+.main-description {
+  font-size: 14px;
+  color: #949494;
+  line-height: 1.6;
+  margin: 0;
+  text-align: left;
+  font-family: 'ABeeZee', sans-serif;
+  max-width: 400px;
+}
+
+@media (max-width: 1024px) {
+  .info-cards-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .main-content-container {
+    gap: 30px;
+  }
+
+  .main-title {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-page {
+    padding: 16px;
+  }
+
+  .info-cards-section {
+    margin-top: 40px;
+  }
+
+  .info-cards-container {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .info-card {
+    padding: 18px;
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+  }
+
+  .card-image {
+    width: 130px;
+    height: 130px;
+    margin-bottom: 16px;
+  }
+
+  .card-step {
+    font-size: 12px;
+  }
+
+  .card-description {
+    font-size: 10px;
+  }
+
+  .main-content-section {
+    padding: 0;
+  }
+
+  .main-content-container {
+    grid-template-columns: 1fr;
+    gap: 5px;
+    justify-items: center;
+  }
+
+  .main-image {
+    max-width: 280px;
+    height: calc(100vh - 140px);
+  }
+
+  .main-title {
+    font-size: 24px;
+    text-align: left;
+  }
+
+  .main-description {
+    font-size: 13px;
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-page {
+    padding: 12px;
+  }
+
+  .info-cards-section {
+    margin-top: 30px;
+  }
+
+  .info-card {
+    padding: 16px;
+    width: 100%;
+    height: auto;
+    min-height: 250px;
+  }
+
+  .card-image {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 12px;
+  }
+
+  .card-step {
+    font-size: 10px;
+  }
+
+  .card-description {
+    font-size: 8px;
+  }
+
+  .main-content-section {
+    padding: 0;
+  }
+
+  .main-image {
+    max-width: 220px;
+    height: calc(100vh - 120px);
+  }
+
+  .main-title {
+    font-size: 20px;
+  }
+
+  .main-description {
+    font-size: 12px;
+  }
+}

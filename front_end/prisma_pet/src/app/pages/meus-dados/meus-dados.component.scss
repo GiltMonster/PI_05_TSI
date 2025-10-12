@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap');
+
+.meus-dados-page {
+  min-height: 100vh;
+  background-color: #ffffff;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.dados-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  max-width: 800px;
+  width: 100%;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile-name {
+  font-size: 24px;
+  font-weight: 600;
+  color: #537FC0;
+  margin: 0;
+  font-family: 'ADLaM Display', sans-serif;
+}
+
+.dados-form {
+  width: 100%;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 0.6fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.form-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.floating-label {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  font-weight: 500;
+  color: #D9D9D9;
+  font-family: 'ABeeZee', sans-serif;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  background: white;
+  padding: 0 4px;
+  z-index: 1;
+  margin: 0;
+}
+
+.field-input {
+  padding: 12px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #949494;
+  background: white;
+  transition: border-color 0.2s ease;
+  font-family: 'ABeeZee', sans-serif;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  &:focus {
+    outline: none;
+    border-color: #537FC0;
+    box-shadow: 0 0 0 3px rgba(83, 127, 192, 0.1);
+  }
+
+  &:focus + .floating-label,
+  &:not(:placeholder-shown) + .floating-label {
+    top: 0;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #D9D9D9;
+    background: white;
+    padding: 0 4px;
+  }
+
+  &::placeholder {
+    color: transparent;
+  }
+}
+
+.save-button {
+  background: #F4864D;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'ADLaM Display', sans-serif;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  height: 48px;
+  width: 100%;
+
+  &:hover {
+    background: #e67e22;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .meus-dados-page {
+    padding: 16px;
+  }
+
+  .dados-container {
+    padding: 24px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .form-column {
+    gap: 16px;
+  }
+
+
+  .profile-avatar {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 12px;
+  }
+
+  .profile-name {
+    font-size: 20px;
+  }
+
+  .form-actions {
+    justify-content: center;
+  }
+
+  .save-button {
+    width: 100%;
+    padding: 14px 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .meus-dados-page {
+    padding: 12px;
+  }
+
+  .dados-container {
+    padding: 16px;
+  }
+
+  .profile-avatar {
+    width: 50px;
+    height: 50px;
+  }
+
+  .profile-name {
+    font-size: 18px;
+  }
+
+  .field-input {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .save-button {
+    padding: 12px 24px;
+    font-size: 13px;
+  }
+}
+

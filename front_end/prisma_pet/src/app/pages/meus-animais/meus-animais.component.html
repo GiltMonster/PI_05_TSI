@@ -1,0 +1,11 @@
+<div class="meus-animais-page">
+  <app-pet-list
+    [pets]="pets"
+    [loading]="loading"
+    [showActions]="true"
+    (editPet)="onEditPet($event)"
+    (deletePet)="onDeletePet($event)"
+    (viewPet)="onViewPet($event)"
+    (addPet)="onAddPet()">
+  </app-pet-list>
+</div>

@@ -1,0 +1,186 @@
+<div class="cadastro-pet-page">
+  <div class="pet-container">
+    <div class="pet-header">
+      <div class="pet-image-container">
+        <img [src]="getSpeciesIcon()" [alt]="pet.especie" class="pet-image">
+      </div>
+      <div class="species-switch">
+        <button 
+          type="button"
+          class="switch-button" 
+          [class]="'switch-button ' + getSwitchButtonClass('cachorro')"
+          [style]="getSwitchButtonStyle('cachorro')"
+          (click)="pet.especie = 'cachorro'; onSpeciesChange()"
+        >
+          Cachorro
+        </button>
+        <button 
+          type="button"
+          class="switch-button" 
+          [class]="'switch-button ' + getSwitchButtonClass('gato')"
+          [style]="getSwitchButtonStyle('gato')"
+          (click)="pet.especie = 'gato'; onSpeciesChange()"
+        >
+          Gato
+        </button>
+      </div>
+    </div>
+
+    <form class="pet-form" (ngSubmit)="onSave()">
+      <div class="form-grid">
+        <div class="form-row">
+          <div class="form-field">
+            <div class="input-container">
+              <input 
+                type="text" 
+                id="nome" 
+                class="field-input" 
+                [(ngModel)]="pet.nome" 
+                name="nome"
+                placeholder=" "
+              >
+              <label for="nome" class="floating-label">Nome</label>
+            </div>
+          </div>
+          <div class="form-field">
+            <div class="input-container">
+              <input 
+                type="text" 
+                id="idade" 
+                class="field-input" 
+                [(ngModel)]="pet.idade" 
+                name="idade"
+                placeholder=" "
+              >
+              <label for="idade" class="floating-label">Idade</label>
+            </div>
+          </div>
+          <div class="form-field">
+            <div class="input-container">
+              <input 
+                type="text" 
+                id="sinPatinnha" 
+                class="field-input" 
+                [(ngModel)]="pet.sinPatinnha" 
+                name="sinPatinnha"
+                placeholder=" "
+              >
+              <label for="sinPatinnha" class="floating-label">SinPatinnha</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <div class="input-container">
+              <input 
+                type="text" 
+                id="raca" 
+                class="field-input" 
+                [(ngModel)]="pet.raca" 
+                name="raca"
+                placeholder=" "
+              >
+              <label for="raca" class="floating-label">Raça</label>
+            </div>
+          </div>
+          <div class="form-field">
+            <div class="input-container">
+              <input 
+                type="text" 
+                id="cor" 
+                class="field-input" 
+                [(ngModel)]="pet.cor" 
+                name="cor"
+                placeholder=" "
+              >
+              <label for="cor" class="floating-label">Cor</label>
+            </div>
+          </div>
+          <div class="form-field">
+            <div class="input-container">
+              <input 
+                type="text" 
+                id="pelagem" 
+                class="field-input" 
+                [(ngModel)]="pet.pelagem" 
+                name="pelagem"
+                placeholder=" "
+              >
+              <label for="pelagem" class="floating-label">Pelagem</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <div class="input-container">
+              <select 
+                id="sexo" 
+                class="field-select" 
+                [(ngModel)]="pet.sexo" 
+                name="sexo"
+              >
+                <option value=""></option>
+                @for (sexo of sexos; track sexo.value) {
+                  <option [value]="sexo.value">{{ sexo.label }}</option>
+                }
+              </select>
+              <label for="sexo" class="floating-label">Sexo</label>
+            </div>
+          </div>
+          <div class="form-field">
+            <div class="input-container">
+              <input 
+                type="text" 
+                id="microchip" 
+                class="field-input" 
+                [(ngModel)]="pet.microchip" 
+                name="microchip"
+                placeholder=" "
+              >
+              <label for="microchip" class="floating-label">Microchip</label>
+            </div>
+          </div>
+          <div class="form-field">
+            <div class="input-container">
+              <input 
+                type="text" 
+                id="tutor" 
+                class="field-input" 
+                [(ngModel)]="pet.tutor" 
+                name="tutor"
+                placeholder=" "
+              >
+              <label for="tutor" class="floating-label">Tutor</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field full-width">
+            <div class="input-container">
+              <textarea 
+                id="observacoes" 
+                class="field-textarea" 
+                [(ngModel)]="pet.observacoes" 
+                name="observacoes"
+                placeholder=" "
+              ></textarea>
+              <label for="observacoes" class="floating-label">Observações</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="cancel-button" (click)="onCancel()">
+          CANCELAR
+        </button>
+        <button type="submit" class="save-button" [disabled]="!isFormValid()">
+          SALVAR
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="home-page">
+  <section class="info-cards-section">
+    <div class="info-cards-container">
+      @for (card of infoCards; track card.id) {
+        <div class="info-card">
+          <div class="card-image">
+            <img [src]="card.image" [alt]="card.title" class="card-img">
+          </div>
+          
+          <div class="card-content">
+            <h3 class="card-step">{{ card.step }}</h3>
+            <p class="card-description">{{ card.description }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <section class="main-content-section">
+    <div class="main-content-container">
+      <div class="image-section">
+        <img src="/mulher_gato.png" alt="Mulher segurando gato" class="main-image">
+      </div>
+
+      <div class="text-section">
+        <h1 class="main-title">{{ mainTitle }}</h1>
+        <p class="main-description">{{ mainDescription }}</p>
+      </div>
+    </div>
+  </section>
+</div>

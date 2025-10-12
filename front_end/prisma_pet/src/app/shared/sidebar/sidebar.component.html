@@ -1,0 +1,32 @@
+<aside class="sidebar" [class.collapsed]="isCollapsed">
+  <button class="sidebar-toggle" (click)="onToggleCollapse()">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <nav class="sidebar-nav">
+    <ul class="menu-list">
+      @for (item of getMenuItems(); track item.id) {
+        <li class="menu-item">
+          <button 
+            class="menu-button"
+            [class.active]="isItemActive(item.id)"
+            (click)="onItemClick(item)"
+            [title]="isCollapsed ? item.label : ''"
+          >
+            <img 
+              [src]="item.icon" 
+              [alt]="item.label"
+              class="menu-icon"
+            >
+            <span class="menu-label" [class.hidden]="isCollapsed">
+              {{ item.label }}
+            </span>
+          </button>
+        </li>
+      }
+    </ul>
+  </nav>
+
+</aside>

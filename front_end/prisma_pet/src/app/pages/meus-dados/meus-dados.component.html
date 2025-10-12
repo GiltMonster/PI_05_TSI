@@ -1,0 +1,178 @@
+<div class="meus-dados-page">
+  <div class="dados-container">
+    <div class="profile-header">
+      <div class="profile-avatar">
+        <img src="/user_icon.png" alt="Avatar do usuário" class="avatar-image">
+      </div>
+      <h1 class="profile-name">{{ userData.nome }}</h1>
+    </div>
+
+    <form class="dados-form" (ngSubmit)="onSave()">
+      <div class="form-grid">
+        <div class="form-column">
+          <div class="form-field">
+            <div class="input-container">
+              <input 
+                type="text" 
+                id="nome" 
+                class="field-input" 
+                [(ngModel)]="userData.nome" 
+                name="nome"
+                placeholder=" "
+              >
+              <label for="nome" class="floating-label">Nome</label>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <div class="input-container">
+              <input 
+                type="email" 
+                id="email" 
+                class="field-input" 
+                [(ngModel)]="userData.email" 
+                name="email"
+                placeholder=" "
+              >
+              <label for="email" class="floating-label">E-mail</label>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <div class="input-container">
+              <input 
+                type="text" 
+                id="endereco" 
+                class="field-input" 
+                [(ngModel)]="userData.endereco" 
+                name="endereco"
+                placeholder=" "
+              >
+              <label for="endereco" class="floating-label">Endereço</label>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <div class="input-container">
+              <input 
+                type="text" 
+                id="bairro" 
+                class="field-input" 
+                [(ngModel)]="userData.bairro" 
+                name="bairro"
+                placeholder=" "
+              >
+              <label for="bairro" class="floating-label">Bairro</label>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <div class="input-container">
+              <input 
+                type="text" 
+                id="cidade" 
+                class="field-input" 
+                [(ngModel)]="userData.cidade" 
+                name="cidade"
+                placeholder=" "
+              >
+              <label for="cidade" class="floating-label">Cidade</label>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <div class="input-container">
+              <input 
+                type="password" 
+                id="senha" 
+                class="field-input" 
+                [(ngModel)]="userData.senha" 
+                name="senha"
+                placeholder=" "
+              >
+              <label for="senha" class="floating-label">Senha</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-column">
+          <div class="form-field">
+            <div class="input-container">
+              <input 
+                type="text" 
+                id="cpf" 
+                class="field-input" 
+                [(ngModel)]="userData.cpf" 
+                name="cpf"
+                placeholder=" "
+              >
+              <label for="cpf" class="floating-label">CPF</label>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <div class="input-container">
+              <input 
+                type="tel" 
+                id="telefone" 
+                class="field-input" 
+                [(ngModel)]="userData.telefone" 
+                name="telefone"
+                placeholder=" "
+              >
+              <label for="telefone" class="floating-label">Telefone</label>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <div class="input-container">
+              <input 
+                type="text" 
+                id="cep" 
+                class="field-input" 
+                [(ngModel)]="userData.cep" 
+                name="cep"
+                placeholder=" "
+              >
+              <label for="cep" class="floating-label">CEP</label>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <div class="input-container">
+              <input 
+                type="text" 
+                id="numero" 
+                class="field-input" 
+                [(ngModel)]="userData.numero" 
+                name="numero"
+                placeholder=" "
+              >
+              <label for="numero" class="floating-label">Número</label>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <div class="input-container">
+              <input 
+                type="text" 
+                id="complemento" 
+                class="field-input" 
+                [(ngModel)]="userData.complemento" 
+                name="complemento"
+                placeholder=" "
+              >
+              <label for="complemento" class="floating-label">Complemento</label>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <button type="submit" class="save-button">
+              SALVAR
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

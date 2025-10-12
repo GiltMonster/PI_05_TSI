@@ -1,0 +1,42 @@
+<div class="pet-list-container">
+  <div class="pet-list-header">
+    <button class="add-pet-button" (click)="onAddPet()">
+      <svg class="plus-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="button-text">CADASTRAR NOVO ANIMAL</span>
+    </button>
+  </div>
+
+  @if (loading) {
+    <div class="loading-container">
+      <div class="loading-spinner"></div>
+      <p class="loading-text">Carregando pets...</p>
+    </div>
+  }
+
+  @if (!loading && pets.length === 0) {
+    <div class="empty-state">
+      <div class="empty-icon">🐾</div>
+      <h3 class="empty-title">Nenhum pet cadastrado</h3>
+      <p class="empty-message">{{ emptyMessage }}</p>
+      <button class="empty-action-button" (click)="onAddPet()">
+        Cadastrar Primeiro Pet
+      </button>
+    </div>
+  }
+
+  @if (!loading && pets.length > 0) {
+    <div class="pet-grid">
+      @for (pet of pets; track trackByPetId($index, pet)) {
+        <app-pet-card
+          [pet]="pet"
+          [showActions]="showActions"
+          (editClick)="onEditPet($event)"
+          (deleteClick)="onDeletePet($event)"
+          (viewClick)="onViewPet($event)">
+        </app-pet-card>
+      }
+    </div>
+  }
+</div>
