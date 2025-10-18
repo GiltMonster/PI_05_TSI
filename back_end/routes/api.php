@@ -19,11 +19,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
         return response()->json(['msg' => 'Bem-vindo, Admin!'], 200);
     });
 
-    Route::middleware(['role:vet'])->get('/vet/dashboard', function () {
+    Route::middleware(['role:admin|vet'])->get('/vet/dashboard', function () {
         return response()->json(['msg' => 'Bem-vindo, Veterinário!'], 200);
     });
 
-    Route::middleware(['role:user'])->get('/user/dashboard', function () {
+    Route::middleware(['role:admin|user'])->get('/user/dashboard', function () {
         return response()->json(['msg' => 'Bem-vindo, Usuário!'], 200);
     });
 });
