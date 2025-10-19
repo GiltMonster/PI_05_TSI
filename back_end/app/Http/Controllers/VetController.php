@@ -32,6 +32,10 @@ class VetController extends Controller
             return response()->json(['message' => 'Veterinário não encontrado.'], 404);
         }
 
+        if($vet->type != 'vet') {
+            return response()->json(['message' => 'O usuário especificado não é um veterinário.'], 400);
+        }
+
         if ($request->filled('password')){
             $vet->password = bcrypt($request->password);
             if ($vet->password === $newVetData->password) {
