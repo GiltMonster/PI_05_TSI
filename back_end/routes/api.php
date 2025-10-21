@@ -29,6 +29,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('/adm/editarCliente', [ClienteController::class, 'editCliente']);
         Route::delete('/adm/deletarCliente/{id}', [ClienteController::class, 'deleteCliente']);
 
+        Route::get('/adm/getPets', [PetController::class, 'getPets']);
+        Route::get('/adm/getPetById/{id}', [PetController::class, 'getPetById']);
+        Route::get('/adm/getPetByUserId/{user_id}', [PetController::class, 'getPetByUserId']);
+        Route::post('/adm/registrarPet', [PetController::class, 'registrarPet']);
+        Route::put('/adm/editarPet', [PetController::class, 'editarPet']);
+        Route::delete('/adm/deletarPet/{id}', [PetController::class, 'deletarPet']);
     });
 
     Route::middleware(['role:admin|vet'])->get('/vet/teste', function () {
