@@ -2,10 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\PetController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\VetController;
-use App\Models\User;
 
 Route::get('/ping', function() {
     return response()->json(['message' => 'API funcionando!']);
@@ -24,6 +23,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/adm/getVetById/{id}', [VetController::class, 'getVetById']);
         Route::put('/adm/editarVet', [VetController::class, 'editarVet']);
         Route::delete('/adm/deletarVet/{id}',  [VetController::class, 'deletarVet']);
+
+        Route::get('/adm/getClientes', [ClienteController::class, 'getClientes']);
+        Route::get('/adm/getClienteById/{id}', [ClienteController::class, 'getClienteById']);
+        Route::put('/adm/editarCliente', [ClienteController::class, 'editCliente']);
+        Route::delete('/adm/deletarCliente/{id}', [ClienteController::class, 'deleteCliente']);
 
     });
 
