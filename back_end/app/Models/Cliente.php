@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Client extends User
+class Cliente extends User
 {
     protected $table = 'users';
     protected $attributes = [
