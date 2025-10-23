@@ -1,0 +1,14 @@
+<app-header></app-header>
+
+<div class="layout">
+  <app-menu-left [itens]="menuVet"></app-menu-left>
+
+  <main class="content">
+
+    <section class="cards">
+      @for (c of cardsVet; track $index) {
+        <app-card [cardInfo]="c"></app-card>
+      }
+    </section>
+  </main>
+</div>

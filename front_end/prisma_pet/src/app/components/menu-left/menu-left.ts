@@ -1,23 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faHome, faPaw, faUserFriends, faStethoscope, faBriefcase } from '@fortawesome/free-solid-svg-icons';
+import { MenuInterface } from '../../interfaces';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @Component({
   selector: 'app-menu-left',
-  imports: [FontAwesomeModule],
+  standalone: true,
+  imports: [CommonModule, RouterModule, MatIconModule],
   templateUrl: './menu-left.html',
-  styleUrl: './menu-left.scss'
+  styleUrls: ['./menu-left.scss'],
 })
 export class MenuLeft {
-  Home = 'Home';
-  Animais = 'Animais';
-  Tutores = 'Tutores';
-  Vets = 'Veterinários';
-  Services = 'Serviços';
-  icon_pata = faPaw;
-  icon_home = faHome;
-  icon_tutor = faUserFriends;
-  icon_vet = faStethoscope;
-  icon_service = faBriefcase;
+
+  itens = input.required<MenuInterface[]>();
+  collapsed = input(false);
   }

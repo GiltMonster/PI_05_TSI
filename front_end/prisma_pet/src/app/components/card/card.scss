@@ -1,0 +1,40 @@
+:host { display: block; }
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+}
+
+.card__img {
+  width: 112px;
+  height: 112px;
+  object-fit: contain;
+}
+
+.card__title {
+  font-weight: 700;
+  font-size: 16px;
+  color: #1e3a8a;
+  margin: 6px 0 0;
+}
+
+.card__subtitle {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #6b7280; 
+  margin: 0;
+}

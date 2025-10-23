@@ -1,22 +1,16 @@
-<section class="menu_left">
+<section class="menu_left" [class.open]="collapsed()">
   <nav class="nav_menu_left">
     <ul class="ul_menu_left">
-      <li class="li_menu_left">
-        <fa-icon [icon]="icon_home"></fa-icon>
-        <a routerLink="/home">{{Home}}</a>
-      </li>
-      <li class="li_menu_left">
-        <fa-icon [icon]="icon_pata"></fa-icon> <a routerLink="/pets">{{Animais}}</a>
-      </li>
-      <li class="li_menu_left">
-        <fa-icon [icon]="icon_tutor"></fa-icon> <a routerLink="/tutores">{{Tutores}}</a>
-      </li>
-      <li class="li_menu_left">
-        <fa-icon [icon]="icon_vet"></fa-icon> <a routerLink="/vets">{{Vets}}</a>
-      </li>
-      <li class="li_menu_left">
-        <fa-icon [icon]="icon_service"></fa-icon> <a routerLink="/services">{{Services}}</a>
-      </li>
+      @for (item of itens(); track $index) {
+        <li class="li_menu_left"
+            routerLinkActive="active"
+            #rla="routerLinkActive">
+          <mat-icon *ngIf="item.icon">{{ item.icon }}</mat-icon>
+          <a [routerLink]="item.link" [attr.aria-current]="rla.isActive ? 'page' : null">
+            {{ item.label }}
+          </a>
+        </li>
+      }
     </ul>
   </nav>
 </section>

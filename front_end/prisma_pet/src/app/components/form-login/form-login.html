@@ -7,20 +7,20 @@
       <p>Seja Bem Vindo (a) a plataforma</p>
     </div>
 
-    <form action="">
+    <form [formGroup]="loginForms">
       <div class="input-group">
         <fa-icon [icon]="icon_email" class="icon-left"></fa-icon>
-        <input type="email" id="email" placeholder="Digite seu e-mail" />
+        <input type="email" formControlName="email" id="email" placeholder="Digite seu e-mail" />
       </div>
 
       <div class="input-group">
         <fa-icon [icon]="icon_senha" class="icon-left"></fa-icon>
-        <input type="password" id="password" placeholder="Digite sua senha" />
+        <input type="password" formControlName="password" id="password" placeholder="Digite sua senha" />
       </div>
       <div class="forgot-password">
         <a href="#">Esqueceu sua senha?</a>
       </div>
-      <button type="submit" class="btn-login">Entrar</button>
+      <button class="btn-login" (click)="login()">Entrar</button>
     </form>
   </div>
 </section>
