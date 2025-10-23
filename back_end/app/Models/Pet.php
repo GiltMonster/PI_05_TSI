@@ -22,9 +22,9 @@ class Pet extends Model
 
     public $timestamps = false;
 
-    public function tutor()
+    public function cliente()
     {
-        return $this->belongsTo(Client::class, 'user_id');
+        return $this->belongsTo(Cliente::class, 'id');
     }
 
 }
