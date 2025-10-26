@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Reddit+Sans:wght@400;500;600;700&display=swap');
 
 .pet-card {
   background: white;
@@ -49,26 +49,26 @@
 .pet-name {
   font-size: 16px;
   font-weight: 600;
-  color: #537FC0;
+  color: #004AAD;
   margin: 0 0 4px 0;
   line-height: 1.2;
-  font-family: 'ADLaM Display', sans-serif;
+  font-family: 'Reddit Sans', sans-serif;
 }
 
 .pet-details {
   font-size: 12px;
-  color: #949494;
+  color: #7B7B7B;
   margin: 0 0 4px 0;
   line-height: 1.4;
-  font-family: 'ABeeZee', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .pet-tutor {
   font-size: 12px;
-  color: #949494;
+  color: #7B7B7B;
   margin: 0;
   line-height: 1.4;
-  font-family: 'ABeeZee', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .pet-actions {

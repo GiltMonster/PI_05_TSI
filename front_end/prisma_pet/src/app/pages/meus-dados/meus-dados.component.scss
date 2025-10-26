@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Reddit+Sans:wght@400;500;600;700&display=swap');
 
 .meus-dados-page {
   min-height: 100vh;
@@ -46,9 +46,9 @@
 .profile-name {
   font-size: 24px;
   font-weight: 600;
-  color: #537FC0;
+  color: #004AAD;
   margin: 0;
-  font-family: 'ADLaM Display', sans-serif;
+  font-family: 'Reddit Sans', sans-serif;
 }
 
 .dados-form {
@@ -86,8 +86,8 @@
   transform: translateY(-50%);
   font-size: 14px;
   font-weight: 500;
-  color: #D9D9D9;
-  font-family: 'ABeeZee', sans-serif;
+  color: #7B7B7B;
+  font-family: 'Poppins', sans-serif;
   pointer-events: none;
   transition: all 0.2s ease;
   background: white;
@@ -101,16 +101,18 @@
   border: 1px solid #d1d5db;
   border-radius: 8px;
   font-size: 14px;
-  color: #949494;
+  color: #262626;
   background: white;
   transition: border-color 0.2s ease;
-  font-family: 'ABeeZee', sans-serif;
+  font-family: 'Poppins', sans-serif;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  height: 48px;
 
   &:focus {
     outline: none;
-    border-color: #537FC0;
-    box-shadow: 0 0 0 3px rgba(83, 127, 192, 0.1);
+    border-color: #004AAD;
+      box-shadow: 0 0 0 3px rgba(0, 74, 173, 0.1);
   }
 
   &:focus + .floating-label,
@@ -118,7 +120,7 @@
     top: 0;
     transform: translateY(-50%);
     font-size: 12px;
-    color: #D9D9D9;
+    color: #7B7B7B;
     background: white;
     padding: 0 4px;
   }
@@ -129,7 +131,7 @@
 }
 
 .save-button {
-  background: #F4864D;
+  background: #FF914D;
   color: white;
   border: none;
   border-radius: 8px;
@@ -140,10 +142,11 @@
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: 'ADLaM Display', sans-serif;
+  font-family: 'Reddit Sans', sans-serif;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  height: 48px;
+  box-sizing: border-box;
   width: 100%;
+  height: 48px;
 
   &:hover {
     background: #e67e22;

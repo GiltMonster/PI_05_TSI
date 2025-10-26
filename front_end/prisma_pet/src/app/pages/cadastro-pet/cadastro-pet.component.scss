@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Reddit+Sans:wght@400;500;600;700&display=swap');
 
 .cadastro-pet-page {
   min-height: 100vh;
@@ -59,14 +59,14 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-family: 'ADLaM Display', sans-serif;
+  font-family: 'Reddit Sans', sans-serif;
   background: transparent;
   color: #6b7280;
 
   &.active {
-    background: #537FC0;
+    background: #004AAD;
     color: white;
-    box-shadow: 0 2px 4px rgba(83, 127, 192, 0.3);
+      box-shadow: 0 2px 4px rgba(0, 74, 173, 0.3);
   }
 
   &:not(.active):hover {
@@ -115,8 +115,8 @@
   transform: translateY(-50%);
   font-size: 14px;
   font-weight: 500;
-  color: #D9D9D9;
-  font-family: 'ABeeZee', sans-serif;
+  color: #7B7B7B;
+  font-family: 'Poppins', sans-serif;
   pointer-events: none;
   transition: all 0.2s ease;
   background: white;
@@ -132,16 +132,16 @@
   border: 1px solid #d1d5db;
   border-radius: 8px;
   font-size: 14px;
-  color: #949494;
+  color: #262626;
   background: white;
   transition: border-color 0.2s ease;
-  font-family: 'ABeeZee', sans-serif;
+  font-family: 'Poppins', sans-serif;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
   &:focus {
     outline: none;
-    border-color: #537FC0;
-    box-shadow: 0 0 0 3px rgba(83, 127, 192, 0.1);
+    border-color: #004AAD;
+      box-shadow: 0 0 0 3px rgba(0, 74, 173, 0.1);
   }
 
   &:focus + .floating-label,
@@ -149,7 +149,7 @@
     top: 0;
     transform: translateY(-50%);
     font-size: 12px;
-    color: #D9D9D9;
+    color: #7B7B7B;
     background: white;
     padding: 0 4px;
   }
@@ -180,7 +180,7 @@
     top: 0;
     transform: translateY(-50%);
     font-size: 12px;
-    color: #D9D9D9;
+    color: #7B7B7B;
     background: white;
     padding: 0 4px;
   }
@@ -205,7 +205,7 @@
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: 'ADLaM Display', sans-serif;
+  font-family: 'Reddit Sans', sans-serif;
 
   &:hover {
     background: #4b5563;
@@ -218,7 +218,7 @@
 }
 
 .save-button {
-  background: #F4864D;
+  background: #FF914D;
   color: white;
   border: none;
   border-radius: 8px;
@@ -229,7 +229,7 @@
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: 'ADLaM Display', sans-serif;
+  font-family: 'Reddit Sans', sans-serif;
 
   &:hover:not(:disabled) {
     background: #e67e22;

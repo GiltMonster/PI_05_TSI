@@ -26,29 +26,12 @@ export class SidebarComponent {
 
   getMenuItems(): MenuItem[] {
     switch(this.userType) {
-      case 'admin':
-        return [
-          { id: 'dashboard', label: 'Dashboard', icon: '/Icon_inicio.png', route: '/dashboard' },
-          { id: 'usuarios', label: 'Usuários', icon: '/Icon_tutores.png', route: '/usuarios' },
-          { id: 'veterinarios', label: 'Veterinários', icon: '/Icon_servicos.png', route: '/veterinarios' },
-          { id: 'pets', label: 'Pets', icon: '/icon_pata.png', route: '/pets' },
-          { id: 'meus-dados', label: 'Meus Dados', icon: '/icon_meus_dados.png', route: '/meus-dados' }
-        ];
-      
-      case 'vet':
-        return [
-          { id: 'dashboard', label: 'Dashboard', icon: '/Icon_inicio.png', route: '/dashboard' },
-          { id: 'pacientes', label: 'Meus Pacientes', icon: '/icon_pata.png', route: '/pacientes' },
-          { id: 'consultas', label: 'Consultas', icon: '/Icon_servicos.png', route: '/consultas' },
-          { id: 'meus-dados', label: 'Meus Dados', icon: '/icon_meus_dados.png', route: '/meus-dados' }
-        ];
-      
       case 'user':
       default:
         return [
-          { id: 'inicio', label: 'Início', icon: '/Icon_inicio.png', route: '/inicio' },
-          { id: 'meus-animais', label: 'Meus Animais', icon: '/icon_pata.png', route: '/meus-animais' },
-          { id: 'meus-dados', label: 'Meus Dados', icon: '/icon_meus_dados.png', route: '/meus-dados' }
+          { id: 'inicio', label: 'Início', icon: '/icon_inicio.svg', route: '/inicio' },
+          { id: 'meus-animais', label: 'Meus Animais', icon: '/icon_pata.svg', route: '/meus-animais' },
+          { id: 'meus-dados', label: 'Meus Dados', icon: '/icon_menus_dados.svg', route: '/meus-dados' }
         ];
     }
   }
@@ -67,10 +50,8 @@ export class SidebarComponent {
 
   getUserTypeLabel(): string {
     switch(this.userType) {
-      case 'admin': return 'Administrador';
-      case 'vet': return 'Veterinário';
       case 'user': return 'Tutor';
-      default: return 'Usuário';
+      default: return 'Tutor';
     }
   }
 }

@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Alatsi&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Reddit+Sans:wght@400;500;600;700&display=swap');
 
 .home-page {
   min-height: 100vh;
   background-color: #ffffff !important;
   padding: 24px 24px 0 24px;
-  font-family: 'ABeeZee', sans-serif;
+  font-family: 'Poppins', sans-serif;
   width: 100%;
 }
 
@@ -68,25 +68,25 @@
   margin: 0 0 5px 0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #537FC0;
-  font-family: 'ABeeZee', sans-serif;
+  color: #004AAD;
+  font-family: 'Poppins', sans-serif;
 }
 
 .card-title {
   font-size: 16px;
   font-weight: 600;
-  color: #949494;
+  color: #7B7B7B;
   margin: 0 0 6px 0;
   line-height: 1.2;
-  font-family: 'ABeeZee', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .card-description {
   font-size: 12px;
-  color: #949494;
+  color: #7B7B7B;
   line-height: 1.4;
   margin: 0;
-  font-family: 'ABeeZee', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .main-content-section {
@@ -113,8 +113,9 @@
 .main-image {
   width: 100%;
   max-width: 350px;
-  height: calc(100vh - 120px);
-  object-fit: cover;
+  height: auto;
+  max-height: calc(100vh - 120px);
+  object-fit: contain;
   border-radius: 12px;
 }
 
@@ -129,19 +130,19 @@
 .main-title {
   font-size: 28px;
   font-weight: 400;
-  color: #537FC0;
+  color: #004AAD;
   margin: 0 0 20px 0;
   line-height: 1.2;
-  font-family: 'Alatsi', sans-serif;
+  font-family: 'Reddit Sans', sans-serif;
 }
 
 .main-description {
   font-size: 14px;
-  color: #949494;
+  color: #7B7B7B;
   line-height: 1.6;
   margin: 0;
   text-align: left;
-  font-family: 'ABeeZee', sans-serif;
+  font-family: 'Poppins', sans-serif;
   max-width: 400px;
 }
 
@@ -207,7 +208,7 @@
 
   .main-image {
     max-width: 280px;
-    height: calc(100vh - 140px);
+    max-height: calc(100vh - 140px);
   }
 
   .main-title {
@@ -257,7 +258,7 @@
 
   .main-image {
     max-width: 220px;
-    height: calc(100vh - 120px);
+    max-height: calc(100vh - 120px);
   }
 
   .main-title {

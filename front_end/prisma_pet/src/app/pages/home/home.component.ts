@@ -23,21 +23,21 @@ export class HomeComponent {
       step: 'Passo 1',
       title: 'Acessar o paciente',
       description: 'Acessar o paciente que foi atendido no menu da esquerda',
-      image: '/img_card1.png'
+      image: '/img_card1.svg'
     },
     {
       id: 2,
       step: 'Passo 2',
       title: 'Analisar serviços',
       description: 'Acessar e analisar os serviços prestados, anexos de receitas e exames',
-      image: '/img_card2.png'
+      image: '/img_card2.svg'
     },
     {
       id: 3,
       step: 'Passo 3',
       title: 'Esclarecer dúvidas',
       description: 'Com o material necessário em mão, poderá levar ao médico veterinário responsável pelo paciente e esclarecer eventuais dúvidas',
-      image: '/img_card3.png'
+      image: '/img_card3.svg'
     }
   ];
 

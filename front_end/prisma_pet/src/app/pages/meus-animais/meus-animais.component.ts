@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { PetListComponent } from '../../shared/pet-list/pet-list.component';
@@ -11,7 +11,7 @@ import { Pet } from '../../shared/pet-card/pet-card.component';
   templateUrl: './meus-animais.component.html',
   styleUrl: './meus-animais.component.scss'
 })
-export class MeusAnimaisComponent {
+export class MeusAnimaisComponent implements OnInit {
   constructor(private router: Router) {}
 
   pets: Pet[] = [
@@ -49,6 +49,14 @@ export class MeusAnimaisComponent {
 
   loading = false;
 
+  ngOnInit(): void {
+    this.savePetsToStorage();
+  }
+
+  savePetsToStorage(): void {
+    localStorage.setItem('pets', JSON.stringify(this.pets));
+  }
+
   onEditPet(pet: Pet): void {
     console.log('Editar pet:', pet);
     this.router.navigate(['/editar-pet', pet.id]);
@@ -58,6 +66,7 @@ export class MeusAnimaisComponent {
     console.log('Excluir pet:', pet);
     if (confirm(`Tem certeza que deseja excluir ${pet.nome}?`)) {
       this.pets = this.pets.filter(p => p.id !== pet.id);
+      this.savePetsToStorage();
     }
   }
 

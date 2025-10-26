@@ -54,12 +54,12 @@ export class PetCardComponent {
     switch(this.pet.especie.toLowerCase()) {
       case 'cachorro':
       case 'cão':
-        return '/icon_dog.png';
+        return '/icon_dog.svg';
       case 'gato':
-        return '/icon_cat.png';
+        return '/icon_cat.svg';
       
       default:
-        return '/icon_cat.png';
+        return '/icon_cat.svg';
     }
   }
 }
