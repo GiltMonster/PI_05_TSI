@@ -5,18 +5,18 @@
 </app-header>
 
 <div class="layout">
-  <app-menu-left [itens]="menuVet" 
+  <app-menu-left [itens]="menuTutor" 
   [collapsed]="isMenuOpen"
   (close)="closeMenu()"></app-menu-left>
 
   <main class="content">
 
     <section class="cards">
-      @for (c of cardsVet; track $index) {
+      @for (c of cardstutor; track $index) {
         <app-card [cardInfo]="c"></app-card>
       }
     </section>
-      <app-texto-inicio [inicio]="inicioVet"></app-texto-inicio>
+      <app-texto-inicio [inicio]="inicioTutor"></app-texto-inicio>
   </main>
 </div>
 
