@@ -3,21 +3,29 @@
 
   <div class="bloco2">
     <div class="whats">
-      <a href="https://api.whatsapp.com/send?phone=55{{ telefone }}" target="_blank">
-        <fa-icon [icon]="icon_whats"></fa-icon>
-        <p>Fale Conosco</p>
+      @for (item of contato(); track $index) {
+      <a href="{{ item.link }}" target="_blank">
+        <mat-icon *ngIf="item.wpp">{{ item.wpp }}</mat-icon>
+        <p>{{ item.label }}</p>
       </a>
+      }
     </div>
 
-<div class="profile">
-  <img src="{{ profile }}" alt="Meu Perfil" />
+    <div class="profile">
+      @for (item of profile(); track $index) {
+      <a routerLink="{{ item.rotaUrl }}">
+        <mat-icon class="icon_profile" *ngIf="item.iconUrl">{{ item.iconUrl }}</mat-icon>
+      </a>
+      }
 
-  <div class="user-info">
-    <a routerLink="/meu_perfil"> 
-      <p>Olá, {{ userName }}</p>
-      <span>{{ tipo_usuario }}</span>
-    </a>
-  </div>
-</div>
+      <div class="user-info">
+        @for (item of profile(); track $index) {
+        <p>Olá, {{ item.nome }}</p>
+        <a routerLink="{{ item.rotaUrl }}">
+          <span>{{ item.tipoUsu }}</span>
+        </a>
+        }
+      </div>
+    </div>
   </div>
 </section>

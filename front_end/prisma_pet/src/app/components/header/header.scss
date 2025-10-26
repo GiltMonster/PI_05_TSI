@@ -4,12 +4,12 @@
   align-items: center;
   padding: 1px 20px;
   background-color: #fff;
-  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.120);
+  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.12);
   height: 12%;
   font-family: poppins;
 }
 
-.logo{
+.logo {
   margin: 0;
   width: 17vh;
   margin-bottom: -5px;
@@ -29,124 +29,114 @@
   font-weight: 500;
 }
 
-.whats fa-icon {
-  font-size: 2.0rem;
-}
-
-.whats a{
+.whats a {
   text-decoration: none;
   display: flex;
   align-items: center;
-  background-color: #7CC350;
+  background-color: #004aad;
   color: #fff;
   padding: 0 11px 0 9px;
   border-radius: 9px;
   gap: 5px;
-  font-size: 1.0rem;
+  font-size: 1rem;
 }
 
 .whats a:hover {
-  background-color: #66b140;
+  background-color: #4c892d;
   transition: background-color 0.3s ease;
 }
 
 .profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  .user-info {
     display: flex;
-    align-items: center;
-    gap: 15px;
+    flex-direction: column;
+    justify-content: center;
+  }
 
-    img {
-        width: 9vh; 
-        height: 9vh;
-        border-radius: 50%;
-        object-fit: cover;
-    }
+  .user-info a {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
 
-    .user-info {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    
+  .user-info p {
+    font-size: 1.2rem;
+    color: #004aad;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+  }
 
-    .user-info a {
-        text-decoration: none;
-        display: flex;
-        flex-direction: column;
-        line-height: 1.2;
-    }
-
-    .user-info p {
-        font-size: 1.2rem;
-        color: #004AAD;
-        font-weight: bold;
-        margin: 0;
-        padding: 0;
-    }
-
-    .user-info span {
-        font-size: 0.9rem;
-        color: #949494;
-        font-weight: normal;
-        margin: 0;
-        padding: 0;
-    }
+  .user-info span {
+    font-size: 0.9rem;
+    color: #949494;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+  }
 }
 
+.icon_profile {
+  font-size: 3.3rem;
+  color: #004aad;
+  height: auto;
+  width: auto;
+
+  :hover {
+    color: #ff914d;
+    transition: color 0.3s ease;
+  }
+}
 
 @media (max-width: 1014px) {
-    .bloco2 {
-        gap: 70px;
-    }
-    
-    .logo {
-        width: 170px;
-    }
 
-    .whats a{
-      font-size: 1.1rem;
-    }
+  .bloco2 {
+    gap: 70px;
+  }
 
-    .whats fa-icon {
-      font-size: 1.9rem;
-    }
+  .logo {
+    width: 150px;
+  }
 
-    .profile img {
-        width: 40px; 
-        height: 40px;
-    }
+  .whats a {
+    font-size: 0.9rem;
+  }
 
-    .profile .user-info p {
-        font-size: 1.3rem; 
-        margin-bottom: 2px;
-    }
+  .profile .user-info p {
+    font-size: 1.3rem;
+    margin-bottom: 2px;
+  }
 
-        .profile .user-info span{
-        font-size: 0.9rem; 
-    }
+  .profile .user-info span {
+    font-size: 0.9rem;
+  }
 }
 
+@media (max-width: 650px) {
+  .header_container {
+    padding: 10px 15px;
+  }
 
-@media (max-width: 576px) {
-    .header_container {
-        padding: 10px 15px;
-    }
-    
-    .logo {
-        width: 100px; 
-    }
+  .logo {
+    width: 100px;
+  }
 
-    .bloco2 {
-        gap: 15px; 
-    }
-    
-    .whats a p {
-        display: none; 
-    }
-    .whats a {
-        padding: 7px; 
-    }
-    .profile .user-info  {
-        display: none; 
-    }
+  .bloco2 {
+    gap: 15px;
+  }
+
+  .whats a p {
+    display: none;
+  }
+  .whats a {
+    padding: 7px;
+  }
+  .profile .user-info {
+    display: none;
+  }
 }

@@ -1,19 +1,21 @@
-import { Component } from '@angular/core';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
-import { faWhatsapp } from '@fortawesome/free-brands-svg-icons'; 
+import { Component, input } from '@angular/core';
+import { HeaderContato, HeaderProfile } from '../../interfaces';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-header',
-  imports: [FontAwesomeModule],
+    standalone: true,
+  imports: [CommonModule, RouterModule, MatIconModule],
   templateUrl: './header.html',
   styleUrl: './header.scss'
 })
 export class Header {
+
+  contato = input.required<HeaderContato[]>();
+  profile = input.required<HeaderProfile[]>();
+  collapsed = input(false);
+
   logo = "assets/imagens/img-logo-novo.png";
-  profile = "assets/icons/icon_profile.svg";
-  userName = "Giovanna";
-  tipo_usuario = "Administrador";
-  telefone = "11999999999";
-  icon_whats = faWhatsapp;
 }

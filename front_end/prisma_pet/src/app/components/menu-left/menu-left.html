@@ -2,14 +2,17 @@
   <nav class="nav_menu_left">
     <ul class="ul_menu_left">
       @for (item of itens(); track $index) {
-        <li class="li_menu_left"
-            routerLinkActive="active"
-            #rla="routerLinkActive">
-          <mat-icon *ngIf="item.icon">{{ item.icon }}</mat-icon>
-          <a [routerLink]="item.link" [attr.aria-current]="rla.isActive ? 'page' : null">
-            {{ item.label }}
-          </a>
-        </li>
+      <li class="li_menu_left" routerLinkActive="active" #rla="routerLinkActive">
+        <mat-icon *ngIf="item.icon">{{ item.icon }}</mat-icon>
+        <a
+          [routerLink]="item.link"
+          [attr.aria-current]="rla.isActive ? 'page' : null"
+          (click)="close.emit()"
+        >
+          <!-- fecha no mobile -->
+          {{ item.label }}
+        </a>
+      </li>
       }
     </ul>
   </nav>

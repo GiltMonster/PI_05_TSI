@@ -1,7 +1,13 @@
-<app-header></app-header>
+<app-header
+  [contato]="headerContato"
+  [profile]="headerProfile"
+  [collapsed]="false">
+</app-header>
 
 <div class="layout">
-  <app-menu-left [itens]="menuVet"></app-menu-left>
+  <app-menu-left [itens]="menuVet" 
+  [collapsed]="isMenuOpen"
+  (close)="closeMenu()"></app-menu-left>
 
   <main class="content">
 
@@ -10,5 +16,14 @@
         <app-card [cardInfo]="c"></app-card>
       }
     </section>
+      <app-texto-inicio [inicio]="inicioVet"></app-texto-inicio>
   </main>
 </div>
+
+
+<button class="menu-fab" type="button" (click)="toggleMenu()" aria-label="Abrir menu">
+  <span class="menu-fab__icon">☰</span>
+</button>
+
+<!-- backdrop ao abrir (fecha ao clicar fora) -->
+<div class="menu-backdrop" *ngIf="isMenuOpen" (click)="closeMenu()"></div>

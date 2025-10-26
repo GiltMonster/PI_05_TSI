@@ -3,12 +3,14 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import { AuthLogin } from '../../services/auth-login';
 import {Validators, NonNullableFormBuilder, FormGroup, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { from } from 'rxjs';
 import { Route, Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-form-login',
-  imports: [FontAwesomeModule, FormsModule, ReactiveFormsModule],
+  imports: [FontAwesomeModule, FormsModule, ReactiveFormsModule, MatIconModule,MatFormFieldModule, MatInputModule],
   standalone: true,
   templateUrl: './form-login.html',
   styleUrl: './form-login.scss'

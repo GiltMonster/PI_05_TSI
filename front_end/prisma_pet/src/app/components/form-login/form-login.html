@@ -1,13 +1,13 @@
 <section class="login-right">
-  <img src="assets/imagens/img-logo-novo.png" alt="Imagem o logo da Vetja" class="logo" />
-
   <div class="form-login">
-    <div class="titulo">
-      <h2>Login na <span>{{ title }}</span></h2>
-      <p>Seja Bem Vindo (a) a plataforma</p>
-    </div>
-
     <form [formGroup]="loginForms">
+      <img src="assets/imagens/img-logo-novo.png" alt="Imagem o logo da Vetja" class="logo" />
+      <div class="titulo">
+        <h2>
+          Login na <span>{{ title }}</span>
+        </h2>
+        <p>Seja Bem Vindo (a) a plataforma</p>
+      </div>
       <div class="input-group">
         <fa-icon [icon]="icon_email" class="icon-left"></fa-icon>
         <input type="email" formControlName="email" id="email" placeholder="Digite seu e-mail" />
@@ -15,7 +15,12 @@
 
       <div class="input-group">
         <fa-icon [icon]="icon_senha" class="icon-left"></fa-icon>
-        <input type="password" formControlName="password" id="password" placeholder="Digite sua senha" />
+        <input
+          type="password"
+          formControlName="password"
+          id="password"
+          placeholder="Digite sua senha"
+        />
       </div>
       <div class="forgot-password">
         <a href="#">Esqueceu sua senha?</a>

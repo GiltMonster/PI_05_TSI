@@ -42,3 +42,80 @@
   user-select: none;
   pointer-events: none;
 }
+
+@media (max-width: 2670px) {
+
+  .login_left {
+    padding: 10vh;
+  }
+
+  .login_left h1 {
+  max-width: 80vh;
+  margin: 0 0 40vh 0;
+}
+
+.login_left img {
+  left: 25vh;
+  height: 54vh;
+}
+}
+
+@media (max-width: 2190px) {
+
+  .login_left {
+    padding: 10vh;
+  }
+
+  .login_left h1 {
+  max-width: 50vh;
+  margin: 0 0 40vh 0;
+  font-size: 3.3rem;
+}
+
+.login_left img {
+  left: 15vh;
+  height: 50vh;
+}
+}
+
+@media (max-width: 2000px) {
+
+  .login_left {
+    padding: 0;
+  }
+
+  .login_left h1 {
+  max-width: 77vh;
+  margin: 0 0 40vh 15vh;
+}
+
+.login_left img {
+  left: 30vh;
+  height: 54vh;
+}
+}
+
+@media (max-width: 1500px) {
+
+  .login_left {
+    padding: 0;
+  }
+
+  .login_left h1 {
+  max-width: 70vh;
+  margin: 0 0 40vh 5vh;
+  font-size: 4.0vh;
+}
+
+.login_left img {
+  left: 25vh;
+  height: 54vh;
+}
+}
+
+@media (max-width: 800px) {
+
+    .login_left {
+    padding: 0;
+  }
+}

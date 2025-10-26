@@ -1,0 +1,12 @@
+@for (item of inicio(); track $index) {
+
+<div class="bloco_texto_inicio">
+  <div class="imagem_inicio">
+    <img src="{{ item.imagem }}" alt="Imagem de uma veterinária com um gatinho na mesa" />
+  </div>
+  <div class="texto_inicio">
+    <h2>{{ item.titulo }}</h2>
+    <p>{{ item.subtitulo }}</p>
+  </div>
+</div>
+}
