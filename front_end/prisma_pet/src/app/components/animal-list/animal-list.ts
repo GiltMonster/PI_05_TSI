@@ -11,7 +11,7 @@ import { PetListInterface } from '../../interfaces';
   standalone: true,
   imports: [CommonModule, MatIconModule, ReactiveFormsModule, AnimalCard],
   templateUrl: './animal-list.html',
-  styleUrl: './animal-list.scss'
+  styleUrls: ['./animal-list.scss']
 })
 export class AnimalList implements OnInit {
   @Input() pets: PetListInterface[] = [];
@@ -19,7 +19,7 @@ export class AnimalList implements OnInit {
   @Input() emptyMessage = 'Nenhum pet cadastrado';
   @Input() columns = 1;
   @Input() gap = 12;
-  @Input() searchPlaceholder = 'Buscar por Nome do Tutor';
+  @Input() searchPlaceholder = 'Buscar Animais';
 
   @Output() searchChange = new EventEmitter<string>();
   @Output() viewPet  = new EventEmitter<PetListInterface>();

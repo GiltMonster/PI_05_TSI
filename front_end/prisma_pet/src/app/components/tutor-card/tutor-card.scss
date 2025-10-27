@@ -1,7 +1,7 @@
 
-.card_pet_container {
+.card_tutor_container {
   display: grid;
-  grid-template-columns: 80px 1fr auto; 
+  grid-template-columns: 1fr auto;
   align-items: center;
   gap: 18px;
   padding: 18px 20px;
@@ -12,18 +12,18 @@
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
 }
 
-.info_pet {
+.info_tutor {
   min-width: 0;
 }
-.nome_pet {
+.nome_tutor {
   margin: 0 0 4px;
   font-weight: 700;
   font-size: 1.35rem;
   line-height: 1.2;
   color: #004AAD; 
 }
-.detalhes_pet,
-.tutor_pet {
+.detalhes_tutor,
+.animal_tutor{
   margin: 0;
   color: #6b7280;
   font-size: 0.98rem;
@@ -33,7 +33,7 @@
   white-space: nowrap;
 }
 
-.botoes_pet {
+.botoes_tutor {
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -100,7 +100,7 @@
 .btn-text--menor{ display: none; }
 
 @media (max-width: 720px) {
-  .card_pet_container {
+  .card_tutor_container {
     grid-template-columns: 72px 1fr;
     grid-template-areas:
       "avatar info"
@@ -108,8 +108,8 @@
     row-gap: 10px;
   }
   .img_especie { grid-area: avatar; }
-  .info_pet    { grid-area: info; }
-  .botoes_pet  { grid-area: actions; justify-content: flex-start; }
+  .info_tutor    { grid-area: info; }
+  .botoes_tutor  { grid-area: actions; justify-content: flex-start; }
   .btn_cadastro { height: 38px; line-height: 38px; }
   .btn-text--total  { display: none; }
   .btn-text--menor{ display: inline; }

@@ -40,6 +40,13 @@ export interface PetListInterface {
   tutor: string;
 }
 
+export interface TutorListInterface {
+  id: number;
+  nome: string;
+  telefone:string;
+  animal: string;
+}
+
 
 export interface PetInterface {
   id: number;

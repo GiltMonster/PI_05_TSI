@@ -1,24 +1,22 @@
-import { Component, ElementRef, HostListener, input, OnInit, ViewChild } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { HeaderContato, HeaderProfile, MenuInterface, PetListInterface } from '../../interfaces';
-import { Header } from '../../components/header/header';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { MenuLeft } from '../../components/menu-left/menu-left';
+import { Header } from '../../components/header/header';
 import { A11yModule, LiveAnnouncer } from '@angular/cdk/a11y';
-import { AnimalList } from '../../components/animal-list/animal-list';
+import { MatIconModule } from '@angular/material/icon';
+import { TutorList } from '../../components/tutor-list/tutor-list';
+import { HeaderContato, HeaderProfile, MenuInterface, TutorListInterface } from '../../interfaces';
 
 @Component({
-  selector: 'app-animais',
+  selector: 'app-tutor',
   standalone: true,
-  imports: [CommonModule, MenuLeft, Header, A11yModule, MatIconModule,AnimalList],
-  templateUrl: './animais.html',
-  styleUrls: ['./animais.scss']
+  imports: [CommonModule, MenuLeft, Header, A11yModule, MatIconModule,TutorList],
+  templateUrl: './tutor.html',
+  styleUrls: ['./tutor.scss']
 })
-
-export class Animais{
+export class Tutor {
 isMenuOpen = false;
-  @ViewChild('menuFabBtn', { read: ElementRef }) menuFabBtn?: ElementRef<HTMLButtonElement>;
+  @ViewChild('menuFabBtn', { read: ElementRef}) menuFabBtn?: ElementRef<HTMLButtonElement>;
 
   constructor(private live: LiveAnnouncer) {}
 
@@ -71,15 +69,15 @@ closeMenu() {
       }
     ];
 
-  listAnimais: PetListInterface[] = [
-    { id: 1, especie: 'Cachorro', nome: 'Luma',    sexo: 'F', idade: '5 anos', tutor: 'Luciene Angelo' },
-    { id: 2, especie: 'Gato',     nome: 'Simba',   sexo: 'M', idade: '5 anos', tutor: 'Giovanna Piccinato' },
-    { id: 3, especie: 'Gato', nome: 'Tereza',   sexo: 'F', idade: '4 anos', tutor: '  Pedro Marques' },
-    { id: 4, especie: 'gato',   nome: 'Nicolas', sexo: 'M', idade: '2 anos', tutor: 'Pedro Marques' },
-    { id: 5, especie: 'cachorro',   nome: 'Evair', sexo: 'M', idade: '2 anos', tutor: 'Andrea Marques' },
+  listTutores: TutorListInterface[] = [
+    { id: 1, nome: 'Luciene Angelo', telefone: '(11)95520-7242', animal: 'Luma' },
+    { id: 2, nome: 'Giovanna Piccinato', telefone: '(11)95520-7242', animal: 'Simba' },
+    { id: 3, nome: 'Pedro Marques', telefone: '(11)95520-7242', animal: 'Tereza' },
+    { id: 4, nome: 'Pedro Marques', telefone: '(11)95520-7242', animal: 'Nicolas' },
+    { id: 5, nome: 'Andrea Marques', telefone: '(11)95520-7242', animal: 'Evair' },
   ];
 
-  filtered: PetListInterface[] = [...this.listAnimais];
+  filtered: TutorListInterface[] = [...this.listTutores];
 
   private norm(t = '') {
   return t.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').trim();
@@ -88,13 +86,13 @@ closeMenu() {
 onSearch(term: string) {
   const q = this.norm(term);
   this.filtered = !q
-    ? [...this.listAnimais]
-    : this.listAnimais.filter(p =>
-        this.norm(p.tutor).includes(q) || this.norm(p.nome).includes(q)
+    ? [...this.listTutores]
+    : this.listTutores.filter(p =>
+        this.norm(p.animal).includes(q) || this.norm(p.nome).includes(q)
       );
 }
 
-  onViewPet(p: PetListInterface)   { /* navegar/abrir modal */ }
-  onEditPet(p: PetListInterface)   { /* editar */ }
-  onDeletePet(p: PetListInterface) { /* confirmar exclusão */ }
+  onViewTutor(p: TutorListInterface)   { }
+  onEditTutor(p: TutorListInterface)   { }
+  onDeleteTutor(p: TutorListInterface) { }
 }

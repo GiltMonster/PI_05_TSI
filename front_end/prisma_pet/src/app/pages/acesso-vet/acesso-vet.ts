@@ -71,7 +71,7 @@ closeMenu() {
   menuVet: MenuInterface[] = [
     { label: 'Início',     link: '/vet',     icon: 'home' },
     { label: 'Animais',    link: '/animais',     icon: 'pets' },
-    { label: 'Responsáveis',    link: '/tutores',  icon: 'groups' },
+    { label: 'Responsáveis',    link: '/responsaveis',  icon: 'groups' },
     { label: 'Serviços',   link: '/services', icon: 'work' },
     { label: 'Meus Dados',   link: '/meus-dados', icon: 'person' },
   ];

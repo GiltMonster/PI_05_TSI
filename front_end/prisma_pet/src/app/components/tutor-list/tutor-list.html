@@ -1,17 +1,17 @@
-<section class="list_pet_container" aria-label="Lista de animais">
-  <h1 class="list_title">Animais</h1>
+<section class="list_tutor_container" aria-label="Lista de animais">
+  <h1 class="list_title">Responsáveis</h1>
 
-  <div class="header_list_pet">
+  <div class="header_list_tutor">
     <form class="search" role="search" (submit)="onSubmit($event)">
-      <label class="sr-only" for="petSearch">Buscar animais</label>
+      <label class="sr-only" for="tutorSearch">Buscar Tutor</label>
       <input
-        id="petSearch"
+        id="tutorSearch"
         class="search__input"
         type="search"
         [placeholder]="searchPlaceholder"
         [formControl]="searchCtrl"
         autocomplete="off"
-        aria-describedby="Buscar Animais"
+        aria-describedby="Buscar Tutor"
       />
       <button
         *ngIf="searchCtrl.value"
@@ -27,37 +27,37 @@
         <mat-icon aria-hidden="true">search</mat-icon>
       </button>
       
-      <span id="Buscar Animais" class="sr-only" aria-live="polite">{{ statusMsg }}</span>
+      <span id="Buscar Tutor" class="sr-only" aria-live="polite">{{ statusMsg }}</span>
     </form>
 
     <button
-      class="add_pet_button"
+      class="add_tutor_button"
       type="button"
-      (click)="onAddPet()"
-      aria-label="Cadastrar novo animal"
+      (click)="onAddTutor()"
+      aria-label="Cadastrar novo Responsável"
     >
       <mat-icon aria-hidden="true">add</mat-icon>
-      <span>Cadastrar Novo Animal</span>
+      <span>Cadastrar Novo Responsável</span>
     </button>
   </div>
 
   @if (loading) {
   <div class="status" role="status" aria-live="polite">Carregando lista…</div>
 
-  } @if (!loading && (!pets || pets.length === 0)) {
+  } @if (!loading && (!tutores || tutores.length === 0)) {
   <div class="empty" role="note" aria-live="polite">{{ emptyMessage }}</div>
 
-  } @if (!loading && pets.length) {
+  } @if (!loading && tutores.length) {
   <ul class="grid" role="list" [style.gridTemplateColumns]="getGridTemplate()" [style.gap.px]="gap">
-    @for (p of pets; track trackById($index, p)) {
+    @for (p of tutores; track trackById($index, p)) {
     <li class="grid__item" role="listitem">
-      <app-animal-card
-        [petCard]="p"
-        (viewClick)="onViewPet($event)"
-        (editClick)="onEditPet($event)"
-        (deleteClick)="onDeletePet($event)"
+      <app-tutor-card
+        [tutorCard]="p"
+        (viewClick)="onViewTutor($event)"
+        (editClick)="onEditTutor($event)"
+        (deleteClick)="onDeleteTutor($event)"
       >
-      </app-animal-card>
+      </app-tutor-card>
     </li>
     }
   </ul>

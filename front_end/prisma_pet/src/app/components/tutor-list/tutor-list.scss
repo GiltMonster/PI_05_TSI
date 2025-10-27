@@ -18,7 +18,7 @@
   list-style: none;
 }
 
-.header_list_pet {
+.header_list_tutor {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -124,7 +124,7 @@
   border: 0 !important;
 }
 
-.add_pet_button {
+.add_tutor_button {
   display: flex;
   font-size: 1rem;
   align-items: center;
@@ -163,7 +163,7 @@
 }
 
   @media (max-width: 870px) {
-    .header_list_pet {
+    .header_list_tutor {
     flex-direction: column;
     align-items: stretch;
     gap: 12px;
