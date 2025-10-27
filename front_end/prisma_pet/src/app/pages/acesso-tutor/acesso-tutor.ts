@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { CardInterface, HeaderContato, HeaderProfile, MenuInterface, TextoInicioInterface } from '../../interfaces';
 import { CommonModule } from '@angular/common';
 import { Card } from '../../components/card/card';
 import { MenuLeft } from '../../components/menu-left/menu-left';
 import { Header } from '../../components/header/header';
 import { TextoInicio } from '../../components/texto-inicio/texto-inicio';
+import { A11yModule, LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-acesso-tutor',
   standalone: true,
-  imports: [CommonModule, Card, MenuLeft, Header, TextoInicio],
+  imports: [CommonModule, Card, MenuLeft, Header, TextoInicio,A11yModule],
   templateUrl: './acesso-tutor.html',
   styleUrl: './acesso-tutor.scss'
 })
@@ -17,8 +18,35 @@ export class AcessoTutor {
 
   isMenuOpen = false;
 
-  toggleMenu() { this.isMenuOpen = !this.isMenuOpen; }
-  closeMenu()  { this.isMenuOpen = false; }
+  @ViewChild('menuFabBtn', { read: ElementRef }) menuFabBtn?: ElementRef<HTMLButtonElement>;
+
+  constructor(private live: LiveAnnouncer) {}
+
+toggleMenu() {
+  this.isMenuOpen = !this.isMenuOpen;
+  if (this.isMenuOpen) {
+    this.live.announce('Menu aberto', 'polite'); // ABNT 5.7
+  } else {
+    this.live.announce('Menu fechado', 'polite'); // ABNT 5.7
+    this.menuFabBtn?.nativeElement.focus();       // ABNT 5.1
+  }
+}
+
+closeMenu() {
+  if (this.isMenuOpen) {
+    this.isMenuOpen = false;
+    this.live.announce('Menu fechado', 'polite'); // ABNT 5.7
+    this.menuFabBtn?.nativeElement.focus();       // ABNT 5.1
+  }
+}
+
+  @HostListener('document:keydown.escape')
+  onEsc() {
+    this.closeMenu(); // ABNT 5.1
+  }
+
+  // toggleMenu() { this.isMenuOpen = !this.isMenuOpen; }
+  // closeMenu()  { this.isMenuOpen = false; }
   
   cardstutor: CardInterface[] = [
     {

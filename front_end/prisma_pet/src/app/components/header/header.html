@@ -1,31 +1,37 @@
-<section class="header_container">
-  <img class="logo" src="{{ logo }}" alt="Logo" />
+<!-- header semântico, alt do logo, aria-label nos links, aria-hidden nos ícones, binding [routerLink].
+Sessões ABNT: 5.2, 5.3, 5.7, 5.1. -->
+<header class="header_container" role="banner">
+  <img class="logo" [src]="logo" alt="Logo da VetJA" />
 
   <div class="bloco2">
     <div class="whats">
       @for (item of contato(); track $index) {
-      <a href="{{ item.link }}" target="_blank">
-        <mat-icon *ngIf="item.wpp">{{ item.wpp }}</mat-icon>
-        <p>{{ item.label }}</p>
-      </a>
+        <a
+          [href]="item.link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Abrir conversa no WhatsApp: {{ item.label }}">
+          <mat-icon *ngIf="item.wpp" aria-hidden="true">{{ item.wpp }}</mat-icon>
+          <p>{{ item.label }}</p>
+        </a>
       }
     </div>
 
     <div class="profile">
       @for (item of profile(); track $index) {
-      <a routerLink="{{ item.rotaUrl }}">
-        <mat-icon class="icon_profile" *ngIf="item.iconUrl">{{ item.iconUrl }}</mat-icon>
-      </a>
+        <a [routerLink]="item.rotaUrl" aria-label="Abrir perfil de {{ item.nome }}">
+          <mat-icon class="icon_profile" *ngIf="item.iconUrl" aria-hidden="true">{{ item.iconUrl }}</mat-icon>
+        </a>
       }
 
       <div class="user-info">
         @for (item of profile(); track $index) {
-        <p>Olá, {{ item.nome }}</p>
-        <a routerLink="{{ item.rotaUrl }}">
-          <span>{{ item.tipoUsu }}</span>
-        </a>
+          <p>Olá, {{ item.nome }}</p>
+          <a [routerLink]="item.rotaUrl" aria-label="Ver perfil completo de {{ item.nome }}">
+            <span>{{ item.tipoUsu }}</span>
+          </a>
         }
       </div>
     </div>
   </div>
-</section>
+</header>

@@ -43,6 +43,12 @@
   pointer-events: none;
 }
 
+.login_left a:focus-visible,
+.login_left button:focus-visible {
+  outline: 1px solid #FFD166; 
+  outline-offset: 2px;
+}
+
 @media (max-width: 2670px) {
 
   .login_left {

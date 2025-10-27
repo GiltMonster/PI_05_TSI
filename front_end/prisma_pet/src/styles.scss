@@ -30,4 +30,44 @@ body {
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: poppins, "Helvetica Neue", sans-serif; }
+
+/* Foco visível forte e consistente (ABNT 5.1, 5.8, 5.10, 5.11) */
+:focus-visible {
+  outline: 3px solid #005FCC; /* alto contraste no branco */
+  outline-offset: 2px;
+}
+
+/* ABNT 5.8 */
+button,
+[role="button"] {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* Estado de navegação  (ABNT 5.7) */
+[aria-current="page"] {
+  background: #EFF3F9;
+  color: #004AAD;
+}
+
+/*  ABNT 5.10/5.11 – apresentação */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Conteúdo só de leitura de tela (ABNT 5.3/5.7) */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important; height: 1px !important;
+  padding: 0 !important; margin: -1px !important;
+  overflow: hidden !important; clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important; border: 0 !important;
+}
+
+

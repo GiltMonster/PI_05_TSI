@@ -62,12 +62,6 @@ form {
     position: absolute;
     opacity: 0.6;
     pointer-events: none;
-
-    fa-icon {
-      font-size: 25px;
-      width: 18px;
-      height: 18px;
-    }
   }
 
   input {
@@ -82,13 +76,15 @@ form {
     background-color: #fafafa;
     transition: all 0.3s ease;
 
-    &::placeholder {
-      color: #b8b8b8;
+    &::placeholder { // cor com contraste (ABNT 5.10/5.11)
+      color: #6b7280;
       font-size: 20px;
     }
 
-    &:focus {
-      outline: none;
+      /* ABNT 5.9 e 5.10/5.11 */
+    &:focus, input:focus-visible {
+        outline: 3px solid #005FCC; 
+        outline-offset: 2px;
       border-color: #004aad;
       background-color: #fff;
       box-shadow: 0 2px 12px rgba(92, 139, 197, 0.15);
@@ -130,8 +126,8 @@ form {
   padding: 10px;
   cursor: pointer;
 
-  &:hover {
-    color: #ff914d;
+  &:hover, a:focus-visible {
+  color: #965229;
   }
 }
 
@@ -155,6 +151,12 @@ form {
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+  }
+
+  /* foco visível e alvo (ABNT 5.8) */
+  &:focus-visible {
+    outline: 3px solid #005FCC;
+    outline-offset: 2px;
   }
 }
 
@@ -229,3 +231,5 @@ form {
   }
 
 }
+
+

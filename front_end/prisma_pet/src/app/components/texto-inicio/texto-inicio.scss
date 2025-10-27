@@ -6,6 +6,10 @@
   flex-wrap: wrap;
 }
 
+.imagem_inicio img {
+  max-width: 35vh;
+}
+
 .texto_inicio {
   max-width: 80vh;
   text-align: justify;
@@ -16,10 +20,11 @@
     color: #004AAD;
   }
 
-  p {
+  p { /* melhorar legibilidade (ABNT 5.10/5.11) */
     font-size: 1.0rem;
     line-height: 1.9rem;
-    color: #949494;
+    color: #4a4a4a;
+    text-align: left;
   }
 }
 

@@ -1,10 +1,8 @@
 import { Routes } from '@angular/router';
 import { Login } from './pages/login/login';
-import { MenuLeft } from './components/menu-left/menu-left';
-import { Header } from './components/header/header';
-import { Card } from './components/card/card';
 import { AcessoVet } from './pages/acesso-vet/acesso-vet';
 import { AcessoTutor } from './pages/acesso-tutor/acesso-tutor';
+import { AcessoAdmin } from './pages/acesso-admin/acesso-admin';
 
 
 export const routes: Routes = [
@@ -12,5 +10,5 @@ export const routes: Routes = [
   { path: 'login', component: Login },
   { path: 'vet', component: AcessoVet },
   { path: 'tutor', component: AcessoTutor },
-  // { path: 'admin', component: AcessoAdmin },
+  { path: 'admin', component: AcessoAdmin },
 ];

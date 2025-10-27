@@ -1,31 +1,49 @@
-<section class="login-right">
+<!-- autocomplete, aria-describedby, type="submit", aria-hidden.
+Sessões ABNT: 5.9, 5.1, 5.7, 5.2. -->
+
+<section class="login-right" aria-labelledby="titulo-login">
   <div class="form-login">
-    <form [formGroup]="loginForms">
-      <img src="assets/imagens/img-logo-novo.png" alt="Imagem o logo da Vetja" class="logo" />
+    <form [formGroup]="loginForms" (ngSubmit)="login()" novalidate>
+      <img src="assets/imagens/img-logo-novo.png" alt="Logo da VetJA" class="logo" />
+
       <div class="titulo">
-        <h2>
+        <h2 id="titulo-login">
           Login na <span>{{ title }}</span>
         </h2>
-        <p>Seja Bem Vindo (a) a plataforma</p>
-      </div>
-      <div class="input-group">
-        <fa-icon [icon]="icon_email" class="icon-left"></fa-icon>
-        <input type="email" formControlName="email" id="email" placeholder="Digite seu e-mail" />
+        <p id="ajuda-login">Acesse com seu e-mail e senha cadastrados.</p>
       </div>
 
       <div class="input-group">
-        <fa-icon [icon]="icon_senha" class="icon-left"></fa-icon>
+        <!-- <label for="email">E-mail</label> -->
+        <fa-icon [icon]="icon_email" class="icon-left" aria-hidden="true"></fa-icon>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="Digite seu e-mail"
+          autocomplete="email"
+          aria-describedby="ajuda-login email-erro" />
+        <span id="email-erro" class="sr-only" *ngIf="emailCtrl?.invalid && loginForms.touched">E-mail inválido.</span>
+      </div>
+
+      <div class="input-group">
+        <!-- <label for="password">Senha</label> -->
+        <fa-icon [icon]="icon_senha" class="icon-left" aria-hidden="true"></fa-icon>
         <input
           type="password"
-          formControlName="password"
           id="password"
+          formControlName="password"
           placeholder="Digite sua senha"
-        />
+          autocomplete="current-password"
+          aria-describedby="ajuda-login senha-erro" />
+        <span id="senha-erro" class="sr-only" *ngIf="passwordCtrl?.invalid && loginForms.touched">Senha obrigatória.</span>
       </div>
+
       <div class="forgot-password">
-        <a href="#">Esqueceu sua senha?</a>
+        <a routerLink="/recuperar-senha">Esqueceu sua senha?</a>
       </div>
-      <button class="btn-login" (click)="login()">Entrar</button>
+
+      <button class="btn-login" type="submit" [disabled]="loginForms.invalid">Entrar</button>
     </form>
   </div>
 </section>
