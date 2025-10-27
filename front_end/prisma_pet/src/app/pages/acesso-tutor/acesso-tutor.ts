@@ -67,8 +67,8 @@ closeMenu() {
   ];
 
   menuTutor: MenuInterface[] = [
-    { label: 'Início',     link: '/home',     icon: 'home' },
-    { label: 'Meus Animais',    link: '/pets',     icon: 'pets' },
+    { label: 'Início',     link: '/tutor',     icon: 'home' },
+    { label: 'Meus Animais',    link: '/animais',     icon: 'pets' },
     { label: 'Meus Dados',   link: '/meus-dados', icon: 'person' },
   ];
 
@@ -84,7 +84,7 @@ closeMenu() {
   headerProfile: HeaderProfile[] = [
     {
       nome: 'Pedro',
-      tipoUsu: 'Tutor',
+      tipoUsu: 'Responsável',
       rotaUrl: '/meu_perfil',
       iconUrl: 'account_circle'
     }

@@ -48,9 +48,9 @@ closeMenu() {
   // closeMenu()  { this.isMenuOpen = false; }
 
   menuAdmin: MenuInterface[] = [
-    { label: 'Início',     link: '/home',     icon: 'home' },
-    { label: 'Animais',    link: '/pets',     icon: 'pets' },
-    { label: 'Tutores',    link: '/tutores',  icon: 'groups' },
+    { label: 'Início',     link: '/admin',     icon: 'home' },
+    { label: 'Animais',    link: '/animais',     icon: 'pets' },
+    { label: 'Responsáveis',    link: '/tutores',  icon: 'groups' },
     { label: 'Veterinários',   link: '/veterinarios', icon: 'medical_services' },
     { label: 'Serviços',   link: '/services', icon: 'work' },
     { label: 'Meus Dados',   link: '/meus-dados', icon: 'person' },

@@ -158,6 +158,9 @@
   }
   .whats a {
     padding: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .profile .user-info {
     display: none;

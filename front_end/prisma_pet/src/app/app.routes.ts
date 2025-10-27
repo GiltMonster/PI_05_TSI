@@ -3,6 +3,10 @@ import { Login } from './pages/login/login';
 import { AcessoVet } from './pages/acesso-vet/acesso-vet';
 import { AcessoTutor } from './pages/acesso-tutor/acesso-tutor';
 import { AcessoAdmin } from './pages/acesso-admin/acesso-admin';
+import { Animais } from './pages/animais/animais';
+import { AnimalCard } from './components/animal-card/animal-card';
+import { AnimalList } from './components/animal-list/animal-list';
+
 
 
 export const routes: Routes = [
@@ -11,4 +15,6 @@ export const routes: Routes = [
   { path: 'vet', component: AcessoVet },
   { path: 'tutor', component: AcessoTutor },
   { path: 'admin', component: AcessoAdmin },
+  { path: 'animais', component: Animais },
+  { path: 'animalCard', component: AnimalList },
 ];

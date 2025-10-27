@@ -18,12 +18,13 @@
   align-items: flex-start;
   gap: 1.5rem;
   padding: 0;
+  
+  :hover {
+    box-shadow: 0 5px 19px rgba(0, 0, 0, 0.12);
+  }
 }
 
 .li_menu_left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
   list-style: none;
   font-size: 1.1rem;
   cursor: pointer;
@@ -39,6 +40,9 @@
     color: inherit;
     text-decoration: none;
     display: inline-block;
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
 }
 
@@ -49,7 +53,6 @@
 .li_menu_left a:focus-visible {
   background: #EFF3F9;
   color: #004AAD;
-  box-shadow: 0 5px 19px rgba(0, 0, 0, 0.12);
   outline-offset: 2px;
 }
 
@@ -58,7 +61,6 @@
 .li_menu_left a[aria-current="page"]{
   background: #EFF3F9;
   color: #004AAD;
-  box-shadow: 0 5px 19px rgba(0, 0, 0, 0.12);
 }
 
 @media (max-width: 1200px) {
@@ -105,7 +107,11 @@
     border-radius: 12px;
   }
 
-  .li_menu_left a { display: inline-block; } 
+  .li_menu_left a { 
+    padding: 0 10px;
+      display: flex;
+    align-items: center;
+    gap: 12px;} 
   .li_menu_left img { width: 26px; height: 26px; }
 }
 

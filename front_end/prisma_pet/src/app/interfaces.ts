@@ -29,3 +29,30 @@ export interface TextoInicioInterface {
   titulo: string;
   subtitulo: string;
 }
+
+
+export interface PetListInterface {
+  id: number;
+  especie: string;
+  nome: string;
+  sexo: string;
+  idade: string;
+  tutor: string;
+}
+
+
+export interface PetInterface {
+  id: number;
+  imagem: string;
+  nome: string;
+  especie: boolean;
+  raça: string;
+  sexo: string;
+  idade: string;
+  peso?: number;
+  castrado: boolean;
+  temperamento: string;
+  tutor: string;
+  cor: string;
+  casoClinico: string;
+}
