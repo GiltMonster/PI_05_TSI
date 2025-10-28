@@ -1,19 +1,16 @@
-<article class="card_servico_container"
-  [attr.aria-labelledby]="'servico-' + servicoCard().id">
+<article class="card_servico_container" [attr.aria-labelledby]="'servico-' + servicoCard().id">
   <div class="info_servico">
     <h3 class="nome_servico" [id]="'servico-' + servicoCard().id">
       {{ servicoCard().titulo }}
     </h3>
-    <p class="detalhes_servico">
-      {{ servicoCard().categoria }}
-    </p>
+    <p class="detalhes_servico"><strong>Categoria:</strong> {{ servicoCard().categoria }}</p>
   </div>
 
   <div class="botoes_servico">
-      <div class="valor_servico">
+    <div class="valor_servico">
       <p>Valor do Serviço:</p>
-      <span> {{ servicoCard().valor | currency:'BRL':'symbol':'1.2-2' }}</span>
-  </div>
+      <span> {{ servicoCard().valor | currency : 'BRL' : 'symbol' : '1.2-2' }}</span>
+    </div>
     <button type="button" class="btn_icon" (click)="onEdit()" aria-label="Editar cadastro">
       <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">edit</mat-icon>
     </button>
