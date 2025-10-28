@@ -1,21 +1,25 @@
-import { Component, ElementRef, HostListener, input, OnInit, ViewChild } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { HeaderContato, HeaderProfile, MenuInterface, PetListInterface } from '../../interfaces';
-import { Header } from '../../components/header/header';
-import { MenuLeft } from '../../components/menu-left/menu-left';
 import { A11yModule, LiveAnnouncer } from '@angular/cdk/a11y';
-import { AnimalList } from '../../components/animal-list/animal-list';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import {
+  HeaderContato,
+  HeaderProfile,
+  MenuInterface,
+  ServicosListInterface,
+} from '../../interfaces';
+import { CommonModule } from '@angular/common';
+import { MenuLeft } from '../../components/menu-left/menu-left';
+import { Header } from '../../components/header/header';
+import { MatIconModule } from '@angular/material/icon';
+import { ServiceList } from '../../components/service-list/service-list';
 
 @Component({
-  selector: 'app-animais',
+  selector: 'app-servicos',
   standalone: true,
-  imports: [CommonModule, MenuLeft, Header, A11yModule, MatIconModule, AnimalList],
-  templateUrl: './animais.html',
-  styleUrls: ['./animais.scss'],
+  imports: [CommonModule, MenuLeft, Header, A11yModule, MatIconModule, ServiceList],
+  templateUrl: './servicos.html',
+  styleUrls: ['./servicos.scss'],
 })
-export class Animais {
+export class Servicos {
   isMenuOpen = false;
   @ViewChild('menuFabBtn', { read: ElementRef }) menuFabBtn?: ElementRef<HTMLButtonElement>;
 
@@ -70,43 +74,15 @@ export class Animais {
     },
   ];
 
-  listAnimais: PetListInterface[] = [
-    {
-      id: 1,
-      especie: 'Cachorro',
-      nome: 'Luma',
-      sexo: 'F',
-      idade: '5 anos',
-      tutor: 'Luciene Angelo',
-    },
-    {
-      id: 2,
-      especie: 'Gato',
-      nome: 'Simba',
-      sexo: 'M',
-      idade: '5 anos',
-      tutor: 'Giovanna Piccinato',
-    },
-    {
-      id: 3,
-      especie: 'Gato',
-      nome: 'Tereza',
-      sexo: 'F',
-      idade: '4 anos',
-      tutor: '  Pedro Marques',
-    },
-    { id: 4, especie: 'gato', nome: 'Nicolas', sexo: 'M', idade: '2 anos', tutor: 'Pedro Marques' },
-    {
-      id: 5,
-      especie: 'cachorro',
-      nome: 'Evair',
-      sexo: 'M',
-      idade: '2 anos',
-      tutor: 'Andrea Marques',
-    },
+  listServicos: ServicosListInterface[] = [
+    { id: 1, titulo: 'Consulta Clínica', categoria: 'Consulta', valor: 230.0 },
+    { id: 2, titulo: 'Vacina Raiva', categoria: 'Vacina', valor: 190.0 },
+    { id: 3, titulo: 'Vacina V10', categoria: 'Vacina', valor: 240.0 },
+    { id: 4, titulo: 'Ecocardiograma', categoria: 'Exame de Imagem', valor: 500.0 },
+    { id: 5, titulo: 'Eletrocardiograma', categoria: 'Exame de Imagem', valor: 350.0 },
   ];
 
-  filtered: PetListInterface[] = [...this.listAnimais];
+  filtered: ServicosListInterface[] = [...this.listServicos];
 
   private norm(t = '') {
     return t
@@ -119,19 +95,12 @@ export class Animais {
   onSearch(term: string) {
     const q = this.norm(term);
     this.filtered = !q
-      ? [...this.listAnimais]
-      : this.listAnimais.filter(
-          (p) => this.norm(p.tutor).includes(q) || this.norm(p.nome).includes(q)
+      ? [...this.listServicos]
+      : this.listServicos.filter(
+          (p) => this.norm(p.categoria).includes(q) || this.norm(p.titulo).includes(q)
         );
   }
 
-  onViewPet(p: PetListInterface) {
-    /* navegar/abrir modal */
-  }
-  onEditPet(p: PetListInterface) {
-    /* editar */
-  }
-  onDeletePet(p: PetListInterface) {
-    /* confirmar exclusão */
-  }
+  onEditServico(p: ServicosListInterface) {}
+  onDeleteServico(p: ServicosListInterface) {}
 }

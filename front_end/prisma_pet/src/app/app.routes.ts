@@ -5,6 +5,8 @@ import { AcessoTutor } from './pages/acesso-tutor/acesso-tutor';
 import { AcessoAdmin } from './pages/acesso-admin/acesso-admin';
 import { Animais } from './pages/animais/animais';
 import { Tutor } from './pages/tutor/tutor';
+import { Servicos } from './pages/servicos/servicos';
+import { Veterinarios } from './pages/veterinarios/veterinarios';
 
 
 
@@ -16,4 +18,6 @@ export const routes: Routes = [
   { path: 'admin', component: AcessoAdmin },
   { path: 'animais', component: Animais },
   { path: 'responsaveis', component: Tutor },
+  { path: 'services', component: Servicos },
+  { path: 'veterinarios', component: Veterinarios },
 ];

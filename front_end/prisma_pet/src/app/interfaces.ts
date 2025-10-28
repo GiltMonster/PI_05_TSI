@@ -47,6 +47,13 @@ export interface TutorListInterface {
   animal: string;
 }
 
+export interface VeterinarioListInterface {
+  id: number;
+  nome: string;
+  especialidade:string;
+  crmv: string;
+}
+
 
 export interface PetInterface {
   id: number;
@@ -62,4 +69,11 @@ export interface PetInterface {
   tutor: string;
   cor: string;
   casoClinico: string;
+}
+
+export interface ServicosListInterface {
+  id: number;
+  titulo: string;
+  categoria:string;
+  valor: number;
 }

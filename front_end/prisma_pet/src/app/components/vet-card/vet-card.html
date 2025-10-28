@@ -1,0 +1,32 @@
+<article class="card_vet_container"
+  [attr.aria-labelledby]="'vet-' + vetCard().id">
+  <div class="info_vet">
+    <h3 class="nome_vet" [id]="'vet-' + vetCard().id">
+      {{ vetCard().nome }}
+    </h3>
+    <p class="detalhes_vet">
+      {{ vetCard().crmv }}
+    </p>
+    <p class="especialidade_vet">
+      <strong>Especialidade:</strong> {{ vetCard().especialidade }}
+    </p>
+  </div>
+
+  <div class="botoes_vet">
+<button
+  type="button"
+  class="btn_cadastro"
+  (click)="onView()"
+  [attr.aria-label]="'Ver cadastro completo de ' + vetCard().nome">
+  <span class="btn-text btn-text--total">Abrir Cadastro</span>
+  <span class="btn-text btn-text--menor">Ver</span>
+</button>
+    <button type="button" class="btn_icon" (click)="onEdit()" aria-label="Editar cadastro">
+      <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">edit</mat-icon>
+    </button>
+
+    <button type="button" class="btn_icon" (click)="onDelete()" aria-label="Excluir cadastro">
+      <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">delete</mat-icon>
+    </button>
+  </div>
+</article>

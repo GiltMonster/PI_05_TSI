@@ -1,21 +1,25 @@
-import { Component, ElementRef, HostListener, input, OnInit, ViewChild } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { HeaderContato, HeaderProfile, MenuInterface, PetListInterface } from '../../interfaces';
-import { Header } from '../../components/header/header';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { MenuLeft } from '../../components/menu-left/menu-left';
+import { Header } from '../../components/header/header';
 import { A11yModule, LiveAnnouncer } from '@angular/cdk/a11y';
-import { AnimalList } from '../../components/animal-list/animal-list';
+import { MatIconModule } from '@angular/material/icon';
+import { VetList } from '../../components/vet-list/vet-list';
+import {
+  HeaderContato,
+  HeaderProfile,
+  MenuInterface,
+  VeterinarioListInterface,
+} from '../../interfaces';
 
 @Component({
-  selector: 'app-animais',
+  selector: 'app-veterinarios',
   standalone: true,
-  imports: [CommonModule, MenuLeft, Header, A11yModule, MatIconModule, AnimalList],
-  templateUrl: './animais.html',
-  styleUrls: ['./animais.scss'],
+  imports: [CommonModule, MenuLeft, Header, A11yModule, MatIconModule, VetList],
+  templateUrl: './veterinarios.html',
+  styleUrl: './veterinarios.scss',
 })
-export class Animais {
+export class Veterinarios {
   isMenuOpen = false;
   @ViewChild('menuFabBtn', { read: ElementRef }) menuFabBtn?: ElementRef<HTMLButtonElement>;
 
@@ -70,43 +74,19 @@ export class Animais {
     },
   ];
 
-  listAnimais: PetListInterface[] = [
+  listVets: VeterinarioListInterface[] = [
+    { id: 1, nome: 'Pamela Pereira', crmv: 'CRMV: 4556 - SP', especialidade: 'Clinica' },
+    { id: 2, nome: 'Mirian Azevedo', crmv: 'CRMV: 4556 - SP', especialidade: 'Clinica' },
+    { id: 3, nome: 'Ana Carolina Primo', crmv: 'CRMV: 4556 - SP', especialidade: 'Clinica' },
     {
-      id: 1,
-      especie: 'Cachorro',
-      nome: 'Luma',
-      sexo: 'F',
-      idade: '5 anos',
-      tutor: 'Luciene Angelo',
-    },
-    {
-      id: 2,
-      especie: 'Gato',
-      nome: 'Simba',
-      sexo: 'M',
-      idade: '5 anos',
-      tutor: 'Giovanna Piccinato',
-    },
-    {
-      id: 3,
-      especie: 'Gato',
-      nome: 'Tereza',
-      sexo: 'F',
-      idade: '4 anos',
-      tutor: '  Pedro Marques',
-    },
-    { id: 4, especie: 'gato', nome: 'Nicolas', sexo: 'M', idade: '2 anos', tutor: 'Pedro Marques' },
-    {
-      id: 5,
-      especie: 'cachorro',
-      nome: 'Evair',
-      sexo: 'M',
-      idade: '2 anos',
-      tutor: 'Andrea Marques',
+      id: 4,
+      nome: 'Giovanna Brancacci',
+      crmv: 'CRMV: 4556 - SP',
+      especialidade: 'Clinica  |  Cirurgiã',
     },
   ];
 
-  filtered: PetListInterface[] = [...this.listAnimais];
+  filtered: VeterinarioListInterface[] = [...this.listVets];
 
   private norm(t = '') {
     return t
@@ -119,19 +99,13 @@ export class Animais {
   onSearch(term: string) {
     const q = this.norm(term);
     this.filtered = !q
-      ? [...this.listAnimais]
-      : this.listAnimais.filter(
-          (p) => this.norm(p.tutor).includes(q) || this.norm(p.nome).includes(q)
+      ? [...this.listVets]
+      : this.listVets.filter(
+          (p) => this.norm(p.especialidade).includes(q) || this.norm(p.nome).includes(q)
         );
   }
 
-  onViewPet(p: PetListInterface) {
-    /* navegar/abrir modal */
-  }
-  onEditPet(p: PetListInterface) {
-    /* editar */
-  }
-  onDeletePet(p: PetListInterface) {
-    /* confirmar exclusão */
-  }
+  onViewVet(p: VeterinarioListInterface) {}
+  onEditVet(p: VeterinarioListInterface) {}
+  onDeleteVet(p: VeterinarioListInterface) {}
 }
