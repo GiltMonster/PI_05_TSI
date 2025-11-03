@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Admin;
 use App\Models\Vet;
-use App\Models\Client;
+use App\Models\Cliente;
 use App\Models\User;
 
 use const Dom\NOT_FOUND_ERR;
@@ -53,7 +53,7 @@ class AuthController extends Controller
                     break;
 
                 case 'user':
-                    $user = Client::create([
+                    $user = Cliente::create([
                         'name' => $validated['name'],
                         'email' => $validated['email'],
                         'password' => bcrypt($validated['password']),
@@ -123,9 +123,10 @@ class AuthController extends Controller
 
         return response()->json([
             'message' => 'Login bem-sucedido',
-            'user' => $user,
+            // 'user' => $user,
+            // 'role' => $user->getRoleNames(),
             'token' => $token,
-            'role' => $user->getRoleNames(),
+            'name' => $user->name,
         ]);
     }
 

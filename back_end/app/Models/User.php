@@ -47,7 +47,7 @@ class User extends Authenticatable
                 case 'vet':
                     return (new Vet)->newFromBuilder($attributes, $connection);
                 case 'user':
-                    return (new Client)->newFromBuilder($attributes, $connection);
+                    return (new Cliente)->newFromBuilder($attributes, $connection);
                 default:
                     return $model;
             }
