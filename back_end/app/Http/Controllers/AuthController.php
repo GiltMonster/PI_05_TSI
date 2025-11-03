@@ -145,4 +145,22 @@ class AuthController extends Controller
             'permissions' => $user->getAllPermissions()->pluck('name'),
         ]);
     }
+
+    public function myType(Request $request)
+    {
+        $user = $request->user();
+        $roles = $user->getRoleNames();
+
+        if ($roles->contains('admin')) {
+            $type = 'admin';
+        } elseif ($roles->contains('vet')) {
+            $type = 'vet';
+        } elseif ($roles->contains('user')) {
+            $type = 'user';
+        } else {
+            $type = 'unknown';
+        }
+
+        return response()->json(['type' => $type]);
+    }
 }
