@@ -1,24 +1,21 @@
 <!-- aria-label no nav, aria-hidden no ícone, [routerLink] nativo.
 Sessões ABNT: 5.7, 5.1, 5.3. -->
 
-<section class="menu_left" [class.open]="collapsed()">
+<section class="menu_left" [class.open]="collapsed">
   <!-- Landmark de navegação com id para aria-controls do botão (ABNT 5.3/5.7) -->
   <nav class="nav_menu_left" id="menu-lateral" aria-label="Menu principal">
     <ul class="ul_menu_left">
-      @for (item of itens(); track $index) {
+      @for(item of itens; track item){
       <li class="li_menu_left" routerLinkActive="active" #rla="routerLinkActive">
-        <a
-          #itemLink
-          [routerLink]="item.link"
-          [attr.aria-current]="rla.isActive ? 'page' : null"
-          (click)="close.emit()"
-        >
-          <mat-icon *ngIf="item.icon" aria-hidden="true">{{ item.icon }}</mat-icon>
-
+        <a #itemLink [routerLink]="item.link" [attr.aria-current]="rla.isActive ? 'page' : null" (click)="close.emit()">
+          @if(item.icon) {
+            <mat-icon aria-hidden="true">{{ item.icon }}</mat-icon>
+          }
           {{ item.label }}
         </a>
       </li>
       }
+
     </ul>
   </nav>
 </section>
