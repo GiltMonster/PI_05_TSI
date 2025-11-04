@@ -25,8 +25,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/adm/getVetById/{id}', [VetController::class, 'getVetById']);
         Route::put('/adm/editarVet', [VetController::class, 'editarVet']);
         Route::delete('/adm/deletarVet/{id}',  [VetController::class, 'deletarVet']);
-        Route::get('/adm/getClientes', [ClienteController::class, 'getClientes']);
 
+        Route::get('/adm/getClientes', [ClienteController::class, 'getClientes']);
         Route::get('/adm/getClienteById/{id}', [ClienteController::class, 'getClienteById']);
         Route::put('/adm/editarCliente', [ClienteController::class, 'editCliente']);
         Route::delete('/adm/deletarCliente/{id}', [ClienteController::class, 'deleteCliente']);
