@@ -163,4 +163,26 @@ class AuthController extends Controller
 
         return response()->json(['type' => $type]);
     }
+
+    public function verifyToken(Request $request)
+    {
+        $user = $request->user();
+        if ($user) {
+            return response()->json(
+                [
+                    'valid' => true,
+                    'user' => [
+                        'id' => $user->id,
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'type' => $this->myType($request)->original['type'],
+                        'permissions' => $user->getAllPermissions()->pluck('name'),
+                    ]
+                    ]
+            );
+        } else {
+            return response()->json(['valid' => false], 401);
+        }
+    }
+
 }
