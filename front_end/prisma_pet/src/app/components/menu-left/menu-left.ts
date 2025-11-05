@@ -22,7 +22,7 @@ export class MenuLeft {
 
   constructor(
     menuService: MenuService
-   ) {
+  ) {
     // Quando o menu "abrir" (collapsed === true), foca o primeiro link
     effect(() => {
       if (this.collapsed) {
@@ -31,25 +31,29 @@ export class MenuLeft {
     });
 
     menuService.getTypeMenuUser().subscribe((typeUser) => {
-      console.log(typeUser);
 
       if (typeUser.type === 'admin') {
         this.itens = [
-          { label: 'Dashboard', link: '/admin/dashboard', icon: 'dashboard' },
-          { label: 'Gerenciar Usuários', link: '/admin/users', icon: 'group' },
-          { label: 'Relatórios', link: '/admin/reports', icon: 'bar_chart' },
+          { label: 'Home', link: '/admin', icon: 'home' },
+          { label: 'Tutores', link: '/admin/tutores', icon: 'people' },
+          { label: 'Pets', link: '/admin/pets', icon: 'pets' },
+          { label: 'Veterinários', link: '/admin/veterinarios', icon: 'medical_services' },
+          { label: 'Serviços', link: '/admin/services', icon: 'list_alt' },
+          { label: 'Meus Dados', link: '/admin/profile', icon: 'person' }
         ];
       } else if (typeUser.type === 'vet') {
         this.itens = [
-          { label: 'Meus Pacientes', link: '/vet/patients', icon: 'pets' },
-          { label: 'Agendamentos', link: '/vet/appointments', icon: 'event' },
-          { label: 'Perfil', link: '/vet/profile', icon: 'person' },
+          { label: 'Home', link: '/vet', icon: 'home' },
+          { label: 'Animais', link: '/vet/pets', icon: 'pets' },
+          { label: 'Tutores', link: '/vet/tutors', icon: 'people' },
+          { label: 'Serviços', link: '/vet/services', icon: 'list_alt' },
+          { label: 'Meus Dados', link: '/vet/profile', icon: 'person' }
         ];
       } else if (typeUser.type === 'user') {
         this.itens = [
+          { label: 'Home', link: '/tutor', icon: 'home' },
           { label: 'Meus Pets', link: '/user/mypets', icon: 'pets' },
-          { label: 'Agendar Consulta', link: '/user/schedule', icon: 'event' },
-          { label: 'Perfil', link: '/user/profile', icon: 'person' },
+          { label: 'Meus Dados', link: '/user/profile', icon: 'person' },
         ];
       }
     });
