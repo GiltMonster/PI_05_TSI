@@ -24,6 +24,13 @@ export const environment = {
   API_URL_ADMIN_CLIENTE_UPDATE: `${end_point_base}/adm/editarCliente`,
   API_URL_ADMIN_CLIENTE_DELETE: `${end_point_base}/adm/deletarCliente`,
 
+  API_URL_ADMIN_PET_LIST: `${end_point_base}/adm/getPets`,
+  API_URL_ADMIN_PET_BY_ID: `${end_point_base}/adm/getPetById`,
+  API_URL_ADMIN_PET_BY_USER_ID: `${end_point_base}/adm/getPetByUserId`,
+  API_URL_ADMIN_PET_REGISTER: `${end_point_base}/adm/registrarPet`,
+  API_URL_ADMIN_PET_UPDATE: `${end_point_base}/adm/editarPet`,
+  API_URL_ADMIN_PET_DELETE: `${end_point_base}/adm/deletarPet`,
+
   // --- veterinario ---
 
   // --- tutor ---
