@@ -23,7 +23,7 @@ export class FormLogin {
   title = 'VeterinariosJA';
   icon_email = faEnvelope;
   icon_senha = faLock;
-  
+
 protected loginForms!: FormGroup<{
     email: FormControl<string>;
     password: FormControl<string>;
@@ -65,7 +65,14 @@ protected loginForms!: FormGroup<{
       if (!resp) return;
       // ABNT 5.7: confirma sucesso
       this.live.announce('Login realizado com sucesso.', 'polite');
-      this.router.navigate(['/vet']);
+      if (resp.role[0] === 'admin') {
+        this.router.navigate(['/admin']);
+      } else if (resp.role[0] === 'vet') {
+        this.router.navigate(['/vet']);
+      } else if (resp.role[0] === 'user') {
+        this.router.navigate(['/tutor']);
+      }
+
       this.loginForms.reset();
     });
   }

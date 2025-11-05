@@ -1,6 +1,13 @@
+export interface LoginResponseInterface {
+  message: string;
+  name: string;
+  role: Array<string>;
+  token: string;
+}
+
 export interface CardInterface {
   titulo: string;
-  subtitulo:string;
+  subtitulo: string;
   imagem: string;
 }
 
@@ -19,8 +26,8 @@ export interface HeaderContato {
 
 export interface HeaderProfile {
   nome: string;
-  tipoUsu: string; 
-  rotaUrl?: string; 
+  tipoUsu: string;
+  rotaUrl?: string;
   iconUrl?: string;
 }
 
@@ -43,14 +50,14 @@ export interface PetListInterface {
 export interface TutorListInterface {
   id: number;
   nome: string;
-  telefone:string;
+  telefone: string;
   animal: string;
 }
 
 export interface VeterinarioListInterface {
   id: number;
   nome: string;
-  especialidade:string;
+  especialidade: string;
   crmv: string;
 }
 
@@ -74,6 +81,6 @@ export interface PetInterface {
 export interface ServicosListInterface {
   id: number;
   titulo: string;
-  categoria:string;
+  categoria: string;
   valor: number;
 }
