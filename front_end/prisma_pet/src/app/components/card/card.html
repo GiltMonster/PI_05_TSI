@@ -1,0 +1,13 @@
+<article class="card">
+  <img
+    class="card__img"
+    [src]="cardInfo().imagem"
+    [alt]="cardInfo().titulo"
+    loading="lazy"
+    decoding="async" />
+  <div class="card__body">
+    <h3 class="card__title">{{ cardInfo().titulo }}</h3>
+    <p class="card__subtitle">{{ cardInfo().subtitulo }}</p>
+  </div>
+</article>
+

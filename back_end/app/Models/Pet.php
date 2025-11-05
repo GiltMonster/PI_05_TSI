@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pet extends Model
 {
+    public $table = 'pets';
+
     protected $fillable = [
         'user_id',
         'nome',
         'especie',
         'raca',
-        'idade',
+        'ano_nascimento',
         'sexo',
         'peso',
         'castrado',

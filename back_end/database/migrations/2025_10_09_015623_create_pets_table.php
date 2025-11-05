@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nome');
             $table->string('especie'); // cachorro, gato, etc
             $table->string('raca')->nullable();
-            $table->integer('idade')->nullable();
+            $table->date('ano_nascimento')->nullable();
             $table->boolean('sexo')->nullable();
             $table->boolean('peso')->nullable();
             $table->boolean('castrado')->nullable();

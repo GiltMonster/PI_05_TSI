@@ -1,0 +1,235 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f7f7fb;
+}
+
+.login-right {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  width: 40vw;
+  background-color: #fff;
+  box-shadow: -2px 0 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5vh 4vw;
+  box-sizing: border-box;
+}
+
+.form-login {
+  width: 30vw;
+}
+
+.form-login img {
+  width: 25vh;
+}
+
+.titulo h2 {
+  font-size: 1.5rem;
+  font-weight: normal;
+  color: #949494;
+}
+
+.titulo h2 span {
+  font-weight: bold;
+  color: #004aad;
+}
+
+.titulo p {
+  font-size: 1.1rem;
+  color: #949494;
+  margin-top: 1vh;
+}
+
+form {
+  width: 100%;
+}
+
+.input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 35px;
+
+  .icon-left {
+    position: absolute;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  input {
+    width: 100%;
+    height: 56px;
+    border: none;
+    box-shadow: 0 8px 9px rgba(0, 0, 0, 0.12);
+    border-radius: 12px;
+    padding: 0 50px;
+    font-size: 15px;
+    color: #333;
+    background-color: #fafafa;
+    transition: all 0.3s ease;
+
+    &::placeholder { // cor com contraste (ABNT 5.10/5.11)
+      color: #6b7280;
+      font-size: 20px;
+    }
+
+      /* ABNT 5.9 e 5.10/5.11 */
+    &:focus, input:focus-visible {
+        outline: 3px solid #005FCC; 
+        outline-offset: 2px;
+      border-color: #004aad;
+      background-color: #fff;
+      box-shadow: 0 2px 12px rgba(92, 139, 197, 0.15);
+    }
+  }
+
+  .icon-left {
+    position: absolute;
+    left: 18px;
+    width: 18px;
+    height: 18px;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  .icon-right {
+    position: absolute;
+    right: 18px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.forgot-password {
+  text-align: right;
+  margin-bottom: 0.1vh;
+}
+
+.forgot-password a {
+  color: #004aad;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+  padding: 10px;
+  cursor: pointer;
+
+  &:hover, a:focus-visible {
+  color: #965229;
+  }
+}
+
+.btn-login {
+  width: 100%;
+  height: 56px;
+  background: #004aad;
+  border: none;
+  border-radius: 9px;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  margin-top: 30px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(92, 139, 197, 0.3);
+
+  &:hover {
+    background: #ff914d;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  /* foco visível e alvo (ABNT 5.8) */
+  &:focus-visible {
+    outline: 3px solid #005FCC;
+    outline-offset: 2px;
+  }
+}
+
+@media (max-width: 800px) {
+  .login-right {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    background: #004aad;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 2px);
+    background-size: 20px 20px;
+  }
+
+  .form-login img {
+    width: 20vh;
+  }
+
+  .form-login {
+    width: 70vw;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+  }
+
+  form {
+    width: 100%;
+    text-align: center;
+  }
+
+  .titulo h2 {
+    font-size: 1.0rem;
+  }
+
+  .titulo p {
+    font-size: 1.8rem;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .login-right {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    background: #004aad;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 2px);
+    background-size: 20px 20px;
+  }
+
+  .form-login img {
+    width: 15vh;
+  }
+
+  .form-login {
+    width: 65vw;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+  }
+
+  form {
+    width: 100%;
+    text-align: center;
+  }
+
+  .titulo h2 {
+    font-size: 1.5rem;
+  }
+
+  .titulo p {
+    font-size: 1.2rem;
+  }
+
+}
+
+

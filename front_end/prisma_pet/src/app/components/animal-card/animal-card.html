@@ -1,0 +1,41 @@
+<article class="card_pet_container"
+  [attr.aria-labelledby]="'pet-' + petCard().id">
+  <div class="img_especie">
+    <img
+      [src]="getEspeciesIcon()"
+      [alt]="'Espécie: ' + (petCard().especie || 'desconhecida')"
+      loading="lazy"
+      decoding="async"
+      width="64" height="64" />
+  </div>
+
+  <div class="info_pet">
+    <h3 class="nome_pet" [id]="'pet-' + petCard().id">
+      {{ petCard().nome }}
+    </h3>
+    <p class="detalhes_pet">
+      {{ getSexoLabel() }} • {{ petCard().idade }}
+    </p>
+    <p class="tutor_pet">
+      Tutor(a): {{ petCard().tutor }}
+    </p>
+  </div>
+
+  <div class="botoes_pet">
+<button
+  type="button"
+  class="btn_cadastro"
+  (click)="onView()"
+  [attr.aria-label]="'Ver cadastro completo de ' + petCard().nome">
+  <span class="btn-text btn-text--total">Abrir Cadastro</span>
+  <span class="btn-text btn-text--menor">Ver</span>
+</button>
+    <button type="button" class="btn_icon" (click)="onEdit()" aria-label="Editar cadastro">
+      <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">edit</mat-icon>
+    </button>
+
+    <button type="button" class="btn_icon" (click)="onDelete()" aria-label="Excluir cadastro">
+      <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">delete</mat-icon>
+    </button>
+  </div>
+</article>

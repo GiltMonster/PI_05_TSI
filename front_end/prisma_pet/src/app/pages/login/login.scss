@@ -1,0 +1,127 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+}
+
+.login_left {
+  position: relative;
+  flex: 1 1 60vw;
+  background: #004aad;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 21vh;
+  overflow: hidden;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 2px);
+  background-size: 20px 20px;
+}
+
+.login_left h1 {
+  max-width: 28ch;
+  margin: 0 8px 40vh 0;
+  text-align: center;
+  font-weight: normal;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-size: 5.2vh;
+}
+
+.login_left h1 span {
+  font-weight: bold;
+  color: #fff;
+}
+
+.login_left img {
+  position: absolute;
+  left: 37vh;
+  bottom: 0;
+  height: 60vh;
+  width: auto;
+  user-select: none;
+  pointer-events: none;
+}
+
+.login_left a:focus-visible,
+.login_left button:focus-visible {
+  outline: 1px solid #FFD166; 
+  outline-offset: 2px;
+}
+
+@media (max-width: 2670px) {
+
+  .login_left {
+    padding: 10vh;
+  }
+
+  .login_left h1 {
+  max-width: 80vh;
+  margin: 0 0 40vh 0;
+}
+
+.login_left img {
+  left: 25vh;
+  height: 54vh;
+}
+}
+
+@media (max-width: 2190px) {
+
+  .login_left {
+    padding: 10vh;
+  }
+
+  .login_left h1 {
+  max-width: 50vh;
+  margin: 0 0 40vh 0;
+  font-size: 3.3rem;
+}
+
+.login_left img {
+  left: 15vh;
+  height: 50vh;
+}
+}
+
+@media (max-width: 2000px) {
+
+  .login_left {
+    padding: 0;
+  }
+
+  .login_left h1 {
+  max-width: 77vh;
+  margin: 0 0 40vh 15vh;
+}
+
+.login_left img {
+  left: 30vh;
+  height: 54vh;
+}
+}
+
+@media (max-width: 1500px) {
+
+  .login_left {
+    padding: 0;
+  }
+
+  .login_left h1 {
+  max-width: 70vh;
+  margin: 0 0 40vh 5vh;
+  font-size: 4.0vh;
+}
+
+.login_left img {
+  left: 25vh;
+  height: 54vh;
+}
+}
+
+@media (max-width: 800px) {
+
+    .login_left {
+    padding: 0;
+  }
+}
