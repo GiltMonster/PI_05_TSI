@@ -42,7 +42,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::middleware(['role:admin|vet'])->group(function () {
         Route::get('/vet/getVetById/{id}', [VetController::class, 'getVetById']);
         Route::put('/vet/editarVet', [VetController::class, 'editarVet']);
+
+        Route::get('/vet/getPetById/{id}', [PetController::class, 'getPetById']);
+        Route::get('/vet/getPetByUserId/{user_id}', [PetController::class, 'getPetByUserId']);
         Route::post('/vet/registrarPet', [PetController::class, 'registrarPet']);
+        Route::put('/vet/editarPet', [PetController::class, 'editarPet']);
     });
 
     Route::middleware(['role:admin|user'])->group(function () {
