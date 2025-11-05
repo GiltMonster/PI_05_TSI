@@ -23,7 +23,6 @@
 .li_menu_left {
   list-style: none;
   font-size: 1.1rem;
-  cursor: pointer;
   width: 100%;
   margin: 0;
   padding: 0.8rem 16px;
@@ -33,7 +32,7 @@
   min-width: 44px;
   min-height: 44px;
 
-  a {
+  label {
     color: inherit;
     text-decoration: none;
     display: inline-block;
@@ -43,11 +42,15 @@
   }
 }
 
+.li_menu_left:hover, label:hover{
+  cursor: pointer;
+}
+
 /* (ABNT 5.1/5.8/5.7) */
 .li_menu_left:hover,
 .li_menu_left:focus-within,
 .li_menu_left:focus-visible,
-.li_menu_left a:focus-visible {
+.li_menu_left label:focus-visible {
   background: #EFF3F9;
   color: #004AAD;
   outline-offset: 2px;
@@ -55,7 +58,7 @@
 
 // (ABNT 5.7)
 .li_menu_left.active,
-.li_menu_left a[aria-current="page"] {
+.li_menu_left label[aria-current="page"] {
   background: #EFF3F9;
   color: #004AAD;
 }
@@ -113,7 +116,7 @@
     border-radius: 12px;
   }
 
-  .li_menu_left a {
+  .li_menu_left label {
     padding: 0 10px;
     display: flex;
     align-items: center;

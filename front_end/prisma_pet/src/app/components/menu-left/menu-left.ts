@@ -1,6 +1,6 @@
 import { Component, effect, ElementRef, HostListener, Input, Output, EventEmitter, QueryList, ViewChildren } from '@angular/core';
 import { MenuInterface } from '../../interfaces';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MenuService } from '../../services/menu-service';
@@ -14,14 +14,15 @@ import { MenuService } from '../../services/menu-service';
 })
 export class MenuLeft {
 
-  @Input() itens: MenuInterface[] = [];
+  itens: MenuInterface[] = [];
   @Input() collapsed: boolean = false; // controla a classe .open
   @Output() close = new EventEmitter<void>(); // para o acessovet fechar ao clicar em um link
 
   @ViewChildren('itemLink', { read: ElementRef }) itemLinks!: QueryList<ElementRef<HTMLAnchorElement>>;
 
   constructor(
-    menuService: MenuService
+    menuService: MenuService,
+    private router: Router
   ) {
     // Quando o menu "abrir" (collapsed === true), foca o primeiro link
     effect(() => {
@@ -72,4 +73,7 @@ export class MenuLeft {
     return !!el?.closest('.menu_left');
   }
 
+  goToLink(link: string) {
+    this.router.navigate([link]);
+  }
 }
