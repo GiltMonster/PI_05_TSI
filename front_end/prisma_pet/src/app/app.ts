@@ -3,13 +3,13 @@ import { RouterOutlet } from '@angular/router';
 import { AuthLogin } from './services/auth-login';
 import { Header } from "./components/header/header";
 import { MenuLeft } from "./components/menu-left/menu-left";
-import { HeaderContato, HeaderProfile, TextoInicioInterface } from './interfaces';
+import { HeaderContato, HeaderProfile } from './interfaces';
 import { A11yModule, LiveAnnouncer } from '@angular/cdk/a11y';
-import { TextoInicio } from './components/texto-inicio/texto-inicio';
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, MenuLeft, TextoInicio, A11yModule],
+  imports: [RouterOutlet, Header, MenuLeft, A11yModule],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
@@ -37,8 +37,8 @@ export class App implements OnInit {
   }
 
   verifyAuthToken() {
-    this.authService.verifyToken().subscribe(
-      (res) => {
+    this.authService.verifyToken().subscribe({
+      next: (res) => {
         this.isLogado = res.valid;
         this.headerProfile[0] = {
           nome: res.user.name,
@@ -48,11 +48,11 @@ export class App implements OnInit {
         };
         // console.log('logado');
       },
-      (err) => {
+      error: () => {
         this.isLogado = false;
         // console.log('não logado');
       }
-    );
+    });
   }
 
   @HostListener('document:keydown.escape')
