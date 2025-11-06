@@ -1,78 +1,19 @@
-import { A11yModule, LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
-import {
-  HeaderContato,
-  HeaderProfile,
-  MenuInterface,
-  ServicosListInterface,
-} from '../../interfaces';
+import { Component } from '@angular/core';
+import { ServicosListInterface } from '../../interfaces';
 import { CommonModule } from '@angular/common';
-import { MenuLeft } from '../../components/menu-left/menu-left';
-import { Header } from '../../components/header/header';
 import { MatIconModule } from '@angular/material/icon';
 import { ServiceList } from '../../components/service-list/service-list';
 
 @Component({
   selector: 'app-servicos',
   standalone: true,
-  imports: [CommonModule, MenuLeft, Header, A11yModule, MatIconModule, ServiceList],
+  imports: [CommonModule, MatIconModule, ServiceList],
   templateUrl: './servicos.html',
   styleUrls: ['./servicos.scss'],
 })
 export class Servicos {
-  isMenuOpen = false;
-  @ViewChild('menuFabBtn', { read: ElementRef }) menuFabBtn?: ElementRef<HTMLButtonElement>;
 
-  constructor(private live: LiveAnnouncer) {}
-
-  toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
-    if (this.isMenuOpen) {
-      this.live.announce('Menu aberto', 'polite'); // ABNT 5.7
-    } else {
-      this.live.announce('Menu fechado', 'polite'); // ABNT 5.7
-      this.menuFabBtn?.nativeElement.focus(); // ABNT 5.1
-    }
-  }
-
-  closeMenu() {
-    if (this.isMenuOpen) {
-      this.isMenuOpen = false;
-      this.live.announce('Menu fechado', 'polite'); // ABNT 5.7
-      this.menuFabBtn?.nativeElement.focus(); // ABNT 5.1
-    }
-  }
-
-  @HostListener('document:keydown.escape')
-  onEsc() {
-    this.closeMenu(); // ABNT 5.1
-  }
-
-  menuVet: MenuInterface[] = [
-    { label: 'Início', link: '/vet', icon: 'home' },
-    { label: 'Animais', link: '/animais', icon: 'pets' },
-    { label: 'Responsáveis', link: '/responsaveis', icon: 'groups' },
-    { label: 'Veterinários', link: '/veterinarios', icon: 'medical_services' },
-    { label: 'Serviços', link: '/services', icon: 'work' },
-    { label: 'Meus Dados', link: '/meus-dados', icon: 'person' },
-  ];
-
-  headerContato: HeaderContato[] = [
-    {
-      label: 'Fale Conosco',
-      wpp: 'chat',
-      link: 'https://api.whatsapp.com/send?phone=5511955207242',
-    },
-  ];
-
-  headerProfile: HeaderProfile[] = [
-    {
-      nome: 'Giovanna',
-      tipoUsu: 'Veterinária',
-      rotaUrl: '/meu_perfil',
-      iconUrl: 'account_circle',
-    },
-  ];
+  constructor() {}
 
   listServicos: ServicosListInterface[] = [
     { id: 1, titulo: 'Consulta Clínica', categoria: 'Consulta', valor: 230.0 },
