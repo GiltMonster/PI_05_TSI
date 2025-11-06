@@ -16,7 +16,7 @@ export class AuthLogin {
   ) { }
 
   login(email: string, password: string) {
-    return this.http.post<LoginResponse>(environment.API_URL_AUTH_LOGIN, {email, password}).pipe(
+    return this.http.post<LoginResponse>(environment.API_URL_AUTH_LOGIN, { email, password }).pipe(
       tap((res) => {
         if (res.token && res.name) {
           localStorage.setItem('token', res.token);
@@ -26,7 +26,7 @@ export class AuthLogin {
     );
   }
 
-  logout () {
+  logout() {
     return this.http.post(environment.API_URL_AUTH_LOGOUT, {})
   }
 
@@ -34,8 +34,6 @@ export class AuthLogin {
     return this.http.get<VerifyTokenResponse>(environment.API_URL_AUTH_VERIFY_TOKEN).pipe(
       tap({
         next: (res) => {
-          console.log(res);
-
           if (res.valid) {
             if (res.user.type === 'admin' || res.user.type === 'tutor' || res.user.type === 'vet') {
               this.router.navigate(['/' + res.user.type]);
@@ -48,6 +46,9 @@ export class AuthLogin {
       catchError((err) => {
         console.log("User not authenticated");
         this.router.navigate(['/login']);
+        if (typeof localStorage !== 'undefined') {
+          localStorage.clear();
+        }
         return [];
       })
     );

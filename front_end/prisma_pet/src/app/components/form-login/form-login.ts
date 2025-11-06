@@ -72,7 +72,7 @@ protected loginForms!: FormGroup<{
       } else if (resp.role[0] === 'user') {
         this.router.navigate(['/tutor']);
       }
-
+      window.location.reload();
       this.loginForms.reset();
     });
   }
