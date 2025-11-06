@@ -36,8 +36,8 @@ export interface HeaderContato {
 }
 
 export interface HeaderProfile {
-  nome: string;
-  tipoUsu: string;
+  nome?: string;
+  tipoUsu?: string;
   rotaUrl?: string;
   iconUrl?: string;
 }
