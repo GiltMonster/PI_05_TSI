@@ -1,4 +1,3 @@
-
 .menu_left {
   width: 250px;
   height: 100dvh;
@@ -18,25 +17,22 @@
   align-items: flex-start;
   gap: 1.5rem;
   padding: 0;
-  
-  :hover {
-    box-shadow: 0 5px 19px rgba(0, 0, 0, 0.12);
-  }
+
 }
 
 .li_menu_left {
   list-style: none;
   font-size: 1.1rem;
-  cursor: pointer;
   width: 100%;
   margin: 0;
   padding: 0.8rem 16px;
-  color: #444; /* Contraste (ABNT 5.10/5.11) */
+  color: #444;
+  /* Contraste (ABNT 5.10/5.11) */
   box-sizing: border-box;
   min-width: 44px;
   min-height: 44px;
 
-  a {
+  label {
     color: inherit;
     text-decoration: none;
     display: inline-block;
@@ -46,11 +42,15 @@
   }
 }
 
+.li_menu_left:hover, label:hover{
+  cursor: pointer;
+}
+
 /* (ABNT 5.1/5.8/5.7) */
 .li_menu_left:hover,
 .li_menu_left:focus-within,
 .li_menu_left:focus-visible,
-.li_menu_left a:focus-visible {
+.li_menu_left label:focus-visible {
   background: #EFF3F9;
   color: #004AAD;
   outline-offset: 2px;
@@ -58,15 +58,24 @@
 
 // (ABNT 5.7)
 .li_menu_left.active,
-.li_menu_left a[aria-current="page"]{
+.li_menu_left label[aria-current="page"] {
   background: #EFF3F9;
   color: #004AAD;
 }
 
 @media (max-width: 1200px) {
-  .menu_left { width: 220px; height: 100%; }
-  .ul_menu_left { gap: 1.25rem; }
-  .li_menu_left { padding: 0.75rem 14px; }
+  .menu_left {
+    width: 220px;
+    height: 100%;
+  }
+
+  .ul_menu_left {
+    gap: 1.25rem;
+  }
+
+  .li_menu_left {
+    padding: 0.75rem 14px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -81,12 +90,12 @@
     background: #fff;
     box-shadow: none;
     transition: width .28s ease, box-shadow .28s ease;
-    padding: 0 env(safe-area-inset-left) 0 0; 
+    padding: 0 env(safe-area-inset-left) 0 0;
   }
 
   .menu_left.open {
-    width: 54vw; 
-    box-shadow: 2px 0 18px rgba(0,0,0,.18);
+    width: 54vw;
+    box-shadow: 2px 0 18px rgba(0, 0, 0, .18);
   }
 
   .ul_menu_left {
@@ -107,11 +116,15 @@
     border-radius: 12px;
   }
 
-  .li_menu_left a { 
+  .li_menu_left label {
     padding: 0 10px;
-      display: flex;
+    display: flex;
     align-items: center;
-    gap: 12px;} 
-  .li_menu_left img { width: 26px; height: 26px; }
-}
+    gap: 12px;
+  }
 
+  .li_menu_left img {
+    width: 26px;
+    height: 26px;
+  }
+}

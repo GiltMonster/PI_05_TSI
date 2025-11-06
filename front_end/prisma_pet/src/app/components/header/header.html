@@ -11,7 +11,9 @@ Sessões ABNT: 5.2, 5.3, 5.7, 5.1. -->
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Abrir conversa no WhatsApp: {{ item.label }}">
-          <mat-icon *ngIf="item.wpp" aria-hidden="true">{{ item.wpp }}</mat-icon>
+          @if (item.wpp) {
+            <mat-icon aria-hidden="true">{{ item.wpp }}</mat-icon>
+          }
           <p>{{ item.label }}</p>
         </a>
       }
@@ -20,7 +22,9 @@ Sessões ABNT: 5.2, 5.3, 5.7, 5.1. -->
     <div class="profile">
       @for (item of profile(); track $index) {
         <a [routerLink]="item.rotaUrl" aria-label="Abrir perfil de {{ item.nome }}">
-          <mat-icon class="icon_profile" *ngIf="item.iconUrl" aria-hidden="true">{{ item.iconUrl }}</mat-icon>
+          @if (item.iconUrl) {
+            <mat-icon class="icon_profile" aria-hidden="true">{{ item.iconUrl }}</mat-icon>
+          }
         </a>
       }
 
@@ -30,6 +34,7 @@ Sessões ABNT: 5.2, 5.3, 5.7, 5.1. -->
           <a [routerLink]="item.rotaUrl" aria-label="Ver perfil completo de {{ item.nome }}">
             <span>{{ item.tipoUsu }}</span>
           </a>
+          <p class="logout" (click)="logout()">Logout</p>
         }
       </div>
     </div>

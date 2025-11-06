@@ -1,1 +1,39 @@
-<router-outlet />
+@if (isLogado) {
+
+<main>
+  <!-- id/menu, aria-* consistentes.
+    Sessões ABNT: 5.1, 5.7, 5.3, 5.8 . -->
+
+  <!-- Cabeçalho (ABNT 5.3) -->
+  <app-header [contato]="headerContato" [profile]="headerProfile" [collapsed]="false"
+    aria-label="Cabeçalho do sistema VetJA">
+  </app-header>
+
+  <div class="layout">
+    <!-- Menu lateral com trap de foco e landmark  (ABNT 5.1/5.3/5.7) -->
+    <app-menu-left [collapsed]="isMenuOpen" (close)="closeMenu()" cdkTrapFocus [cdkTrapFocusAutoCapture]="isMenuOpen"
+      aria-label="Menu de navegação principal">
+    </app-menu-left>
+    <!-- Conteúdo principal com foco  (ABNT 5.1/5.3) -->
+    <section id="conteudo-principal" class="content" role="main" tabindex="-1">
+      <router-outlet></router-outlet>
+    </section>
+  </div>
+
+  <!-- Botão do menu com estado acessível e referência para devolver foco (ABNT 5.1/5.8) -->
+  <button class="menu-fab" #menuFabBtn type="button" (click)="toggleMenu()" aria-label="Abrir menu lateral"
+    [attr.aria-expanded]="isMenuOpen" aria-controls="menu-lateral">
+    <span class="menu-fab__icon" aria-hidden="true">☰</span>
+  </button>
+
+</main>
+
+} @else {
+  <router-outlet></router-outlet>
+}
+
+@if (isMenuOpen) {
+<!-- Backdrop não-interativo (ABNT 5.1) -->
+<div div class="menu-backdrop" (click)="closeMenu()" aria-hidden="true"></div>
+
+}
