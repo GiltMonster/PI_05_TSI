@@ -9,16 +9,33 @@ export const routes: Routes = [
       {
         path: '',
         loadComponent: () => import('./pages/acesso-vet/acesso-vet').then(m => m.AcessoVet)
+      },
+      {
+        path: 'pets',
+        loadComponent: () => import('./pages/animais/animais').then(m => m.Animais)
+      },
+      {
+        path: 'tutors',
+        loadComponent: () => import('./pages/tutor/tutor').then(m => m.Tutor)
+      },
+      {
+        path: 'services',
+        loadComponent: () => import('./pages/servicos/servicos').then(m => m.Servicos)
       }
     ]
   },
   {
-    path: 'tutor',
+    path: 'user',
     children: [
       {
         path: '',
         loadComponent: () => import('./pages/acesso-tutor/acesso-tutor').then(m => m.AcessoTutor)
-      }
+      },
+      {
+        path: 'pets',
+        loadComponent: () => import('./pages/animais/animais').then(m => m.Animais)
+      },
+
     ]
   },
   {

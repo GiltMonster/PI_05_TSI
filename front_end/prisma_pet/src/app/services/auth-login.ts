@@ -35,7 +35,7 @@ export class AuthLogin {
       tap({
         next: (res) => {
           if (res.valid) {
-            if (res.user.type === 'admin' || res.user.type === 'tutor' || res.user.type === 'vet') {
+            if (res.user.type === 'admin' || res.user.type === 'user' || res.user.type === 'vet') {
               this.router.navigate(['/' + res.user.type]);
             } else {
               this.router.navigate(['/login']);

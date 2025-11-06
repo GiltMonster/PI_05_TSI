@@ -1,34 +1,6 @@
-<!-- id/menu, aria-* consistentes.
-Sessões ABNT: 5.1, 5.7, 5.3, 5.8 -->
-<app-header [contato]="headerContato" [profile]="headerProfile" [collapsed]="false"> </app-header>
-
-<div class="layout">
-  <app-menu-left
-    id="menu-lateral"
-    [collapsed]="isMenuOpen"
-    (close)="closeMenu()"
-  ></app-menu-left>
-
-  <main class="content" id="conteudo-principal" role="main" tabindex="-1">
-    <section class="cards" aria-label="Atalhos e funcionalidades do tutor">
-      @for (c of cardstutor; track $index) {
-      <app-card [cardInfo]="c"></app-card>
-      }
-    </section>
-    <app-texto-inicio [inicio]="inicioTutor"></app-texto-inicio>
-  </main>
-</div>
-
-<button
-  class="menu-fab"
-  #menuFabBtn
-  type="button"
-  (click)="toggleMenu()"
-  aria-label="Abrir menu"
-  [attr.aria-expanded]="isMenuOpen"
-  aria-controls="menu-lateral"
->
-  <span class="menu-fab__icon" aria-hidden="true">☰</span>
-</button>
-
-<div class="menu-backdrop" *ngIf="isMenuOpen" (click)="closeMenu()" aria-hidden="true"></div>
+<section class="cards" aria-label="Atalhos e funcionalidades do tutor">
+  @for (c of cardstutor; track $index) {
+  <app-card [cardInfo]="c"></app-card>
+  }
+</section>
+<app-texto-inicio [inicio]="inicioTutor"></app-texto-inicio>

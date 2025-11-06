@@ -52,8 +52,8 @@ export class MenuLeft {
           ];
         } else if (typeUser.type === 'user') {
           this.itens = [
-            { label: 'Home', link: '/tutor', icon: 'home' },
-            { label: 'Meus Pets', link: '/user/mypets', icon: 'pets' },
+            { label: 'Home', link: '/user', icon: 'home' },
+            { label: 'Meus Pets', link: '/user/pets', icon: 'pets' },
             { label: 'Meus Dados', link: '/user/profile', icon: 'person' },
           ];
         }
