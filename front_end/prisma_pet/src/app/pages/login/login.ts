@@ -11,10 +11,12 @@ import { AuthLogin } from '../../services/auth-login';
 
 export class Login implements OnInit {
 
+  constructor(
+    private authService: AuthLogin
+  ) { }
+
   ngOnInit(): void {
-    // Limpa todos os dados do localStorage ao inicializar o componente
-    if (typeof localStorage !== 'undefined') {
-      localStorage.clear();
-    }
+    this.authService.verifyToken().subscribe();
   }
+
 }

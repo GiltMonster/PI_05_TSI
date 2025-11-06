@@ -1,40 +1,5 @@
-<!-- id="menu-lateral", aria-controls, aria-label nos cards, aria-hidden no ícone. Sessões ABNT:5.1, 5.7, 5.3, 5.8. -->
-<app-header [contato]="headerContato" [profile]="headerProfile" [collapsed]="false"> </app-header>
-
-<div class="layout">
-  <app-menu-left
-    id="menu-lateral"
-    [itens]="menuVet"
-    [collapsed]="isMenuOpen"
-    (close)="closeMenu()"
-  ></app-menu-left>
-
-  <main class="content" id="conteudo-principal" role="main" tabindex="-1">
-    <section class="lista_servico" aria-label="Lista de Responsáveis">
-      <app-service-list
-        [servicos]="filtered"
-        [loading]="false"
-        [columns]="1"
-        [gap]="12"
-        (searchChange)="onSearch($event)"
-        (editServico)="onEditServico($event)"
-        (deleteServico)="onDeleteServico($event)"
-      >
-      </app-service-list>
-    </section>
-  </main>
-</div>
-
-<button
-  class="menu-fab"
-  type="button"
-  #menuFabBtn
-  (click)="toggleMenu()"
-  aria-label="Abrir menu"
-  [attr.aria-expanded]="isMenuOpen"
-  aria-controls="menu-lateral"
->
-  <span class="menu-fab__icon" aria-hidden="true">☰</span>
-</button>
-
-<div class="menu-backdrop" *ngIf="isMenuOpen" (click)="closeMenu()" aria-hidden="true"></div>
+<section class="lista_servico" aria-label="Lista de Responsáveis">
+  <app-service-list [servicos]="filtered" [loading]="false" [columns]="1" [gap]="12" (searchChange)="onSearch($event)"
+    (editServico)="onEditServico($event)" (deleteServico)="onDeleteServico($event)">
+  </app-service-list>
+</section>

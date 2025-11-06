@@ -2,30 +2,31 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1px 20px;
+  padding: 0px 20px;
   background-color: #fff;
   box-shadow: 0 1px 20px rgba(0, 0, 0, 0.12);
-  height: 12%;
+  height: 10%;
   font-family: poppins;
 }
 
 .logo {
   margin: 0;
-  width: 17vh;
-  margin-bottom: -5px;
+  width: 7%;
+  margin: 10px 20px;
 }
 
 .bloco2 {
   display: flex;
   align-items: center;
-  gap: 90px;
+  gap: 20px;
 }
 
 .whats {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #4a4a4a; /* Texto cinza com contraste melhor (ABNT 5.10/5.11) */
+  color: #4a4a4a;
+  /* Texto cinza com contraste melhor (ABNT 5.10/5.11) */
   font-weight: 500;
 }
 
@@ -65,12 +66,25 @@
     line-height: 1.2;
   }
 
-  .user-info p {
-    font-size: 1.2rem;
-    color: #004aad;
-    font-weight: bold;
-    margin: 0;
-    padding: 0;
+
+  .user-info {
+    p{
+      font-size: 1.2rem;
+      color: #004aad;
+      font-weight: bold;
+      margin: 0;
+      padding: 0;
+    }
+
+    .logout {
+      font-size: 0.9rem;
+      color: #ff4d4d;
+    }
+
+    .logout:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
   }
 
   .user-info span {
@@ -82,9 +96,9 @@
   }
 }
 
-  /* Links do WhatsApp e perfil (ABNT 5.1/5.8) */
-  .whats a:focus-visible,
-  .profile a:focus-visible {
+/* Links do WhatsApp e perfil (ABNT 5.1/5.8) */
+.whats a:focus-visible,
+.profile a:focus-visible {
   outline: 3px solid #005FCC;
   outline-offset: 2px;
 }
@@ -109,9 +123,9 @@
 
   /* Estado de foco consistente (ABNT 5.8) */
   :focus-visible {
-  outline: 3px solid #005FCC;
-  outline-offset: 2px;
-}
+    outline: 3px solid #005FCC;
+    outline-offset: 2px;
+  }
 }
 
 @media (max-width: 1014px) {
@@ -156,12 +170,14 @@
   .whats a p {
     display: none;
   }
+
   .whats a {
     padding: 7px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
+
   .profile .user-info {
     display: none;
   }
