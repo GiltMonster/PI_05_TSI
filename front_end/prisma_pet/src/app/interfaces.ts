@@ -1,8 +1,19 @@
-export interface LoginResponseInterface {
+export interface LoginResponse {
   message: string;
   name: string;
   role: Array<string>;
   token: string;
+}
+
+export interface VerifyTokenResponse {
+  valid: boolean;
+  user: {
+    id: number;
+    name: string;
+    email: string;
+    type: string;
+    permissions: Array<string>;
+  }
 }
 
 export interface CardInterface {
