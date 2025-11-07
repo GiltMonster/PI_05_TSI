@@ -34,7 +34,7 @@ class User extends Authenticatable
     protected $guard_name = 'api';
     public $timestamps = false;
 
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['password', 'remember_token', 'roles', 'permissions'];
 
     public function newFromBuilder($attributes = [], $connection = null)
     {
