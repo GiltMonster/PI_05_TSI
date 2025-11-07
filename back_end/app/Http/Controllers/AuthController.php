@@ -82,7 +82,7 @@ class AuthController extends Controller
             $error_msg = "";
             if (isset($error['email'])) {
                 $error_msg = "O email já está em uso.";
-            }else{
+            } else {
                 $error_msg = "Erro de validação.";
             }
 
@@ -139,9 +139,11 @@ class AuthController extends Controller
     public function me(Request $request)
     {
         $user = $request->user();
-        return response()->json([
-            'user' => $user,
-        ], 200);
+
+        return response()->json(
+            $user,
+            200
+        );
     }
 
     public function myType(Request $request)
@@ -176,11 +178,10 @@ class AuthController extends Controller
                         'type' => $this->myType($request)->original['type'],
                         'permissions' => $user->getAllPermissions()->pluck('name'),
                     ]
-                    ]
+                ]
             );
         } else {
             return response()->json(['valid' => false], 401);
         }
     }
-
 }
