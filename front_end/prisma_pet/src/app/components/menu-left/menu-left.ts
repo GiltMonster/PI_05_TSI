@@ -40,7 +40,7 @@ export class MenuLeft {
             { label: 'Pets', link: '/admin/pets', icon: 'pets' },
             { label: 'Veterinários', link: '/admin/veterinarios', icon: 'medical_services' },
             { label: 'Serviços', link: '/admin/services', icon: 'list_alt' },
-            { label: 'Meus Dados', link: '/admin/profile', icon: 'person' }
+            { label: 'Meus Dados', link: '/admin/perfil', icon: 'person' }
           ];
         } else if (typeUser.type === 'vet') {
           this.itens = [
@@ -48,13 +48,13 @@ export class MenuLeft {
             { label: 'Animais', link: '/vet/pets', icon: 'pets' },
             { label: 'Tutores', link: '/vet/tutors', icon: 'people' },
             { label: 'Serviços', link: '/vet/services', icon: 'list_alt' },
-            { label: 'Meus Dados', link: '/vet/profile', icon: 'person' }
+            { label: 'Meus Dados', link: '/vet/perfil', icon: 'person' }
           ];
         } else if (typeUser.type === 'user') {
           this.itens = [
             { label: 'Home', link: '/user', icon: 'home' },
             { label: 'Meus Pets', link: '/user/pets', icon: 'pets' },
-            { label: 'Meus Dados', link: '/user/profile', icon: 'person' },
+            { label: 'Meus Dados', link: '/user/perfil', icon: 'person' },
           ];
         }
       },
