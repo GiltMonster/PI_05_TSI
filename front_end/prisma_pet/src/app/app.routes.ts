@@ -21,6 +21,10 @@ export const routes: Routes = [
       {
         path: 'services',
         loadComponent: () => import('./pages/servicos/servicos').then(m => m.Servicos)
+      },
+      {
+        path: 'perfil',
+        loadComponent: () => import('./pages/perfil/perfil').then(m => m.Perfil)
       }
     ]
   },
@@ -35,7 +39,10 @@ export const routes: Routes = [
         path: 'pets',
         loadComponent: () => import('./pages/animais/animais').then(m => m.Animais)
       },
-
+      {
+        path: 'perfil',
+        loadComponent: () => import('./pages/perfil/perfil').then(m => m.Perfil)
+      }
     ]
   },
   {
@@ -61,10 +68,10 @@ export const routes: Routes = [
         path: 'services',
         loadComponent: () => import('./pages/servicos/servicos').then(m => m.Servicos)
       },
+      {
+        path: 'perfil',
+        loadComponent: () => import('./pages/perfil/perfil').then(m => m.Perfil)
+      }
     ]
   },
-  { path: 'animais', loadComponent: () => import('./pages/animais/animais').then(m => m.Animais) },
-  { path: 'admin/tutores', loadComponent: () => import('./pages/tutor/tutor').then(m => m.Tutor) },
-  { path: 'services', loadComponent: () => import('./pages/servicos/servicos').then(m => m.Servicos) },
-  { path: 'veterinarios', loadComponent: () => import('./pages/veterinarios/veterinarios').then(m => m.Veterinarios) },
 ];

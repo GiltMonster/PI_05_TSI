@@ -39,6 +39,13 @@ class ClienteController extends Controller
             return response()->json(['message' => 'O usuário especificado não é um cliente.'], 400);
         }
 
+        if ($request->filled('email') && $request->email != $cliente->email) {
+            $existingEmail = Cliente::where('email', $request->email)->first();
+            if ($existingEmail) {
+                return response()->json(['message' => 'E-mail invalido.'], 400);
+            }
+        }
+
         if ($request->filled('password')){
             $cliente->password = bcrypt($request->password);
         }
