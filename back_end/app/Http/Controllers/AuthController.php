@@ -141,9 +141,7 @@ class AuthController extends Controller
         $user = $request->user();
         return response()->json([
             'user' => $user,
-            'roles' => $user->getRoleNames(),
-            'permissions' => $user->getAllPermissions()->pluck('name'),
-        ]);
+        ], 200);
     }
 
     public function myType(Request $request)
