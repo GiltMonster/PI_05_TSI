@@ -47,6 +47,34 @@ export class Perfil implements OnInit {
     }
   }
 
+  applyCpfMask(event: any): void {
+    let value = event.target.value.replace(/\D/g, ''); // Remove qualquer coisa que não seja número
+    value = value.replace(/(\d{3})(\d)/, '$1.$2'); // Coloca o primeiro ponto
+    value = value.replace(/(\d{3})(\d)/, '$1.$2'); // Coloca o segundo ponto
+    value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Coloca o hífen
+
+    this.userData.cpf = value;
+  }
+
+  applyTelephoneMask(event: any): void {
+    let value = event.target.value.replace(/\D/g, ''); // Remove qualquer coisa que não seja número
+    value = value.replace(/(\d{2})(\d)/, '($1) $2'); // Coloca o parêntese e espaço
+    value = value.replace(/(\d{5})(\d)/, '$1-$2'); // Coloca o hífen
+
+    this.userData.phone = value;
+  }
+
+  applyMaskcCEP(event: any): void {
+    let value = event.target.value.replace(/\D/g, ''); // Remove qualquer coisa que não seja número
+    value = value.replace(/(\d{5})(\d)/, '$1-$2'); // Coloca o hífen
+
+    this.userData.cep = value;
+  }
+
+  removeMask(value: string): string {
+    return value.replace(/\D/g, '');
+  }
+
   getUserData() {
     this.usuarioService.getUserData().subscribe({
       next: (res) => {
