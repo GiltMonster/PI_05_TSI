@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { TutorListInterface } from '../../interfaces';
+import { UserInterface } from '../../interfaces';
 
 @Component({
   selector: 'app-tutor-card',
@@ -11,11 +11,11 @@ import { TutorListInterface } from '../../interfaces';
   styleUrls: ['./tutor-card.scss']
 })
 export class TutorCard {
-  tutorCard = input.required<TutorListInterface>();
+  tutorCard = input.required<UserInterface>();
 
-  editClick   = output<TutorListInterface>();
-  deleteClick = output<TutorListInterface>();
-  viewClick   = output<TutorListInterface>();
+  editClick   = output<UserInterface>();
+  deleteClick = output<UserInterface>();
+  viewClick   = output<UserInterface>();
 
   onEdit()   { this.editClick.emit(this.tutorCard()); }
   onDelete() { this.deleteClick.emit(this.tutorCard()); }

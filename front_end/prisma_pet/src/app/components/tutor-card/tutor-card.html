@@ -2,13 +2,10 @@
   [attr.aria-labelledby]="'tutor-' + tutorCard().id">
   <div class="info_tutor">
     <h3 class="nome_tutor" [id]="'tutor-' + tutorCard().id">
-      {{ tutorCard().nome }}
+      {{ tutorCard().name }}
     </h3>
     <p class="detalhes_tutor">
-      {{ tutorCard().telefone }}
-    </p>
-    <p class="animal_tutor">
-      <strong>Animal:</strong> {{ tutorCard().animal }}
+      {{ tutorCard().phone }}
     </p>
   </div>
 
@@ -17,7 +14,7 @@
   type="button"
   class="btn_cadastro"
   (click)="onView()"
-  [attr.aria-label]="'Ver cadastro completo de ' + tutorCard().nome">
+  [attr.aria-label]="'Ver cadastro completo de ' + tutorCard().name">
   <span class="btn-text btn-text--total">Abrir Cadastro</span>
   <span class="btn-text btn-text--menor">Ver</span>
 </button>
