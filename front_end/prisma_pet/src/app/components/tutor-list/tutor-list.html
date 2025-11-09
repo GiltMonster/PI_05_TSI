@@ -2,40 +2,25 @@
   <h1 class="list_title">Responsáveis</h1>
 
   <div class="header_list_tutor">
-    <form class="search" role="search" (submit)="onSubmit($event)">
+    <form class="search" role="search">
       <label class="sr-only" for="tutorSearch">Buscar Tutor</label>
-      <input
-        id="tutorSearch"
-        class="search__input"
-        type="search"
-        [placeholder]="searchPlaceholder"
-        [formControl]="searchCtrl"
-        autocomplete="off"
-        aria-describedby="Buscar Tutor"
-      />
-      <button
-        *ngIf="searchCtrl.value"
-        type="button"
-        class="search__clear"
-        (click)="clearSearch()"
-        aria-label="Limpar busca"
-      >
+      <input id="tutorSearch" class="search__input" type="search" placeholder="Buscar Responsável"
+        [formControl]="searchCtrl" autocomplete="off" aria-describedby="Buscar Tutor" />
+      @if(searchCtrl.value){
+
+      <button type="button" class="search__clear" aria-label="Limpar busca">
         <mat-icon aria-hidden="true">close</mat-icon>
       </button>
-      
+      }
+
       <button type="submit" class="search__btn" aria-label="Buscar">
         <mat-icon aria-hidden="true">search</mat-icon>
       </button>
-      
+
       <span id="Buscar Tutor" class="sr-only" aria-live="polite">{{ statusMsg }}</span>
     </form>
 
-    <button
-      class="add_tutor_button"
-      type="button"
-      (click)="onAddTutor()"
-      aria-label="Cadastrar novo Responsável"
-    >
+    <button class="add_tutor_button" type="button" aria-label="Cadastrar novo Responsável">
       <mat-icon aria-hidden="true">add</mat-icon>
       <span>Cadastrar Novo Responsável</span>
     </button>
@@ -45,18 +30,13 @@
   <div class="status" role="status" aria-live="polite">Carregando lista…</div>
 
   } @if (!loading && (!tutores || tutores.length === 0)) {
-  <div class="empty" role="note" aria-live="polite">{{ emptyMessage }}</div>
+  <div class="empty" role="note" aria-live="polite">Nenhum tutor cadastrado</div>
 
   } @if (!loading && tutores.length) {
-  <ul class="grid" role="list" [style.gridTemplateColumns]="getGridTemplate()" [style.gap.px]="gap">
-    @for (p of tutores; track trackById($index, p)) {
+  <ul class="grid" role="list" >
+    @for (p of tutores; track p.id) {
     <li class="grid__item" role="listitem">
-      <app-tutor-card
-        [tutorCard]="p"
-        (viewClick)="onViewTutor($event)"
-        (editClick)="onEditTutor($event)"
-        (deleteClick)="onDeleteTutor($event)"
-      >
+      <app-tutor-card [tutorCard]="p">
       </app-tutor-card>
     </li>
     }
