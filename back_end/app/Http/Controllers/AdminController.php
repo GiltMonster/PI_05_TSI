@@ -43,8 +43,7 @@ class AdminController extends Controller
         $user->save();
 
         return response()->json([
-            'message' => 'Admin atualizado com sucesso',
-            'user' => $user,
-        ]);
+            'message' => 'Admin atualizado com sucesso'
+        ], 200);
     }
 }
