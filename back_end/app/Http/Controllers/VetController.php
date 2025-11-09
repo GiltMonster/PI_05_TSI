@@ -36,11 +36,8 @@ class VetController extends Controller
             return response()->json(['message' => 'O usuário especificado não é um veterinário.'], 400);
         }
 
-        if ($request->filled('password')){
-            $vet->password = bcrypt($request->password);
-            if ($vet->password === $newVetData->password) {
-                return response()->json(['message' => 'A nova senha não pode ser igual à senha atual.'], 400);
-            }
+        if (!empty($request['password'])) { // Atualiza a senha somente se fornecida
+            $vet->password = bcrypt($request['password']);
         }
 
         if ($vet == $newVetData) {
@@ -49,7 +46,6 @@ class VetController extends Controller
 
         $vet->name = $newVetData->name;
         $vet->email = $newVetData->email;
-        $vet->password = bcrypt($newVetData->password);
         $vet->phone = $newVetData->phone;
         $vet->cep = $newVetData->cep;
         $vet->endereco = $newVetData->endereco;
@@ -60,8 +56,10 @@ class VetController extends Controller
         $vet->cpf = $newVetData->cpf;
         $vet->crmv = $newVetData->crmv;
         $vet->pix = $newVetData->pix;
+
+
         $vet->save();
-        return response()->json(['message' => 'Dados do veterinário atualizados com sucesso.'], 200);
+        return response()->json(['message' => 'Dados do veterinário atualizados com sucesso.', $vet], 200);
     }
 
     function deletarVet($id)

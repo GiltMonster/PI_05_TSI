@@ -36,7 +36,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
         Route::get('/adm/getPets', [PetController::class, 'getPets']);
         Route::get('/adm/getPetById/{id}', [PetController::class, 'getPetById']);
-        Route::get('/adm/getPetByUserId/{user_id}', [PetController::class, 'getPetByUserId']);
+        Route::get('/adm/getPetsByUserId/{user_id}', [PetController::class, 'getPetsByUserId']);
         Route::post('/adm/registrarPet', [PetController::class, 'registrarPet']);
         Route::put('/adm/editarPet', [PetController::class, 'editarPet']);
         Route::delete('/adm/deletarPet/{id}', [PetController::class, 'deletarPet']);
@@ -47,7 +47,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('/vet/editarVet', [VetController::class, 'editarVet']);
 
         Route::get('/vet/getPetById/{id}', [PetController::class, 'getPetById']);
-        Route::get('/vet/getPetByUserId/{user_id}', [PetController::class, 'getPetByUserId']);
+        Route::get('/vet/getPetsByUserId/{user_id}', [PetController::class, 'getPetsByUserId']);
         Route::post('/vet/registrarPet', [PetController::class, 'registrarPet']);
         Route::put('/vet/editarPet', [PetController::class, 'editarPet']);
     });
@@ -57,7 +57,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('/cliente/editarCliente', [ClienteController::class, 'editCliente']);
 
         Route::get('/cliente/getPetById/{id}', [PetController::class, 'getPetById']);
-        Route::get('/cliente/getPetByUserId/{user_id}', [PetController::class, 'getPetByUserId']);
+        Route::get('/cliente/getPetsByUserId/{user_id}', [PetController::class, 'getPetsByUserId']);
         Route::post('/cliente/registrarPet', [PetController::class, 'registrarPet']);
         Route::put('/cliente/editarPet', [PetController::class, 'editarPet']);
         Route::delete('/cliente/deletarPet/{id}', [PetController::class, 'deletarPet']);
