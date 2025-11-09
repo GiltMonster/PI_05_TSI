@@ -24,9 +24,9 @@ export class UsuarioService {
     if (data.type === 'admin') {
       return this.http.put(environment.API_URL_ADMIN_UPDATE, data);
     }else if (data.type === 'vet') {
-      return this.http.put(environment.API_URL_ADMIN_VET_UPDATE, data);
+      return this.http.put(environment.API_URL_VET_UPDATE, data);
     } else {
-      return this.http.put(environment.API_URL_ADMIN_CLIENTE_UPDATE, data);
+      return this.http.put(environment.API_URL_CLIENTE_UPDATE, data);
     }
   }
 
