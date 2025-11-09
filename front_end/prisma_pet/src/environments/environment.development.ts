@@ -28,16 +28,31 @@ export const environment = {
 
   API_URL_ADMIN_PET_LIST: `${end_point_base}/adm/getPets`,
   API_URL_ADMIN_PET_BY_ID: `${end_point_base}/adm/getPetById`,
-  API_URL_ADMIN_PET_BY_USER_ID: `${end_point_base}/adm/getPetByUserId`,
+  API_URL_ADMIN_PET_BY_USER_ID: `${end_point_base}/adm/getPetsByUserId`,
   API_URL_ADMIN_PET_REGISTER: `${end_point_base}/adm/registrarPet`,
   API_URL_ADMIN_PET_UPDATE: `${end_point_base}/adm/editarPet`,
   API_URL_ADMIN_PET_DELETE: `${end_point_base}/adm/deletarPet`,
 
   // --- veterinario ---
+  API_URL_VET_GET_VET_BY_ID: `${end_point_base}/vet/getVetById`,
+  API_URL_VET_UPDATE: `${end_point_base}/vet/editarVet`,
+
+  API_URL_VET_GET_PET_BY_ID: `${end_point_base}/vet/getPetById`,
+  API_URL_VET_GET_PETS_BY_USER_ID: `${end_point_base}/vet/getPetsByUserId`,
+  API_URL_VET_PET_REGISTER: `${end_point_base}/vet/registrarPet`,
+  API_URL_VET_PET_UPDATE: `${end_point_base}/vet/editarPet`,
 
   // --- tutor ---
+  API_URL_CLIENTE_GET_CLIENTE_BY_ID: `${end_point_base}/cliente/getClienteById`,
+  API_URL_CLIENTE_UPDATE: `${end_point_base}/cliente/editarCliente`,
 
-  // --- pet ---
+  API_URL_CLIENTE_GET_PET_BY_ID: `${end_point_base}/cliente/getPetById`,
+  API_URL_CLIENTE_GET_PETS_BY_USER_ID: `${end_point_base}/cliente/getPetsByUserId`,
+  API_URL_CLIENTE_PET_REGISTER: `${end_point_base}/cliente/registrarPet`,
+  API_URL_CLIENTE_PET_UPDATE: `${end_point_base}/cliente/editarPet`,
+  API_URL_CLIENTE_PET_DELETE: `${end_point_base}/cliente/deletarPet`,
+
+  // --- History pet ---
 
   // --- servicos ---
 
