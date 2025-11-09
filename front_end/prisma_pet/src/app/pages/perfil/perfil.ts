@@ -3,13 +3,9 @@ import { UsuarioService } from '../../services/usuario-service';
 import { UserInterface } from '../../interfaces';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { FormatCPFPipe } from '../../pipes/format-cpf-pipe';
-import { FormatPhonePipe } from '../../pipes/format-phone-pipe';
-import { FormatCEPPipe } from '../../pipes/format-cep-pipe';
-
 @Component({
   selector: 'app-perfil',
-  imports: [CommonModule, FormsModule, FormatCPFPipe, FormatPhonePipe, FormatCEPPipe],
+  imports: [CommonModule, FormsModule],
   templateUrl: './perfil.html',
   styleUrl: './perfil.scss',
   standalone: true
