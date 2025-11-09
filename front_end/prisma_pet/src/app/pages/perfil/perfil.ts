@@ -60,6 +60,10 @@ export class Perfil implements OnInit {
     });
   }
 
+  restartForm() {
+    this.getUserData();
+  }
+
   findCEP(cep = '') {
     this.usuarioService.findCEP(cep).subscribe({
       next: (res) => {
@@ -75,7 +79,6 @@ export class Perfil implements OnInit {
         console.log('Erro ao buscar CEP', err);
       }
     });
-
   }
 
 }
