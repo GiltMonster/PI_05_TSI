@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClienteController;
@@ -21,6 +22,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     // Protegidas por role
     Route::middleware(['role:admin'])->group(function () {
+        Route::put('/adm/editarAdmin', [AdminController::class, 'editarAdmin']);
+
         Route::get('/adm/getVets', [VetController::class, 'getVets']);
         Route::get('/adm/getVetById/{id}', [VetController::class, 'getVetById']);
         Route::put('/adm/editarVet', [VetController::class, 'editarVet']);
