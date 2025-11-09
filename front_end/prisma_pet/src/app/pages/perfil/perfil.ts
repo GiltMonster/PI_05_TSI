@@ -17,7 +17,7 @@ import { FormatCEPPipe } from '../../pipes/format-cep-pipe';
 export class Perfil implements OnInit {
 
   class_is_required = '';
-  class_pix_required = '';
+  class_group_full_option = '';
   userData: UserInterface = {
     id: 0,
     type: '',
@@ -79,11 +79,32 @@ export class Perfil implements OnInit {
     this.usuarioService.getUserData().subscribe({
       next: (res) => {
         this.userData = res;
-        this.class_is_required = this.userData.type !== 'cliente' || 'vet' ? 'form-label' : 'form-label form-label--required';
-        this.class_pix_required = this.userData.type === 'vet' ? 'form-label form-label--required' : 'form-label';
+        this.class_is_required = this.userData.type !== 'admin' ? 'form-label form-label--required' : 'form-label';
+        this.class_group_full_option = this.userData.type !== 'vet' ? 'form-group form-group--full' : 'form-group';
+
+        console.log(res);
+
+
       },
       error: (err) => {
         console.log('Erro, não foi possível ler os dados do usuário!!');
+      }
+    });
+  }
+
+  updateUserData() {
+    this.userData = {
+      ...this.userData,
+      cpf: this.removeMask(this.userData.cpf || ''),
+      phone: this.removeMask(this.userData.phone || ''),
+      cep: this.removeMask(this.userData.cep || '')
+    }
+    this.usuarioService.updateUser(this.userData).subscribe({
+      next: (res) => {
+        console.log('Dados atualizados com sucesso!', res);
+      },
+      error: (err) => {
+        console.log('Erro ao atualizar os dados do usuário!!', err);
       }
     });
   }

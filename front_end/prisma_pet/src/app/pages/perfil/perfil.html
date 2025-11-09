@@ -29,9 +29,9 @@
           <div class="form-group">
             <label for="cpf" [class]="class_is_required">CPF</label>
             <input type="text" id="cpf" name="cpf" class="form-input" [(ngModel)]="userData.cpf"
-              (input)="applyCpfMask($event)" maxlength="14"
-              aria-required="true" required="{{userData.type === 'vet' || 'user' ? true : false }}"
-              pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Formato: 000.000.000-00" placeholder="Digite seu CPF...">
+              (input)="applyCpfMask($event)" maxlength="14" aria-required="true"
+              required="{{userData.type !== 'admin' ? true : false }}" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+              title="Formato: 000.000.000-00" placeholder="Digite seu CPF...">
           </div>
 
           <!-- Email -->
@@ -53,9 +53,9 @@
           <!-- Telefone -->
           <div class="form-group">
             <label for="telefone" class="form-label">Telefone</label>
-            <input type="tel" id="telefone" name="telefone" class="form-input" [(ngModel)]="userData.phone" (input)="applyTelephoneMask($event)" maxlength="15"
-              autocomplete="tel" pattern="\(\d{2}\) \d{5}-\d{4}" title="Formato: (00) 00000-0000"
-              placeholder="Digite seu telefone..." maxlength="15">
+            <input type="tel" id="telefone" name="telefone" class="form-input" [(ngModel)]="userData.phone"
+              (input)="applyTelephoneMask($event)" maxlength="15" autocomplete="tel" pattern="\(\d{2}\) \d{5}-\d{4}"
+              title="Formato: (00) 00000-0000" placeholder="Digite seu telefone..." maxlength="15">
           </div>
 
 
@@ -66,13 +66,21 @@
               required="{{userData.type === 'vet' ? true : false }}" placeholder="Digite seu Pix...">
           </div>
 
+          @if (userData.type === 'vet') {
+          <!-- CRMV -->
+          <div class="form-group">
+            <label for="crmv" [class]="class_is_required">CRMV</label>
+            <input type="text" id="crmv" name="crmv" class="form-input" [(ngModel)]="userData.crmv"
+              required="{{userData.type === 'vet' ? true : false }}" placeholder="Digite seu CRMV...">
+          </div>
+          }
 
           <!-- CEP -->
-          <div class="form-group form-group--full">
+          <div [class]="class_group_full_option">
             <label for="cep" class="form-label">CEP</label>
             <input type="text" id="cep" name="cep" class="form-input" [(ngModel)]="userData.cep"
-              autocomplete="postal-code" (focusout)="findCEP(userData.cep)" pattern="\d{5}-\d{3}" (input)="applyMaskcCEP($event)"
-              title="Formato: 00000-000" placeholder="Digite seu CEP..." maxlength="9">
+              autocomplete="postal-code" (focusout)="findCEP(userData.cep)" pattern="\d{5}-\d{3}"
+              (input)="applyMaskcCEP($event)" title="Formato: 00000-000" placeholder="Digite seu CEP..." maxlength="9">
           </div>
 
           <!-- Endereço -->
@@ -113,7 +121,7 @@
             </svg>
             Cancelar
           </button>
-          <button type="submit" class="btn btn--primary">
+          <button type="submit" class="btn btn--primary" (click)="updateUserData()">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="20 6 9 17 4 12"></polyline>
             </svg>
