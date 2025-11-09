@@ -46,8 +46,8 @@ class ClienteController extends Controller
             }
         }
 
-        if ($request->filled('password')){
-            $cliente->password = bcrypt($request->password);
+        if (!empty($request['password'])) { // Atualiza a senha somente se fornecida
+            $cliente->password = bcrypt($request['password']);
         }
 
         if ($cliente == $newClienteData) {
@@ -65,6 +65,7 @@ class ClienteController extends Controller
         $cliente->bairro = $newClienteData->bairro;
         $cliente->complemento = $newClienteData->complemento;
         $cliente->cpf = $newClienteData->cpf;
+        $cliente->pix = $newClienteData->pix;
         $cliente->save();
         return response()->json(['message' => 'Dados do cliente atualizados com sucesso.'], 200);
     }

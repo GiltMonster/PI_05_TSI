@@ -19,7 +19,7 @@ class PetController extends Controller
         return response()->json($pet, 200);
     }
 
-    function getPetByUserId($user_id) {
+    function getPetsByUserId($user_id) {
         $pets = Pet::where('user_id', $user_id)->get();
 
         if ($pets->isEmpty()) {
