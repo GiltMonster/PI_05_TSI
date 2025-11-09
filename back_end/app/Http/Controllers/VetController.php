@@ -59,7 +59,7 @@ class VetController extends Controller
 
 
         $vet->save();
-        return response()->json(['message' => 'Dados do veterinário atualizados com sucesso.', $vet], 200);
+        return response()->json(['message' => 'Dados do veterinário atualizados com sucesso.'], 200);
     }
 
     function deletarVet($id)
