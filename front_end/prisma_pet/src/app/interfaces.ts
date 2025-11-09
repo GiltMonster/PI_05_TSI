@@ -89,8 +89,8 @@ export interface PetListInterface {
 export interface TutorListInterface {
   id: number;
   nome: string;
-  telefone: string;
-  animal: string;
+  telefone?: string;
+  // animal: string;
 }
 
 export interface VeterinarioListInterface {
