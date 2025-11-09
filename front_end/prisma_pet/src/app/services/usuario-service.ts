@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { UserInterface } from '../interfaces';
+import { CepInterface, UserInterface } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +26,10 @@ export class UsuarioService {
 
   deleteAccount(id: string) {
     return this.http.delete(`${environment.API_URL_ADMIN_CLIENTE_DELETE}/${id}`);
+  }
+
+  findCEP(cep: string) {
+    return this.http.get<CepInterface>(`https://brasilapi.com.br/api/cep/v1/${cep}`);
   }
 
 }

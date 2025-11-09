@@ -11,16 +11,25 @@ export interface UserInterface {
   name: string;
   email: string;
   password?: string;
-  phone?: string;
-  cep?: string;
+  phone: string;
+  cep: string;
   endereco?: string;
   cidade?: string;
   estado?: string;
   bairro?: string;
   complemento?: string;
-  cpf?: string;
+  cpf: string;
   crmv?: string;
   pix?: string;
+}
+
+export interface CepInterface {
+  cep: string;
+  state: string;
+  city: string;
+  neighborhood: string;
+  street: string;
+  service: string;
 }
 
 
