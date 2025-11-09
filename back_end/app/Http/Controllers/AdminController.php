@@ -40,6 +40,7 @@ class AdminController extends Controller
         $user->estado = $request->estado;
         $user->bairro = $request->bairro;
         $user->complemento = $request->complemento;
+        $user->pix = $request->pix;
         $user->save();
 
         return response()->json([

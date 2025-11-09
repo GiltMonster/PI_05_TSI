@@ -14,6 +14,8 @@ export const environment = {
   API_URL_REGISTER: `${end_point_base}/register`,
 
   // --- admin ---
+  API_URL_ADMIN_UPDATE: `${end_point_base}/adm/editarAdmin`,
+
   API_URL_ADMIN_VET_LIST: `${end_point_base}/adm/getVets`,
   API_URL_ADMIN_VET_BY_ID: `${end_point_base}/adm/getVetById`,
   API_URL_ADMIN_VET_UPDATE: `${end_point_base}/adm/editarVet`,
