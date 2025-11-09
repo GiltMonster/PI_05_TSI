@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { TutorList } from '../../components/tutor-list/tutor-list';
-import { TutorListInterface, UserInterface } from '../../interfaces';
+import { UserInterface } from '../../interfaces';
 import { VeterinarioService } from '../../services/veterinario-service';
+import { TutorList } from '../../components/tutor-list/tutor-list';
 
 @Component({
   selector: 'app-tutor',
@@ -27,9 +27,7 @@ export class Tutor implements OnInit {
   loadTutores() {
     this.veterinarioService.getAllTutors().subscribe({
       next: (res) => {
-        this.listTutores = res;
-        console.log(res);
-
+        this.listTutores = [...res];
       },
       error: (err) => { console.error('Erro ao carregar tutores:', err); }
     });
