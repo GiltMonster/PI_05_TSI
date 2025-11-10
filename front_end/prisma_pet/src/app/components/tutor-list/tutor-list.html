@@ -2,13 +2,13 @@
   <h1 class="list_title">Responsáveis</h1>
 
   <div class="header_list_tutor">
-    <form class="search" role="search">
+    <form class="search" role="search" (submit)="onSearch(); $event.preventDefault()">
       <label class="sr-only" for="tutorSearch">Buscar Tutor</label>
-      <input id="tutorSearch" class="search__input" type="search" placeholder="Buscar Responsável"
-        [formControl]="searchCtrl" autocomplete="off" aria-describedby="Buscar Tutor" />
-      @if(searchCtrl.value){
+      <input id="tutorSearch" class="search__input" type="search" placeholder="Buscar Responsável" autocomplete="off"
+        aria-describedby="Buscar Tutor" [(ngModel)]="searchValue" name="searchValue" (ngModelChange)="onSearch()" />
 
-      <button type="button" class="search__clear" aria-label="Limpar busca">
+      @if(searchValue !== "") {
+      <button type="button" class="search__clear" aria-label="Limpar busca" (click)="clearSearch()">
         <mat-icon aria-hidden="true">close</mat-icon>
       </button>
       }
@@ -26,18 +26,14 @@
     </button>
   </div>
 
-  @if (loading) {
-  <div class="status" role="status" aria-live="polite">Carregando lista…</div>
+  @if (!filteredTutores || filteredTutores.length === 0){
+  <div class="empty" role="note" aria-live="polite">{{ emptyMessage }}</div>
 
-  } @if (!loading && (!tutores || tutores.length === 0)) {
-  <div class="empty" role="note" aria-live="polite">Nenhum tutor cadastrado</div>
-
-  } @if (!loading && tutores.length) {
-  <ul class="grid" role="list" >
-    @for (p of tutores; track p.id) {
+  } @if (filteredTutores.length) {
+  <ul class="grid" role="list">
+    @for (tutor of filteredTutores; track tutor.id) {
     <li class="grid__item" role="listitem">
-      <app-tutor-card [tutorCard]="p">
-      </app-tutor-card>
+      <app-tutor-card [tutorCard]="tutor" />
     </li>
     }
   </ul>
