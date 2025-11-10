@@ -14,14 +14,18 @@
       <span class="btn-text btn-text--total">Abrir Cadastro</span>
       <span class="btn-text btn-text--menor">Ver</span>
     </button>
-    <button type="button" class="btn_icon" (click)="editTutor(userTutor.id)" aria-label="Editar cadastro">
+    @if (typeUser === 'admin') {
+    <button type="button" class="btn_icon" (click)="openEditModal(userTutor)" aria-label="Editar cadastro">
       <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">edit</mat-icon>
     </button>
 
-    @if (typeUser === 'admin') {
     <button type="button" class="btn_icon" (click)="deleteTutor(userTutor.id)" aria-label="Excluir cadastro">
       <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">delete</mat-icon>
     </button>
     }
   </div>
 </article>
+
+@if(editModalOpen){
+<app-modal-edit [user]="userTutor" (close)="closeEditModal()" (save)="saveTutor($event)" />
+}
