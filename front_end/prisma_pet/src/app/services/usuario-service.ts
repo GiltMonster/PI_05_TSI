@@ -12,6 +12,10 @@ export class UsuarioService {
     private http: HttpClient
   ) { }
 
+  getUserType() {
+    return this.http.get<{ type: string }>(environment.API_URL_AUTH_MY_TYPE);
+  }
+
   getUserData() {
     return this.http.get<UserInterface>(environment.API_URL_AUTH_ME);
   }
@@ -30,7 +34,7 @@ export class UsuarioService {
     }
   }
 
-  deleteAccount(id: string) {
+  deleteAccount(id: number) {
     return this.http.delete(`${environment.API_URL_ADMIN_CLIENTE_DELETE}/${id}`);
   }
 
