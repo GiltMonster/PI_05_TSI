@@ -3,10 +3,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { UserInterface } from '../../interfaces';
 import { UsuarioService } from '../../services/usuario-service';
+import { FormatPhonePipe } from '../../pipes/format-phone-pipe';
 
 @Component({
   selector: 'app-tutor-card',
-  imports: [CommonModule, MatIconModule],
+  imports: [CommonModule, MatIconModule, FormatPhonePipe],
   standalone: true,
   templateUrl: './tutor-card.html',
   styleUrls: ['./tutor-card.scss']
