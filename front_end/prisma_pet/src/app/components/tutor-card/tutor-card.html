@@ -1,29 +1,27 @@
-<article class="card_tutor_container"
-  [attr.aria-labelledby]="'tutor-' + tutorCard().id">
+<article class="card_tutor_container" [attr.aria-labelledby]="'tutor-' + userTutor.id">
   <div class="info_tutor">
-    <h3 class="nome_tutor" [id]="'tutor-' + tutorCard().id">
-      {{ tutorCard().name }}
+    <h3 class="nome_tutor" [id]="'tutor-' + userTutor.id">
+      {{ userTutor.name }}
     </h3>
     <p class="detalhes_tutor">
-      {{ tutorCard().phone }}
+      {{ userTutor.phone }}
     </p>
   </div>
 
   <div class="botoes_tutor">
-<button
-  type="button"
-  class="btn_cadastro"
-  (click)="onView()"
-  [attr.aria-label]="'Ver cadastro completo de ' + tutorCard().name">
-  <span class="btn-text btn-text--total">Abrir Cadastro</span>
-  <span class="btn-text btn-text--menor">Ver</span>
-</button>
-    <button type="button" class="btn_icon" (click)="onEdit()" aria-label="Editar cadastro">
+    <button type="button" class="btn_cadastro" (click)="findUserById(userTutor.id)"
+      [attr.aria-label]="'Ver cadastro completo de ' + userTutor.name">
+      <span class="btn-text btn-text--total">Abrir Cadastro</span>
+      <span class="btn-text btn-text--menor">Ver</span>
+    </button>
+    <button type="button" class="btn_icon" (click)="editTutor(userTutor.id)" aria-label="Editar cadastro">
       <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">edit</mat-icon>
     </button>
 
-    <button type="button" class="btn_icon" (click)="onDelete()" aria-label="Excluir cadastro">
+    @if (typeUser === 'admin') {
+    <button type="button" class="btn_icon" (click)="deleteTutor(userTutor.id)" aria-label="Excluir cadastro">
       <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">delete</mat-icon>
     </button>
+    }
   </div>
 </article>

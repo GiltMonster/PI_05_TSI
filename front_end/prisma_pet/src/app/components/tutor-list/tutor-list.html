@@ -33,7 +33,7 @@
   <ul class="grid" role="list">
     @for (tutor of filteredTutores; track tutor.id) {
     <li class="grid__item" role="listitem">
-      <app-tutor-card [tutorCard]="tutor" />
+      <app-tutor-card [userTutor]="tutor" [typeUser]="typeUser" (tutorDeleted)="onTutorDeleted($event)"/>
     </li>
     }
   </ul>

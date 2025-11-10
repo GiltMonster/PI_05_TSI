@@ -4,6 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { TutorCard } from '../tutor-card/tutor-card';
 import { UserInterface } from '../../interfaces';
 import { FormsModule } from '@angular/forms';
+import { UsuarioService } from '../../services/usuario-service';
 
 @Component({
   selector: 'app-tutor-list',
@@ -19,14 +20,33 @@ export class TutorList implements OnInit {
   searchValue = "";
   statusMsg = '';
   filteredTutores: UserInterface[] = [];
+  typeUser = '';
+
+  constructor(
+    private usuarioService: UsuarioService
+  ) { }
 
   ngOnInit(): void {
     this.filteredTutores = this.tutores;
+    this.userTypeVerification();
   }
 
   ngOnChanges(): void {
     this.filteredTutores = this.filterTutors();
+
   }
+
+  userTypeVerification() {
+    this.usuarioService.getUserType().subscribe({
+      next: (res) => {
+        this.typeUser = res.type;
+      },
+      error: (err) => {
+        console.log("erro ao verificar tipo de usuário:", err);
+      }
+    });
+  }
+
 
   clearSearch() {
     this.searchValue = "";
@@ -34,6 +54,11 @@ export class TutorList implements OnInit {
   }
 
   onSearch() {
+    this.filteredTutores = this.filterTutors();
+  }
+
+  onTutorDeleted(tutorId: number) {
+    this.tutores = this.tutores.filter(tutor => tutor.id !== tutorId);
     this.filteredTutores = this.filterTutors();
   }
 
@@ -50,8 +75,5 @@ export class TutorList implements OnInit {
     );
 
   }
-
-
-
 
 }
