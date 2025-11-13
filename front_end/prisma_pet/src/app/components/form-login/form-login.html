@@ -39,9 +39,9 @@ Sessões ABNT: 5.9, 5.1, 5.7, 5.2. -->
         <span id="senha-erro" class="sr-only" *ngIf="passwordCtrl?.invalid && loginForms.touched">Senha obrigatória.</span>
       </div>
 
-      <div class="forgot-password">
+      <!-- <div class="forgot-password">
         <a routerLink="/recuperar-senha">Esqueceu sua senha?</a>
-      </div>
+      </div> -->
 
       <button class="btn-login" type="submit" [disabled]="loginForms.invalid">Entrar</button>
     </form>

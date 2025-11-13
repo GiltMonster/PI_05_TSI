@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthLogin } from '../../services/auth-login';
+import { Notification } from '../../services/notification';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class Header {
 
   constructor(
     private authService: AuthLogin,
-    private router: Router
+    private router: Router,
+    private notification: Notification,
   ) { }
 
   logout() {
@@ -31,10 +33,11 @@ export class Header {
         localStorage.clear();
         window.location.reload();
         this.router.navigate(['/']);
-
+        this.notification.success('Logout realizado com sucesso.');
       },
       (err) => {
         console.log('Erro ao fazer logout:', err);
+        this.notification.error('Erro ao fazer logout - Tente novamente.');
       }
     );
   }

@@ -3,6 +3,8 @@ import { UsuarioService } from '../../services/usuario-service';
 import { UserInterface } from '../../interfaces';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Notification } from '../../services/notification';
+
 @Component({
   selector: 'app-perfil',
   imports: [CommonModule, FormsModule],
@@ -25,7 +27,8 @@ export class Perfil implements OnInit {
   }
 
   constructor(
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private notification: Notification,
   ) { }
 
   ngOnInit(): void {
@@ -98,9 +101,11 @@ export class Perfil implements OnInit {
     this.usuarioService.updateUser(this.userData).subscribe({
       next: (res) => {
         console.log('Dados atualizados com sucesso!', res);
+        this.notification.success('Dados atualizados com sucesso!');
       },
       error: (err) => {
         console.log('Erro ao atualizar os dados do usuário!!', err);
+        this.notification.error('Erro ao atualizar os dados do usuário!!');
       }
     });
   }
@@ -122,6 +127,7 @@ export class Perfil implements OnInit {
       },
       error: (err) => {
         console.log('Erro ao buscar CEP', err);
+        this.notification.error('Cep não encontrado!');
       }
     });
   }

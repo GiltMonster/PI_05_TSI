@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from
 import { UserInterface } from '../../interfaces';
 import { FormsModule } from '@angular/forms';
 import { UsuarioService } from '../../services/usuario-service';
+import { Notification } from '../../services/notification';
 
 @Component({
   selector: 'app-modal-edit',
@@ -20,7 +21,8 @@ export class ModalEdit implements OnChanges {
 
 
   constructor(
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+      private notification: Notification,
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -36,9 +38,11 @@ export class ModalEdit implements OnChanges {
     this.usuarioService.updateUser(this.editedUser).subscribe({
       next: (res) => {
         console.log('Usuário atualizado com sucesso', res);
+        this.notification.success('Usuário atualizado com sucesso.');
       },
       error: (err) => {
         console.log('Erro ao atualizar usuário', err);
+        this.notification.error('Erro ao atualizar usuário');
       }
     });
     this.close.emit();
@@ -89,6 +93,7 @@ export class ModalEdit implements OnChanges {
       },
       error: (err) => {
         console.log('Erro ao buscar CEP', err);
+        this.notification.error('Erro ao buscar CEP');
       }
     });
   }
