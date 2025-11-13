@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ConsultaPet;
 use App\Models\Pet;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -33,9 +34,19 @@ class PetController extends Controller
             return response()->json(['message' => 'Nenhum pet encontrado para este usuário.'], 404);
         }
 
+        $consultas = ConsultaPet::whereIn('pet_id', $pets->pluck('id'))->get();
+
+        foreach ($consultas as $consulta) {
+            $vet = User::find($consulta->vet_id);
+            if ($vet) {
+                $consulta->nome_vet = $vet->name;
+            }
+        }
+
         return response()->json([
             'tutor_name' => $user->name,
-            'pets' => $pets
+            'pets' => $pets,
+            'consultas' => $consultas
         ], 200);
     }
 

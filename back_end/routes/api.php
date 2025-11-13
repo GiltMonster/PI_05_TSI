@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ConsultaPetController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClienteController;
@@ -52,6 +53,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/vet/getPetsByUserId/{user_id}', [PetController::class, 'getPetsByUserId']);
         Route::post('/vet/registrarPet', [PetController::class, 'registrarPet']);
         Route::put('/vet/editarPet', [PetController::class, 'editarPet']);
+
+        Route::post('/vet/novaConsulta', [ConsultaPetController::class, 'novaConsulta']);
     });
 
     Route::middleware(['role:admin|user'])->group(function () {
