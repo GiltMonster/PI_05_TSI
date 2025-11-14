@@ -7,3 +7,12 @@
 </nav>
 
 <hr>
+
+@if (activeTab === 'documentos') {
+  <app-documentos-pet/>
+} @else if (activeTab === 'vacinas') {
+  <app-vacinas-pet/>
+} @else if (activeTab === 'anexos') {
+  <app-outros-anexos-pet/>
+}
+
