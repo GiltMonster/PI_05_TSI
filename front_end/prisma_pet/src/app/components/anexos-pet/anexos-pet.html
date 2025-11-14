@@ -1,0 +1,9 @@
+<nav class="pet-menu">
+  <ul>
+    <li [class.active]="activeTab === 'documentos'" (click)="setActiveTab('documentos')">Documentos</li>
+    <li [class.active]="activeTab === 'vacinas'" (click)="setActiveTab('vacinas')">Vacinas</li>
+    <li [class.active]="activeTab === 'anexos'" (click)="setActiveTab('anexos')">Anexos</li>
+  </ul>
+</nav>
+
+<hr>

@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FichaPetInterface, PetInterface } from '../../interfaces';
 import { DatePipe } from '@angular/common';
+import { AnexosPet } from "../anexos-pet/anexos-pet";
 
 @Component({
   selector: 'app-header-pet',
-  imports: [DatePipe],
+  imports: [DatePipe, AnexosPet],
   templateUrl: './header-pet.html',
   styleUrl: './header-pet.scss',
   standalone: true,
