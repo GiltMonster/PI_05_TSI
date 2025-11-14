@@ -1,6 +1,6 @@
 <nav class="pet-menu">
   <ul>
-    <li [class.active]="activeTab === 'documentos'" (click)="setActiveTab('documentos')">Documentos</li>
+    <li [class.active]="activeTab === 'consultas'" (click)="setActiveTab('consultas')">Consultas</li>
     <li [class.active]="activeTab === 'vacinas'" (click)="setActiveTab('vacinas')">Vacinas</li>
     <li [class.active]="activeTab === 'anexos'" (click)="setActiveTab('anexos')">Anexos</li>
   </ul>
@@ -8,8 +8,8 @@
 
 <hr>
 
-@if (activeTab === 'documentos') {
-  <app-documentos-pet/>
+@if (activeTab === 'consultas') {
+  <app-consultas-pet/>
 } @else if (activeTab === 'vacinas') {
   <app-vacinas-pet/>
 } @else if (activeTab === 'anexos') {

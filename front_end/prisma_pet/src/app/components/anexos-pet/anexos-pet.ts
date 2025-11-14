@@ -1,18 +1,19 @@
 import { Component } from '@angular/core';
-import { DocumentosPet } from "../documentos-pet/documentos-pet";
+
 import { VacinasPet } from "../vacinas-pet/vacinas-pet";
 import { OutrosAnexosPet } from "../outros-anexos-pet/outros-anexos-pet";
+import { ConsultasPet } from '../consultas-pet/consultas-pet';
 
 @Component({
   selector: 'app-anexos-pet',
-  imports: [DocumentosPet, VacinasPet, OutrosAnexosPet],
+  imports: [ConsultasPet, VacinasPet, OutrosAnexosPet],
   templateUrl: './anexos-pet.html',
   styleUrl: './anexos-pet.scss',
   standalone: true,
 })
 export class AnexosPet {
 
-  activeTab: string = 'documentos';
+  activeTab: string = 'consultas';
 
   setActiveTab(tab: string) {
     this.activeTab = tab;
