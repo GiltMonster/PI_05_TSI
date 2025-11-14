@@ -6,6 +6,7 @@ import { UsuarioService } from '../../services/usuario-service';
 import { FormatPhonePipe } from '../../pipes/format-phone-pipe';
 import { ModalEdit } from '../modal-edit/modal-edit';
 import { Router } from '@angular/router';
+import { Notification } from '../../services/notification';
 
 @Component({
   selector: 'app-tutor-card',
@@ -26,7 +27,8 @@ export class TutorCard implements OnInit {
 
   constructor(
     private usuarioService: UsuarioService,
-    private router: Router
+    private router: Router,
+    private notification: Notification,
   ) { }
 
   ngOnInit(): void {
@@ -48,9 +50,11 @@ export class TutorCard implements OnInit {
       next: (res) => {
         console.log(res);
         this.tutorDeleted.emit(tutorId);
+        this.notification.success('Responsável excluído com sucesso');
       },
       error: (err) => {
         console.log("erro ao deletar tutor:", err);
+        this.notification.error('Erro ao deletar responsável');
       }
     });
   }

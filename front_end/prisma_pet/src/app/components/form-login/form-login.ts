@@ -10,6 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { catchError, of } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { Notification } from '../../services/notification';
+
 
 @Component({
   selector: 'app-form-login',
@@ -33,7 +35,8 @@ protected loginForms!: FormGroup<{
     private authLogin: AuthLogin,
     protected formBuilder: NonNullableFormBuilder,
     private router: Router,
-    private live: LiveAnnouncer
+    private live: LiveAnnouncer,
+    private notification: Notification,
   ) {
     this.loginForms = this.formBuilder.group({
       email: this.formBuilder.control('', [Validators.required, Validators.email]),
@@ -58,13 +61,15 @@ protected loginForms!: FormGroup<{
     this.authLogin.login(userEmail, userPassword).pipe(
       // ABNT 5.7/5.9
       catchError(err => {
-        this.live.announce('Falha no login. Verifique suas credenciais.', 'assertive');
+      // this.live.announce('Falha no login. Verifique suas credenciais.', 'assertive');
+      this.notification.error('Falha no login. Verifique suas credenciais.');
         return of(null);
       })
     ).subscribe(resp => {
       if (!resp) return;
       // ABNT 5.7: confirma sucesso
       this.live.announce('Login realizado com sucesso.', 'polite');
+      this.notification.success('Login realizado com sucesso.');
       if (resp.role[0] === 'admin') {
         this.router.navigate(['/admin']);
       } else if (resp.role[0] === 'vet') {
@@ -72,7 +77,9 @@ protected loginForms!: FormGroup<{
       } else if (resp.role[0] === 'user') {
         this.router.navigate(['/tutor']);
       }
-      window.location.reload();
+
+      setTimeout(() => window.location.reload(), 500);
+      // window.location.reload();
       this.loginForms.reset();
     });
   }
@@ -80,36 +87,4 @@ protected loginForms!: FormGroup<{
   consoleLog() {
     console.log(this.loginForms.value);
   }
-
-
-  // VERSÃO ANTERIOR DO CÓDIGO
-  // protected loginForms!:  FormGroup<{
-  //   email: FormControl<string>;
-  //   password: FormControl<string>;
-  // }>;
-
-  //   constructor(
-  //   private authLogin: AuthLogin,
-  //   protected formBuilder: NonNullableFormBuilder,
-  //   private router: Router,
-  //   private live: LiveAnnouncer
-  // ) {
-  //   this.loginForms = this.formBuilder.group({
-  //     email: this.formBuilder.control('', [Validators.required, Validators.email ]),
-  //     password: this.formBuilder.control('', [Validators.required]),
-  //   });
-  // }
-
-  // login() {
-  //   const userEmail = this.loginForms.get('email')!.value;
-  //   const userPassword = this.loginForms.get('password')!.value;
-  //   this.authLogin.login(userEmail,userPassword).subscribe(
-  //     (resp) => {
-  //       console.log('Login successful', resp);
-  //           this.router.navigate(['/menu'])
-  //     }
-  //   );
-
-  //   this.loginForms.reset();
-  // }
 }
