@@ -54,6 +54,10 @@
   font-size: 1rem;
 }
 
+.pet-info button{
+  margin-top: 0.5rem;
+}
+
 .pet-details-container {
   display: flex;
   flex-direction: column;
@@ -131,6 +135,13 @@ button{
 .btn--primary {
   background-color: var(--primary-color);
   color: var(--white);
+}
+
+.btn--disabled {
+  background-color: var(--gray-light);
+  color: var(--gray-dark);
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .btn--primary:hover {
