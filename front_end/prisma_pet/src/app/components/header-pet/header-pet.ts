@@ -23,6 +23,22 @@ export class HeaderPet implements OnInit {
 
   }
 
+  calcIdadePet(data_nascimento?: Date): string | number {
+    if (data_nascimento) {
+      const nascimento = new Date(data_nascimento);
+      const hoje = new Date();
+      let idade = hoje.getFullYear() - nascimento.getFullYear();
+      const mes = hoje.getMonth() - nascimento.getMonth();
+
+      if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
+        idade--;
+      }
+
+      return idade;
+    }
+    return '';
+  }
+
   btnNextDisabled(): boolean {
     return this.indexPet >= this.petsList.pets.length - 1;
   }

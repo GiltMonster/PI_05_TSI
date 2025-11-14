@@ -13,8 +13,8 @@
           <div class="button-group">
             <button [class]="getPrevBtnClass()" (click)="onChangePrevPet()" [disabled]="btnPrevDisabled()">&lt; Pet
               anterior</button>
-            <button [class]="getNextBtnClass()" (click)="onChangeNextPet()"
-              [disabled]="btnNextDisabled()">Próximo pet &gt;</button>
+            <button [class]="getNextBtnClass()" (click)="onChangeNextPet()" [disabled]="btnNextDisabled()">Próximo pet
+              &gt;</button>
           </div>
           } @else {
           <h1>Nenhum pet cadastrado</h1>
@@ -35,8 +35,10 @@
         </div>
         <div class="pet-detail">
           <label>Idade:</label>
-          <p>{{petsList.pets[indexPet].ano_nascimento ? (petsList.pets[indexPet].ano_nascimento | date:'dd/MM/yyyy') :
-            '-'}}</p>
+          <p>
+            {{petsList.pets[indexPet].ano_nascimento ? calcIdadePet(petsList.pets[indexPet].ano_nascimento) : '-'}} anos - {{petsList.pets[indexPet].ano_nascimento ? (petsList.pets[indexPet].ano_nascimento | date:'dd/MM/yyyy') :
+            '-'}}
+          </p>
         </div>
         <div class="pet-detail">
           <label>Raça:</label>
