@@ -32,4 +32,48 @@ class ConsultaPetController extends Controller
 
         return response()->json(['message' => 'Consulta registrada com sucesso'], 201);
     }
+
+    public function editarConsulta(Request $request)
+    {
+        $validade = $request->validate([
+            'id' => 'required|numeric',
+            'pet_id' => 'sometimes|numeric',
+            'vet_id' => 'sometimes|numeric',
+            'data_consulta' => 'sometimes|date',
+            'tipo_consulta' => 'sometimes|string',
+            'anamnese' => 'sometimes|string',
+        ]);
+
+        if ($validade['vet_id'] ?? false) {
+            $vet = Vet::find($validade['vet_id']);
+            if (!$vet) {
+                return response()->json(['error' => 'Veterinário não encontrado'], 404);
+            }
+        }
+
+        $consulta = ConsultaPet::find($request->input('id'));
+
+        if (!$consulta) {
+            return response()->json(['error' => 'Consulta não encontrada'], 404);
+        }
+
+        $consulta->update($validade);
+        return response()->json(['message' => 'Consulta atualizada com sucesso'], 200);
+    }
+
+    function deletarConsulta($id)
+    {
+
+        if (!is_numeric($id)) {
+            return response()->json(['error' => 'ID inválido'], 400);
+        }
+
+        $consulta = ConsultaPet::find($id);
+
+        if (!$consulta) {
+            return response()->json(['error' => 'Consulta não encontrada'], 404);
+        }
+
+        $consulta->delete();
+    }
 }

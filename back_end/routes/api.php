@@ -42,6 +42,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/adm/registrarPet', [PetController::class, 'registrarPet']);
         Route::put('/adm/editarPet', [PetController::class, 'editarPet']);
         Route::delete('/adm/deletarPet/{id}', [PetController::class, 'deletarPet']);
+
+        Route::post('/adm/novaConsulta', [ConsultaPetController::class, 'novaConsulta']);
+        Route::put('/adm/editarConsulta', [ConsultaPetController::class, 'editarConsulta']);
+        Route::delete('/adm/deletarConsulta/{id}', [ConsultaPetController::class, 'deletarConsulta']);
     });
 
     Route::middleware(['role:admin|vet'])->group(function () {
@@ -55,6 +59,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('/vet/editarPet', [PetController::class, 'editarPet']);
 
         Route::post('/vet/novaConsulta', [ConsultaPetController::class, 'novaConsulta']);
+        Route::put('/vet/editarConsulta', [ConsultaPetController::class, 'editarConsulta']);
+        Route::delete('/vet/deletarConsulta/{id}', [ConsultaPetController::class, 'deletarConsulta']);
     });
 
     Route::middleware(['role:admin|user'])->group(function () {
