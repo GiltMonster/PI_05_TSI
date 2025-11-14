@@ -5,6 +5,7 @@ import { UserInterface } from '../../interfaces';
 import { UsuarioService } from '../../services/usuario-service';
 import { FormatPhonePipe } from '../../pipes/format-phone-pipe';
 import { ModalEdit } from '../modal-edit/modal-edit';
+import { Router } from '@angular/router';
 import { Notification } from '../../services/notification';
 
 @Component({
@@ -26,15 +27,22 @@ export class TutorCard implements OnInit {
 
   constructor(
     private usuarioService: UsuarioService,
+    private router: Router,
     private notification: Notification,
-
   ) { }
 
   ngOnInit(): void {
     this.typeUser
   }
 
-  findUserById(id: number) {
+  goToFichaPet(tutorId: number) {
+    if (this.typeUser === 'vet') {
+      this.router.navigate([`/vet/ficha/${tutorId}`]);
+    } else if (this.typeUser === 'admin') {
+      this.router.navigate([`/admin/ficha/${tutorId}`]);
+    } else {
+      this.router.navigate([`/user/ficha/${tutorId}`]);
+    }
   }
 
   deleteTutor(tutorId: number) {
@@ -66,7 +74,6 @@ export class TutorCard implements OnInit {
   }
 
   saveTutor(editedTutor: UserInterface) {
-    // Atualize a lista de tutores com os dados editados
 
     this.closeEditModal();
   }

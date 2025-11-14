@@ -29,4 +29,9 @@ class Pet extends Model
         return $this->belongsTo(Cliente::class, 'id');
     }
 
+    public function consultas()
+    {
+        return $this->hasMany(ConsultaPet::class, 'pet_id');
+    }
+
 }

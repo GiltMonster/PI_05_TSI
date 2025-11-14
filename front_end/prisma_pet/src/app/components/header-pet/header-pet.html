@@ -1,0 +1,92 @@
+<section class="section-content" role="main">
+  <div class="pet-container">
+    <header class="pet-header">
+      <div class="header-content">
+        <div class="pet-avatar">
+          <div class="pet-avatar__image" aria-label="Avatar do pet">
+            <!-- IMG do pet -->
+          </div>
+        </div>
+        <div class="pet-info">
+          @if(petsList.pets.length > 0 && petsList.pets[indexPet]) {
+          <h1>{{petsList.pets[indexPet].nome}}</h1>
+          <div class="button-group">
+            <button [class]="getPrevBtnClass()" (click)="onChangePrevPet()" [disabled]="btnPrevDisabled()">&lt; Pet
+              anterior</button>
+            <button [class]="getNextBtnClass()" (click)="onChangeNextPet()" [disabled]="btnNextDisabled()">Próximo pet
+              &gt;</button>
+          </div>
+          } @else {
+          <h1>Nenhum pet cadastrado</h1>
+          <button class="btn btn--primary">Cadastrar um NOVO pet?</button>
+          }
+        </div>
+      </div>
+    </header>
+
+    <hr>
+
+    @if(petsList.pets.length > 0 && petsList.pets[indexPet]) {
+    <div class="pet-details-container">
+      <div class="row-details">
+        <div class="pet-detail">
+          <label>Espécie:</label>
+          <p>{{petsList.pets[indexPet].especie || '-'}}</p>
+        </div>
+        <div class="pet-detail">
+          <label>Idade:</label>
+          <p>
+            {{petsList.pets[indexPet].ano_nascimento ? calcIdadePet(petsList.pets[indexPet].ano_nascimento) : '-'}} anos
+            - {{petsList.pets[indexPet].ano_nascimento ? (petsList.pets[indexPet].ano_nascimento | date:'dd/MM/yyyy') :
+            '-'}}
+          </p>
+        </div>
+        <div class="pet-detail">
+          <label>Raça:</label>
+          <p>{{petsList.pets[indexPet].raca || '-'}}</p>
+        </div>
+        <div class="pet-detail">
+          <label>Peso:</label>
+          <p>{{petsList.pets[indexPet].peso !== undefined ? petsList.pets[indexPet].peso + ' kg' : '-'}}</p>
+        </div>
+        <div class="pet-detail">
+          <label>Temperamento:</label>
+          <p>{{petsList.pets[indexPet].temperamento || '-'}}</p>
+        </div>
+      </div>
+      <div class="row-details">
+        <div class="pet-detail">
+          <label>Possui carteirinha:</label>
+          <p>{{petsList.pets[indexPet].possuiCarteirinha ? 'Sim' : 'Não'}}</p>
+        </div>
+        <div class="pet-detail">
+          <label>Cor da pelagem:</label>
+          <p>{{petsList.pets[indexPet].cor_pelagem || '-'}}</p>
+        </div>
+        <div class="pet-detail">
+          <label>Sexo:</label>
+          <p>{{petsList.pets[indexPet].sexo === 1 ? 'Macho' : petsList.pets[indexPet].sexo === 2 ? 'Fêmea' : '-'}}</p>
+        </div>
+        <div class="pet-detail">
+          <label>Castrado:</label>
+          <p>{{petsList.pets[indexPet].castrado === 1 ? 'Sim' : petsList.pets[indexPet].castrado === 2 ? 'Não' : '-'}}
+          </p>
+        </div>
+        <div class="pet-detail">
+          <label>Nome do tutor:</label>
+          <p>{{petsList.tutor_name || '-'}}</p>
+        </div>
+
+      </div>
+      <div class="pet-detail-full">
+        <label>Caso clinico:</label>
+        <p>{{petsList.pets[indexPet].caso_clinico || '-'}}</p>
+      </div>
+    </div>
+    }
+  </div>
+
+  <div class="pet-container">
+    <app-anexos-pet />
+  </div>
+</section>
