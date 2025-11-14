@@ -36,7 +36,8 @@
         <div class="pet-detail">
           <label>Idade:</label>
           <p>
-            {{petsList.pets[indexPet].ano_nascimento ? calcIdadePet(petsList.pets[indexPet].ano_nascimento) : '-'}} anos - {{petsList.pets[indexPet].ano_nascimento ? (petsList.pets[indexPet].ano_nascimento | date:'dd/MM/yyyy') :
+            {{petsList.pets[indexPet].ano_nascimento ? calcIdadePet(petsList.pets[indexPet].ano_nascimento) : '-'}} anos
+            - {{petsList.pets[indexPet].ano_nascimento ? (petsList.pets[indexPet].ano_nascimento | date:'dd/MM/yyyy') :
             '-'}}
           </p>
         </div>
@@ -75,8 +76,17 @@
           <label>Nome do tutor:</label>
           <p>{{petsList.tutor_name || '-'}}</p>
         </div>
+
+      </div>
+      <div class="pet-detail-full">
+        <label>Caso clinico:</label>
+        <p>{{petsList.pets[indexPet].caso_clinico || '-'}}</p>
       </div>
     </div>
     }
+  </div>
+
+  <div class="pet-container">
+
   </div>
 </section>

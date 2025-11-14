@@ -55,15 +55,16 @@
   font-size: 1rem;
 }
 
-.pet-info button{
+.pet-info button {
   margin-top: 0.5rem;
 }
 
 .pet-details-container {
+  padding: 1rem 0;
+  gap: 1rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 1rem;
+  align-items: stretch;
 }
 
 hr {
@@ -76,9 +77,19 @@ hr {
 .pet-detail {
   display: flex;
   flex-direction: column;
-  min-width: 15em;
+  width: 100%;
   align-items: start;
-  padding: 0.75rem 1rem;
+  padding: 1rem;
+  background-color: var(--background);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+}
+
+.pet-detail-full {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
   background-color: var(--background);
   border: 1px solid var(--border-color);
   border-radius: 8px;
@@ -87,17 +98,22 @@ hr {
 
 .row-details {
   display: flex;
+  justify-content: stretch;
   gap: 1rem;
 }
 
-.pet-detail label {
+.pet-detail,
+.pet-detail-full,
+label {
   font-size: 1rem;
   font-weight: 600;
   color: var(--text-primary);
   margin-bottom: 0.25rem;
 }
 
-.pet-detail p {
+.pet-detail,
+.pet-detail-full,
+p {
   font-size: 1rem;
   color: var(--text-secondary);
   margin: 0;
@@ -107,10 +123,9 @@ hr {
   display: flex;
   gap: 1rem;
   justify-content: flex-end;
-  margin-top: 1rem;
 }
 
-button{
+button {
   min-height: 0.35rem;
 }
 
