@@ -1,0 +1,20 @@
+<!-- alt condicional + role="presentation" quando decorativa, otimização de carregamento.
+Sessão ABNT: 5.2. -->
+
+@for (item of inicio(); track $index) {
+<div class="bloco_texto_inicio">
+  <div class="imagem_inicio">
+    <img
+      [src]="item.imagem"
+      [alt]="item.titulo || ''"
+      [attr.role]="item.titulo ? null : 'presentation'"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+  <div class="texto_inicio">
+    <h2>{{ item.titulo }}</h2>
+    <p>{{ item.subtitulo }}</p>
+  </div>
+</div>
+}

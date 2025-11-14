@@ -1,0 +1,6 @@
+<section class="cards" aria-label="Atalhos e funcionalidades do tutor">
+  @for (c of cardstutor; track $index) {
+  <app-card [cardInfo]="c"></app-card>
+  }
+</section>
+<app-texto-inicio [inicio]="inicioTutor"></app-texto-inicio>

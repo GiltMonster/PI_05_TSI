@@ -39,8 +39,15 @@ class ClienteController extends Controller
             return response()->json(['message' => 'O usuário especificado não é um cliente.'], 400);
         }
 
-        if ($request->filled('password')){
-            $cliente->password = bcrypt($request->password);
+        if ($request->filled('email') && $request->email != $cliente->email) {
+            $existingEmail = Cliente::where('email', $request->email)->first();
+            if ($existingEmail) {
+                return response()->json(['message' => 'E-mail invalido.'], 400);
+            }
+        }
+
+        if (!empty($request['password'])) { // Atualiza a senha somente se fornecida
+            $cliente->password = bcrypt($request['password']);
         }
 
         if ($cliente == $newClienteData) {
@@ -58,6 +65,7 @@ class ClienteController extends Controller
         $cliente->bairro = $newClienteData->bairro;
         $cliente->complemento = $newClienteData->complemento;
         $cliente->cpf = $newClienteData->cpf;
+        $cliente->pix = $newClienteData->pix;
         $cliente->save();
         return response()->json(['message' => 'Dados do cliente atualizados com sucesso.'], 200);
     }

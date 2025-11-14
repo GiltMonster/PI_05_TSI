@@ -1,0 +1,41 @@
+<section class="list_tutor_container" aria-label="Lista de animais">
+  <h1 class="list_title">Responsáveis</h1>
+
+  <div class="header_list_tutor">
+    <form class="search" role="search" (submit)="onSearch(); $event.preventDefault()">
+      <label class="sr-only" for="tutorSearch">Buscar Tutor</label>
+      <input id="tutorSearch" class="search__input" type="search" placeholder="Buscar Responsável" autocomplete="off"
+        aria-describedby="Buscar Tutor" [(ngModel)]="searchValue" name="searchValue" (ngModelChange)="onSearch()" />
+
+      @if(searchValue !== "") {
+      <button type="button" class="search__clear" aria-label="Limpar busca" (click)="clearSearch()">
+        <mat-icon aria-hidden="true">close</mat-icon>
+      </button>
+      }
+
+      <button type="submit" class="search__btn" aria-label="Buscar">
+        <mat-icon aria-hidden="true">search</mat-icon>
+      </button>
+
+      <span id="Buscar Tutor" class="sr-only" aria-live="polite">{{ statusMsg }}</span>
+    </form>
+
+    <button class="add_tutor_button" type="button" aria-label="Cadastrar novo Responsável">
+      <mat-icon aria-hidden="true">add</mat-icon>
+      <span>Cadastrar Novo Responsável</span>
+    </button>
+  </div>
+
+  @if (!filteredTutores || filteredTutores.length === 0){
+  <div class="empty" role="note" aria-live="polite">{{ emptyMessage }}</div>
+
+  } @if (filteredTutores.length) {
+  <ul class="grid" role="list">
+    @for (tutor of filteredTutores; track tutor.id) {
+    <li class="grid__item" role="listitem">
+      <app-tutor-card [userTutor]="tutor" [typeUser]="typeUser" (tutorDeleted)="onTutorDeleted($event)"/>
+    </li>
+    }
+  </ul>
+  }
+</section>

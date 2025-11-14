@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Admin;
 use App\Models\Vet;
-use App\Models\Client;
+use App\Models\Cliente;
 use App\Models\User;
 
 use const Dom\NOT_FOUND_ERR;
@@ -53,7 +53,7 @@ class AuthController extends Controller
                     break;
 
                 case 'user':
-                    $user = Client::create([
+                    $user = Cliente::create([
                         'name' => $validated['name'],
                         'email' => $validated['email'],
                         'password' => bcrypt($validated['password']),
@@ -82,7 +82,7 @@ class AuthController extends Controller
             $error_msg = "";
             if (isset($error['email'])) {
                 $error_msg = "O email já está em uso.";
-            }else{
+            } else {
                 $error_msg = "Erro de validação.";
             }
 
@@ -123,9 +123,10 @@ class AuthController extends Controller
 
         return response()->json([
             'message' => 'Login bem-sucedido',
-            'user' => $user,
-            'token' => $token,
+            // 'user' => $user,
             'role' => $user->getRoleNames(),
+            'token' => $token,
+            'name' => $user->name,
         ]);
     }
 
@@ -138,10 +139,49 @@ class AuthController extends Controller
     public function me(Request $request)
     {
         $user = $request->user();
-        return response()->json([
-            'user' => $user,
-            'roles' => $user->getRoleNames(),
-            'permissions' => $user->getAllPermissions()->pluck('name'),
-        ]);
+
+        return response()->json(
+            $user,
+            200
+        );
+    }
+
+    public function myType(Request $request)
+    {
+        $user = $request->user();
+        $roles = $user->getRoleNames();
+
+        if ($roles->contains('admin')) {
+            $type = 'admin';
+        } elseif ($roles->contains('vet')) {
+            $type = 'vet';
+        } elseif ($roles->contains('user')) {
+            $type = 'user';
+        } else {
+            $type = 'unknown';
+        }
+
+        return response()->json(['type' => $type]);
+    }
+
+    public function verifyToken(Request $request)
+    {
+        $user = $request->user();
+        if ($user) {
+            return response()->json(
+                [
+                    'valid' => true,
+                    'user' => [
+                        'id' => $user->id,
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'type' => $this->myType($request)->original['type'],
+                        'permissions' => $user->getAllPermissions()->pluck('name'),
+                    ]
+                ]
+            );
+        } else {
+            return response()->json(['valid' => false], 401);
+        }
     }
 }

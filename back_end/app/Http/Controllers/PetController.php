@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ConsultaPet;
 use App\Models\Pet;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PetController extends Controller
 {
 
-    function getPetById($id) {
+    function getPetById($id)
+    {
         $pet = Pet::find($id);
 
         if (!$pet) {
@@ -18,17 +21,37 @@ class PetController extends Controller
         return response()->json($pet, 200);
     }
 
-    function getPetByUserId($user_id) {
+    function getPetsByUserId($user_id)
+    {
+        $user = User::find($user_id);
+        if (!$user) {
+            return response()->json(['message' => 'Usuário não encontrado.'], 404);
+        }
+
         $pets = Pet::where('user_id', $user_id)->get();
 
         if ($pets->isEmpty()) {
             return response()->json(['message' => 'Nenhum pet encontrado para este usuário.'], 404);
         }
 
-        return response()->json($pets, 200);
+        $consultas = ConsultaPet::whereIn('pet_id', $pets->pluck('id'))->get();
+
+        foreach ($consultas as $consulta) {
+            $vet = User::find($consulta->vet_id);
+            if ($vet) {
+                $consulta->nome_vet = $vet->name;
+            }
+        }
+
+        return response()->json([
+            'tutor_name' => $user->name,
+            'pets' => $pets,
+            'consultas' => $consultas
+        ], 200);
     }
 
-    function getPets() {
+    function getPets()
+    {
         $pets = Pet::all();
 
         if ($pets->isEmpty()) {
@@ -38,31 +61,40 @@ class PetController extends Controller
         return response()->json($pets, 200);
     }
 
-    function registrarPet(Request $request) {
+    function registrarPet(Request $request)
+    {
         $pet = new Pet();
 
-        $validatedData = $request->validate([
-            'user_id' => 'required|integer',
-            'nome' => 'required|string|max:255',
-            'especie' => 'required|string|max:100',
-            'raca' => 'required|string|max:100',
-            'idade' => 'required|integer',
-            'peso' => 'required|numeric',
-            'castrado' => 'required|boolean',
-            'temperamento' => 'nullable|string|max:255',
-            'cor_pelagem' => 'nullable|string|max:100',
-            'caso_clinico' => 'nullable|string|max:500'
-        ]);
+        if (!User::find($request->user_id)) {
+            return response()->json(['message' => 'Usuário não encontrado.'], 404);
+        }
 
-        if (!$validatedData) {
-            return response()->json(['message' => 'Dados inválidos para o pet.'], 400);
+        // $validatedData = $request->validate([
+        //     'user_id' => 'required|integer',
+        //     'nome' => 'required|string|max:255',
+        //     'especie' => 'required|string|max:100',
+        //     'raca' => 'required|string|max:100',
+        //     'ano_nascimento' => 'required|integer',
+        //     'peso' => 'required|numeric',
+        //     'castrado' => 'required|boolean',
+        //     'temperamento' => 'nullable|string|max:255',
+        //     'cor_pelagem' => 'nullable|string|max:100',
+        //     'caso_clinico' => 'nullable|string|max:500'
+        // ]);
+
+        // if (!$validatedData) {
+        //     return response()->json(['message' => 'Dados inválidos para o pet.'], 400);
+        // }
+
+        if (!$request->nome || !$request->especie || !$request->raca || !$request->ano_nascimento || !$request->peso || !isset($request->castrado)) {
+            return response()->json(['message' => 'Dados obrigatórios do pet estão faltando.'], 400);
         }
 
         $pet->user_id = $request->user_id;
         $pet->nome = $request->nome;
         $pet->especie = $request->especie;
         $pet->raca = $request->raca;
-        $pet->idade = $request->idade;
+        $pet->ano_nascimento = $request->ano_nascimento;
         $pet->sexo = $request->sexo;
         $pet->peso = $request->peso;
         $pet->castrado = $request->castrado;
@@ -75,35 +107,41 @@ class PetController extends Controller
         return response()->json(['message' => 'Pet registrado com sucesso!', 'pet' => $pet], 201);
     }
 
-    function editarPet(Request $request) {
+    function editarPet(Request $request)
+    {
         $pet = Pet::find($request->id);
 
         if (!$pet) {
             return response()->json(['message' => 'Pet não encontrado.'], 404);
         }
 
-        $validatedData = $request->validate([
-            'user_id' => 'sometimes|integer',
-            'nome' => 'sometimes|string|max:255',
-            'especie' => 'sometimes|string|max:100',
-            'raca' => 'sometimes|string|max:100',
-            'idade' => 'sometimes|integer',
-            'peso' => 'sometimes|numeric',
-            'castrado' => 'sometimes|boolean',
-            'temperamento' => 'nullable|string|max:255',
-            'cor_pelagem' => 'nullable|string|max:100',
-            'caso_clinico' => 'nullable|string|max:500'
-        ]);
-
-        if (!$validatedData) {
-            return response()->json(['message' => 'Dados inválidos para o pet.'], 400);
+        if (!$request->nome || !$request->especie || !$request->raca || !$request->ano_nascimento || !$request->peso || !isset($request->castrado)) {
+            return response()->json(['message' => 'Dados obrigatórios do pet estão faltando.'], 400);
         }
+
+        // $validatedData = $request->validate([
+        //     'user_id' => 'sometimes|integer',
+        //     'nome' => 'sometimes|string|max:255',
+        //     'especie' => 'sometimes|string|max:100',
+        //     'raca' => 'sometimes|string|max:100',
+        //     'ano_nascimento' => 'sometimes|integer',
+        //     'peso' => 'sometimes|numeric',
+        //     'castrado' => 'sometimes|boolean',
+        //     'temperamento' => 'nullable|string|max:255',
+        //     'cor_pelagem' => 'nullable|string|max:100',
+        //     'caso_clinico' => 'nullable|string|max:500'
+        // ]);
+
+        // if (!$validatedData) {
+        //     return response()->json(['message' => 'Dados inválidos para o pet.'], 400);
+        // }
+
 
         $pet->user_id = $request->user_id ?? $pet->user_id;
         $pet->nome = $request->nome ?? $pet->nome;
         $pet->especie = $request->especie ?? $pet->especie;
         $pet->raca = $request->raca ?? $pet->raca;
-        $pet->idade = $request->idade ?? $pet->idade;
+        $pet->ano_nascimento = $request->ano_nascimento ?? $pet->ano_nascimento;
         $pet->sexo = $request->sexo ?? $pet->sexo;
         $pet->peso = $request->peso ?? $pet->peso;
         $pet->castrado = $request->castrado ?? $pet->castrado;
@@ -116,7 +154,8 @@ class PetController extends Controller
         return response()->json(['message' => 'Dados do pet atualizados com sucesso.', 'pet' => $pet], 200);
     }
 
-    function deletarPet($id){
+    function deletarPet($id)
+    {
         $pet = Pet::find($id);
 
         if (!$pet) {
@@ -127,5 +166,4 @@ class PetController extends Controller
 
         return response()->json(['message' => 'Pet deletado com sucesso.'], 200);
     }
-
 }

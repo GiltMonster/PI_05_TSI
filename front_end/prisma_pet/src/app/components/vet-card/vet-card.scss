@@ -1,0 +1,135 @@
+.card_vet_container {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 20px;
+  margin: 14px 8px;
+  background: #fff;
+  border: 1px solid #e6e9f2;
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+}
+
+.info_vet {
+  min-width: 0;
+}
+.nome_vet {
+  margin: 0 0 4px;
+  font-weight: 700;
+  font-size: 1.35rem;
+  line-height: 1.2;
+  color: #004aad;
+}
+.detalhes_vet,
+.especialidade_vet {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.botoes_vet {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn_cadastro {
+  background: #fff;
+  color: #004aad;
+  border: 1.5px solid #004aad;
+  border-radius: 10px;
+  height: 40px;
+  padding: 0 14px;
+  font-weight: 600;
+  line-height: 40px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    background: #ff914d;
+    color: #fff;
+    border-color: #ff914d;
+  }
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.35);
+  }
+}
+
+.btn_icon {
+  appearance: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1.5px solid #004aad;
+  background: #fff;
+  color: #004aad;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    background: #ff914d;
+    color: #fff;
+    border-color: #ff914d;
+  }
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.35);
+  }
+  &:active {
+    transform: translateY(1px);
+  }
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    line-height: 1;
+  }
+}
+
+.btn-text--total {
+  display: inline;
+}
+.btn-text--menor {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .card_vet_container {
+    grid-template-columns: 72px 1fr;
+    grid-template-areas:
+      'avatar info'
+      'avatar actions';
+    row-gap: 10px;
+  }
+
+  .info_vet {
+    grid-area: info;
+  }
+  .botoes_vet {
+    grid-area: actions;
+    justify-content: flex-start;
+  }
+  .btn_cadastro {
+    height: 38px;
+    line-height: 38px;
+  }
+  .btn-text--total {
+    display: none;
+  }
+  .btn-text--menor {
+    display: inline;
+  }
+}

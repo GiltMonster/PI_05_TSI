@@ -1,0 +1,68 @@
+:host {
+  display: block;
+  background: #f7f6fb;
+  min-height: 100dvh;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 0;
+}
+
+.content {
+  padding: 10px 32px;
+}
+
+
+.menu-fab{
+  position: fixed;
+  left: 16px;
+  bottom: 24px;
+  width: 56px;
+  height: 56px;
+  border: 0;
+  border-radius: 50%;
+  background: #004AAD;
+  color:#fff;
+  box-shadow: 0 6px 18px rgba(0,0,0,.2);
+  display: none;
+  z-index: 1100;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-fab__icon{ font-size: 22px; line-height: 1; }
+
+.menu-backdrop{
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.35);
+  z-index: 900;
+  pointer-events: auto;
+}
+
+
+@media (max-width: 1200px) {
+  .layout { grid-template-columns: 220px 1fr; }
+}
+@media (max-width: 640px) {
+  .layout { grid-template-columns: 1fr; }
+  .content { padding: 20px 16px 32px; }
+}
+
+
+@media (max-width: 600px){
+  .menu-fab{
+    display: inline-flex;
+    left: max(16px, env(safe-area-inset-left));
+    bottom: max(24px, env(safe-area-inset-bottom));
+  }
+  .menu_left{ z-index: 1000; }
+}
+
+/* Respeitar movimento reduzido  ABNT 5.10/5.11.*/
+@media (prefers-reduced-motion: reduce) {
+  .menu-fab, .layout {
+    transition: none !important;
+  }
+}

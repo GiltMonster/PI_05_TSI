@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pet extends Model
 {
+    public $table = 'pets';
+
     protected $fillable = [
         'user_id',
         'nome',
         'especie',
         'raca',
-        'idade',
+        'ano_nascimento',
         'sexo',
         'peso',
         'castrado',
@@ -25,6 +27,11 @@ class Pet extends Model
     public function cliente()
     {
         return $this->belongsTo(Cliente::class, 'id');
+    }
+
+    public function consultas()
+    {
+        return $this->hasMany(ConsultaPet::class, 'pet_id');
     }
 
 }

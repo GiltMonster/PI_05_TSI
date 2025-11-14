@@ -1,0 +1,5 @@
+<section class="lista_servico" aria-label="Lista de Responsáveis">
+  <app-service-list [servicos]="filtered" [loading]="false" [columns]="1" [gap]="12" (searchChange)="onSearch($event)"
+    (editServico)="onEditServico($event)" (deleteServico)="onDeleteServico($event)">
+  </app-service-list>
+</section>

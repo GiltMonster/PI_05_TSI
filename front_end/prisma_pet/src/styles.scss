@@ -1,1 +1,97 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+:root {
+  --primary-color: #4A90E2;
+  --primary-dark: #357ABD;
+  --primary-light: #E8F4FF;
+  --text-primary: #2C3E50;
+  --gray-light: #BDC3C7;
+  --gray-dark: #818d8d;
+  --text-secondary: #7F8C8D;
+  --border-color: #E1E8ED;
+  --background: #F8FAFB;
+  --white: #FFFFFF;
+  --success: #27AE60;
+  --error: #E74C3C;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--background);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+
+html {
+  @include mat.theme((
+    color: (
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+body {
+  // Default the application to a light color theme. This can be changed to
+  // `dark` to enable the dark color theme, or to `light dark` to defer to the
+  // user's system settings.
+  color-scheme: light;
+
+  // Set a default background, font and text colors for the application using
+  // Angular Material's system-level CSS variables. Learn more about these
+  // variables at https://material.angular.dev/guide/system-variables
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+
+  // Reset the user agent margin.
+  margin: 0;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: poppins, "Helvetica Neue", sans-serif; }
+
+/* Foco visível forte e consistente (ABNT 5.1, 5.8, 5.10, 5.11) */
+:focus-visible {
+  outline: 3px solid #005FCC; /* alto contraste no branco */
+  outline-offset: 2px;
+}
+
+/* ABNT 5.8 */
+button,
+[role="button"] {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* Estado de navegação  (ABNT 5.7) */
+[aria-current="page"] {
+  background: #EFF3F9;
+  color: #004AAD;
+}
+
+/*  ABNT 5.10/5.11 – apresentação */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Conteúdo só de leitura de tela (ABNT 5.3/5.7) */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important; height: 1px !important;
+  padding: 0 !important; margin: -1px !important;
+  overflow: hidden !important; clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important; border: 0 !important;
+}

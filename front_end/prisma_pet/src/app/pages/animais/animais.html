@@ -1,0 +1,5 @@
+<section class="lista_pet" aria-label="Lista de Animais">
+  <app-animal-list [pets]="filtered" [loading]="false" [columns]="1" [gap]="12" (searchChange)="onSearch($event)"
+    (viewPet)="onViewPet($event)" (editPet)="onEditPet($event)" (deletePet)="onDeletePet($event)">
+  </app-animal-list>
+</section>

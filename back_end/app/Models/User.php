@@ -34,7 +34,7 @@ class User extends Authenticatable
     protected $guard_name = 'api';
     public $timestamps = false;
 
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['password', 'remember_token', 'roles', 'permissions'];
 
     public function newFromBuilder($attributes = [], $connection = null)
     {
@@ -47,7 +47,7 @@ class User extends Authenticatable
                 case 'vet':
                     return (new Vet)->newFromBuilder($attributes, $connection);
                 case 'user':
-                    return (new Client)->newFromBuilder($attributes, $connection);
+                    return (new Cliente)->newFromBuilder($attributes, $connection);
                 default:
                     return $model;
             }

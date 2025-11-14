@@ -1,0 +1,42 @@
+<!-- header semântico, alt do logo, aria-label nos links, aria-hidden nos ícones, binding [routerLink].
+Sessões ABNT: 5.2, 5.3, 5.7, 5.1. -->
+<header class="header_container" role="banner">
+  <img class="logo" [src]="logo" alt="Logo da VetJA" />
+
+  <div class="bloco2">
+    <div class="whats">
+      @for (item of contato(); track $index) {
+        <a
+          [href]="item.link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Abrir conversa no WhatsApp: {{ item.label }}">
+          @if (item.wpp) {
+            <mat-icon aria-hidden="true">{{ item.wpp }}</mat-icon>
+          }
+          <p>{{ item.label }}</p>
+        </a>
+      }
+    </div>
+
+    <div class="profile">
+      @for (item of profile(); track $index) {
+        <a [routerLink]="item.rotaUrl" aria-label="Abrir perfil de {{ item.nome }}">
+          @if (item.iconUrl) {
+            <mat-icon class="icon_profile" aria-hidden="true">{{ item.iconUrl }}</mat-icon>
+          }
+        </a>
+      }
+
+      <div class="user-info">
+        @for (item of profile(); track $index) {
+          <p>Olá, {{ item.nome }}</p>
+          <a [routerLink]="item.rotaUrl" aria-label="Ver perfil completo de {{ item.nome }}">
+            <span>{{ item.tipoUsu }}</span>
+          </a>
+          <p class="logout" (click)="logout()">Logout</p>
+        }
+      </div>
+    </div>
+  </div>
+</header>

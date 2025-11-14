@@ -1,0 +1,184 @@
+.header_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px;
+  background-color: #fff;
+  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.12);
+  height: 10%;
+  font-family: poppins;
+}
+
+.logo {
+  margin: 0;
+  width: 7%;
+  margin: 10px 20px;
+}
+
+.bloco2 {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.whats {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #4a4a4a;
+  /* Texto cinza com contraste melhor (ABNT 5.10/5.11) */
+  font-weight: 500;
+}
+
+.whats a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  background-color: #004aad;
+  color: #fff;
+  padding: 0 11px 0 9px;
+  border-radius: 9px;
+  gap: 5px;
+  font-size: 1rem;
+}
+
+.whats a:hover {
+  background-color: #4c892d;
+  transition: background-color 0.3s ease;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .user-info a {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+
+
+  .user-info {
+    p{
+      font-size: 1.2rem;
+      color: #004aad;
+      font-weight: bold;
+      margin: 0;
+      padding: 0;
+    }
+
+    .logout {
+      font-size: 0.9rem;
+      color: #ff4d4d;
+    }
+
+    .logout:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
+  .user-info span {
+    font-size: 0.9rem;
+    color: #949494;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* Links do WhatsApp e perfil (ABNT 5.1/5.8) */
+.whats a:focus-visible,
+.profile a:focus-visible {
+  outline: 3px solid #005FCC;
+  outline-offset: 2px;
+}
+
+/* Alvo para o link do Whats e icon (ABNT 5.8) */
+.whats a,
+.icon_profile {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.icon_profile {
+  font-size: 3.5rem;
+  color: #004aad;
+  height: auto;
+  width: auto;
+
+  :hover {
+    color: #ff914d;
+    transition: color 0.3s ease;
+  }
+
+  /* Estado de foco consistente (ABNT 5.8) */
+  :focus-visible {
+    outline: 3px solid #005FCC;
+    outline-offset: 2px;
+  }
+}
+
+@media (max-width: 1014px) {
+
+  .bloco2 {
+    gap: 70px;
+  }
+
+  .logo {
+    width: 150px;
+  }
+
+  .whats a {
+    font-size: 0.9rem;
+  }
+
+  .profile .user-info p {
+    font-size: 1.3rem;
+    margin-bottom: 2px;
+  }
+
+  .profile .user-info span {
+    font-size: 0.9rem;
+  }
+}
+
+
+
+@media (max-width: 650px) {
+  .header_container {
+    padding: 10px 15px;
+  }
+
+  .logo {
+    width: 100px;
+  }
+
+  .bloco2 {
+    gap: 15px;
+  }
+
+  .whats a p {
+    display: none;
+  }
+
+  .whats a {
+    padding: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .profile .user-info {
+    display: none;
+  }
+}
