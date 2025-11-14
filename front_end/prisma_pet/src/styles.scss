@@ -95,3 +95,10 @@ button,
   overflow: hidden !important; clip: rect(0, 0, 0, 0) !important;
   white-space: nowrap !important; border: 0 !important;
 }
+
+hr {
+  width: 100%;
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 1.5rem 0;
+}

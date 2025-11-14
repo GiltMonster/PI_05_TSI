@@ -67,13 +67,6 @@
   align-items: stretch;
 }
 
-hr {
-  width: 100%;
-  border: none;
-  border-top: 1px solid var(--border-color);
-  margin: 1.5rem 0;
-}
-
 .pet-detail {
   display: flex;
   flex-direction: column;
@@ -121,7 +114,7 @@ p {
 
 .button-group {
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
   justify-content: flex-end;
 }
 
