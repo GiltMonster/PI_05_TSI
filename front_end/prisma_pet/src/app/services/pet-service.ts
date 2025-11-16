@@ -6,10 +6,9 @@ import { Observable, switchMap } from 'rxjs';
 import { FichaPetInterface, PetInterface } from '../interfaces';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class PetService {
-
   constructor(
     private http: HttpClient,
     private userService: UsuarioService
@@ -27,5 +26,27 @@ export class PetService {
         }
       })
     );
+  }
+
+  getAllPets(): Observable<PetInterface[]> {
+    return this.http.get<PetInterface[]>(environment.API_URL_VET_PET_LIST);
+  }
+
+  getUserType() {
+    return this.http.get<{ type: string }>(environment.API_URL_AUTH_MY_TYPE);
+  }
+
+  updatePet(data: PetInterface) {
+    if (data.type === 'admin') {
+      return this.http.put(environment.API_URL_ADMIN_PET_UPDATE, data);
+    }else if (data.type === 'vet') {
+      return this.http.put(environment.API_URL_VET_PET_UPDATE, data);
+    } else {
+      return this.http.put(environment.API_URL_CLIENTE_PET_UPDATE, data);
+    }
+  }
+
+  deleteAccountPet(id: number) {
+    return this.http.delete(`${environment.API_URL_ADMIN_PET_DELETE}/${id}`);
   }
 }

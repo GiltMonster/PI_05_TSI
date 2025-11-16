@@ -1,63 +1,55 @@
-<section class="list_vet_container" aria-label="Lista de animais">
-  <h1 class="list_title">Veterinário</h1>
+<section class="list_vet_container" aria-label="Lista de veterinários">
+  <h1 class="list_title">Veterinários</h1>
 
   <div class="header_list_vet">
-    <form class="search" role="search" (submit)="onSubmit($event)">
+    <form class="search" role="search" (submit)="onSearch(); $event.preventDefault()">
       <label class="sr-only" for="vetSearch">Buscar Veterinário</label>
       <input
         id="vetSearch"
         class="search__input"
         type="search"
-        [placeholder]="searchPlaceholder"
-        [formControl]="searchCtrl"
+        placeholder="Buscar Veterinário"
         autocomplete="off"
         aria-describedby="Buscar Veterinário"
+        [(ngModel)]="searchValue"
+        name="searchValue"
+        (ngModelChange)="onSearch()"
       />
-      <button
-        *ngIf="searchCtrl.value"
-        type="button"
-        class="search__clear"
-        (click)="clearSearch()"
-        aria-label="Limpar busca"
-      >
+
+@if(searchValue !== "") {
+      <button type="button" class="search__clear" aria-label="Limpar busca" (click)="clearSearch()">
         <mat-icon aria-hidden="true">close</mat-icon>
       </button>
-      
+      }
+
       <button type="submit" class="search__btn" aria-label="Buscar">
         <mat-icon aria-hidden="true">search</mat-icon>
       </button>
-      
+
       <span id="Buscar Veterinário" class="sr-only" aria-live="polite">{{ statusMsg }}</span>
     </form>
 
     <button
       class="add_vet_button"
       type="button"
-      (click)="onAddVet()"
-      aria-label="Cadastrar novo Veterinário"
-    >
+      aria-label="Cadastrar novo Veterinário">
       <mat-icon aria-hidden="true">add</mat-icon>
       <span>Cadastrar Novo Veterinário</span>
     </button>
   </div>
 
-  @if (loading) {
-  <div class="status" role="status" aria-live="polite">Carregando lista…</div>
-
-  } @if (!loading && (!veterinarios || veterinarios.length === 0)) {
+@if (!filteredVets || filteredVets.length === 0){
   <div class="empty" role="note" aria-live="polite">{{ emptyMessage }}</div>
 
-  } @if (!loading && veterinarios.length) {
-  <ul class="grid" role="list" [style.gridTemplateColumns]="getGridTemplate()" [style.gap.px]="gap">
-    @for (p of veterinarios; track trackById($index, p)) {
+  } @if (filteredVets.length) {
+  <ul class="grid" role="list">
+    @for (vet of filteredVets; track vet.id) {
     <li class="grid__item" role="listitem">
       <app-vet-card
-        [vetCard]="p"
-        (viewClick)="onViewVet($event)"
-        (editClick)="onEditVet($event)"
-        (deleteClick)="onDeleteVet($event)"
-      >
-      </app-vet-card>
+        [userVet]="vet"
+        [typeUser]="typeUser"
+        (vetDeleted)="onVetDeleted($event)"
+      />
     </li>
     }
   </ul>

@@ -1,23 +1,25 @@
 <article class="card_pet_container"
-  [attr.aria-labelledby]="'pet-' + petCard().id">
+  [attr.aria-labelledby]="'pet-' + userPet.id">
   <div class="img_especie">
     <img
       [src]="getEspeciesIcon()"
-      [alt]="'Espécie: ' + (petCard().especie || 'desconhecida')"
+      [alt]="'Espécie: ' + (userPet.especie || 'desconhecida')"
       loading="lazy"
       decoding="async"
-      width="64" height="64" />
+      width="64"
+      height="64"
+    />
   </div>
 
   <div class="info_pet">
-    <h3 class="nome_pet" [id]="'pet-' + petCard().id">
-      {{ petCard().nome }}
+    <h3 class="nome_pet" [id]="'pet-' + userPet.id">
+      {{ userPet.nome }}
     </h3>
     <p class="detalhes_pet">
-      {{ getSexoLabel() }} • {{ petCard().idade }}
+      {{ getSexoLabel() }}
     </p>
     <p class="tutor_pet">
-      Tutor(a): {{ petCard().tutor }}
+      Responsável: {{ tutorName }}
     </p>
   </div>
 
@@ -25,17 +27,34 @@
 <button
   type="button"
   class="btn_cadastro"
-  (click)="onView()"
-  [attr.aria-label]="'Ver cadastro completo de ' + petCard().nome">
+  (click)="findUserById(userPet.id)"
+  [attr.aria-label]="'Ver cadastro completo de ' + userPet.nome">
   <span class="btn-text btn-text--total">Abrir Cadastro</span>
   <span class="btn-text btn-text--menor">Ver</span>
 </button>
-    <button type="button" class="btn_icon" (click)="onEdit()" aria-label="Editar cadastro">
+
+@if (typeUser === 'admin') {
+    <button
+      type="button"
+      class="btn_icon"
+      (click)="openEditModal(userPet)"
+      aria-label="Editar cadastro"
+    >
       <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">edit</mat-icon>
     </button>
 
-    <button type="button" class="btn_icon" (click)="onDelete()" aria-label="Excluir cadastro">
+    <button
+      type="button"
+      class="btn_icon"
+      (click)="deletePet(userPet.id)"
+      aria-label="Excluir cadastro"
+    >
       <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">delete</mat-icon>
     </button>
+    }
   </div>
 </article>
+
+@if(editModalOpen){
+<app-modal-edit-pet [pet]="petToEdit!" (close)="closeEditModal()" (save)="savePet($event)" />
+}
