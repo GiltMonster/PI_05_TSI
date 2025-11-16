@@ -25,6 +25,10 @@ export const routes: Routes = [
       {
         path: 'perfil',
         loadComponent: () => import('./pages/perfil/perfil').then(m => m.Perfil)
+      },
+      {
+        path: 'ficha/{userId}',
+        loadComponent: () => import('./pages/ficha-pet/ficha-pet').then(m => m.FichaPet)
       }
     ]
   },
@@ -71,6 +75,10 @@ export const routes: Routes = [
       {
         path: 'perfil',
         loadComponent: () => import('./pages/perfil/perfil').then(m => m.Perfil)
+      },
+      {
+        path: 'ficha/:userId',
+        loadComponent: () => import('./pages/ficha-pet/ficha-pet').then(m => m.FichaPet)
       }
     ]
   },

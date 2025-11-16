@@ -100,21 +100,26 @@ export interface VeterinarioListInterface {
   crmv: string;
 }
 
+export interface FichaPetInterface {
+  tutor_name: string;
+  pets: Array<PetInterface>;
+}
 
 export interface PetInterface {
   id: number;
-  imagem: string;
   nome: string;
-  especie: boolean;
-  raça: string;
-  sexo: string;
-  idade: string;
+  especie?: boolean;
+  ano_nascimento?: Date;
+  raca?: string;
   peso?: number;
-  castrado: boolean;
   temperamento: string;
-  tutor: string;
-  cor: string;
-  casoClinico: string;
+  possuiCarteirinha?: boolean;
+  cor_pelagem?: string;
+  sexo?: number;
+  castrado?: number;
+  tutor?: string;
+  caso_clinico: string;
+  imagem?: string;
 }
 
 export interface ServicosListInterface {

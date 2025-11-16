@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MenuService } from '../../services/menu-service';
+import { Notification } from '../../services/notification';
 
 @Component({
   selector: 'app-menu-left',
@@ -22,7 +23,8 @@ export class MenuLeft {
 
   constructor(
     menuService: MenuService,
-    private router: Router
+    private router: Router,
+    private notification: Notification,
   ) {
     // Quando o menu "abrir" (collapsed === true), foca o primeiro link
     effect(() => {
@@ -60,6 +62,7 @@ export class MenuLeft {
       },
       (error) => {
         console.error('Erro ao obter o tipo de usuário para o menu:', error);
+        this.notification.error('Erro ao obter o tipo de usuário para o menu:');
         this.itens = [
           { label: 'login', link: '/login', icon: 'login' }
         ];
