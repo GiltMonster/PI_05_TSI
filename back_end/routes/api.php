@@ -55,6 +55,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
         Route::get('/vet/getPetById/{id}', [PetController::class, 'getPetById']);
         Route::get('/vet/getAllTutors', [ClienteController::class, 'getClientes']);
+        Route::get('/vet/getPets', [PetController::class, 'getPets']);
         Route::get('/vet/getPetsByUserId/{user_id}', [PetController::class, 'getPetsByUserId']);
         Route::post('/vet/registrarPet', [PetController::class, 'registrarPet']);
         Route::put('/vet/editarPet', [PetController::class, 'editarPet']);

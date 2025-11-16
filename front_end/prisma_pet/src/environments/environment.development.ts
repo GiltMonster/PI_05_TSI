@@ -39,6 +39,7 @@ export const environment = {
   API_URL_VET_UPDATE: `${end_point_base}/vet/editarVet`,
 
   API_URL_VET_GET_TUTORS_LIST: `${end_point_base}/vet/getAllTutors`,
+  API_URL_VET_GET_ALL_PETS: `${end_point_base}/vet/getPets`,
   API_URL_VET_GET_PET_BY_ID: `${end_point_base}/vet/getPetById`,
   API_URL_VET_GET_PETS_BY_USER_ID: `${end_point_base}/vet/getPetsByUserId`,
   API_URL_VET_PET_REGISTER: `${end_point_base}/vet/registrarPet`,
