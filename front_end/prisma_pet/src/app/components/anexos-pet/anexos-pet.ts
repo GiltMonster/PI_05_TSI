@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
-import { VacinasPet } from "../vacinas-pet/vacinas-pet";
+import { VacinasPet } from "../vacinas/vacinas-pet/vacinas-pet";
 import { OutrosAnexosPet } from "../outros-anexos-pet/outros-anexos-pet";
-import { ConsultasPet } from '../consultas-pet/consultas-pet';
+import { ConsultasPet } from '../consultas/consultas-pet/consultas-pet';
 
 @Component({
   selector: 'app-anexos-pet',
