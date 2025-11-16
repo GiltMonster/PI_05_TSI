@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\PetController;
+use App\Http\Controllers\ServicoController;
 use App\Http\Controllers\VetController;
 use GuzzleHttp\Client;
 
@@ -73,4 +74,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('/cliente/editarPet', [PetController::class, 'editarPet']);
         Route::delete('/cliente/deletarPet/{id}', [PetController::class, 'deletarPet']);
     });
+
+    Route::middleware(['role:admin|vet|user'])->group(function () {
+        Route::get('/servico/all', [ServicoController::class, 'listarServicos']);
+        Route::get('/servico/{id}', [ServicoController::class, 'getServicoById']);
+        Route::post('/servico/novo', [ServicoController::class, 'criarServico']);
+        Route::put('/servico/editar', [ServicoController::class, 'editarServico']);
+        Route::delete('/servico/deletar/{id}', [ServicoController::class, 'deletarServico']);
+    });
+
 });
