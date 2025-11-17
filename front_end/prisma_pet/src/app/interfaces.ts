@@ -112,14 +112,25 @@ export interface PetInterface {
   ano_nascimento?: Date;
   raca?: string;
   peso?: number;
-  temperamento: string;
+  temperamento?: string;
   possuiCarteirinha?: boolean;
   cor_pelagem?: string;
   sexo?: number;
   castrado?: number;
   tutor?: string;
-  caso_clinico: string;
+  caso_clinico?: string;
   imagem?: string;
+  consultas?: Array<PetConsulta>;
+}
+
+export interface PetConsulta {
+  id: number;
+  vet_id: number;
+  servico_id: number;
+  data_consulta: Date;
+  anamnese: string;
+  nome_vet?: string;
+  categoria_servico?: string;
 }
 
 export interface ServicosListInterface {

@@ -87,6 +87,6 @@
   </div>
 
   <div class="pet-container">
-    <app-anexos-pet />
+    <app-anexos-pet [pet_consultas]="petsList.pets[indexPet].consultas || []" />
   </div>
 </section>
