@@ -1,1 +1,44 @@
-<p>consultas-pet-list works!</p>
+<article class="card_consulta_container" [attr.aria-labelledby]="'consulta-'">
+
+  <div class="info_consulta_container">
+
+    <div class="info_consulta_contant">
+      <h2 class="nome_consulta" [id]="'consulta'">
+        {{ pet_consulta.nome_servico || 'Serviço não informado' }}
+      </h2>
+      <p class="data_consulta">
+        <label>
+          Data:
+        </label>
+        {{ (pet_consulta.data_consulta | date:'dd/MM/yyyy') || 'Não informado' }}
+      </p>
+
+      <p class="vet_consulta">
+        <label>
+          Veterinário responsavel:
+        </label>
+        {{ pet_consulta.nome_vet || 'Não informado' }}
+      </p>
+    </div>
+
+    <div class="btns_consulta">
+      <button type="button" class="btn_icon" (click)="onEdit()" aria-label="Editar cadastro">
+        <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">edit</mat-icon>
+      </button>
+
+      <button type="button" class="btn_icon" (click)="onDelete()" aria-label="Excluir cadastro">
+        <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">delete</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="anamneses_consulta">
+    <h2>Anamneses:</h2>
+    <p>
+      {{ pet_consulta.anamnese || 'Nenhuma anamneses cadastrada.' }}
+    </p>
+
+  </div>
+</article>

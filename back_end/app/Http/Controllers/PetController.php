@@ -45,6 +45,7 @@ class PetController extends Controller
 
             $servico = Servico::find($consulta->servico_id);
             if ($servico) {
+                $consulta->nome_servico = $servico->nome;
                 $consulta->categoria_servico = $servico->categoria;
             }
         }

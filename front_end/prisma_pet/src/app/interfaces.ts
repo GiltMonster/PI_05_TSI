@@ -130,6 +130,7 @@ export interface PetConsulta {
   data_consulta: Date;
   anamnese: string;
   nome_vet?: string;
+  nome_servico?: string;
   categoria_servico?: string;
 }
 

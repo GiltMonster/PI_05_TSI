@@ -1,12 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ConsultasPetList } from "../consultas-pet-list/consultas-pet-list";
+import { PetConsulta } from '../../../interfaces';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-consultas-pet',
-  imports: [ConsultasPetList],
   templateUrl: './consultas-pet.html',
   styleUrl: './consultas-pet.scss',
+  imports: [ConsultasPetList, CommonModule],
 })
 export class ConsultasPet {
+  @Input() pet_consultas: Array<PetConsulta> = [];
 
 }

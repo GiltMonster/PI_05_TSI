@@ -13,7 +13,7 @@
   @if (activeTab === 'consultas') {
 
     @if(pet_consultas.length != 0) {
-      <app-consultas-pet />
+      <app-consultas-pet [pet_consultas]="pet_consultas" />
     } @else {
       <div class="tab-container-not-found">
         <h2>Nenhuma consulta cadastrada para este pet.</h2>
