@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { VacinasPet } from "../vacinas/vacinas-pet/vacinas-pet";
 import { OutrosAnexosPet } from "../outros-anexos-pet/outros-anexos-pet";
 import { ConsultasPet } from '../consultas/consultas-pet/consultas-pet';
+import { PetConsulta } from '../../interfaces';
 
 @Component({
   selector: 'app-anexos-pet',
@@ -13,6 +14,9 @@ import { ConsultasPet } from '../consultas/consultas-pet/consultas-pet';
 })
 export class AnexosPet {
 
+  @Input() pet_consultas: Array<PetConsulta> = [];
+  @Input() pet_vacinas: Array<any> = [];
+  @Input() pet_anexos: Array<any> = [];
   activeTab: string = 'consultas';
 
   setActiveTab(tab: string) {

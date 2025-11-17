@@ -1,4 +1,8 @@
 <section class="tab-content">
-  <h2>Consultas do Pet</h2>
-  <!-- Conteúdo dos Consultas -->
+  <h2>Consultas do Pet:</h2>
+
+  @for (consulta of pet_consultas; track consulta.id) {
+    <app-consultas-pet-list [pet_consulta]="consulta" />
+  }
+
 </section>

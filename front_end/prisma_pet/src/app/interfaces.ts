@@ -119,14 +119,20 @@ export interface PetInterface {
   cor_pelagem?: string;
   castrado?: boolean;
   tutor?: string;
-  caso_clinico: string;
+  caso_clinico?: string;
   imagem?: string;
-  user_id: number;
-  cor: string;
-  casoClinico: string;
+  consultas?: Array<PetConsulta>;
+}
 
-  tutorName?: string;
-  idadeTexto?: string;
+export interface PetConsulta {
+  id: number;
+  vet_id: number;
+  servico_id: number;
+  data_consulta: Date;
+  anamnese: string;
+  nome_vet?: string;
+  nome_servico?: string;
+  categoria_servico?: string;
 }
 
 export interface ServicosListInterface {

@@ -12,7 +12,12 @@ import { AnexosPet } from "../anexos-pet/anexos-pet";
 })
 export class HeaderPet implements OnInit {
 
-  @Input() petsList: FichaPetInterface = { tutor_name: '', pets: [] };
+  @Input() petsList: FichaPetInterface = {
+    tutor_name: '', pets: [
+      {
+        id: 0, nome: '', tutor: '', consultas: [] }
+    ]
+  };
   indexPet: number = 0;
 
   class_btn_next: string = 'btn btn--primary';
