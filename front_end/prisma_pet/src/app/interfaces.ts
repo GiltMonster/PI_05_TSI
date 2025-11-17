@@ -20,6 +20,7 @@ export interface UserInterface {
   complemento?: string;
   cpf: string;
   crmv?: string;
+  especialidade?:string;
   pix?: string;
 }
 
@@ -90,7 +91,6 @@ export interface TutorListInterface {
   id: number;
   nome: string;
   telefone?: string;
-  // animal: string;
 }
 
 export interface VeterinarioListInterface {
@@ -106,17 +106,18 @@ export interface FichaPetInterface {
 }
 
 export interface PetInterface {
+  type: string;
   id: number;
   nome: string;
-  especie?: boolean;
+  especie?: string;
   ano_nascimento?: Date;
   raca?: string;
+  sexo?: boolean;
   peso?: number;
   temperamento?: string;
   possuiCarteirinha?: boolean;
   cor_pelagem?: string;
-  sexo?: number;
-  castrado?: number;
+  castrado?: boolean;
   tutor?: string;
   caso_clinico?: string;
   imagem?: string;

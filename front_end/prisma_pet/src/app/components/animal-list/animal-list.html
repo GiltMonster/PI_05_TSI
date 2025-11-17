@@ -8,32 +8,30 @@
         id="petSearch"
         class="search__input"
         type="search"
-        [placeholder]="searchPlaceholder"
-        [formControl]="searchCtrl"
+        placeholder="Buscar Animal"
         autocomplete="off"
-        aria-describedby="Buscar Animais"
+        aria-describedby="Buscar Animal"
+        [(ngModel)]="searchValue"
+        name="searchValue"
+        (ngModelChange)="onSearch()"
       />
-      <button
-        *ngIf="searchCtrl.value"
-        type="button"
-        class="search__clear"
-        (click)="clearSearch()"
-        aria-label="Limpar busca"
-      >
+
+      @if(searchValue !== "") {
+      <button type="button" class="search__clear" aria-label="Limpar busca" (click)="clearSearch()">
         <mat-icon aria-hidden="true">close</mat-icon>
       </button>
-      
+      }
+
       <button type="submit" class="search__btn" aria-label="Buscar">
         <mat-icon aria-hidden="true">search</mat-icon>
       </button>
-      
+
       <span id="Buscar Animais" class="sr-only" aria-live="polite">{{ statusMsg }}</span>
     </form>
 
     <button
       class="add_pet_button"
       type="button"
-      (click)="onAddPet()"
       aria-label="Cadastrar novo animal"
     >
       <mat-icon aria-hidden="true">add</mat-icon>
@@ -41,23 +39,19 @@
     </button>
   </div>
 
-  @if (loading) {
-  <div class="status" role="status" aria-live="polite">Carregando lista…</div>
-
-  } @if (!loading && (!pets || pets.length === 0)) {
+    @if (!filteredPets || filteredPets.length === 0){
   <div class="empty" role="note" aria-live="polite">{{ emptyMessage }}</div>
 
-  } @if (!loading && pets.length) {
-  <ul class="grid" role="list" [style.gridTemplateColumns]="getGridTemplate()" [style.gap.px]="gap">
-    @for (p of pets; track trackById($index, p)) {
+  } @if (filteredPets.length) {
+  <ul class="grid" role="list">
+    @for (pet of filteredPets; track pet.id) {
     <li class="grid__item" role="listitem">
       <app-animal-card
-        [petCard]="p"
-        (viewClick)="onViewPet($event)"
-        (editClick)="onEditPet($event)"
-        (deleteClick)="onDeletePet($event)"
-      >
-      </app-animal-card>
+        [userPet]="pet"
+        [typeUser]="typeUser"
+        (petDeleted)="onPetDeleted($event)"
+        (tutorLoad)="onTutorLoad($event)"
+      />
     </li>
     }
   </ul>
