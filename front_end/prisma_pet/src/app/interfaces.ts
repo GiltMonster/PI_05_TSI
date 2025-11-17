@@ -109,7 +109,7 @@ export interface PetInterface {
   type: string;
   id: number;
   nome: string;
-  especie?: boolean;
+  especie?: string;
   ano_nascimento?: Date;
   raca?: string;
   sexo?: boolean;

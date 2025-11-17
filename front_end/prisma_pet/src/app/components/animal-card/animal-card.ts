@@ -143,10 +143,6 @@ getEspeciesIcon(): string {
   if (especie === 'gato' || especie === 'felino') {
     return 'assets/imagens/gato.png';
   }
-
-  if (especie === 'ave' || especie === 'passaro' || especie === 'pássaro') {
-    return 'assets/imagens/ave.png';
-  }
   return 'assets/imagens/pet-generico.png';
 }
 }

@@ -65,11 +65,11 @@
         </div>
         <div class="pet-detail">
           <label>Sexo:</label>
-          <p>{{petsList.pets[indexPet].sexo === 1 ? 'Macho' : petsList.pets[indexPet].sexo === 0 ? 'Fêmea' : '-'}}</p>
+          <p>{{petsList.pets[indexPet].sexo === true ? 'Macho' : petsList.pets[indexPet].sexo === false ? 'Fêmea' : '-'}}</p>
         </div>
         <div class="pet-detail">
           <label>Castrado:</label>
-          <p>{{petsList.pets[indexPet].castrado === 1 ? 'Sim' : petsList.pets[indexPet].castrado === 0 ? 'Não' : '-'}}
+          <p>{{petsList.pets[indexPet].castrado === true ? 'Sim' : petsList.pets[indexPet].castrado === false ? 'Não' : '-'}}
           </p>
         </div>
         <div class="pet-detail">
