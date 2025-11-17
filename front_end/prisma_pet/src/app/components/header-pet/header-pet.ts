@@ -15,7 +15,8 @@ export class HeaderPet implements OnInit {
   @Input() petsList: FichaPetInterface = {
     tutor_name: '', pets: [
       {
-        id: 0, nome: '', tutor: '', consultas: [] }
+        id: 0, nome: '', tutor: '', consultas: []
+      }
     ]
   };
   indexPet: number = 0;
@@ -71,5 +72,26 @@ export class HeaderPet implements OnInit {
     if (!this.btnPrevDisabled()) {
       this.indexPet--;
     }
+  }
+
+  private norm(t?: string): string {
+    return (t ?? '')  // se vier undefined/null, vira string vazia
+      .toLowerCase() // tudo minúsculo
+      .normalize('NFD') // separa letras dos acentos
+      .replace(/\p{Diacritic}/gu, '') // remove os acentos via regex
+      .trim(); // tira espaços no início/fim
+  }
+
+  getEspeciesIcon(): string {
+    const especie = this.norm(this.petsList.pets[this.indexPet].especie);
+
+    if (especie === 'cachorro' || especie === 'cao' || especie === 'canino') {
+      return 'assets/imagens/cachorro.png';
+    }
+
+    if (especie === 'gato' || especie === 'felino') {
+      return 'assets/imagens/gato.png';
+    }
+    return 'assets/imagens/pet-generico.png';
   }
 }

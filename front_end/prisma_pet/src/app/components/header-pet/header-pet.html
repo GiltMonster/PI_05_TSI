@@ -4,7 +4,8 @@
       <div class="header-content">
         <div class="pet-avatar">
           <div class="pet-avatar__image" aria-label="Avatar do pet">
-            <!-- IMG do pet -->
+            <img [src]="getEspeciesIcon()" [alt]="'Espécie: ' + (petsList.pets[indexPet].especie)" loading="lazy"
+              decoding="async" width="64" height="64" />
           </div>
         </div>
         <div class="pet-info">
@@ -65,11 +66,13 @@
         </div>
         <div class="pet-detail">
           <label>Sexo:</label>
-          <p>{{petsList.pets[indexPet].sexo === true ? 'Macho' : petsList.pets[indexPet].sexo === false ? 'Fêmea' : '-'}}</p>
+          <p>{{petsList.pets[indexPet].sexo === true ? 'Macho' : petsList.pets[indexPet].sexo === false ? 'Fêmea' :
+            '-'}}</p>
         </div>
         <div class="pet-detail">
           <label>Castrado:</label>
-          <p>{{petsList.pets[indexPet].castrado === true ? 'Sim' : petsList.pets[indexPet].castrado === false ? 'Não' : '-'}}
+          <p>{{petsList.pets[indexPet].castrado === true ? 'Sim' : petsList.pets[indexPet].castrado === false ? 'Não' :
+            '-'}}
           </p>
         </div>
         <div class="pet-detail">

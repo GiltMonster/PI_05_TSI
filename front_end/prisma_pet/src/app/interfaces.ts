@@ -106,7 +106,7 @@ export interface FichaPetInterface {
 }
 
 export interface PetInterface {
-  type: string;
+  type?: string;
   id: number;
   nome: string;
   especie?: string;
@@ -122,6 +122,10 @@ export interface PetInterface {
   caso_clinico?: string;
   imagem?: string;
   consultas?: Array<PetConsulta>;
+  user_id?: number;
+  cor?: string;
+  casoClinico?: string;
+  tutorName?: string;
 }
 
 export interface PetConsulta {
