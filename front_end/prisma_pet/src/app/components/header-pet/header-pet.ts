@@ -46,6 +46,14 @@ export class HeaderPet implements OnInit {
     return '';
   }
 
+  isFemale(sexo: any): boolean {
+    return sexo === true || sexo === 'true' || sexo === 1 || sexo === '1';
+  }
+
+  isCastrado(castrado: any): boolean {
+    return castrado === true || castrado === 'true' || castrado === 1 || castrado === '1';
+  }
+
   btnNextDisabled(): boolean {
     return this.indexPet >= this.petsList.pets.length - 1;
   }
