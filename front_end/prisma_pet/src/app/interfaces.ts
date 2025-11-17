@@ -20,6 +20,7 @@ export interface UserInterface {
   complemento?: string;
   cpf: string;
   crmv?: string;
+  especialidade?:string;
   pix?: string;
 }
 
@@ -90,7 +91,6 @@ export interface TutorListInterface {
   id: number;
   nome: string;
   telefone?: string;
-  // animal: string;
 }
 
 export interface VeterinarioListInterface {
@@ -106,20 +106,37 @@ export interface FichaPetInterface {
 }
 
 export interface PetInterface {
+  type?: string;
   id: number;
   nome: string;
-  especie?: boolean;
+  especie?: string;
   ano_nascimento?: Date;
   raca?: string;
+  sexo?: boolean;
   peso?: number;
-  temperamento: string;
+  temperamento?: string;
   possuiCarteirinha?: boolean;
   cor_pelagem?: string;
-  sexo?: number;
-  castrado?: number;
+  castrado?: boolean;
   tutor?: string;
-  caso_clinico: string;
+  caso_clinico?: string;
   imagem?: string;
+  consultas?: Array<PetConsulta>;
+  user_id?: number;
+  cor?: string;
+  casoClinico?: string;
+  tutorName?: string;
+}
+
+export interface PetConsulta {
+  id: number;
+  vet_id: number;
+  servico_id: number;
+  data_consulta: Date;
+  anamnese: string;
+  nome_vet?: string;
+  nome_servico?: string;
+  categoria_servico?: string;
 }
 
 export interface ServicosListInterface {

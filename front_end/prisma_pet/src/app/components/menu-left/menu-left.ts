@@ -38,7 +38,7 @@ export class MenuLeft {
         if (typeUser.type === 'admin') {
           this.itens = [
             { label: 'Home', link: '/admin', icon: 'home' },
-            { label: 'Tutores', link: '/admin/tutores', icon: 'people' },
+            { label: 'Responsáveis', link: '/admin/tutores', icon: 'people' },
             { label: 'Pets', link: '/admin/pets', icon: 'pets' },
             { label: 'Veterinários', link: '/admin/veterinarios', icon: 'medical_services' },
             { label: 'Serviços', link: '/admin/services', icon: 'list_alt' },
@@ -48,7 +48,7 @@ export class MenuLeft {
           this.itens = [
             { label: 'Home', link: '/vet', icon: 'home' },
             { label: 'Animais', link: '/vet/pets', icon: 'pets' },
-            { label: 'Tutores', link: '/vet/tutors', icon: 'people' },
+            { label: 'Responsáveis', link: '/vet/tutors', icon: 'people' },
             { label: 'Serviços', link: '/vet/services', icon: 'list_alt' },
             { label: 'Meus Dados', link: '/vet/perfil', icon: 'person' }
           ];

@@ -8,11 +8,35 @@
 
 <hr>
 
-@if (activeTab === 'consultas') {
-  <app-consultas-pet/>
-} @else if (activeTab === 'vacinas') {
-  <app-vacinas-pet/>
-} @else if (activeTab === 'anexos') {
-  <app-outros-anexos-pet/>
-}
+<div class="tab-content">
 
+  @if (activeTab === 'consultas') {
+
+    @if(pet_consultas.length != 0) {
+      <app-consultas-pet [pet_consultas]="pet_consultas" />
+    } @else {
+      <div class="tab-container-not-found">
+        <h2>Nenhuma consulta cadastrada para este pet.</h2>
+        <button class="btn btn--primary">Cadastrar uma NOVA consulta?</button>
+      </div>
+    }
+  } @else if (activeTab === 'vacinas') {
+    @if(pet_vacinas.length != 0) {
+      <app-vacinas-pet />
+    } @else {
+      <div class="tab-container-not-found">
+        <h2>Nenhuma vacina cadastrada para este pet.</h2>
+        <button class="btn btn--primary">Cadastrar uma NOVA consulta?</button>
+      </div>
+    }
+  } @else if (activeTab === 'anexos') {
+    @if(pet_anexos.length != 0) {
+      <app-outros-anexos-pet />
+    } @else {
+      <div class="tab-container-not-found">
+        <h2>Esse pet não possui anexos cadastrados.</h2>
+        <button class="btn btn--primary">Cadastrar uma NOVA consulta?</button>
+      </div>
+    }
+  }
+</div>

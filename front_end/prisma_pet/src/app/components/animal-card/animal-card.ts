@@ -1,25 +1,120 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, output } from '@angular/core';
-import { PetListInterface } from '../../interfaces';
+import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { FormatPhonePipe } from '../../pipes/format-phone-pipe';
+import { PetInterface } from '../../interfaces';
+import { PetService } from '../../services/pet-service';
+import { Notification } from '../../services/notification';
+import { ModalEditPet } from '../modal-edit-pet/modal-edit-pet';
+import { UsuarioService } from '../../services/usuario-service';
 
 @Component({
   selector: 'app-animal-card',
-  imports: [CommonModule, MatIconModule],
+  imports: [CommonModule, MatIconModule, ModalEditPet],
   standalone: true,
   templateUrl: './animal-card.html',
   styleUrls: ['./animal-card.scss']
 })
-export class AnimalCard {
-  petCard = input.required<PetListInterface>();
+export class AnimalCard implements OnInit{
 
-  editClick   = output<PetListInterface>();
-  deleteClick = output<PetListInterface>();
-  viewClick   = output<PetListInterface>();
+  @Input() userPet!: PetInterface;
+  @Input() typeUser: string = '';
+  @Output() petDeleted = new EventEmitter<number>();
+  @Output() edit = new EventEmitter<PetInterface>();
+  @Output() tutorLoad = new EventEmitter<{ id: number; tutorName: string }>(); // enviar o nome do tutor pro animallist
 
-  onEdit()   { this.editClick.emit(this.petCard()); }
-  onDelete() { this.deleteClick.emit(this.petCard()); }
-  onView()   { this.viewClick.emit(this.petCard()); }
+
+  editModalOpen = false;
+  petToEdit?: PetInterface;
+
+  tutorName = '';
+
+  constructor(
+    private petService: PetService,
+    private notification: Notification,
+    private usuarioService: UsuarioService,
+
+  ) { }
+
+
+  ngOnInit(): void {
+    this.typeUser,
+    this.loadTutorName();
+  }
+
+    private loadTutorName() {
+if (!this.userPet.user_id) return;
+
+  this.usuarioService.getUserById(String(this.userPet.user_id)).subscribe({
+    next: (user: any) => {
+      this.tutorName = user.name;
+
+      // avisa o componente quem é o tutor desse pet
+      this.tutorLoad.emit({
+        id: this.userPet.id,
+        tutorName: this.tutorName,
+      });
+    },
+    error: (err) => {
+      console.error('Erro ao buscar responsável do pet:', err);
+      this.notification.success('Erro ao buscar responsável do pet');
+      this.tutorName = '';
+    }
+  });
+}
+
+  findUserById(id: number) {
+  }
+
+  deletePet(petId: number) {
+    this.petService.deleteAccountPet(petId).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.petDeleted.emit(petId);
+        this.notification.success('Animal excluído com sucesso');
+      },
+      error: (err) => {
+        console.log("erro ao deletar animal:", err);
+        this.notification.error('Erro ao deletar Animal');
+      }
+    });
+  }
+
+  editPet(petId: number) {
+    this.edit.emit(this.userPet);
+  }
+
+  openEditModal(pet: PetInterface) {
+    this.petToEdit = { ...pet };
+    this.editModalOpen = true;
+  }
+
+  closeEditModal() {
+    this.editModalOpen = false;
+    this.petToEdit = undefined;
+  }
+
+  savePet(editedPet: PetInterface) {
+    // Atualiza a lista de animais com os dados editados
+    editedPet.id = this.userPet.id;
+    editedPet.type = editedPet.type || 'vet';
+
+    this.petService.updatePet(editedPet).subscribe({
+      next: (res) => {
+        this.userPet = { ...this.userPet, ...editedPet };
+
+        this.edit.emit(this.userPet);
+        this.notification.success('Dados do animal atualizados com sucesso');
+        this.closeEditModal();
+      },
+      error: (err) => {
+        console.log('Erro ao atualizar animal:', err);
+        this.notification.error('Erro ao atualizar animal');
+      }
+    });
+
+    this.closeEditModal();
+  }
 
 
   private norm(t?: string): string {
@@ -30,22 +125,24 @@ export class AnimalCard {
       .trim(); // tira espaços no início/fim
   }
 
-  getSexoLabel(): string {
-    const s = this.norm(this.petCard().sexo);
-    if (s.startsWith('m')) return 'Macho';
-    if (s.startsWith('f')) return 'Fêmea';
+
+getSexoLabel(): string {
+const sexoPet: any = this.userPet.sexo;
+if (sexoPet === 1 || sexoPet === true) return 'Macho';
+if (sexoPet === 0 || sexoPet === false) return 'Fêmea';
     return 'Indefinido';
+}
+
+getEspeciesIcon(): string {
+  const especie = this.norm(this.userPet.especie);
+
+  if (especie === 'cachorro' || especie === 'cao' || especie === 'canino') {
+    return 'assets/imagens/cachorro.png';
   }
 
-  getEspeciesIcon(): string {
-    const especie = this.norm(this.petCard().especie);
-    if (especie === 'cachorro') {
-      return 'assets/imagens/cachorro.png';
-    }
-    else if (especie === 'gato') {
-      return 'assets/imagens/gato.png';
-    } else{
-      return 'assets/imagens/pet-generico.png';
-    }
+  if (especie === 'gato' || especie === 'felino') {
+    return 'assets/imagens/gato.png';
   }
+  return 'assets/imagens/pet-generico.png';
+}
 }

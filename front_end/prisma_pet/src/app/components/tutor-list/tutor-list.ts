@@ -15,7 +15,7 @@ import { UsuarioService } from '../../services/usuario-service';
 })
 export class TutorList implements OnInit {
   @Input() tutores: UserInterface[] = [];
-  @Input() emptyMessage = 'Nenhum tutor cadastrado';
+  @Input() emptyMessage = 'Nenhum Responsável cadastrado';
 
   searchValue = "";
   statusMsg = '';

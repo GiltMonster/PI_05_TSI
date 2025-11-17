@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\ConsultaPet;
+use App\Models\Pet;
+use App\Models\Servico;
 use App\Models\Vet;
 use Illuminate\Http\Request;
 
@@ -10,7 +12,19 @@ class ConsultaPetController extends Controller
 {
     public function novaConsulta(Request $request)
     {
-        if (!$request->has(['pet_id', 'vet_id', 'data_consulta', 'tipo_consulta', 'anamnese'])) {
+        if(Pet::find($request->input('pet_id')) === null){
+            return response()->json(['error' => 'Pet não encontrado'], 404);
+        }
+
+        if (Vet::where('type', 'vet')->find($request->input('vet_id')) === null) {
+            return response()->json(['error' => 'Veterinário não encontrado'], 404);
+        }
+
+        if(Servico::find($request->input('servico_id')) === null){
+            return response()->json(['error' => 'Serviço não encontrado'], 404);
+        }
+
+        if (!$request->has(['pet_id', 'vet_id', 'data_consulta', 'servico_id', 'anamnese'])) {
             return response()->json(['error' => 'Parâmetros insuficientes'], 400);
         }
 
@@ -25,8 +39,8 @@ class ConsultaPetController extends Controller
         ConsultaPet::create([
             'pet_id' => $request->input('pet_id'),
             'vet_id' => $request->input('vet_id'),
+            'servico_id' => $request->input('servico_id'),
             'data_consulta' => $request->input('data_consulta'),
-            'tipo_consulta' => $request->input('tipo_consulta'),
             'anamnese' => $request->input('anamnese'),
         ]);
 
@@ -39,8 +53,8 @@ class ConsultaPetController extends Controller
             'id' => 'required|numeric',
             'pet_id' => 'sometimes|numeric',
             'vet_id' => 'sometimes|numeric',
+            'servico_id' => 'sometimes|string',
             'data_consulta' => 'sometimes|date',
-            'tipo_consulta' => 'sometimes|string',
             'anamnese' => 'sometimes|string',
         ]);
 

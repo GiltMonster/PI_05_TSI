@@ -1,52 +1,94 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { ReactiveFormsModule, FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { ReactiveFormsModule, FormControl, FormsModule } from '@angular/forms';
 import { AnimalCard } from '../animal-card/animal-card';
-import { PetListInterface } from '../../interfaces';
+import { PetInterface } from '../../interfaces';
+import { PetService } from '../../services/pet-service';
 
 @Component({
   selector: 'app-animal-list',
   standalone: true,
-  imports: [CommonModule, MatIconModule, ReactiveFormsModule, AnimalCard],
+  imports: [CommonModule, MatIconModule, ReactiveFormsModule, AnimalCard, FormsModule],
   templateUrl: './animal-list.html',
-  styleUrls: ['./animal-list.scss']
+  styleUrls: ['./animal-list.scss'],
 })
 export class AnimalList implements OnInit {
-  @Input() pets: PetListInterface[] = [];
-  @Input() loading = false;
-  @Input() emptyMessage = 'Nenhum pet cadastrado';
-  @Input() columns = 1;
-  @Input() gap = 12;
-  @Input() searchPlaceholder = 'Buscar Animais';
+  @Input() pets: PetInterface[] = [];
+  @Input() emptyMessage = 'Nenhum animal cadastrado';
 
-  @Output() searchChange = new EventEmitter<string>();
-  @Output() viewPet  = new EventEmitter<PetListInterface>();
-  @Output() editPet  = new EventEmitter<PetListInterface>();
-  @Output() deletePet= new EventEmitter<PetListInterface>();
-  @Output() addPet   = new EventEmitter<void>();
-
-  searchCtrl = new FormControl<string>('', { nonNullable: true });
+  searchValue = '';
   statusMsg = '';
+  filteredPets: PetInterface[] = [];
+  typeUser = '';
 
-  ngOnInit(): void {
-    this.searchCtrl.valueChanges
-      .pipe(debounceTime(250), distinctUntilChanged())
-      .subscribe(term => {
-        this.searchChange.emit(term);
-        this.statusMsg = term ? `Filtrando por: ${term}.` : 'Filtro limpo.';
-      });
+  constructor(private petService: PetService) {}
+
+  onSubmit(event: Event) {
+    event.preventDefault();
+    this.onSearch();
   }
 
-  onSubmit(e: Event) { e.preventDefault(); this.searchChange.emit(this.searchCtrl.value); }
-  clearSearch()      { this.searchCtrl.setValue(''); }
+  ngOnInit(): void {
+    this.filteredPets = this.pets;
+    this.userTypeVerification();
+  }
 
-  onViewPet(p: PetListInterface)   { this.viewPet.emit(p); }
-  onEditPet(p: PetListInterface)   { this.editPet.emit(p); }
-  onDeletePet(p: PetListInterface) { this.deletePet.emit(p); }
-  onAddPet()                       { this.addPet.emit(); }
+  ngOnChanges(): void {
+    this.filteredPets = this.filterPets();
+  }
 
-  getGridTemplate() { return `repeat(${Math.max(1, this.columns)}, minmax(0,1fr))`; }
-  trackById = (index: number, p: PetListInterface) => (p as any).id ?? p.nome;
+  userTypeVerification() {
+    this.petService.getUserType().subscribe({
+      next: (res) => {
+        this.typeUser = res.type;
+      },
+      error: (err) => {
+        console.log('erro ao verificar tipo de usuário:', err);
+      },
+    });
+  }
+
+  clearSearch() {
+    this.searchValue = '';
+    this.filteredPets = this.pets;
+  }
+
+  onSearch() {
+    this.filteredPets = this.filterPets();
+  }
+
+  onPetDeleted(petId: number) {
+    this.pets = this.pets.filter((pet) => pet.id !== petId);
+    this.filteredPets = this.filterPets();
+  }
+
+  onTutorLoad(event: { id: number; tutorName: string }) {
+  this.pets = this.pets.map(pet =>
+    pet.id === event.id ? { ...pet, tutorName: event.tutorName } : pet
+  );
+  this.filteredPets = this.filterPets();
 }
+
+  filterPets(): PetInterface[] {
+    if (!this.searchValue) {
+      return this.pets;
+    }
+
+  const searchTerm = this.searchValue.toLowerCase();
+
+  return this.pets.filter((pet) => {
+    const sexoTexto   = pet.sexo === true ? 'macho' : 'femea';
+    const tutorTexto  = (pet.tutorName ?? '').toLowerCase();
+
+    return (
+      pet.nome.toLowerCase().includes(searchTerm) ||
+      tutorTexto.includes(searchTerm) ||
+      sexoTexto.includes(searchTerm)
+    );
+  });
+}
+}
+
+
+

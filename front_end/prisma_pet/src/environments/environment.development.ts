@@ -1,3 +1,4 @@
+// const end_point_base = 'https://prisma-pet-api.up.railway.app/api';
 const end_point_base = 'http://127.0.0.1:8000/api';
 
 export const environment = {
@@ -36,8 +37,10 @@ export const environment = {
   // --- veterinario ---
   API_URL_VET_GET_VET_BY_ID: `${end_point_base}/vet/getVetById`,
   API_URL_VET_UPDATE: `${end_point_base}/vet/editarVet`,
+  API_URL_VET_PET_LIST: `${end_point_base}/adm/getPets`,
 
   API_URL_VET_GET_TUTORS_LIST: `${end_point_base}/vet/getAllTutors`,
+  API_URL_VET_GET_ALL_PETS: `${end_point_base}/vet/getPets`,
   API_URL_VET_GET_PET_BY_ID: `${end_point_base}/vet/getPetById`,
   API_URL_VET_GET_PETS_BY_USER_ID: `${end_point_base}/vet/getPetsByUserId`,
   API_URL_VET_PET_REGISTER: `${end_point_base}/vet/registrarPet`,
@@ -56,5 +59,10 @@ export const environment = {
   // --- History pet ---
 
   // --- servicos ---
+  API_URL_SERVICO_LIST_ALL: `${end_point_base}/servico/all`,
+  API_URL_SERVICO_BY_ID: `${end_point_base}/servico/`, // + id
+  API_URL_SERVICO_CREATE: `${end_point_base}/servico/novo`,
+  API_URL_SERVICO_UPDATE: `${end_point_base}/servico/editar`,
+  API_URL_SERVICO_DELETE: `${end_point_base}/servico/deletar/`, // + id
 
 };

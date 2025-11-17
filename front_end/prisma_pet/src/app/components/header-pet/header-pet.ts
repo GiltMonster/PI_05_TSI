@@ -12,7 +12,13 @@ import { AnexosPet } from "../anexos-pet/anexos-pet";
 })
 export class HeaderPet implements OnInit {
 
-  @Input() petsList: FichaPetInterface = { tutor_name: '', pets: [] };
+  @Input() petsList: FichaPetInterface = {
+    tutor_name: '', pets: [
+      {
+        id: 0, nome: '', tutor: '', consultas: []
+      }
+    ]
+  };
   indexPet: number = 0;
 
   class_btn_next: string = 'btn btn--primary';
@@ -38,6 +44,14 @@ export class HeaderPet implements OnInit {
       return idade;
     }
     return '';
+  }
+
+  isFemale(sexo: any): boolean {
+    return sexo === true || sexo === 'true' || sexo === 1 || sexo === '1';
+  }
+
+  isCastrado(castrado: any): boolean {
+    return castrado === true || castrado === 'true' || castrado === 1 || castrado === '1';
   }
 
   btnNextDisabled(): boolean {
@@ -66,5 +80,26 @@ export class HeaderPet implements OnInit {
     if (!this.btnPrevDisabled()) {
       this.indexPet--;
     }
+  }
+
+  private norm(t?: string): string {
+    return (t ?? '')  // se vier undefined/null, vira string vazia
+      .toLowerCase() // tudo minúsculo
+      .normalize('NFD') // separa letras dos acentos
+      .replace(/\p{Diacritic}/gu, '') // remove os acentos via regex
+      .trim(); // tira espaços no início/fim
+  }
+
+  getEspeciesIcon(): string {
+    const especie = this.norm(this.petsList.pets[this.indexPet].especie);
+
+    if (especie === 'cachorro' || especie === 'cao' || especie === 'canino') {
+      return 'assets/imagens/cachorro.png';
+    }
+
+    if (especie === 'gato' || especie === 'felino') {
+      return 'assets/imagens/gato.png';
+    }
+    return 'assets/imagens/pet-generico.png';
   }
 }
