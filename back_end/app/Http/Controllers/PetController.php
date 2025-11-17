@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ConsultaPet;
 use App\Models\Pet;
+use App\Models\Servico;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -41,12 +42,21 @@ class PetController extends Controller
             if ($vet) {
                 $consulta->nome_vet = $vet->name;
             }
+
+            $servico = Servico::find($consulta->servico_id);
+            if ($servico) {
+                $consulta->categoria_servico = $servico->categoria;
+            }
+        }
+
+        foreach ($pets as $pet) {
+            $pet->consultas = $consultas->where('pet_id', $pet->id)->values();
         }
 
         return response()->json([
             'tutor_name' => $user->name,
             'pets' => $pets,
-            'consultas' => $consultas
+            // 'consultas' => $consultas
         ], 200);
     }
 
