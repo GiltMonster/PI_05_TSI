@@ -1,0 +1,36 @@
+<div
+  class="modal-backdrop"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-label]="title"
+>
+  <div class="modal-content">
+    <h2 class="form-section__title">
+      {{ title || 'Confirmar exclusão' }}
+    </h2>
+
+    <div class="modal-delete__body">
+      <p class="modal-delete__message">
+        {{ message }}
+      </p>
+    </div>
+
+    <div class="button-group">
+      <button
+        type="button"
+        class="btn btn--secondary"
+        (click)="onCancel()"
+      >
+        Cancelar
+      </button>
+
+      <button
+        type="button"
+        class="btn btn--primary btn--danger"
+        (click)="onConfirm()"
+      >
+        {{ confirmLabel || 'Excluir' }}
+      </button>
+    </div>
+  </div>
+</div>

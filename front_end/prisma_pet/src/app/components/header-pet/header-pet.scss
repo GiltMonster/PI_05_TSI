@@ -33,15 +33,9 @@
 .pet-avatar__image {
   width: 90px;
   height: 90px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--white);
-  font-size: 2.5rem;
-  font-weight: 600;
-  box-shadow: var(--shadow-md);
 }
 
 .pet-info h1 {

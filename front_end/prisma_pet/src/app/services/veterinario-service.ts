@@ -18,7 +18,7 @@ export class VeterinarioService {
   getAllTutors() {
     return this.http.get<Array<UserInterface>>(`${environment.API_URL_VET_GET_TUTORS_LIST}`);
   }
-
+  
     getAllVets() {
   return this.http.get<UserInterface[]>(environment.API_URL_ADMIN_VET_LIST);
 }

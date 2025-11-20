@@ -39,7 +39,7 @@ export class MenuLeft {
           this.itens = [
             { label: 'Home', link: '/admin', icon: 'home' },
             { label: 'Responsáveis', link: '/admin/tutores', icon: 'people' },
-            { label: 'Pets', link: '/admin/pets', icon: 'pets' },
+            { label: 'Animais', link: '/admin/pets', icon: 'pets' },
             { label: 'Veterinários', link: '/admin/veterinarios', icon: 'medical_services' },
             { label: 'Serviços', link: '/admin/services', icon: 'list_alt' },
             { label: 'Meus Dados', link: '/admin/perfil', icon: 'person' }
@@ -55,7 +55,7 @@ export class MenuLeft {
         } else if (typeUser.type === 'user') {
           this.itens = [
             { label: 'Home', link: '/user', icon: 'home' },
-            { label: 'Meus Pets', link: '/user/pets', icon: 'pets' },
+            { label: 'Meus Animais', link: '/user/pets', icon: 'pets' },
             { label: 'Meus Dados', link: '/user/perfil', icon: 'person' },
           ];
         }

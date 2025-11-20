@@ -16,8 +16,8 @@
       <app-consultas-pet [pet_consultas]="pet_consultas" />
     } @else {
       <div class="tab-container-not-found">
-        <h2>Nenhuma consulta cadastrada para este pet.</h2>
-        <button class="btn btn--primary">Cadastrar uma NOVA consulta?</button>
+        <h2>Nenhuma consulta cadastrada para este animal.</h2>
+        <button class="btn btn--primary">Cadastrar um novo atendimento</button>
       </div>
     }
   } @else if (activeTab === 'vacinas') {
@@ -25,8 +25,8 @@
       <app-vacinas-pet />
     } @else {
       <div class="tab-container-not-found">
-        <h2>Nenhuma vacina cadastrada para este pet.</h2>
-        <button class="btn btn--primary">Cadastrar uma NOVA consulta?</button>
+        <h2>Nenhuma vacina cadastrada para este animal.</h2>
+        <button class="btn btn--primary">Cadastrar uma nova vacina</button>
       </div>
     }
   } @else if (activeTab === 'anexos') {
@@ -34,8 +34,8 @@
       <app-outros-anexos-pet />
     } @else {
       <div class="tab-container-not-found">
-        <h2>Esse pet não possui anexos cadastrados.</h2>
-        <button class="btn btn--primary">Cadastrar uma NOVA consulta?</button>
+        <h2>Esse animal não possui anexos cadastrados.</h2>
+        <button class="btn btn--primary">Adicionar um novo anexo</button>
       </div>
     }
   }

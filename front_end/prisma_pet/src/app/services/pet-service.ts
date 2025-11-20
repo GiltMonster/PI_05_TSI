@@ -29,7 +29,7 @@ export class PetService {
   }
 
   getAllPets(): Observable<PetInterface[]> {
-    return this.http.get<PetInterface[]>(environment.API_URL_VET_PET_LIST);
+    return this.http.get<PetInterface[]>(environment.API_URL_VET_GET_ALL_PETS);
   }
 
   getUserType() {
@@ -49,4 +49,5 @@ export class PetService {
   deleteAccountPet(id: number) {
     return this.http.delete(`${environment.API_URL_ADMIN_PET_DELETE}/${id}`);
   }
+
 }
