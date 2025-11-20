@@ -139,9 +139,10 @@ export interface PetConsulta {
   categoria_servico?: string;
 }
 
-export interface ServicosListInterface {
+export interface ServicosInterface {
   id: number;
-  titulo: string;
+  type?: string;
+  nome: string;
   categoria: string;
-  valor: number;
+  preco: number;
 }

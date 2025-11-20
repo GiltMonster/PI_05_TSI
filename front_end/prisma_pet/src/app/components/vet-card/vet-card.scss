@@ -1,8 +1,8 @@
 .card_vet_container {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
   padding: 18px 20px;
   margin: 14px 8px;
   background: #fff;
@@ -12,8 +12,10 @@
 }
 
 .info_vet {
+  width: 100%;
   min-width: 0;
 }
+
 .nome_vet {
   margin: 0 0 4px;
   font-weight: 700;
@@ -21,6 +23,7 @@
   line-height: 1.2;
   color: #004aad;
 }
+
 .detalhes_vet,
 .especialidade_vet {
   margin: 0;
@@ -33,10 +36,12 @@
 }
 
 .botoes_vet {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 12px;
+  flex-wrap: wrap;
 }
+
 
 .btn_cadastro {
   background: #fff;
@@ -55,6 +60,7 @@
     color: #fff;
     border-color: #ff914d;
   }
+
   &:active {
     transform: translateY(1px);
   }
@@ -83,10 +89,12 @@
     color: #fff;
     border-color: #ff914d;
   }
+
   &:focus-visible {
     outline: none;
     box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.35);
   }
+
   &:active {
     transform: translateY(1px);
   }
@@ -102,33 +110,32 @@
 .btn-text--total {
   display: inline;
 }
+
 .btn-text--menor {
   display: none;
 }
 
-@media (max-width: 720px) {
+@media (min-width: 720px) {
   .card_vet_container {
-    grid-template-columns: 72px 1fr;
-    grid-template-areas:
-      'avatar info'
-      'avatar actions';
-    row-gap: 10px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 
-  .info_vet {
-    grid-area: info;
-  }
   .botoes_vet {
-    grid-area: actions;
-    justify-content: flex-start;
+    flex-wrap: nowrap;
   }
-  .btn_cadastro {
-    height: 38px;
-    line-height: 38px;
+}
+
+@media (max-width: 480px) {
+  .nome_vet {
+    font-size: 1.2rem;
   }
+
   .btn-text--total {
     display: none;
   }
+
   .btn-text--menor {
     display: inline;
   }

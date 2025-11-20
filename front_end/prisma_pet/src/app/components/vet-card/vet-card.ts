@@ -5,17 +5,16 @@ import { UserInterface } from '../../interfaces';
 import { Notification } from '../../services/notification';
 import { ModalEdit } from '../modal-edit/modal-edit';
 import { UsuarioService } from '../../services/usuario-service';
-
+import { ModalDelete } from '../modal-delete/modal-delete';
 
 @Component({
   selector: 'app-vet-card',
-  imports: [CommonModule, MatIconModule, ModalEdit],
+  imports: [CommonModule, MatIconModule, ModalEdit, ModalDelete],
   standalone: true,
   templateUrl: './vet-card.html',
-  styleUrls: ['./vet-card.scss']
+  styleUrls: ['./vet-card.scss'],
 })
-export class VetCard implements OnInit{
-
+export class VetCard implements OnInit {
   @Input() userVet!: UserInterface;
   @Input() typeUser: string = '';
   @Output() vetDeleted = new EventEmitter<number>();
@@ -24,18 +23,13 @@ export class VetCard implements OnInit{
   editModalOpen = false;
   vetToEdit?: UserInterface;
 
-  constructor(
-    private vetService: UsuarioService,
-    private notification: Notification,
-
-  ) { }
+  constructor(private vetService: UsuarioService, private notification: Notification) {}
 
   ngOnInit(): void {
-    this.typeUser
+    this.typeUser;
   }
 
-  findUserById(id: number) {
-  }
+  findUserById(id: number) {}
 
   deleteVet(vetId: number) {
     this.vetService.deleteAccountVet(vetId).subscribe({
@@ -45,10 +39,31 @@ export class VetCard implements OnInit{
         this.notification.success('Veterinário excluído com sucesso');
       },
       error: (err) => {
-        console.log("erro ao deletar veterinário:", err);
+        console.log('erro ao deletar veterinário:', err);
         this.notification.error('Erro ao deletar veterinário');
-      }
+      },
     });
+  }
+
+  deleteModalOpen = false;
+  vetToDelete: UserInterface | null = null;
+
+  openDeleteModal(vet: UserInterface) {
+    this.vetToDelete = vet;
+    this.deleteModalOpen = true;
+  }
+
+  closeDeleteModal() {
+    this.deleteModalOpen = false;
+    this.vetToDelete = null;
+  }
+
+  handleConfirmDelete() {
+    if (!this.vetToDelete) return;
+
+    this.deleteVet(this.vetToDelete.id);
+
+    this.closeDeleteModal();
   }
 
   editVet(vetId: number) {
@@ -82,7 +97,7 @@ export class VetCard implements OnInit{
       error: (err) => {
         console.log('Erro ao atualizar veterinário:', err);
         this.notification.error('Erro ao atualizar veterinário');
-      }
+      },
     });
 
     this.closeEditModal();

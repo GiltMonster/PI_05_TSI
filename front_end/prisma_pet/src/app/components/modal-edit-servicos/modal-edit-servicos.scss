@@ -1,4 +1,3 @@
-
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -11,6 +10,7 @@
   overflow-y: auto;
   z-index: 1000;
 }
+
 .modal-content {
   background: #fff;
   padding: 2rem;
@@ -20,20 +20,6 @@
   max-height: 90vh;
   box-sizing: border-box;
   overflow-y: auto;
-}
-
-.modal-actions {
-  margin-top: 1rem;
-  display: flex;
-  gap: 1rem;
-  justify-content: flex-end;
-}
-
-.form-section {
-  background-color: var(--white);
-  border-radius: 16px;
-  padding: 2.5rem;
-  box-shadow: var(--shadow-sm);
 }
 
 .form-section__title {
@@ -109,7 +95,6 @@
   color: var(--text-secondary);
 }
 
-
 .button-group {
   display: flex;
   gap: 1rem;
@@ -158,7 +143,6 @@
   border-color: var(--text-secondary);
 }
 
-
 @media (max-width: 768px) {
   .form-grid {
     grid-template-columns: 1fr;
@@ -175,12 +159,17 @@
   }
 }
 
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 1.25rem;
+    border-radius: 12px;
+  }
+}
 
 *:focus-visible {
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;
 }
-
 
 .sr-only {
   position: absolute;
@@ -192,11 +181,4 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
-}
-
-@media (max-width: 480px) {
-  .modal-content {
-    padding: 1.25rem;
-    border-radius: 12px;
-  }
 }

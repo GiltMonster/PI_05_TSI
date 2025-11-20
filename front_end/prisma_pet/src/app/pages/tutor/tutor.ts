@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { UserInterface } from '../../interfaces';
+import { PetInterface, UserInterface } from '../../interfaces';
 import { VeterinarioService } from '../../services/veterinario-service';
 import { TutorList } from '../../components/tutor-list/tutor-list';
+import { PetService } from '../../services/pet-service';
 
 @Component({
   selector: 'app-tutor',
@@ -17,7 +18,7 @@ export class Tutor implements OnInit {
   listTutores: Array<UserInterface> = [];
 
   constructor(
-    private veterinarioService: VeterinarioService
+    private veterinarioService: VeterinarioService,
   ) { }
 
   ngOnInit(): void {
@@ -32,5 +33,4 @@ export class Tutor implements OnInit {
       error: (err) => { console.error('Erro ao carregar tutores:', err); }
     });
   }
-
 }

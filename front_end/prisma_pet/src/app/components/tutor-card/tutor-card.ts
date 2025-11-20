@@ -7,10 +7,11 @@ import { FormatPhonePipe } from '../../pipes/format-phone-pipe';
 import { ModalEdit } from '../modal-edit/modal-edit';
 import { Router } from '@angular/router';
 import { Notification } from '../../services/notification';
+import { ModalDelete } from '../modal-delete/modal-delete';
 
 @Component({
   selector: 'app-tutor-card',
-  imports: [CommonModule, MatIconModule, FormatPhonePipe, ModalEdit],
+  imports: [CommonModule, MatIconModule, FormatPhonePipe, ModalEdit, ModalDelete],
   standalone: true,
   templateUrl: './tutor-card.html',
   styleUrls: ['./tutor-card.scss']
@@ -58,6 +59,27 @@ export class TutorCard implements OnInit {
       }
     });
   }
+
+
+    deleteModalOpen = false;
+    tutorToDelete: UserInterface | null = null;
+
+    openDeleteModal(tutor: UserInterface) {
+      this.tutorToDelete = tutor;
+      this.deleteModalOpen = true;
+    }
+
+    closeDeleteModal() {
+      this.deleteModalOpen = false;
+      this.tutorToDelete = null;
+    }
+
+    handleConfirmDelete() {
+      if (!this.tutorToDelete) return;
+      this.deleteTutor(this.tutorToDelete.id);
+
+      this.closeDeleteModal();
+    }
 
   editTutor(tutorId: number) {
     this.edit.emit(this.userTutor);

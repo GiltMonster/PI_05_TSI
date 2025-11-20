@@ -1,5 +1,4 @@
-<article class="card_pet_container"
-  [attr.aria-labelledby]="'pet-' + userPet.id">
+<article class="card_pet_container" [attr.aria-labelledby]="'pet-' + userPet.id">
   <div class="img_especie">
     <img
       [src]="getEspeciesIcon()"
@@ -18,22 +17,21 @@
     <p class="detalhes_pet">
       {{ getSexoLabel() }}
     </p>
-    <p class="tutor_pet">
-      Responsável: {{ tutorName }}
-    </p>
+    <p class="tutor_pet">Responsável: {{ tutorName }}</p>
   </div>
 
   <div class="botoes_pet">
-<button
-  type="button"
-  class="btn_cadastro"
-  (click)="findUserById(userPet.id)"
-  [attr.aria-label]="'Ver cadastro completo de ' + userPet.nome">
-  <span class="btn-text btn-text--total">Abrir Cadastro</span>
-  <span class="btn-text btn-text--menor">Ver</span>
-</button>
+    <button
+      type="button"
+      class="btn_cadastro"
+      (click)="findUserById(userPet.id)"
+      [attr.aria-label]="'Ver cadastro completo de ' + userPet.nome"
+    >
+      <span class="btn-text btn-text--total">Abrir Cadastro</span>
+      <span class="btn-text btn-text--menor">Ver</span>
+    </button>
 
-@if (typeUser === 'admin') {
+    @if (typeUser === 'admin') {
     <button
       type="button"
       class="btn_icon"
@@ -46,10 +44,10 @@
     <button
       type="button"
       class="btn_icon"
-      (click)="deletePet(userPet.id)"
+      (click)="openDeleteModal(userPet)"
       aria-label="Excluir cadastro"
     >
-      <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">delete</mat-icon>
+      <mat-icon fontSet="material-symbols-outlined" aria-hidden="true"> delete </mat-icon>
     </button>
     }
   </div>
@@ -57,4 +55,15 @@
 
 @if(editModalOpen){
 <app-modal-edit-pet [pet]="petToEdit!" (close)="closeEditModal()" (save)="savePet($event)" />
+}
+
+@if (deleteModalOpen) {
+<app-modal-delete
+  [title]="'Excluir Animal'"
+  [message]="'Tem certeza que deseja excluir ' + (petToDelete?.nome || 'este animal') + '?'"
+  [confirmLabel]="'Excluir'"
+  [cancelLabel]="'Cancelar'"
+  (confirm)="handleConfirmDelete()"
+  (cancel)="closeDeleteModal()"
+></app-modal-delete>
 }
