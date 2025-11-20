@@ -19,6 +19,11 @@
       font-weight: 600;
       transition: background 0.2s;
 
+      &:first-child {
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+      }
+
       &.active, &:hover {
         background: var(--orange);
       }
@@ -27,6 +32,8 @@
 
       &:last-child {
         border-right: none;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
       }
     }
   }
