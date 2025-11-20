@@ -27,7 +27,7 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/perfil/perfil').then(m => m.Perfil)
       },
       {
-        path: 'ficha/{userId}',
+        path: 'ficha/:userId',
         loadComponent: () => import('./pages/ficha-pet/ficha-pet').then(m => m.FichaPet)
       }
     ]
