@@ -21,15 +21,14 @@
 
   h2 {
     font-size: 1.25rem;
-    margin-bottom: 0.5rem;
     color: var(--text-primary);
   }
 
   p {
+    margin: 0.25rem 0;
 
     label {
       font-weight: 600;
-      margin-right: 0.25rem;
     }
 
     font-size: 1rem;
@@ -39,9 +38,14 @@
 
 .anamneses_consulta {
 
-  h2 {
+  mat-expansion-panel {
+    box-shadow: none;
+    border: 1px solid var(--gray-light);
+    border-radius: 8px;
+  }
+
+  mat-panel-title {
     font-size: 1.25rem;
-    margin-bottom: 0.5rem;
     color: var(--text-primary);
   }
 

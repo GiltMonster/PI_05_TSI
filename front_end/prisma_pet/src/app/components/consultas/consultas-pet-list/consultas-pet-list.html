@@ -35,10 +35,13 @@
   <hr>
 
   <div class="anamneses_consulta">
-    <h2>Anamneses:</h2>
-    <p>
-      {{ pet_consulta.anamnese || 'Nenhuma anamneses cadastrada.' }}
-    </p>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Anamneses: </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>{{ pet_consulta.anamnese || 'Nenhuma anamneses cadastrada.' }}</p>
+    </mat-expansion-panel>
 
   </div>
 </article>
