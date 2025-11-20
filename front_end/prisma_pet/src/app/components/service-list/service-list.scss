@@ -1,20 +1,23 @@
-.search__input::-webkit-search-decoration,
-.search__input::-webkit-search-cancel-button,
-.search__input::-webkit-search-results-button,
-.search__input::-webkit-search-results-decoration {
-  -webkit-appearance: none;
-  appearance: none;
-  display: none;
+.list_servico_container {
+  margin: 0 auto;
+  padding: 32px 40px 48px;
 }
 
 .list_title {
   font-size: 2.8rem;
   font-weight: bold;
   color: #004aad;
-  padding: 0 30px;
+  margin: 0 0 24px;
+  padding: 0;
 }
 
 .grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.grid__item {
   list-style: none;
 }
 
@@ -77,6 +80,7 @@
       background: #f3f5fb;
       color: #004aad;
     }
+
     &:focus-visible {
       outline: none;
       box-shadow: 0 0 0 3px rgba(0, 74, 173, 0.25);
@@ -112,6 +116,7 @@
       background: #f3f5fb;
       color: #004aad;
     }
+
     &:focus-visible {
       outline: none;
       box-shadow: 0 0 0 3px rgba(0, 74, 173, 0.25);
@@ -125,6 +130,15 @@
       line-height: 1;
     }
   }
+}
+
+.search__input::-webkit-search-decoration,
+.search__input::-webkit-search-cancel-button,
+.search__input::-webkit-search-results-button,
+.search__input::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
 }
 
 /* ---------- Utilitário para leitor de tela ---------- */
@@ -184,6 +198,10 @@
 }
 
 @media (max-width: 870px) {
+  .list_servico_container {
+    padding: 24px 16px 32px;
+  }
+
   .header_list_servico {
     flex-direction: column;
     align-items: stretch;

@@ -1,22 +1,52 @@
-<article class="card_servico_container" [attr.aria-labelledby]="'servico-' + servicoCard().id">
+<article class="card_servico_container" [attr.aria-labelledby]="'servico-' + servicoCard.id">
   <div class="info_servico">
-    <h3 class="nome_servico" [id]="'servico-' + servicoCard().id">
-      {{ servicoCard().titulo }}
+    <h3 class="nome_servico" [id]="'servico-' + servicoCard.id">
+      {{ servicoCard.nome }}
     </h3>
-    <p class="detalhes_servico"><strong>Categoria:</strong> {{ servicoCard().categoria }}</p>
+    <p class="detalhes_servico"><strong>Categoria:</strong> {{ servicoCard.categoria }}</p>
   </div>
 
   <div class="botoes_servico">
     <div class="valor_servico">
       <p>Valor do Serviço:</p>
-      <span> {{ servicoCard().valor | currency : 'BRL' : 'symbol' : '1.2-2' }}</span>
+      <span>{{ servicoCard.preco | currency : 'BRL' : 'symbol' : '1.2-2' }}</span>
     </div>
-    <button type="button" class="btn_icon" (click)="onEdit()" aria-label="Editar cadastro">
+
+    @if (typeUser === 'admin') {
+    <button
+      type="button"
+      class="btn_icon"
+      (click)="openEditModal(servicoCard)"
+      aria-label="Editar Serviço"
+    >
       <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">edit</mat-icon>
     </button>
 
-    <button type="button" class="btn_icon" (click)="onDelete()" aria-label="Excluir cadastro">
+    <button
+      type="button"
+      class="btn_icon"
+      (click)="openDeleteModal(servicoCard)"
+      aria-label="Excluir Serviço"
+    >
       <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">delete</mat-icon>
     </button>
+    }
   </div>
 </article>
+
+@if (editModalOpen) {
+<app-modal-edit-servicos
+  [servico]="servicoToEdit || servicoCard"
+  (close)="closeEditModal()"
+  (save)="saveServico($event)"
+/>
+} @if (deleteModalOpen) {
+<app-modal-delete
+  [title]="'Excluir Serviço'"
+  [message]="'Tem certeza que deseja excluir ' + (servicoToDelete?.nome || 'este serviço') + '?'"
+  [confirmLabel]="'Excluir'"
+  [cancelLabel]="'Cancelar'"
+  (confirm)="handleConfirmDelete()"
+  (cancel)="closeDeleteModal()"
+></app-modal-delete>
+}
