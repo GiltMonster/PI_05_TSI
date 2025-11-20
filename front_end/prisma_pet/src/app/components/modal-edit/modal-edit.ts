@@ -21,16 +21,35 @@ export class ModalEdit implements OnChanges {
   class_group_full_option = '';
   loading = false;
 
-  constructor(
-    private usuarioService: UsuarioService,
-      private notification: Notification,
-  ) { }
+  especialidadesVet: string[] = [
+    'Auxiliar',
+    'Cardiologista',
+    'Cirurgiã',
+    'Clínico Geral',
+    'Dermatologista',
+    'Endócrinologista',
+    'Fisioterapia',
+    'Nefrologista',
+    'Nutricionista',
+    'Oftalmologista',
+    'Raio X',
+    'Silvestres',
+    'Ultrassom',
+  ];
+
+  constructor(private usuarioService: UsuarioService, private notification: Notification) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['user'] && this.user) {
       this.editedUser = { ...this.user };
-      this.class_is_required = this.user.type !== 'admin' ? 'form-label form-label--required' : 'form-label';
-      this.class_group_full_option = this.user.type !== 'vet' ? 'form-group form-group--full' : 'form-group';
+      this.class_is_required =
+        this.user.type !== 'admin' ? 'form-label form-label--required' : 'form-label';
+      this.class_group_full_option =
+        this.user.type !== 'vet' ? 'form-group form-group--full' : 'form-group';
+
+      if (this.user.type === 'vet' && !this.editedUser.especialidade_vet) {
+        this.editedUser.especialidade_vet = '';
+      }
     }
   }
 
@@ -47,7 +66,7 @@ export class ModalEdit implements OnChanges {
         console.log('Erro ao atualizar usuário', err);
         this.notification.error('Erro ao atualizar usuário');
         this.loading = false;
-      }
+      },
     });
     this.close.emit();
   }
@@ -92,13 +111,13 @@ export class ModalEdit implements OnChanges {
           endereco: res.street,
           cidade: res.city,
           estado: res.state,
-          bairro: res.neighborhood
+          bairro: res.neighborhood,
         };
       },
       error: (err) => {
         console.log('Erro ao buscar CEP', err);
         this.notification.error('Erro ao buscar CEP');
-      }
+      },
     });
   }
 }

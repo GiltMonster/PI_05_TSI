@@ -22,18 +22,18 @@
 
         <!-- Espécie -->
         <div class="form-group">
-          <label for="especie" class="form-label form-label--required">Espécie</label>
-          <input
-            type="text"
+          <label for="especie" class="form-label">Espécie</label>
+          <select
             id="especie"
             name="especie"
             class="form-input"
             [(ngModel)]="editedPet.especie"
-            required
-            aria-required="true"
-            autocomplete="off"
-            placeholder="Ex.: Cachorro, Gato..."
-          />
+          >
+            <option value="">Selecione a espécie...</option>
+            <option *ngFor="let especie of especies" [value]="especie">
+              {{ especie }}
+            </option>
+          </select>
         </div>
 
         <!-- Raça -->
@@ -113,13 +113,13 @@
 
         <!-- Cor da Pelagem -->
         <div class="form-group">
-          <label for="cor" class="form-label">Cor da Pelagem</label>
+          <label for="cor_pelagem" class="form-label">Cor da Pelagem</label>
           <input
             type="text"
-            id="cor"
-            name="cor"
+            id="cor_pelagem"
+            name="cor_pelagem"
             class="form-input"
-            [(ngModel)]="editedPet.cor"
+            [(ngModel)]="editedPet.cor_pelagem"
             autocomplete="off"
             placeholder="Ex.: Branco, Tigrado, Preto com manchas..."
           />

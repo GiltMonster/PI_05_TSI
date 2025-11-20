@@ -137,6 +137,26 @@ export class TutorCard implements OnInit {
   }
 
   saveTutor(editedTutor: UserInterface) {
+    // Atualiza a lista de veterinários com os dados editados
+    editedTutor.id = this.userTutor.id;
+    editedTutor.type = editedTutor.type || 'tutor';
+    this.loading = true;
+
+    this.usuarioService.updateUser(editedTutor).subscribe({
+      next: (res) => {
+        this.userTutor = { ...this.userTutor, ...editedTutor };
+
+        this.edit.emit(this.userTutor);
+        this.notification.success('Dados do responsável atualizados com sucesso');
+        this.closeEditModal();
+        this.loading = false;
+      },
+      error: (err) => {
+        console.log('Erro ao atualizar responsável:', err);
+        this.notification.error('Erro ao atualizar responsável');
+        this.loading = false;
+      },
+    });
 
     this.closeEditModal();
   }

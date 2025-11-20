@@ -1,21 +1,22 @@
 <div class="modal-backdrop">
   <div class="modal-content">
-    <h2 class="form-section__title">Editar Dados</h2>
-    <form aria-label="Formulário de dados pessoais">
+    <h2 class="form-section__title">Cadastrar novo Usuário</h2>
+
+    <form aria-label="Formulário de dados pessoais" (ngSubmit)="onSave()">
       <div class="form-grid">
         <!-- Nome -->
         <div class="form-group">
-          <label for="nome" class="form-label form-label--required">Nome Completo</label>
+          <label for="nome" class="form-label form-label--required"> Nome Completo </label>
           <input
             type="text"
             id="nome"
             name="nome"
             class="form-input"
-            [(ngModel)]="editedUser.name"
+            [(ngModel)]="createUser.name"
             required
             aria-required="true"
             autocomplete="name"
-            placeholder="Digite seu nome..."
+            placeholder="Digite o nome..."
           />
         </div>
 
@@ -27,14 +28,14 @@
             id="cpf"
             name="cpf"
             class="form-input"
-            [(ngModel)]="editedUser.cpf"
+            [(ngModel)]="createUser.cpf"
             (input)="applyCpfMask($event)"
             maxlength="14"
             aria-required="true"
-            required="{{ editedUser.type !== 'admin' ? true : false }}"
+            required="{{ userType !== 'admin' ? true : false }}"
             pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
             title="Formato: 000.000.000-00"
-            placeholder="Digite seu CPF..."
+            placeholder="Digite o CPF..."
           />
         </div>
 
@@ -46,7 +47,8 @@
             id="email"
             name="email"
             class="form-input"
-            [(ngModel)]="editedUser.email"
+            [(ngModel)]="createUser.email"
+            required
             aria-required="true"
             autocomplete="email"
             placeholder="email@exemplo.com"
@@ -55,22 +57,34 @@
 
         <!-- Senha -->
         <div class="form-group">
-          <label for="senha" class="form-label">Senha</label>
+          <label for="senha" class="form-label form-label--required">Senha</label>
           <input
             type="password"
             id="senha"
             name="senha"
             class="form-input"
-            [(ngModel)]="editedUser.password"
-            autocomplete="current-password"
-            aria-describedby="senha-hint"
-            placeholder="********"
+            [(ngModel)]="createUser.password"
+            required
+            autocomplete="new-password"
+            placeholder="Crie uma senha..."
           />
-          <small
-            id="senha-hint"
-            style="color: var(--text-secondary); margin-top: 0.25rem; font-size: 0.875rem"
-            >Deixe em branco para manter a senha atual</small
-          >
+        </div>
+
+        <!-- Confirmar Senha -->
+        <div class="form-group">
+          <label for="confirmSenha" class="form-label form-label--required">
+            Confirmar Senha
+          </label>
+          <input
+            type="password"
+            id="confirmSenha"
+            name="confirmSenha"
+            class="form-input"
+            [(ngModel)]="confirmPassword"
+            required
+            autocomplete="new-password"
+            placeholder="Repita a senha..."
+          />
         </div>
 
         <!-- Telefone -->
@@ -81,19 +95,18 @@
             id="telefone"
             name="telefone"
             class="form-input"
-            [(ngModel)]="editedUser.phone"
+            [(ngModel)]="createUser.phone"
             (input)="applyTelephoneMask($event)"
             maxlength="15"
             autocomplete="tel"
             pattern="\(\d{2}\) \d{5}-\d{4}"
             title="Formato: (00) 00000-0000"
-            placeholder="Digite seu telefone..."
-            maxlength="15"
+            placeholder="Digite o telefone..."
           />
         </div>
 
-        <!-- Pix -->
-        @if (editedUser.type === 'vet') {
+        <!-- Pix (apenas vet) -->
+        @if (userType === 'vet') {
         <div class="form-group">
           <label for="numero" [class]="class_is_required">Pix</label>
           <input
@@ -101,13 +114,15 @@
             id="numero"
             name="numero"
             class="form-input"
-            [(ngModel)]="editedUser.pix"
-            required="{{ editedUser.type === 'vet' ? true : false }}"
-            placeholder="Digite seu Pix..."
+            [(ngModel)]="createUser.pix"
+            required="{{ userType === 'vet' ? true : false }}"
+            placeholder="Digite o Pix..."
           />
         </div>
-        } @if (editedUser.type === 'vet') {
-        <!-- CRMV -->
+        }
+
+        <!-- CRMV (apenas vet) -->
+        @if (userType === 'vet') {
         <div class="form-group">
           <label for="crmv" [class]="class_is_required">CRMV</label>
           <input
@@ -115,25 +130,25 @@
             id="crmv"
             name="crmv"
             class="form-input"
-            [(ngModel)]="editedUser.crmv"
-            required="{{ editedUser.type === 'vet' ? true : false }}"
-            placeholder="Digite seu CRMV..."
+            [(ngModel)]="createUser.crmv"
+            required="{{ userType === 'vet' ? true : false }}"
+            placeholder="Digite o CRMV..."
           />
         </div>
         }
 
-        <!-- ESPECIALIDADE  -->
-        @if (editedUser.type === 'vet') {
+        <!-- ESPECIALIDADE (apenas vet) -->
+        @if (userType === 'vet') {
         <div class="form-group">
           <label for="especialidade_vet" class="form-label">Especialidade</label>
           <select
             id="especialidade_vet"
             name="especialidade_vet"
             class="form-input"
-            [(ngModel)]="editedUser.especialidade_vet"
+            [(ngModel)]="createUser.especialidade_vet"
           >
             <option value="">Selecione a especialidade...</option>
-            <option *ngFor="let especialidade of especialidadesVet" [value]="especialidade">
+            <option *ngFor="let especialidade of especialidade_vet" [value]="especialidade">
               {{ especialidade }}
             </option>
           </select>
@@ -148,9 +163,9 @@
             id="cep"
             name="cep"
             class="form-input"
-            [(ngModel)]="editedUser.cep"
+            [(ngModel)]="createUser.cep"
             autocomplete="postal-code"
-            (focusout)="findCEP(editedUser.cep)"
+            (focusout)="findCEP(createUser.cep)"
             pattern="\d{5}-\d{3}"
             (input)="applyMaskcCEP($event)"
             title="Formato: 00000-000"
@@ -167,7 +182,7 @@
             id="endereco"
             name="endereco"
             class="form-input"
-            [(ngModel)]="editedUser.endereco"
+            [(ngModel)]="createUser.endereco"
             autocomplete="street-address"
             placeholder="Rua, Avenida, etc."
           />
@@ -181,7 +196,7 @@
             id="bairro"
             name="bairro"
             class="form-input"
-            [(ngModel)]="editedUser.bairro"
+            [(ngModel)]="createUser.bairro"
             placeholder="Bairro"
           />
         </div>
@@ -194,7 +209,7 @@
             id="cidade"
             name="cidade"
             class="form-input"
-            [(ngModel)]="editedUser.cidade"
+            [(ngModel)]="createUser.cidade"
             autocomplete="address-level2"
             placeholder="Digite sua cidade..."
           />
@@ -208,7 +223,7 @@
             id="complemento"
             name="complemento"
             class="form-input"
-            [(ngModel)]="editedUser.complemento"
+            [(ngModel)]="createUser.complemento"
             placeholder="Apto, bloco, etc."
           />
         </div>
@@ -230,7 +245,7 @@
           </svg>
           Cancelar
         </button>
-        <button type="submit" class="btn btn--primary" (click)="onSave()">
+        <button type="submit" class="btn btn--primary">
           <svg
             width="20"
             height="20"
@@ -241,8 +256,12 @@
           >
             <polyline points="20 6 9 17 4 12"></polyline>
           </svg>
-          Salvar Alterações
+          Cadastrar novo Usuário
         </button>
+      </div>
+
+      <div class="loading-overlay" *ngIf="loading">
+        <app-loading></app-loading>
       </div>
     </form>
   </div>

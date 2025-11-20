@@ -42,6 +42,10 @@ export class UsuarioService {
   findCEP(cep: string) {
     return this.http.get<CepInterface>(`https://brasilapi.com.br/api/cep/v1/${cep}`);
   }
+
+  createUser(data: UserInterface & { password_confirmation: string }) {
+    return this.http.post<UserInterface>(environment.API_URL_REGISTER, data);
+  }
 }
 
 

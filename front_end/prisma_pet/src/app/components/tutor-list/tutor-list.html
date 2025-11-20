@@ -2,11 +2,7 @@
   <h1 class="list_title">Responsáveis</h1>
 
   <div class="header_list_tutor">
-    <form
-      class="search"
-      role="search"
-      (submit)="onSearch(); $event.preventDefault()"
-    >
+    <form class="search" role="search" (submit)="onSearch(); $event.preventDefault()">
       <label class="sr-only" for="tutorSearch">Buscar Responsável</label>
       <input
         id="tutorSearch"
@@ -21,12 +17,7 @@
       />
 
       @if(searchValue !== "") {
-      <button
-        type="button"
-        class="search__clear"
-        aria-label="Limpar busca"
-        (click)="clearSearch()"
-      >
+      <button type="button" class="search__clear" aria-label="Limpar busca" (click)="clearSearch()">
         <mat-icon aria-hidden="true">close</mat-icon>
       </button>
       }
@@ -35,22 +26,20 @@
         <mat-icon aria-hidden="true">search</mat-icon>
       </button>
 
-      <span
-        id="Buscar Responsável"
-        class="sr-only"
-        aria-live="polite"
-        >{{ statusMsg }}</span
-      >
+      <span id="Buscar Responsável" class="sr-only" aria-live="polite">{{ statusMsg }}</span>
     </form>
 
+    @if (typeUser === 'admin') {
     <button
       class="add_tutor_button"
       type="button"
       aria-label="Cadastrar novo Responsável"
+      (click)="openCreateModal()"
     >
       <mat-icon aria-hidden="true">add</mat-icon>
       <span>Cadastrar Novo Responsável</span>
     </button>
+    }
   </div>
 
   @if (!filteredTutores || filteredTutores.length === 0){
@@ -70,5 +59,13 @@
     </li>
     }
   </ul>
+  } @if (createModalOpen) {
+  <app-modal-create
+    *ngIf="createModalOpen"
+    (close)="closeCreateModal()"
+    [userType]="'user'"
+    (save)="handleTutorCreated($event)"
+  >
+  </app-modal-create>
   }
 </section>
