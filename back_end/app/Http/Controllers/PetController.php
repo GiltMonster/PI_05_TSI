@@ -69,6 +69,13 @@ class PetController extends Controller
             return response()->json(['message' => 'Nenhum pet encontrado.'], 404);
         }
 
+        foreach ($pets as $pet) {
+            $user = User::find($pet->user_id);
+            if ($user) {
+                $pet->tutor_name = $user->name;
+            }
+        }
+
         return response()->json($pets, 200);
     }
 
