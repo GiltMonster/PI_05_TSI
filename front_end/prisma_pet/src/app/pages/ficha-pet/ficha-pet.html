@@ -1,3 +1,7 @@
-<main class="main-content">
-  <app-header-pet  [petsList]="pets" />
+<div *ngIf="loading" class="loading-page">
+  <app-loading></app-loading>
+</div>
+
+<main class="main-content" *ngIf="!loading">
+  <app-header-pet [petsList]="pets" />
 </main>

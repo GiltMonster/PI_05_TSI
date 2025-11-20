@@ -3,6 +3,7 @@ import { UserInterface } from '../../interfaces';
 import { FormsModule } from '@angular/forms';
 import { UsuarioService } from '../../services/usuario-service';
 import { Notification } from '../../services/notification';
+import { Loading } from '../loading/loading';
 
 @Component({
   selector: 'app-modal-edit',
@@ -18,7 +19,7 @@ export class ModalEdit implements OnChanges {
   editedUser: UserInterface = {} as UserInterface;
   class_is_required = '';
   class_group_full_option = '';
-
+  loading = false;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -34,15 +35,18 @@ export class ModalEdit implements OnChanges {
   }
 
   onSave() {
+    this.loading = true;
     this.save.emit(this.editedUser);
     this.usuarioService.updateUser(this.editedUser).subscribe({
       next: (res) => {
         console.log('Usuário atualizado com sucesso', res);
         this.notification.success('Usuário atualizado com sucesso.');
+        this.loading = false;
       },
       error: (err) => {
         console.log('Erro ao atualizar usuário', err);
         this.notification.error('Erro ao atualizar usuário');
+        this.loading = false;
       }
     });
     this.close.emit();

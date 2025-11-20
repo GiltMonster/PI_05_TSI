@@ -98,8 +98,6 @@
   }
 }
 
-/* === ESPECÍFICO DO MODAL DE DELETE === */
-
 .modal-delete__body {
   margin-top: 0.75rem;
 }
@@ -110,7 +108,6 @@
   line-height: 1.5;
 }
 
-/* opcional: dar uma carinha de "alerta" no botão de excluir */
 .btn--danger {
   background-color: var(--error);
 }
