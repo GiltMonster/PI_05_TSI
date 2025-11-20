@@ -1,28 +1,26 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { FormatPhonePipe } from '../../pipes/format-phone-pipe';
 import { PetInterface } from '../../interfaces';
 import { PetService } from '../../services/pet-service';
 import { Notification } from '../../services/notification';
 import { ModalEditPet } from '../modal-edit-pet/modal-edit-pet';
 import { UsuarioService } from '../../services/usuario-service';
+import { ModalDelete } from '../modal-delete/modal-delete';
 
 @Component({
   selector: 'app-animal-card',
-  imports: [CommonModule, MatIconModule, ModalEditPet],
+  imports: [CommonModule, MatIconModule, ModalEditPet, ModalDelete],
   standalone: true,
   templateUrl: './animal-card.html',
-  styleUrls: ['./animal-card.scss']
+  styleUrls: ['./animal-card.scss'],
 })
-export class AnimalCard implements OnInit{
-
+export class AnimalCard implements OnInit {
   @Input() userPet!: PetInterface;
   @Input() typeUser: string = '';
   @Output() petDeleted = new EventEmitter<number>();
   @Output() edit = new EventEmitter<PetInterface>();
   @Output() tutorLoad = new EventEmitter<{ id: number; tutorName: string }>(); // enviar o nome do tutor pro animallist
-
 
   editModalOpen = false;
   petToEdit?: PetInterface;
@@ -32,39 +30,35 @@ export class AnimalCard implements OnInit{
   constructor(
     private petService: PetService,
     private notification: Notification,
-    private usuarioService: UsuarioService,
-
-  ) { }
-
+    private usuarioService: UsuarioService
+  ) {}
 
   ngOnInit(): void {
-    this.typeUser,
-    this.loadTutorName();
+    this.typeUser, this.loadTutorName();
   }
 
-    private loadTutorName() {
-if (!this.userPet.user_id) return;
+  private loadTutorName() {
+    if (!this.userPet.user_id) return;
 
-  this.usuarioService.getUserById(String(this.userPet.user_id)).subscribe({
-    next: (user: any) => {
-      this.tutorName = user.name;
+    this.usuarioService.getUserById(String(this.userPet.user_id)).subscribe({
+      next: (user: any) => {
+        this.tutorName = user.name;
 
-      // avisa o componente quem é o tutor desse pet
-      this.tutorLoad.emit({
-        id: this.userPet.id,
-        tutorName: this.tutorName,
-      });
-    },
-    error: (err) => {
-      console.error('Erro ao buscar responsável do pet:', err);
-      this.notification.success('Erro ao buscar responsável do pet');
-      this.tutorName = '';
-    }
-  });
-}
-
-  findUserById(id: number) {
+        // avisa o componente quem é o tutor desse pet
+        this.tutorLoad.emit({
+          id: this.userPet.id,
+          tutorName: this.tutorName,
+        });
+      },
+      error: (err) => {
+        console.error('Erro ao buscar responsável do pet:', err);
+        this.notification.success('Erro ao buscar responsável do pet');
+        this.tutorName = '';
+      },
+    });
   }
+
+  findUserById(id: number) {}
 
   deletePet(petId: number) {
     this.petService.deleteAccountPet(petId).subscribe({
@@ -74,10 +68,30 @@ if (!this.userPet.user_id) return;
         this.notification.success('Animal excluído com sucesso');
       },
       error: (err) => {
-        console.log("erro ao deletar animal:", err);
+        console.log('erro ao deletar animal:', err);
         this.notification.error('Erro ao deletar Animal');
-      }
+      },
     });
+  }
+  deleteModalOpen = false;
+  petToDelete: PetInterface | null = null;
+
+  openDeleteModal(pet: PetInterface) {
+    this.petToDelete = pet;
+    this.deleteModalOpen = true;
+  }
+
+  closeDeleteModal() {
+    this.deleteModalOpen = false;
+    this.petToDelete = null;
+  }
+
+  handleConfirmDelete() {
+    if (!this.petToDelete) return;
+
+    this.deletePet(this.petToDelete.id);
+
+    this.closeDeleteModal();
   }
 
   editPet(petId: number) {
@@ -110,39 +124,37 @@ if (!this.userPet.user_id) return;
       error: (err) => {
         console.log('Erro ao atualizar animal:', err);
         this.notification.error('Erro ao atualizar animal');
-      }
+      },
     });
 
     this.closeEditModal();
   }
 
-
   private norm(t?: string): string {
-    return (t ?? '')  // se vier undefined/null, vira string vazia
+    return (t ?? '') // se vier undefined/null, vira string vazia
       .toLowerCase() // tudo minúsculo
       .normalize('NFD') // separa letras dos acentos
       .replace(/\p{Diacritic}/gu, '') // remove os acentos via regex
       .trim(); // tira espaços no início/fim
   }
 
-
-getSexoLabel(): string {
-const sexoPet: any = this.userPet.sexo;
-if (sexoPet === 1 || sexoPet === true) return 'Macho';
-if (sexoPet === 0 || sexoPet === false) return 'Fêmea';
+  getSexoLabel(): string {
+    const sexoPet: any = this.userPet.sexo;
+    if (sexoPet === 1 || sexoPet === true) return 'Macho';
+    if (sexoPet === 0 || sexoPet === false) return 'Fêmea';
     return 'Indefinido';
-}
-
-getEspeciesIcon(): string {
-  const especie = this.norm(this.userPet.especie);
-
-  if (especie === 'cachorro' || especie === 'cao' || especie === 'canino') {
-    return 'assets/imagens/cachorro.png';
   }
 
-  if (especie === 'gato' || especie === 'felino') {
-    return 'assets/imagens/gato.png';
+  getEspeciesIcon(): string {
+    const especie = this.norm(this.userPet.especie);
+
+    if (especie === 'cachorro' || especie === 'cao' || especie === 'canino') {
+      return 'assets/imagens/cachorro.png';
+    }
+
+    if (especie === 'gato' || especie === 'felino') {
+      return 'assets/imagens/gato.png';
+    }
+    return 'assets/imagens/pet-generico.png';
   }
-  return 'assets/imagens/pet-generico.png';
-}
 }

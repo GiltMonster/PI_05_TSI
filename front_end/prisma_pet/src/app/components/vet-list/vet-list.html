@@ -2,7 +2,11 @@
   <h1 class="list_title">Veterinários</h1>
 
   <div class="header_list_vet">
-    <form class="search" role="search" (submit)="onSearch(); $event.preventDefault()">
+    <form
+      class="search"
+      role="search"
+      (submit)="onSearch(); $event.preventDefault()"
+    >
       <label class="sr-only" for="vetSearch">Buscar Veterinário</label>
       <input
         id="vetSearch"
@@ -16,8 +20,13 @@
         (ngModelChange)="onSearch()"
       />
 
-@if(searchValue !== "") {
-      <button type="button" class="search__clear" aria-label="Limpar busca" (click)="clearSearch()">
+      @if(searchValue !== "") {
+      <button
+        type="button"
+        class="search__clear"
+        aria-label="Limpar busca"
+        (click)="clearSearch()"
+      >
         <mat-icon aria-hidden="true">close</mat-icon>
       </button>
       }
@@ -26,20 +35,27 @@
         <mat-icon aria-hidden="true">search</mat-icon>
       </button>
 
-      <span id="Buscar Veterinário" class="sr-only" aria-live="polite">{{ statusMsg }}</span>
+      <span
+        id="Buscar Veterinário"
+        class="sr-only"
+        aria-live="polite"
+        >{{ statusMsg }}</span>
     </form>
 
     <button
       class="add_vet_button"
       type="button"
-      aria-label="Cadastrar novo Veterinário">
+      aria-label="Cadastrar novo Veterinário"
+    >
       <mat-icon aria-hidden="true">add</mat-icon>
       <span>Cadastrar Novo Veterinário</span>
     </button>
   </div>
 
-@if (!filteredVets || filteredVets.length === 0){
-  <div class="empty" role="note" aria-live="polite">{{ emptyMessage }}</div>
+  @if (!filteredVets || filteredVets.length === 0){
+  <div class="empty" role="note" aria-live="polite">
+    {{ emptyMessage }}
+  </div>
 
   } @if (filteredVets.length) {
   <ul class="grid" role="list">

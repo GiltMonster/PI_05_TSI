@@ -17,7 +17,12 @@
       />
 
       @if(searchValue !== "") {
-      <button type="button" class="search__clear" aria-label="Limpar busca" (click)="clearSearch()">
+      <button
+        type="button"
+        class="search__clear"
+        aria-label="Limpar busca"
+        (click)="clearSearch()"
+      >
         <mat-icon aria-hidden="true">close</mat-icon>
       </button>
       }
@@ -26,7 +31,12 @@
         <mat-icon aria-hidden="true">search</mat-icon>
       </button>
 
-      <span id="Buscar Animais" class="sr-only" aria-live="polite">{{ statusMsg }}</span>
+      <span
+        id="Buscar Animais"
+        class="sr-only"
+        aria-live="polite"
+        >{{ statusMsg }}</span
+      >
     </form>
 
     <button
@@ -39,8 +49,10 @@
     </button>
   </div>
 
-    @if (!filteredPets || filteredPets.length === 0){
-  <div class="empty" role="note" aria-live="polite">{{ emptyMessage }}</div>
+  @if (!filteredPets || filteredPets.length === 0){
+  <div class="empty" role="note" aria-live="polite">
+    {{ emptyMessage }}
+  </div>
 
   } @if (filteredPets.length) {
   <ul class="grid" role="list">

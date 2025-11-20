@@ -11,7 +11,7 @@
   <div class="botoes_tutor">
     <button type="button" class="btn_cadastro" (click)="goToFichaPet(userTutor.id)"
       [attr.aria-label]="'Ver cadastro completo de ' + userTutor.name">
-      <span class="btn-text btn-text--total">Abrir Cadastro</span>
+      <span class="btn-text btn-text--total"> Animais</span>
       <span class="btn-text btn-text--menor">Ver</span>
     </button>
 
@@ -28,7 +28,7 @@
     <button
       type="button"
       class="btn_icon"
-      (click)="deleteTutor(userTutor.id)"
+      (click)="openDeleteModal(userTutor)"
       aria-label="Excluir cadastro"
     >
       <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">delete</mat-icon>
@@ -39,4 +39,16 @@
 
 @if(editModalOpen){
 <app-modal-edit [user]="userTutor" (close)="closeEditModal()" (save)="saveTutor($event)" />
+}
+
+
+@if (deleteModalOpen) {
+<app-modal-delete
+  [title]="'Excluir Responsável'"
+  [message]="'Tem certeza que deseja excluir ' + (userTutor.name || 'este responsável') + '?'"
+  [confirmLabel]="'Excluir'"
+  [cancelLabel]="'Cancelar'"
+  (confirm)="handleConfirmDelete()"
+  (cancel)="closeDeleteModal()"
+></app-modal-delete>
 }

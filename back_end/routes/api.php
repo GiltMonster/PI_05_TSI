@@ -76,7 +76,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::delete('/cliente/deletarPet/{id}', [PetController::class, 'deletarPet']);
     });
 
-    Route::middleware(['role:admin|vet|user'])->group(function () {
+    Route::middleware(['role:admin|vet'])->group(function () {
         Route::get('/servico/all', [ServicoController::class, 'listarServicos']);
         Route::get('/servico/{id}', [ServicoController::class, 'getServicoById']);
         Route::post('/servico/novo', [ServicoController::class, 'criarServico']);
