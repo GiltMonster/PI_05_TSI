@@ -22,7 +22,7 @@
     }
   } @else if (activeTab === 'vacinas') {
     @if(pet_vacinas.length != 0) {
-      <app-vacinas-pet />
+      <app-vacinas-pet [pet_vacinas]="pet_vacinas" />
     } @else {
       <div class="tab-container-not-found">
         <h2>Nenhuma vacina cadastrada para este animal.</h2>

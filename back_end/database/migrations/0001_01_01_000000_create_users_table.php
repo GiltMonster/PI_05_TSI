@@ -31,6 +31,7 @@ return new class extends Migration
             // Campos exclusivos de veterinário
             $table->string('crmv')->nullable();
             $table->string('pix')->nullable();
+            $table->string('especialidade_vet')->nullable();
 
         });
     }

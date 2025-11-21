@@ -48,6 +48,7 @@ class AuthController extends Controller
                         'estado' => $request->estado,
                         'bairro' => $request->bairro,
                         'complemento' => $request->complemento,
+                        'especialidade_vet' => $request->especialidade_vet,
                     ]);
                     $user->assignRole('vet');
                     break;

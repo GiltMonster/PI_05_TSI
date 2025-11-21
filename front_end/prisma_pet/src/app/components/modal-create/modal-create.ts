@@ -120,7 +120,7 @@ export class ModalCreate {
               msg = errors.email[0];
             }
           } else if (typeof err.error?.message === 'string') {
-            msg = err.error.message;
+            msg = err.error.errors;
           }
         }
 

@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 import { VacinasPet } from "../vacinas/vacinas-pet/vacinas-pet";
 import { OutrosAnexosPet } from "../outros-anexos-pet/outros-anexos-pet";
 import { ConsultasPet } from '../consultas/consultas-pet/consultas-pet';
-import { PetConsulta } from '../../interfaces';
+import { PetConsulta, PetVacina } from '../../interfaces';
 
 @Component({
   selector: 'app-anexos-pet',
@@ -15,7 +15,7 @@ import { PetConsulta } from '../../interfaces';
 export class AnexosPet {
 
   @Input() pet_consultas: Array<PetConsulta> = [];
-  @Input() pet_vacinas: Array<any> = [];
+  @Input() pet_vacinas: Array<PetVacina> = [];
   @Input() pet_anexos: Array<any> = [];
   activeTab: string = 'consultas';
 

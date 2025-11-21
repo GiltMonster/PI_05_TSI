@@ -6,6 +6,7 @@ use App\Models\ConsultaPet;
 use App\Models\Pet;
 use App\Models\Servico;
 use App\Models\User;
+use App\Models\VacinaPet;
 use Illuminate\Http\Request;
 
 class PetController extends Controller
@@ -50,8 +51,18 @@ class PetController extends Controller
             }
         }
 
+        $vacinas = VacinaPet::whereIn('pet_id', $pets->pluck('id'))->get();
+
+        foreach ($vacinas as $vacina) {
+            $vet = User::find($vacina->vet_id);
+            if ($vet) {
+                $vacina->nome_vet = $vet->name;
+            }
+        }
+
         foreach ($pets as $pet) {
             $pet->consultas = $consultas->where('pet_id', $pet->id)->values();
+            $pet->vacinas = $vacinas->where('pet_id', $pet->id)->values();
         }
 
         return response()->json([

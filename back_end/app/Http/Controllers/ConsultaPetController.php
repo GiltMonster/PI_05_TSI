@@ -16,7 +16,7 @@ class ConsultaPetController extends Controller
             return response()->json(['error' => 'Pet não encontrado'], 404);
         }
 
-        if (Vet::where('type', 'vet')->find($request->input('vet_id')) === null) {
+        if (Vet::whereIn('type', ['vet', 'admin'])->find($request->input('vet_id')) === null) {
             return response()->json(['error' => 'Veterinário não encontrado'], 404);
         }
 
@@ -59,7 +59,7 @@ class ConsultaPetController extends Controller
         ]);
 
         if ($validade['vet_id'] ?? false) {
-            $vet = Vet::find($validade['vet_id']);
+            $vet = Vet::whereIn('type', ['vet', 'admin'])->find($request->input('vet_id'));
             if (!$vet) {
                 return response()->json(['error' => 'Veterinário não encontrado'], 404);
             }
