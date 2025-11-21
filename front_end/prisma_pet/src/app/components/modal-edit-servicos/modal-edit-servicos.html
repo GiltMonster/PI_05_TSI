@@ -21,19 +21,19 @@
         </div>
 
         <!-- Categoria -->
-        <div class="form-group">
-          <label for="categoria" class="form-label form-label--required"> Categoria </label>
-          <input
-            type="text"
+          <div class="form-group">
+          <label for="categoria" class="form-label form-label--required">Categoria</label>
+          <select
             id="categoria"
             name="categoria"
             class="form-input"
             [(ngModel)]="editedServico.categoria"
-            required
-            aria-required="true"
-            autocomplete="off"
-            placeholder="Digite a categoria do serviço..."
-          />
+          >
+            <option value="">Selecione a categoria...</option>
+            <option *ngFor="let categoria of categorias" [value]="categoria">
+              {{ categoria }}
+            </option>
+          </select>
         </div>
 
         <!-- Preço -->

@@ -64,5 +64,4 @@ export const environment = {
   API_URL_SERVICO_CREATE: `${end_point_base}/servico/novo`,
   API_URL_SERVICO_UPDATE: `${end_point_base}/servico/editar`,
   API_URL_SERVICO_DELETE: `${end_point_base}/servico/deletar/`, // + id
-
 };

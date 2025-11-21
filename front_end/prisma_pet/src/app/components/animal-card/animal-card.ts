@@ -7,10 +7,11 @@ import { Notification } from '../../services/notification';
 import { ModalEditPet } from '../modal-edit-pet/modal-edit-pet';
 import { UsuarioService } from '../../services/usuario-service';
 import { ModalDelete } from '../modal-delete/modal-delete';
+import { Loading } from '../loading/loading';
 
 @Component({
   selector: 'app-animal-card',
-  imports: [CommonModule, MatIconModule, ModalEditPet, ModalDelete],
+  imports: [CommonModule, MatIconModule, ModalEditPet, ModalDelete, Loading],
   standalone: true,
   templateUrl: './animal-card.html',
   styleUrls: ['./animal-card.scss'],
@@ -24,6 +25,7 @@ export class AnimalCard implements OnInit {
 
   editModalOpen = false;
   petToEdit?: PetInterface;
+  loading = false;
 
   tutorName = '';
 
@@ -61,15 +63,18 @@ export class AnimalCard implements OnInit {
   findUserById(id: number) {}
 
   deletePet(petId: number) {
+    this.loading = true;
     this.petService.deleteAccountPet(petId).subscribe({
       next: (res) => {
         console.log(res);
         this.petDeleted.emit(petId);
         this.notification.success('Animal excluído com sucesso');
+        this.loading = false;
       },
       error: (err) => {
         console.log('erro ao deletar animal:', err);
         this.notification.error('Erro ao deletar Animal');
+        this.loading = false;
       },
     });
   }
@@ -109,6 +114,7 @@ export class AnimalCard implements OnInit {
   }
 
   savePet(editedPet: PetInterface) {
+    this.loading = true;
     // Atualiza a lista de animais com os dados editados
     editedPet.id = this.userPet.id;
     editedPet.type = editedPet.type || 'vet';
@@ -119,11 +125,13 @@ export class AnimalCard implements OnInit {
 
         this.edit.emit(this.userPet);
         this.notification.success('Dados do animal atualizados com sucesso');
+        this.loading = false;
         this.closeEditModal();
       },
       error: (err) => {
         console.log('Erro ao atualizar animal:', err);
         this.notification.error('Erro ao atualizar animal');
+        this.loading = false;
       },
     });
 

@@ -21,6 +21,15 @@ export class ModalEditServicos implements OnChanges {
   class_is_required = '';
   class_group_full_option = '';
 
+  categorias: string[] = [
+  'Consulta',
+  'Vacina',
+  'Exame',
+  'Cirurgia',
+  'Medicamento',
+  ].sort((a, b) => a.localeCompare(b, 'pt-BR')); // ordenar em ordem alfabética
+
+
   constructor(private servicoService: ServicosService, private notification: Notification) {}
 
   ngOnChanges(changes: SimpleChanges): void {

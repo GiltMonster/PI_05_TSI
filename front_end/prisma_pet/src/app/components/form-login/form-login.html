@@ -45,5 +45,10 @@ Sessões ABNT: 5.9, 5.1, 5.7, 5.2. -->
 
       <button class="btn-login" type="submit" [disabled]="loginForms.invalid">Entrar</button>
     </form>
+
+    <div class="loading-overlay" *ngIf="loading">
+      <app-loading></app-loading>
+    </div>
+    
   </div>
 </section>

@@ -6,10 +6,11 @@ import { Notification } from '../../services/notification';
 import { ModalEdit } from '../modal-edit/modal-edit';
 import { UsuarioService } from '../../services/usuario-service';
 import { ModalDelete } from '../modal-delete/modal-delete';
+import { Loading } from '../loading/loading';
 
 @Component({
   selector: 'app-vet-card',
-  imports: [CommonModule, MatIconModule, ModalEdit, ModalDelete],
+  imports: [CommonModule, MatIconModule, ModalEdit, ModalDelete,Loading],
   standalone: true,
   templateUrl: './vet-card.html',
   styleUrls: ['./vet-card.scss'],
@@ -22,6 +23,7 @@ export class VetCard implements OnInit {
 
   editModalOpen = false;
   vetToEdit?: UserInterface;
+  loading = false;
 
   constructor(private vetService: UsuarioService, private notification: Notification) {}
 
@@ -32,15 +34,18 @@ export class VetCard implements OnInit {
   findUserById(id: number) {}
 
   deleteVet(vetId: number) {
+    this.loading = true;
     this.vetService.deleteAccountVet(vetId).subscribe({
       next: (res) => {
         console.log(res);
         this.vetDeleted.emit(vetId);
         this.notification.success('Veterinário excluído com sucesso');
+        this.loading = false;
       },
       error: (err) => {
         console.log('erro ao deletar veterinário:', err);
         this.notification.error('Erro ao deletar veterinário');
+        this.loading = false;
       },
     });
   }
@@ -84,6 +89,7 @@ export class VetCard implements OnInit {
     // Atualiza a lista de veterinários com os dados editados
     editedvet.id = this.userVet.id;
     editedvet.type = editedvet.type || 'vet';
+    this.loading = true;
 
     this.vetService.updateUser(editedvet).subscribe({
       next: (res) => {
@@ -93,10 +99,12 @@ export class VetCard implements OnInit {
 
         this.notification.success('Dados do veterinário atualizados com sucesso');
         this.closeEditModal();
+        this.loading = false;
       },
       error: (err) => {
         console.log('Erro ao atualizar veterinário:', err);
         this.notification.error('Erro ao atualizar veterinário');
+        this.loading = false;
       },
     });
 
