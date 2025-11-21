@@ -6,11 +6,12 @@ import { UserInterface } from '../../interfaces';
 import { FormsModule } from '@angular/forms';
 import { UsuarioService } from '../../services/usuario-service';
 import { ModalCreate } from '../modal-create/modal-create';
+import { MatPaginator } from "@angular/material/paginator";
 
 @Component({
   selector: 'app-tutor-list',
   standalone: true,
-  imports: [CommonModule, MatIconModule, TutorCard, FormsModule, ModalCreate],
+  imports: [CommonModule, MatIconModule, TutorCard, FormsModule, ModalCreate, MatPaginator],
   templateUrl: './tutor-list.html',
   styleUrls: ['./tutor-list.scss']
 })
@@ -24,6 +25,9 @@ export class TutorList implements OnInit {
   typeUser = '';
   createModalOpen = false;
 
+  pageSize = 5;
+  pageIndex = 0;
+
   constructor(
     private usuarioService: UsuarioService
   ) { }
@@ -31,6 +35,16 @@ export class TutorList implements OnInit {
   ngOnInit(): void {
     this.filteredTutores = this.tutores;
     this.userTypeVerification();
+  }
+
+  get pagedTutores(): UserInterface[] {
+    const start = this.pageIndex * this.pageSize;
+    return this.filteredTutores.slice(start, start + this.pageSize);
+  }
+
+  onPageChange(event: any) {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
   }
 
   ngOnChanges(): void {
@@ -56,11 +70,15 @@ export class TutorList implements OnInit {
 
   onSearch() {
     this.filteredTutores = this.filterTutors();
+    this.pageIndex = 0;
   }
 
   onTutorDeleted(tutorId: number) {
     this.tutores = this.tutores.filter(tutor => tutor.id !== tutorId);
     this.filteredTutores = this.filterTutors();
+    if (this.pageIndex > 0 && this.pagedTutores.length === 0) {
+      this.pageIndex--;
+    }
   }
 
   filterTutors(): UserInterface[] {

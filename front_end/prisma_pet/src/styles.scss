@@ -103,3 +103,13 @@ hr {
   border-top: 1px solid var(--border-color);
   margin: 1.5rem 0;
 }
+
+mat-paginator {
+  width: fit-content;
+  margin-top: 2.5rem;
+  background-color: var(--white);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
