@@ -29,14 +29,12 @@ body {
 
 
 html {
-  @include mat.theme((
-    color: (
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
-    ),
-    typography: Roboto,
-    density: 0,
-  ));
+  @include mat.theme((color: (primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    ));
 }
 
 body {
@@ -56,12 +54,20 @@ body {
   margin: 0;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: poppins, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: poppins, "Helvetica Neue", sans-serif;
+}
 
 /* Foco visível forte e consistente (ABNT 5.1, 5.8, 5.10, 5.11) */
 :focus-visible {
-  outline: 3px solid #005FCC; /* alto contraste no branco */
+  outline: 3px solid #005FCC;
+  /* alto contraste no branco */
   outline-offset: 2px;
 }
 
@@ -80,7 +86,10 @@ button,
 
 /*  ABNT 5.10/5.11 – apresentação */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -91,10 +100,14 @@ button,
 /* Conteúdo só de leitura de tela (ABNT 5.3/5.7) */
 .sr-only {
   position: absolute !important;
-  width: 1px !important; height: 1px !important;
-  padding: 0 !important; margin: -1px !important;
-  overflow: hidden !important; clip: rect(0, 0, 0, 0) !important;
-  white-space: nowrap !important; border: 0 !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
 hr {
@@ -110,6 +123,9 @@ mat-paginator {
   background-color: var(--white);
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border-color);
-  border-radius: 0.5rem;
   padding: 0.5rem;
+  margin: 32px auto 0 auto;
+  display: flex;
+  justify-content: center;
+  border-radius: 8px;
 }
