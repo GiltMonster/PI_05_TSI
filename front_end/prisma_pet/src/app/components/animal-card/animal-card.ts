@@ -8,6 +8,7 @@ import { ModalEditPet } from '../modal-edit-pet/modal-edit-pet';
 import { UsuarioService } from '../../services/usuario-service';
 import { ModalDelete } from '../modal-delete/modal-delete';
 import { Loading } from '../loading/loading';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-animal-card',
@@ -32,7 +33,8 @@ export class AnimalCard implements OnInit {
   constructor(
     private petService: PetService,
     private notification: Notification,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -60,7 +62,53 @@ export class AnimalCard implements OnInit {
     });
   }
 
-  findUserById(id: number) {}
+  findUserById(petId: number) {
+    const tutorId = this.userPet.user_id;
+
+    if (!tutorId) {
+      this.notification.error('Não foi possível identificar o responsável deste animal.');
+      return;
+    }
+
+    this.loading = true;
+
+    this.petService.getPetsByTutorId(tutorId).subscribe({
+      next: (res) => {
+        const hasPets = res && Array.isArray(res.pets) && res.pets.length > 0;
+
+        if (!hasPets) {
+          this.notification.error('Este responsável ainda não possui nenhum animal cadastrado.');
+          this.loading = false;
+          return;
+        }
+
+        let baseRoute = '';
+
+        if (this.typeUser === 'vet') {
+          baseRoute = '/vet/ficha';
+        } else if (this.typeUser === 'admin') {
+          baseRoute = '/admin/ficha';
+        } else if (this.typeUser === 'user') {
+          baseRoute = '/user/ficha';
+        }
+
+        this.router.navigate([`${baseRoute}/${tutorId}`], {
+          queryParams: { petId },
+        });
+
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Erro ao buscar pets do responsável:', err);
+        if (err.status === 404) {
+          this.notification.error('Este responsável ainda não possui nenhum animal cadastrado.');
+        } else {
+          this.notification.error('Não foi possível verificar os animais deste responsável.');
+        }
+        this.loading = false;
+      },
+    });
+  }
 
   deletePet(petId: number) {
     this.loading = true;
