@@ -4,17 +4,8 @@
   <div class="header_list_servico">
     <form class="search" role="search" (submit)="onSearch(); $event.preventDefault()">
       <label class="sr-only" for="servicoSearch">Buscar Serviço</label>
-      <input
-        id="servicoSearch"
-        class="search__input"
-        type="search"
-        placeholder="Buscar Serviço"
-        autocomplete="off"
-        aria-describedby="Buscar Serviço"
-        [(ngModel)]="searchValue"
-        name="searchValue"
-        (ngModelChange)="onSearch()"
-      />
+      <input id="servicoSearch" class="search__input" type="search" placeholder="Buscar Serviço" autocomplete="off"
+        aria-describedby="Buscar Serviço" [(ngModel)]="searchValue" name="searchValue" (ngModelChange)="onSearch()" />
 
       @if (searchValue !== "") {
       <button type="button" class="search__clear" aria-label="Limpar busca" (click)="clearSearch()">
@@ -30,12 +21,7 @@
     </form>
 
     @if (typeUser === 'admin') {
-    <button
-      class="add_servico_button"
-      type="button"
-      aria-label="Cadastrar novo Serviço"
-      (click)="openCreateModal()"
-    >
+    <button class="add_servico_button" type="button" aria-label="Cadastrar novo Serviço" (click)="openCreateModal()">
       <mat-icon aria-hidden="true">add</mat-icon>
       <span>Cadastrar Novo Serviço</span>
     </button>
@@ -49,23 +35,26 @@
 
   } @if (filteredServicos.length) {
   <ul class="grid" role="list">
-    @for (servico of filteredServicos; track servico.id) {
+    @for (servico of pagedServicos; track servico.id) {
     <li class="grid__item" role="listitem">
-      <app-service-card
-        [servicoCard]="servico"
-        [typeUser]="typeUser"
-        (servicoDeleted)="onServicoDeleted($event)"
-      >
+      <app-service-card [servicoCard]="servico" [typeUser]="typeUser" (servicoDeleted)="onServicoDeleted($event)">
       </app-service-card>
     </li>
     }
   </ul>
-  } @if (createModalOpen) {
-  <app-modal-create-servico
-    *ngIf="createModalOpen"
-    (close)="closeCreateModal()"
-    (save)="handleServicoCreated($event)"
-  >
+  <mat-paginator
+    [length]="filteredServicos.length"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    [pageSizeOptions]="[5, 10, 20]"
+    (page)="onPageChange($event)"
+    [ariaLabel]="'Paginação da lista de serviços'"
+    [showFirstLastButtons]="true"
+  />
+  }
+
+  @if (createModalOpen) {
+  <app-modal-create-servico (close)="closeCreateModal()" (save)="handleServicoCreated($event)">
   </app-modal-create-servico>
   }
 </section>
