@@ -55,18 +55,19 @@
     </li>
     }
   </ul>
-  <mat-paginator
-    [length]="filteredVets.length"
-    [pageSize]="pageSize"
-    [pageIndex]="pageIndex"
-    [pageSizeOptions]="[5, 10, 20]"
-    (page)="onPageChange($event)"
-    [ariaLabel]="'Paginação da lista de veterinários'"
-    [showFirstLastButtons]="true"
-  />
-  }
 
-  @if (createModalOpen) {
+    <mat-paginator
+      class="paginator"
+      [length]="filteredVets.length"
+      [pageSize]="pageSize"
+      [pageIndex]="pageIndex"
+      [pageSizeOptions]="[5, 10, 20]"
+      (page)="onPageChange($event)"
+      [ariaLabel]="'Paginação da lista de veterinários'"
+      [showFirstLastButtons]="true"
+    />
+
+  } @if (createModalOpen) {
   <app-modal-create
     (close)="closeCreateModal()"
     [userType]="'vet'"
