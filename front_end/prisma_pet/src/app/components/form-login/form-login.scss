@@ -83,7 +83,7 @@ form {
 
       /* ABNT 5.9 e 5.10/5.11 */
     &:focus, input:focus-visible {
-        outline: 3px solid #005FCC; 
+        outline: 3px solid #005FCC;
         outline-offset: 2px;
       border-color: #004aad;
       background-color: #fff;
@@ -113,23 +113,23 @@ form {
   }
 }
 
-.forgot-password {
-  text-align: right;
-  margin-bottom: 0.1vh;
-}
+// .forgot-password {
+//   text-align: right;
+//   margin-bottom: 0.1vh;
+// }
 
-.forgot-password a {
-  color: #004aad;
-  text-decoration: none;
-  font-size: 14px;
-  transition: color 0.3s ease;
-  padding: 10px;
-  cursor: pointer;
+// .forgot-password a {
+//   color: #004aad;
+//   text-decoration: none;
+//   font-size: 14px;
+//   transition: color 0.3s ease;
+//   padding: 10px;
+//   cursor: pointer;
 
-  &:hover, a:focus-visible {
-  color: #965229;
-  }
-}
+//   &:hover, a:focus-visible {
+//   color: #965229;
+//   }
+// }
 
 .btn-login {
   width: 100%;
@@ -140,7 +140,6 @@ form {
   color: white;
   font-size: 20px;
   cursor: pointer;
-  margin-top: 30px;
   transition: all 0.3s ease;
   box-shadow: 0 4px 16px rgba(92, 139, 197, 0.3);
 
@@ -158,6 +157,12 @@ form {
     outline: 3px solid #005FCC;
     outline-offset: 2px;
   }
+}
+
+.termos {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
 }
 
 @media (max-width: 800px) {

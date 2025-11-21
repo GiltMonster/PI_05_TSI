@@ -124,7 +124,7 @@
 
         <!-- ESPECIALIDADE  -->
         @if (editedUser.type === 'vet') {
-        <div class="form-group">
+        <div class="form-group" *ngIf="editedUser.type === 'vet'">
           <label for="especialidade_vet" class="form-label">Especialidade</label>
           <select
             id="especialidade_vet"
@@ -246,4 +246,5 @@
       </div>
     </form>
   </div>
+  <app-loading *ngIf="loading"></app-loading>
 </div>
