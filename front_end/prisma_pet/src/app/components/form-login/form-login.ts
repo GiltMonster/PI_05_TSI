@@ -11,12 +11,13 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { catchError, of } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Notification } from '../../services/notification';
+import { Loading } from '../loading/loading';
 
 
 @Component({
   selector: 'app-form-login',
     standalone: true,
-  imports: [FontAwesomeModule, FormsModule, ReactiveFormsModule, MatIconModule, MatFormFieldModule, MatInputModule, CommonModule],
+  imports: [FontAwesomeModule, FormsModule, ReactiveFormsModule, MatIconModule, MatFormFieldModule, MatInputModule, CommonModule, Loading],
   templateUrl: './form-login.html',
   styleUrl: './form-login.scss'
 })
@@ -25,6 +26,8 @@ export class FormLogin {
   title = 'VeterinariosJA';
   icon_email = faEnvelope;
   icon_senha = faLock;
+  
+    loading = false;
 
 protected loginForms!: FormGroup<{
     email: FormControl<string>;
@@ -54,6 +57,7 @@ protected loginForms!: FormGroup<{
       this.live.announce('Formulário inválido. Por favor, corrija os campos destacados.', 'assertive');
       return;
     }
+    this.loading = true;
 
     const userEmail = this.emailCtrl.value;
     const userPassword = this.passwordCtrl.value;
@@ -61,12 +65,14 @@ protected loginForms!: FormGroup<{
     this.authLogin.login(userEmail, userPassword).pipe(
       // ABNT 5.7/5.9
       catchError(err => {
+        this.loading = false;
       // this.live.announce('Falha no login. Verifique suas credenciais.', 'assertive');
       this.notification.error('Falha no login. Verifique suas credenciais.');
         return of(null);
       })
     ).subscribe(resp => {
       if (!resp) return;
+      this.loading = false;
       // ABNT 5.7: confirma sucesso
       this.live.announce('Login realizado com sucesso.', 'polite');
       this.notification.success('Login realizado com sucesso.');
@@ -78,6 +84,8 @@ protected loginForms!: FormGroup<{
         this.router.navigate(['/tutor']);
       }
 
+      this.loading = false;
+      
       setTimeout(() => window.location.reload(), 500);
       // window.location.reload();
       this.loginForms.reset();

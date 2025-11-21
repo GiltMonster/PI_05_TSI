@@ -29,6 +29,7 @@ class User extends Authenticatable
         'cpf',
         'crmv',
         'pix',
+        'especialidade_vet',
     ];
 
     protected $guard_name = 'api';

@@ -5,11 +5,12 @@ import { TutorCard } from '../tutor-card/tutor-card';
 import { UserInterface } from '../../interfaces';
 import { FormsModule } from '@angular/forms';
 import { UsuarioService } from '../../services/usuario-service';
+import { ModalCreate } from '../modal-create/modal-create';
 
 @Component({
   selector: 'app-tutor-list',
   standalone: true,
-  imports: [CommonModule, MatIconModule, TutorCard, FormsModule],
+  imports: [CommonModule, MatIconModule, TutorCard, FormsModule, ModalCreate],
   templateUrl: './tutor-list.html',
   styleUrls: ['./tutor-list.scss']
 })
@@ -21,6 +22,7 @@ export class TutorList implements OnInit {
   statusMsg = '';
   filteredTutores: UserInterface[] = [];
   typeUser = '';
+  createModalOpen = false;
 
   constructor(
     private usuarioService: UsuarioService
@@ -47,7 +49,6 @@ export class TutorList implements OnInit {
     });
   }
 
-
   clearSearch() {
     this.searchValue = "";
     this.filteredTutores = this.tutores;
@@ -73,7 +74,20 @@ export class TutorList implements OnInit {
       tutor.email.toLowerCase().includes(searchTerm) ||
       (tutor.phone && tutor.phone.toLowerCase().includes(searchTerm))
     );
-
   }
 
+  openCreateModal() {
+    this.createModalOpen = true;
+  }
+
+  closeCreateModal() {
+    this.createModalOpen = false;
+  }
+
+  handleTutorCreated(newTutor: UserInterface) {
+    this.tutores = [newTutor, ...this.tutores];
+    this.filteredTutores = this.filterTutors();
+    this.statusMsg = 'Responsável cadastrado com sucesso.';
+    this.createModalOpen = false;
+  }
 }

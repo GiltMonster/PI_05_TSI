@@ -1,0 +1,175 @@
+.card_vacina_container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--gray-light);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  background-color: var(--white);
+}
+
+.info_vacina_container {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.info_vacina_contant {
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+  }
+
+  p {
+    margin: 0.25rem 0;
+
+    label {
+      font-weight: 600;
+    }
+
+    font-size: 1rem;
+    color: var(--text-secondary);
+  }
+}
+
+.informacoes_vacina {
+
+  mat-expansion-panel {
+    box-shadow: none;
+    border: 1px solid var(--gray-light);
+    border-radius: 8px;
+  }
+
+  mat-panel-title {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+  }
+
+  p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    white-space: pre-wrap;
+  }
+
+  ul {
+
+    label {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--text-secondary);
+    }
+
+    li {
+      list-style: none;
+      color: var(--text-secondary);
+      gap: 0.25rem;
+      font-size: 1rem;
+
+    }
+  }
+}
+
+.btns_vacina {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.btn_cadastro {
+  background: #fff;
+  color: #004AAD;
+  border: 1.5px solid #004AAD;
+  border-radius: 10px;
+  height: 40px;
+  padding: 0 14px;
+  font-weight: 600;
+  line-height: 40px;
+  cursor: pointer;
+  transition: background-color .15s ease, box-shadow .15s ease;
+
+  &:hover {
+    background: #FF914D;
+    color: #fff;
+    border-color: #FF914D;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(43, 108, 176, .35);
+  }
+}
+
+.btn_icon {
+  appearance: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1.5px solid #004AAD;
+  background: #fff;
+  color: #004AAD;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background-color .15s ease, box-shadow .15s ease;
+
+  &:hover {
+    background: #FF914D;
+    color: #fff;
+    border-color: #FF914D;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(43, 108, 176, .35);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    line-height: 1;
+  }
+}
+
+.status_vacina {
+  display: flex;
+  align-items: baseline;
+  gap: 0 0.5rem;
+
+  label {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-secondary);
+
+  }
+
+  .estado-aplicada {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--success);
+  }
+
+  .estado-atrasada {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--error);
+  }
+
+  .estado-programada {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--primary-color);
+  }
+}

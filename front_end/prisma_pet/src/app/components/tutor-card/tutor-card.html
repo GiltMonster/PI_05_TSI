@@ -4,7 +4,7 @@
       {{ userTutor.name }}
     </h3>
     <p class="detalhes_tutor">
-      {{ userTutor.phone | formatPhone }}
+      <span>Telefone:</span> {{ userTutor.phone | formatPhone }}
     </p>
   </div>
 
@@ -35,6 +35,10 @@
     </button>
     }
   </div>
+
+    <div class="tutor-loading-overlay" *ngIf="loading">
+    <app-loading></app-loading>
+  </div>
 </article>
 
 @if(editModalOpen){
@@ -43,12 +47,8 @@
 
 
 @if (deleteModalOpen) {
-<app-modal-delete
-  [title]="'Excluir Responsável'"
+<app-modal-delete [title]="'Excluir Responsável'"
   [message]="'Tem certeza que deseja excluir ' + (userTutor.name || 'este responsável') + '?'"
-  [confirmLabel]="'Excluir'"
-  [cancelLabel]="'Cancelar'"
-  (confirm)="handleConfirmDelete()"
-  (cancel)="closeDeleteModal()"
-></app-modal-delete>
+  [confirmLabel]="'Excluir'" [cancelLabel]="'Cancelar'" (confirm)="handleConfirmDelete()"
+  (cancel)="closeDeleteModal()"></app-modal-delete>
 }

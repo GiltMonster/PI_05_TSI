@@ -29,10 +29,17 @@
       <span id="Buscar Serviço" class="sr-only" aria-live="polite">{{ statusMsg }}</span>
     </form>
 
-    <button class="add_servico_button" type="button" aria-label="Cadastrar novo Serviço">
+    @if (typeUser === 'admin') {
+    <button
+      class="add_servico_button"
+      type="button"
+      aria-label="Cadastrar novo Serviço"
+      (click)="openCreateModal()"
+    >
       <mat-icon aria-hidden="true">add</mat-icon>
       <span>Cadastrar Novo Serviço</span>
     </button>
+    }
   </div>
 
   @if (!filteredServicos || filteredServicos.length === 0) {
@@ -53,5 +60,12 @@
     </li>
     }
   </ul>
+  } @if (createModalOpen) {
+  <app-modal-create-servico
+    *ngIf="createModalOpen"
+    (close)="closeCreateModal()"
+    (save)="handleServicoCreated($event)"
+  >
+  </app-modal-create-servico>
   }
 </section>

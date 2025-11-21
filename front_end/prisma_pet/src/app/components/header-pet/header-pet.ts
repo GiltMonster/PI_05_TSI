@@ -15,7 +15,7 @@ export class HeaderPet implements OnInit {
   @Input() petsList: FichaPetInterface = {
     tutor_name: '', pets: [
       {
-        id: 0, nome: '', tutor: '', consultas: []
+        id: 0, nome: '', tutor: '', consultas: [], vacinas: []
       }
     ]
   };

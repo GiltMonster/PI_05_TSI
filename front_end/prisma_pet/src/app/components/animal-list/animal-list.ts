@@ -5,11 +5,12 @@ import { ReactiveFormsModule, FormControl, FormsModule } from '@angular/forms';
 import { AnimalCard } from '../animal-card/animal-card';
 import { PetInterface } from '../../interfaces';
 import { PetService } from '../../services/pet-service';
+import { ModalCreatePet } from '../modal-create-pet/modal-create-pet';
 
 @Component({
   selector: 'app-animal-list',
   standalone: true,
-  imports: [CommonModule, MatIconModule, ReactiveFormsModule, AnimalCard, FormsModule],
+  imports: [CommonModule, MatIconModule, ReactiveFormsModule, AnimalCard, FormsModule, ModalCreatePet],
   templateUrl: './animal-list.html',
   styleUrls: ['./animal-list.scss'],
 })
@@ -21,6 +22,7 @@ export class AnimalList implements OnInit {
   statusMsg = '';
   filteredPets: PetInterface[] = [];
   typeUser = '';
+  createModalOpen = false;
 
   constructor(private petService: PetService) {}
 
@@ -88,6 +90,21 @@ export class AnimalList implements OnInit {
     );
   });
 }
+
+  openCreateModal() {
+    this.createModalOpen = true;
+  }
+
+  closeCreateModal() {
+    this.createModalOpen = false;
+  }
+
+  handlePetCreated(newPet: PetInterface) {
+    this.pets = [newPet, ...this.pets];
+    this.filteredPets = this.filterPets();
+    this.statusMsg = 'Animal cadastrado com sucesso.';
+    this.createModalOpen = false;
+  }
 }
 
 

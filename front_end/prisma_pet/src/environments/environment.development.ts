@@ -1,5 +1,5 @@
- const end_point_base = 'https://prisma-pet-api.up.railway.app/api';
-//const end_point_base = 'http://127.0.0.1:8000/api';
+//  const end_point_base = 'https://prisma-pet-api.up.railway.app/api';
+const end_point_base = 'http://127.0.0.1:8000/api';
 
 export const environment = {
   production: false,
@@ -64,5 +64,4 @@ export const environment = {
   API_URL_SERVICO_CREATE: `${end_point_base}/servico/novo`,
   API_URL_SERVICO_UPDATE: `${end_point_base}/servico/editar`,
   API_URL_SERVICO_DELETE: `${end_point_base}/servico/deletar/`, // + id
-
 };

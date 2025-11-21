@@ -1,0 +1,80 @@
+.loading-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  z-index: 11000;
+}
+
+.loading-card {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 1rem 1rem;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.paw-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.paw-icon {
+  font-size: 2.4rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  animation: paw-bounce 0.8s infinite ease-in-out;
+  color: var(--primary-color);
+}
+
+.loading-text {
+  margin: 0;
+  font-weight: 600;
+  color: var(--primary-color);
+  font-size: 1rem;
+}
+
+/* patinha pulando */
+@keyframes paw-bounce {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-6px) scale(1.05);
+    opacity: 1;
+  }
+  60% {
+    transform: translateY(0) scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.4;
+  }
+}
+
+@media (max-width: 480px) {
+  .loading-card {
+    width: 80%;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .paw-icon {
+    font-size: 2rem;
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .loading-text {
+    font-size: 0.95rem;
+    text-align: center;
+  }
+}
