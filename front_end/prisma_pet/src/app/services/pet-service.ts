@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { UsuarioService } from './usuario-service';
-import { Observable, switchMap } from 'rxjs';
+import { map, Observable, switchMap } from 'rxjs';
 import { FichaPetInterface, PetInterface } from '../interfaces';
 
 @Injectable({
@@ -56,4 +56,15 @@ export class PetService {
   createPet(data: PetInterface) {
     return this.http.post<PetInterface>(environment.API_URL_ADMIN_PET_REGISTER, data);
   }
+
+getMyPets(): Observable<PetInterface[]> {
+  return this.userService.getUserData().pipe( // obter dados do usuário logado
+    switchMap((user) => // usar os dados do usuário para obter os pets
+      this.http.get<FichaPetInterface>( // obter ficha dos pets do usuário logado
+        `${environment.API_URL_CLIENTE_GET_PETS_BY_USER_ID}/${user.id}` // usar user.id para buscar pets
+      )
+    ),
+    map((ficha) => ficha.pets ?? []) // extrair array de pets da ficha
+  );
+}
 }

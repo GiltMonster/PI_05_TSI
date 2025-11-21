@@ -42,7 +42,7 @@ export class AnimalCard implements OnInit {
   private loadTutorName() {
     if (!this.userPet.user_id) return;
 
-    this.usuarioService.getUserById(String(this.userPet.user_id)).subscribe({
+    this.usuarioService.getTutorById(String(this.userPet.user_id)).subscribe({
       next: (user: any) => {
         this.tutorName = user.name;
 

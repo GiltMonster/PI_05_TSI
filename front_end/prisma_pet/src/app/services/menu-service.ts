@@ -12,7 +12,6 @@ export class MenuService {
 
   getTypeMenuUser(): Observable<{ type: string }> {
     return this.http.get<{type: string}>(environment.API_URL_AUTH_MY_TYPE);
-
   }
 
 }
