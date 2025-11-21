@@ -20,7 +20,7 @@ export interface UserInterface {
   complemento?: string;
   cpf: string;
   crmv?: string;
-  especialidade_vet?:string;
+  especialidade_vet?: string;
   pix?: string;
 }
 
@@ -120,11 +120,12 @@ export interface PetInterface {
   tutor?: string;
   caso_clinico?: string;
   imagem?: string;
-  consultas?: Array<PetConsulta>;
   user_id?: number;
   cor_pelagem?: string;
   casoClinico?: string;
   tutorName?: string;
+  consultas?: Array<PetConsulta>;
+  vacinas?: Array<PetVacina>;
 }
 
 export interface PetConsulta {
@@ -136,6 +137,21 @@ export interface PetConsulta {
   nome_vet?: string;
   nome_servico?: string;
   categoria_servico?: string;
+}
+
+export interface PetVacina {
+  id: number;
+  vet_id: number;
+  pet_id: number;
+  data_vacinacao: Date;
+  data_reforco: Date;
+  dose_atual: string;
+  dose_total: string;
+  tipo_vacina: string;
+  fabricante: string;
+  observacoes: string;
+  estado_vacina: string;
+  nome_vet: string;
 }
 
 export interface ServicosInterface {
