@@ -7,17 +7,21 @@ import { ServiceCard } from '../service-card/service-card';
 import { UsuarioService } from '../../services/usuario-service';
 import { ServicosService } from '../../services/servicos-service';
 import { ModalCreateServico } from '../modal-create-servico/modal-create-servico';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-service-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIconModule, ReactiveFormsModule, ServiceCard, ModalCreateServico],
+  imports: [CommonModule, FormsModule, MatIconModule, ReactiveFormsModule, ServiceCard, ModalCreateServico, MatPaginatorModule],
   templateUrl: './service-list.html',
   styleUrls: ['./service-list.scss'],
 })
 export class ServiceList implements OnInit {
   @Input() servicos: ServicosInterface[] = [];
   @Input() emptyMessage = 'Nenhum serviço cadastrado';
+
+  pageSize = 5;
+  pageIndex = 0;
 
   searchValue = '';
   statusMsg = '';
@@ -61,11 +65,24 @@ export class ServiceList implements OnInit {
 
   onSearch() {
     this.filteredServicos = this.filterServicos();
+    this.pageIndex = 0;
   }
 
   onServicoDeleted(servicoId: number) {
     this.servicos = this.servicos.filter((servico) => servico.id !== servicoId);
     this.filteredServicos = this.filterServicos();
+    if (this.pageIndex > 0 && this.pagedServicos.length === 0) {
+      this.pageIndex--;
+    }
+  }
+  get pagedServicos(): ServicosInterface[] {
+    const start = this.pageIndex * this.pageSize;
+    return this.filteredServicos.slice(start, start + this.pageSize);
+  }
+
+  onPageChange(event: any) {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
   }
 
   filterServicos(): ServicosInterface[] {
@@ -89,11 +106,11 @@ export class ServiceList implements OnInit {
     openCreateModal() {
       this.createModalOpen = true;
     }
-  
+
     closeCreateModal() {
       this.createModalOpen = false;
     }
-  
+
     handleServicoCreated(newServico: ServicosInterface) {
       this.servicos = [newServico, ...this.servicos];
       this.filteredServicos = this.filterServicos();
