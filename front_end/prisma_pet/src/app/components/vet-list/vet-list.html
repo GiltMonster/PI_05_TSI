@@ -49,15 +49,25 @@
 
   } @if (filteredVets.length) {
   <ul class="grid" role="list">
-    @for (vet of filteredVets; track vet.id) {
+    @for (vet of pagedVets; track vet.id) {
     <li class="grid__item" role="listitem">
       <app-vet-card [userVet]="vet" [typeUser]="typeUser" (vetDeleted)="onVetDeleted($event)" />
     </li>
     }
   </ul>
-  } @if (createModalOpen) {
+  <mat-paginator
+    [length]="filteredVets.length"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    [pageSizeOptions]="[5, 10, 20]"
+    (page)="onPageChange($event)"
+    [ariaLabel]="'Paginação da lista de veterinários'"
+    [showFirstLastButtons]="true"
+  />
+  }
+
+  @if (createModalOpen) {
   <app-modal-create
-    *ngIf="createModalOpen"
     (close)="closeCreateModal()"
     [userType]="'vet'"
     (save)="handleVetCreated($event)"

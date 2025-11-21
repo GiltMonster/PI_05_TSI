@@ -6,17 +6,21 @@ import { VetCard } from '../vet-card/vet-card';
 import { UserInterface } from '../../interfaces';
 import { UsuarioService } from '../../services/usuario-service';
 import { ModalCreate } from '../modal-create/modal-create';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-vet-list',
   standalone: true,
-  imports: [CommonModule,FormsModule, MatIconModule, ReactiveFormsModule, VetCard, ModalCreate],
+  imports: [CommonModule, FormsModule, MatIconModule, ReactiveFormsModule, VetCard, ModalCreate, MatPaginatorModule],
   templateUrl: './vet-list.html',
   styleUrl: './vet-list.scss'
 })
 export class VetList implements OnInit {
   @Input() vets: UserInterface[] = [];
   @Input() emptyMessage = 'Nenhum veterinário cadastrado';
+
+  pageSize = 5;
+  pageIndex = 0;
 
   searchValue = '';
   statusMsg = '';
@@ -57,11 +61,24 @@ export class VetList implements OnInit {
 
   onSearch() {
     this.filteredVets = this.filterVets();
+    this.pageIndex = 0;
   }
 
   onVetDeleted(vetId: number) {
     this.vets = this.vets.filter(vet => vet.id !== vetId);
     this.filteredVets = this.filterVets();
+    if (this.pageIndex > 0 && this.pagedVets.length === 0) {
+      this.pageIndex--;
+    }
+  }
+  get pagedVets(): UserInterface[] {
+    const start = this.pageIndex * this.pageSize;
+    return this.filteredVets.slice(start, start + this.pageSize);
+  }
+
+  onPageChange(event: any) {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
   }
 
   filterVets(): UserInterface[] {
@@ -78,7 +95,7 @@ export class VetList implements OnInit {
     );
   }
 
-    openCreateModal() {
+  openCreateModal() {
     this.createModalOpen = true;
   }
 
