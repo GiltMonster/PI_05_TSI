@@ -62,13 +62,12 @@ export class AnimalList implements OnInit {
 
   onSearch() {
     this.filteredPets = this.filterPets();
-    this.pageIndex = 0; // Volta para a primeira página ao buscar
+    this.pageIndex = 0;
   }
 
   onPetDeleted(petId: number) {
     this.pets = this.pets.filter((pet) => pet.id !== petId);
     this.filteredPets = this.filterPets();
-    // Garante que não fique em uma página vazia após deletar
     if (this.pageIndex > 0 && this.pagedPets.length === 0) {
       this.pageIndex--;
     }
