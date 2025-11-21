@@ -3,29 +3,30 @@ import { FormsModule } from '@angular/forms';
 import { PetInterface, UserInterface } from '../../interfaces';
 import { PetService } from '../../services/pet-service';
 import { Notification } from '../../services/notification';
-import { UsuarioService } from '../../services/usuario-service';
 import { CommonModule } from '@angular/common';
 import { VeterinarioService } from '../../services/veterinario-service';
 
 @Component({
   selector: 'app-modal-edit-pet',
   imports: [FormsModule, CommonModule],
-  standalone:true,
+  standalone: true,
   templateUrl: './modal-edit-pet.html',
   styleUrls: ['./modal-edit-pet.scss'],
 })
 export class ModalEditPet implements OnChanges {
-@Input() pet!: PetInterface;
+  @Input() pet!: PetInterface;
   @Output() close = new EventEmitter<void>();
-  @Output() save  = new EventEmitter<PetInterface>();
+  @Output() save = new EventEmitter<PetInterface>();
 
   editedPet: PetInterface = {} as PetInterface;
   tutores: UserInterface[] = [];
 
+  especies: string[] = ['Cachorro', 'Gato'].sort((a, b) => a.localeCompare(b, 'pt-BR')); // ordenar em ordem alfabética
+
   constructor(
     private petService: PetService,
     private notification: Notification,
-    private vetService: VeterinarioService,
+    private vetService: VeterinarioService
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -42,9 +43,9 @@ export class ModalEditPet implements OnChanges {
 
       const sexo: any = this.pet.sexo;
       if (sexo === 1 || sexo === '1' || sexo === true) {
-        this.editedPet.sexo = true;   // macho
+        this.editedPet.sexo = true; // macho
       } else if (sexo === 0 || sexo === '0' || sexo === false) {
-        this.editedPet.sexo = false;  // femea
+        this.editedPet.sexo = false; // femea
       }
 
       const castrado: any = this.pet.castrado;
@@ -59,7 +60,11 @@ export class ModalEditPet implements OnChanges {
   private loadTutores() {
     this.vetService.getAllTutors().subscribe({
       next: (res) => {
-        this.tutores = res;
+        this.tutores = [...res].sort((a, b) =>
+          (a.name || '').localeCompare(b.name || '', 'pt-BR', {
+            sensitivity: 'base',
+          })
+        ); // ordenar em ordem alfabética
 
         // faz com que o tutor atual do pet fique selecionado
         if (!this.editedPet.user_id && this.pet.user_id) {

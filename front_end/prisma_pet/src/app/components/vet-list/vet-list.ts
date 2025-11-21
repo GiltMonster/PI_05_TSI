@@ -5,11 +5,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { VetCard } from '../vet-card/vet-card';
 import { UserInterface } from '../../interfaces';
 import { UsuarioService } from '../../services/usuario-service';
+import { ModalCreate } from '../modal-create/modal-create';
 
 @Component({
   selector: 'app-vet-list',
   standalone: true,
-  imports: [CommonModule,FormsModule, MatIconModule, ReactiveFormsModule, VetCard],
+  imports: [CommonModule,FormsModule, MatIconModule, ReactiveFormsModule, VetCard, ModalCreate],
   templateUrl: './vet-list.html',
   styleUrl: './vet-list.scss'
 })
@@ -21,6 +22,7 @@ export class VetList implements OnInit {
   statusMsg = '';
   filteredVets: UserInterface[] = [];
   typeUser = '';
+  createModalOpen = false;
 
   constructor(
     private usuarioService: UsuarioService
@@ -72,7 +74,23 @@ export class VetList implements OnInit {
     return this.vets.filter(vet =>
       vet.name.toLowerCase().includes(searchTerm) ||
       vet.crmv?.toLowerCase().includes(searchTerm) ||
-      vet.especialidade?.toLowerCase().includes(searchTerm)
+      vet.especialidade_vet?.toLowerCase().includes(searchTerm)
     );
+  }
+
+    openCreateModal() {
+    this.createModalOpen = true;
+  }
+
+  closeCreateModal() {
+    this.createModalOpen = false;
+  }
+
+
+  handleVetCreated(newVet: UserInterface) {
+    this.vets = [newVet, ...this.vets];
+    this.filteredVets = this.filterVets();
+    this.statusMsg = 'Veterinário cadastrado com sucesso.';
+    this.createModalOpen = false;
   }
 }

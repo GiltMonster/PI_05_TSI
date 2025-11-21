@@ -35,6 +35,10 @@
     </button>
     }
   </div>
+
+    <div class="tutor-loading-overlay" *ngIf="loading">
+    <app-loading></app-loading>
+  </div>
 </article>
 
 @if(editModalOpen){

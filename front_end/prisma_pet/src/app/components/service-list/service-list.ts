@@ -6,11 +6,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { ServiceCard } from '../service-card/service-card';
 import { UsuarioService } from '../../services/usuario-service';
 import { ServicosService } from '../../services/servicos-service';
+import { ModalCreateServico } from '../modal-create-servico/modal-create-servico';
 
 @Component({
   selector: 'app-service-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIconModule, ReactiveFormsModule, ServiceCard],
+  imports: [CommonModule, FormsModule, MatIconModule, ReactiveFormsModule, ServiceCard, ModalCreateServico],
   templateUrl: './service-list.html',
   styleUrls: ['./service-list.scss'],
 })
@@ -22,6 +23,7 @@ export class ServiceList implements OnInit {
   statusMsg = '';
   filteredServicos: ServicosInterface[] = [];
   typeUser = '';
+  createModalOpen = false;
 
   constructor(
     private servicoService: ServicosService,
@@ -83,4 +85,19 @@ export class ServiceList implements OnInit {
       );
     });
   }
+
+    openCreateModal() {
+      this.createModalOpen = true;
+    }
+  
+    closeCreateModal() {
+      this.createModalOpen = false;
+    }
+  
+    handleServicoCreated(newServico: ServicosInterface) {
+      this.servicos = [newServico, ...this.servicos];
+      this.filteredServicos = this.filterServicos();
+      this.statusMsg = 'Serviço cadastrado com sucesso.';
+      this.createModalOpen = false;
+    }
 }

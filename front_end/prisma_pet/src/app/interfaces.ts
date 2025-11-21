@@ -20,7 +20,7 @@ export interface UserInterface {
   complemento?: string;
   cpf: string;
   crmv?: string;
-  especialidade?:string;
+  especialidade_vet?:string;
   pix?: string;
 }
 
@@ -116,14 +116,13 @@ export interface PetInterface {
   peso?: number;
   temperamento?: string;
   possuiCarteirinha?: boolean;
-  cor_pelagem?: string;
   castrado?: boolean;
   tutor?: string;
   caso_clinico?: string;
   imagem?: string;
   consultas?: Array<PetConsulta>;
   user_id?: number;
-  cor?: string;
+  cor_pelagem?: string;
   casoClinico?: string;
   tutorName?: string;
 }

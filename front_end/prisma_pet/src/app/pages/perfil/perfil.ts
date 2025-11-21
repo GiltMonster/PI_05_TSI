@@ -4,10 +4,11 @@ import { UserInterface } from '../../interfaces';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Notification } from '../../services/notification';
+import { Loading } from '../../components/loading/loading';
 
 @Component({
   selector: 'app-perfil',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, Loading],
   templateUrl: './perfil.html',
   styleUrl: './perfil.scss',
   standalone: true
@@ -25,6 +26,7 @@ export class Perfil implements OnInit {
     cpf: '',
     phone: ''
   }
+  loading = false;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -75,6 +77,7 @@ export class Perfil implements OnInit {
   }
 
   getUserData() {
+    this.loading = true;
     this.usuarioService.getUserData().subscribe({
       next: (res) => {
         this.userData = res;
@@ -82,16 +85,18 @@ export class Perfil implements OnInit {
         this.class_group_full_option = this.userData.type !== 'vet' ? 'form-group form-group--full' : 'form-group';
 
         console.log(res);
-
+        this.loading = false;
 
       },
       error: (err) => {
         console.log('Erro, não foi possível ler os dados do usuário!!');
+        this.loading = false;
       }
     });
   }
 
   updateUserData() {
+    this.loading = true;
     this.userData = {
       ...this.userData,
       cpf: this.removeMask(this.userData.cpf || ''),
@@ -102,10 +107,12 @@ export class Perfil implements OnInit {
       next: (res) => {
         console.log('Dados atualizados com sucesso!', res);
         this.notification.success('Dados atualizados com sucesso!');
+        this.loading = false;
       },
       error: (err) => {
         console.log('Erro ao atualizar os dados do usuário!!', err);
         this.notification.error('Erro ao atualizar os dados do usuário!!');
+        this.loading = false;
       }
     });
   }

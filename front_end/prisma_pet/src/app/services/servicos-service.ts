@@ -29,4 +29,8 @@ export class ServicosService {
   updateServico(data: ServicosInterface) {
     return this.http.put(environment.API_URL_SERVICO_UPDATE, data);
   }
+
+  createServico(data: ServicosInterface) {
+    return this.http.post<ServicosInterface>(environment.API_URL_SERVICO_CREATE, data);
+  }
 }

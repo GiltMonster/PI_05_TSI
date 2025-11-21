@@ -1,5 +1,3 @@
-/* === BASE: exatamente o que você já usa nos outros modais === */
-
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -24,12 +22,85 @@
   overflow-y: auto;
 }
 
+
+.modal-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
 .form-section__title {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
   color: var(--text-primary);
   padding-bottom: 1rem;
   border-bottom: 2px solid var(--border-color);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.form-grid--full {
+  grid-template-columns: 1fr;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group--full {
+  grid-column: 1 / -1;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.form-label--required::after {
+  content: '*';
+  color: var(--error);
+}
+
+.form-input {
+  padding: 0.6rem 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  background-color: var(--white);
+}
+
+.form-input:hover {
+  border-color: var(--primary-light);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.form-input:disabled {
+  background-color: var(--background);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-input::placeholder {
+  color: var(--text-secondary);
 }
 
 .button-group {
@@ -80,7 +151,22 @@
   border-color: var(--text-secondary);
 }
 
+
+.loading-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgb(255 255 255 / 60%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+}
+
 @media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
   .button-group {
     flex-direction: column;
   }
@@ -98,20 +184,19 @@
   }
 }
 
-.modal-delete__body {
-  margin-top: 0.75rem;
+*:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
 }
 
-.modal-delete__message {
-  font-size: 0.98rem;
-  color: var(--text-secondary);
-  line-height: 1.5;
-}
-
-.btn--danger {
-  background-color: var(--error);
-}
-
-.btn--danger:hover {
-  background-color: #be123c;
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
