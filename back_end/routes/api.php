@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\PetController;
 use App\Http\Controllers\ServicoController;
+use App\Http\Controllers\VacinaPetController;
 use App\Http\Controllers\VetController;
 use GuzzleHttp\Client;
 
@@ -47,6 +48,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/adm/novaConsulta', [ConsultaPetController::class, 'novaConsulta']);
         Route::put('/adm/editarConsulta', [ConsultaPetController::class, 'editarConsulta']);
         Route::delete('/adm/deletarConsulta/{id}', [ConsultaPetController::class, 'deletarConsulta']);
+
+        Route::post('/adm/novaVacina', [VacinaPetController::class, 'novaVacina']);
+        Route::get('/adm/getVacinaById/{id}', [VacinaPetController::class, 'getVacinaById']);
+        Route::put('/adm/editarVacina', [VacinaPetController::class, 'editarVacina']);
+        Route::delete('/adm/deletarVacina/{id}', [VacinaPetController::class, 'deletarVacina']);
     });
 
     Route::middleware(['role:admin|vet'])->group(function () {
@@ -63,6 +69,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/vet/novaConsulta', [ConsultaPetController::class, 'novaConsulta']);
         Route::put('/vet/editarConsulta', [ConsultaPetController::class, 'editarConsulta']);
         Route::delete('/vet/deletarConsulta/{id}', [ConsultaPetController::class, 'deletarConsulta']);
+
+        Route::post('/vet/novaVacina', [VacinaPetController::class, 'novaVacina']);
+        Route::get('/vet/getVacinaById/{id}', [VacinaPetController::class, 'getVacinaById']);
+        Route::put('/vet/editarVacina', [VacinaPetController::class, 'editarVacina']);
+        Route::delete('/vet/deletarVacina/{id}', [VacinaPetController::class, 'deletarVacina']);
     });
 
     Route::middleware(['role:admin|user'])->group(function () {
