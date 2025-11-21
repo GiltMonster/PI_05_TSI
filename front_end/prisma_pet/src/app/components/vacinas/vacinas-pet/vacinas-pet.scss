@@ -61,7 +61,6 @@ h2 {
 
   .card_resume {
     display: flex;
-    flex-direction: column;
     align-items: center;
     border: 1px solid var(--gray-light);
     border-radius: 12px;
@@ -82,9 +81,44 @@ h2 {
   .card_resume:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
+}
 
-  @media (max-width: 600px) {
+
+@media (max-width: 870px) {
+  .container_vacina {
     flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .container_vacina h2 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .resume_vacinas {
+    justify-content: space-between;
     gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .resume_vacinas .card_resume {
+    padding: 0.85rem 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .container_vacina h2 {
+    font-size: 1.15rem;
+  }
+
+  .resume_vacinas {
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .resume_vacinas .card_resume {
+    width: 100%;
+    justify-content: flex-start;
   }
 }
