@@ -131,6 +131,7 @@ export interface PetInterface {
 export interface PetConsulta {
   id: number;
   vet_id: number;
+  pet_id: number;
   servico_id: number;
   data_consulta: Date;
   anamnese: string;
