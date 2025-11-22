@@ -11,7 +11,7 @@
   </div>
 
   @for (consulta of pet_consultas; track consulta.id) {
-  <app-consultas-pet-list [pet_consulta]="consulta" [userType]="userType" />
+  <app-consultas-pet-list [pet_consulta]="consulta" [userType]="userType" (delete)="handleConsultaDeleted($event)" />
   }
 
 </section>

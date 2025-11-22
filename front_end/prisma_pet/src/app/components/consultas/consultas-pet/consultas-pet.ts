@@ -45,5 +45,9 @@ export class ConsultasPet {
 
   }
 
+  handleConsultaDeleted(deletedPetConsulta: PetConsulta) {
+    this.pet_consultas = this.pet_consultas.filter(c => c.id !== deletedPetConsulta.id);
+
+  }
 
 }
