@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, Input } from '@angular/core';
 import { ConsultasPetList } from "../consultas-pet-list/consultas-pet-list";
 import { PetConsulta } from '../../../interfaces';
 import { CommonModule } from '@angular/common';
 import { MatIcon } from "@angular/material/icon";
 import { ConsultasPetModal } from "../consultas-pet-modal/consultas-pet-modal";
+import { UsuarioService } from '../../../services/usuario-service';
 
 
 
@@ -17,6 +18,7 @@ export class ConsultasPet {
 
   @Input() pet_consultas: Array<PetConsulta> = [];
   @Input() pet_id: number = 0;
+  @Input() userType: string = '';
 
   createModalOpen = false;
   editModalOpen = false;

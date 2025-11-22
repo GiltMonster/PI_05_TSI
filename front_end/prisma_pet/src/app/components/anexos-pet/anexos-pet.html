@@ -13,11 +13,13 @@
   @if (activeTab === 'consultas') {
 
     @if(pet_consultas.length != 0) {
-      <app-consultas-pet [pet_id]="pet_id" [pet_consultas]="pet_consultas" />
+      <app-consultas-pet [pet_id]="pet_id" [userType]="userType" [pet_consultas]="pet_consultas" />
     } @else {
       <div class="tab-container-not-found">
         <h2>Nenhuma consulta cadastrada para este animal.</h2>
-        <button class="btn btn--primary" (click)="openCreateModal()">Cadastrar uma nova consulta</button>
+        @if (userType !== 'user') {
+          <button class="btn btn--primary" (click)="openCreateModal()">Cadastrar uma nova consulta</button>
+        }
       </div>
     }
   } @else if (activeTab === 'vacinas') {

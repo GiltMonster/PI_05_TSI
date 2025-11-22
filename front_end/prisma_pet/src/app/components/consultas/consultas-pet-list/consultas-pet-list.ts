@@ -14,7 +14,7 @@ import { ConsultasPetModal } from "../consultas-pet-modal/consultas-pet-modal";
 export class ConsultasPetList {
 
   @Input() pet_consulta: PetConsulta = {} as PetConsulta;
-
+  @Input() userType: string = '';
 
   createModalOpen = false;
   editModalOpen = false;

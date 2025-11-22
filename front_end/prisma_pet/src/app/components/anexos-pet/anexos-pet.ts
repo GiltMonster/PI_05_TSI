@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { VacinasPet } from "../vacinas/vacinas-pet/vacinas-pet";
 import { OutrosAnexosPet } from "../outros-anexos-pet/outros-anexos-pet";
 import { ConsultasPet } from '../consultas/consultas-pet/consultas-pet';
 import { PetConsulta, PetVacina } from '../../interfaces';
 import { ConsultasPetModal } from '../consultas/consultas-pet-modal/consultas-pet-modal';
+import { UsuarioService } from '../../services/usuario-service';
 
 @Component({
   selector: 'app-anexos-pet',
@@ -13,7 +14,7 @@ import { ConsultasPetModal } from '../consultas/consultas-pet-modal/consultas-pe
   styleUrl: './anexos-pet.scss',
   standalone: true,
 })
-export class AnexosPet {
+export class AnexosPet implements OnInit {
 
   @Input() pet_consultas: Array<PetConsulta> = [];
   @Input() pet_vacinas: Array<PetVacina> = [];
@@ -24,6 +25,23 @@ export class AnexosPet {
 
   createModalOpen = false;
   editModalOpen = false;
+
+  userType: string = '';
+
+  constructor(
+    private usuarioService: UsuarioService
+  ) { }
+
+  ngOnInit(): void {
+    this.usuarioService.getUserType().subscribe({
+      next: (res) => {
+        this.userType = res.type;
+      },
+      error: (err) => {
+        console.log('erro ao verificar tipo de usuário:', err);
+      }
+    });
+  }
 
   setActiveTab(tab: string) {
     this.activeTab = tab;
