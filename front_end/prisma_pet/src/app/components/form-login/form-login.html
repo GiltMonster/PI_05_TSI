@@ -22,8 +22,11 @@ Sessões ABNT: 5.9, 5.1, 5.7, 5.2. -->
           formControlName="email"
           placeholder="Digite seu e-mail"
           autocomplete="email"
-          aria-describedby="ajuda-login email-erro" />
-        <span id="email-erro" class="sr-only" *ngIf="emailCtrl?.invalid && loginForms.touched">E-mail inválido.</span>
+          aria-describedby="ajuda-login email-erro"
+        />
+        <span id="email-erro" class="sr-only" *ngIf="emailCtrl?.invalid && loginForms.touched"
+          >E-mail inválido.</span
+        >
       </div>
 
       <div class="input-group">
@@ -35,8 +38,11 @@ Sessões ABNT: 5.9, 5.1, 5.7, 5.2. -->
           formControlName="password"
           placeholder="Digite sua senha"
           autocomplete="current-password"
-          aria-describedby="ajuda-login senha-erro" />
-        <span id="senha-erro" class="sr-only" *ngIf="passwordCtrl?.invalid && loginForms.touched">Senha obrigatória.</span>
+          aria-describedby="ajuda-login senha-erro"
+        />
+        <span id="senha-erro" class="sr-only" *ngIf="passwordCtrl?.invalid && loginForms.touched"
+          >Senha obrigatória.</span
+        >
       </div>
 
       <!-- <div class="forgot-password">
@@ -44,11 +50,15 @@ Sessões ABNT: 5.9, 5.1, 5.7, 5.2. -->
       </div> -->
 
       <button class="btn-login" type="submit" [disabled]="loginForms.invalid">Entrar</button>
+
+      <div class="termos">
+        <button mat-button type="button" (click)="openDialogTermos()">Termos de Uso</button>
+        <button mat-button type="button" (click)="openDialogPrivacidade()">Política de Privacidade</button>
+      </div>
     </form>
 
     <div class="loading-overlay" *ngIf="loading">
       <app-loading></app-loading>
     </div>
-    
   </div>
 </section>

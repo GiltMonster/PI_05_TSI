@@ -42,10 +42,17 @@
     </li>
     }
   </ul>
-  <mat-paginator [length]="filteredPets.length" [pageSize]="pageSize" [pageIndex]="pageIndex"
-    [pageSizeOptions]="[5, 10, 20]" (page)="onPageChange($event)" [ariaLabel]="'Paginação da lista de animais'"
-    [showFirstLastButtons]="true" />
-  }
+  <mat-paginator
+    class="paginator"
+    [length]="filteredPets.length"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    [pageSizeOptions]="[5, 10, 20]"
+    (page)="onPageChange($event)"
+    [ariaLabel]="'Paginação da lista de animais'"
+    [showFirstLastButtons]="true">
+  </mat-paginator>
+}
 
   @if (createModalOpen) {
   <app-modal-create-pet *ngIf="createModalOpen" (close)="closeCreateModal()" (save)="handlePetCreated($event)">

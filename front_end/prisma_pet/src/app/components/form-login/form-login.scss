@@ -11,7 +11,7 @@ body {
   right: 0;
   top: 0;
   height: 100vh;
-  width: 40vw;
+  width: 46vw;
   background-color: #fff;
   box-shadow: -2px 0 12px rgba(0, 0, 0, 0.05);
   display: flex;
@@ -60,6 +60,9 @@ form {
 
   .icon-left {
     position: absolute;
+    left: 18px;
+    width: 18px;
+    height: 18px;
     opacity: 0.6;
     pointer-events: none;
   }
@@ -83,7 +86,7 @@ form {
 
       /* ABNT 5.9 e 5.10/5.11 */
     &:focus, input:focus-visible {
-        outline: 3px solid #005FCC; 
+        outline: 3px solid #005FCC;
         outline-offset: 2px;
       border-color: #004aad;
       background-color: #fff;
@@ -113,23 +116,23 @@ form {
   }
 }
 
-.forgot-password {
-  text-align: right;
-  margin-bottom: 0.1vh;
-}
+// .forgot-password {
+//   text-align: right;
+//   margin-bottom: 0.1vh;
+// }
 
-.forgot-password a {
-  color: #004aad;
-  text-decoration: none;
-  font-size: 14px;
-  transition: color 0.3s ease;
-  padding: 10px;
-  cursor: pointer;
+// .forgot-password a {
+//   color: #004aad;
+//   text-decoration: none;
+//   font-size: 14px;
+//   transition: color 0.3s ease;
+//   padding: 10px;
+//   cursor: pointer;
 
-  &:hover, a:focus-visible {
-  color: #965229;
-  }
-}
+//   &:hover, a:focus-visible {
+//   color: #965229;
+//   }
+// }
 
 .btn-login {
   width: 100%;
@@ -140,12 +143,15 @@ form {
   color: white;
   font-size: 20px;
   cursor: pointer;
-  margin-top: 30px;
   transition: all 0.3s ease;
   box-shadow: 0 4px 16px rgba(92, 139, 197, 0.3);
 
   &:hover {
     background: #ff914d;
+  }
+
+    &:active {
+    transform: translateY(1px);
   }
 
   &:disabled {
@@ -160,10 +166,18 @@ form {
   }
 }
 
-@media (max-width: 800px) {
+.termos {
+  margin-top: 10px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 980px) {
   .login-right {
     position: absolute;
-    height: 100vh;
+    height: 100svh;
     width: 100%;
     background: #004aad;
     background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 2px);
@@ -187,11 +201,11 @@ form {
   }
 
   .titulo h2 {
-    font-size: 1.0rem;
+    font-size: 1.5rem;
   }
 
   .titulo p {
-    font-size: 1.8rem;
+    font-size: 1.0rem;
     margin-top: 10px;
   }
 }

@@ -50,7 +50,7 @@
 }
 
 .pet-info button {
-  margin-top: 0.5rem;
+  margin-top: 0.9rem;
 }
 
 .pet-details-container {
@@ -92,7 +92,7 @@
 .pet-detail,
 .pet-detail-full,
 label {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--text-primary);
   margin-bottom: 0.25rem;
@@ -101,9 +101,10 @@ label {
 .pet-detail,
 .pet-detail-full,
 p {
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: var(--text-secondary);
   margin: 0;
+  font-weight: normal;
 }
 
 .button-group {
@@ -151,4 +152,124 @@ button {
   background-color: var(--primary-dark);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 1024px) {
+  .section-content {
+    padding: 0.75rem;
+  }
+
+  .pet-container {
+    max-width: 100%;
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+  }
+
+  .pet-header {
+    gap: 1.5rem;
+  }
+
+  .pet-info h1 {
+    font-size: 1.75rem;
+  }
+
+  .pet-details-container {
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-content {
+    padding: 0.5rem;
+  }
+
+  .pet-container {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  .pet-header {
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .header-content {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .pet-avatar__image {
+    width: 72px;
+    height: 72px;
+  }
+
+  .pet-info h1 {
+    font-size: 1.5rem;
+  }
+
+  .pet-info p {
+    font-size: 0.9rem;
+  }
+
+  .row-details {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .pet-detail,
+  .pet-detail-full {
+    padding: 0.25rem;
+    gap: 10px;
+  }
+
+  .pet-detail label,
+  .pet-detail-full label{
+    font-size: 0.9rem;
+    padding: 0 10px;
+  }
+
+  .pet-detail p,
+  .pet-detail-full p{
+    font-size: 0.9rem;
+    padding: 0 10px;
+  }
+
+  .button-group {
+    width: 100%;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .button-group .btn {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pet-container {
+    padding: 0.85rem;
+  }
+
+  .pet-info h1 {
+    font-size: 1.3rem;
+  }
+
+  .pet-info p {
+    font-size: 0.85rem;
+  }
+
+  .button-group {
+    justify-content: center;
+  }
+
+  .button-group .btn {
+    width: 100%;
+    justify-content: center;
+  }
 }

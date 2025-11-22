@@ -22,7 +22,7 @@ Sessões ABNT: 5.2, 5.3, 5.7, 5.1. -->
 
     <div class="profile">
       @for (item of profile(); track $index) {
-      <a [routerLink]="item.rotaUrl" aria-label="Abrir perfil de {{ item.nome }}">
+      <a [routerLink]="item.rotaUrl" aria-label="Abrir perfil de {{ item.nome }}" (click)="openProfile()">
         @if (item.iconUrl) {
         <mat-icon class="icon_profile" aria-hidden="true">{{ item.iconUrl }}</mat-icon>
         }

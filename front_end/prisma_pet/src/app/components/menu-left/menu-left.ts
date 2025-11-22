@@ -86,4 +86,8 @@ export class MenuLeft {
   goToLink(link: string) {
     this.router.navigate([link]);
   }
+
+    isActive(link: string): boolean {
+    return this.router.url === link; // Verifica se a rota atual é igual ao link fornecido - pra ativar o active do menu
+  }
 }
