@@ -56,12 +56,21 @@ export const environment = {
   API_URL_CLIENTE_PET_UPDATE: `${end_point_base}/cliente/editarPet`,
   API_URL_CLIENTE_PET_DELETE: `${end_point_base}/cliente/deletarPet`,
 
-  // --- History pet ---
-
   // --- servicos ---
   API_URL_SERVICO_LIST_ALL: `${end_point_base}/servico/all`,
   API_URL_SERVICO_BY_ID: `${end_point_base}/servico/`, // + id
   API_URL_SERVICO_CREATE: `${end_point_base}/servico/novo`,
   API_URL_SERVICO_UPDATE: `${end_point_base}/servico/editar`,
   API_URL_SERVICO_DELETE: `${end_point_base}/servico/deletar/`, // + id
+
+  // --- Ficha pet: ---
+  // --- Consulta ---
+  API_URL_VET_CADASTRAR_CONSULTA: `${end_point_base}/vet/novaConsulta`,
+  API_URL_VET_EDITAR_CONSULTA: `${end_point_base}/vet/editarConsulta`,
+  API_URL_VET_DELETAR_CONSULTA: `${end_point_base}/vet/deletarConsulta`, // + id
+
+  // --- Vacina ---
+  API_URL_VET_CADASTRAR_VACINA: `${end_point_base}/vet/novaVacina`,
+  API_URL_VET_EDITAR_VACINA: `${end_point_base}/vet/editarVacina`,
+  API_URL_VET_DELETAR_VACINA: `${end_point_base}/vet/deletarVacina`, // + id
 };

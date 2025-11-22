@@ -5,6 +5,7 @@
       class="add_consulta_button"
       type="button"
       aria-label="Cadastrar nova consulta"
+      (click)="openCreateModal()"
     >
       <mat-icon aria-hidden="true">add</mat-icon>
       <span>Cadastrar uma nova consulta</span>
@@ -16,3 +17,8 @@
   }
 
 </section>
+
+@if (createModalOpen) {
+  <app-consultas-pet-modal [pet_id]="pet_id" (close)="closeCreateModal()" (save)="handleConsultaCreated($event)" [editMode]="editModalOpen" />
+
+}
