@@ -1,11 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, Input } from '@angular/core';
 import { ConsultasPetList } from "../consultas-pet-list/consultas-pet-list";
 import { PetConsulta } from '../../../interfaces';
 import { CommonModule } from '@angular/common';
 import { MatIcon } from "@angular/material/icon";
 import { ConsultasPetModal } from "../consultas-pet-modal/consultas-pet-modal";
-
-
 
 @Component({
   selector: 'app-consultas-pet',
@@ -17,6 +15,7 @@ export class ConsultasPet {
 
   @Input() pet_consultas: Array<PetConsulta> = [];
   @Input() pet_id: number = 0;
+  @Input() userType: string = '';
 
   createModalOpen = false;
   editModalOpen = false;
@@ -30,9 +29,22 @@ export class ConsultasPet {
   }
 
   handleConsultaCreated(newConsulta: PetConsulta) {
-    this.pet_consultas = [...this.pet_consultas, newConsulta];
-    this.closeCreateModal();
+    if (!this.editModalOpen) {
+      this.pet_consultas = [...this.pet_consultas, newConsulta];
+      this.closeCreateModal();
+    } else {
+      const index = this.pet_consultas.findIndex(c => c.id === newConsulta.id);
+      if (index !== -1) {
+        this.pet_consultas[index] = newConsulta;
+      }
+      this.closeCreateModal();
+    }
+
   }
 
+  handleConsultaDeleted(deletedPetConsulta: PetConsulta) {
+    this.pet_consultas = this.pet_consultas.filter(c => c.id !== deletedPetConsulta.id);
+
+  }
 
 }

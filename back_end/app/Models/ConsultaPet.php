@@ -19,10 +19,6 @@ class ConsultaPet extends Model
 
     public $timestamps = false;
 
-    public $hidden = [
-        'pet_id'
-    ];
-
     public function pet()
     {
         return $this->belongsTo(Pet::class, 'pet_id');

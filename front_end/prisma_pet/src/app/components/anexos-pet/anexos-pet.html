@@ -13,20 +13,24 @@
   @if (activeTab === 'consultas') {
 
     @if(pet_consultas.length != 0) {
-      <app-consultas-pet [pet_id]="pet_id" [pet_consultas]="pet_consultas" />
+      <app-consultas-pet [pet_id]="pet_id" [userType]="userType" [pet_consultas]="pet_consultas" />
     } @else {
       <div class="tab-container-not-found">
         <h2>Nenhuma consulta cadastrada para este animal.</h2>
-        <button class="btn btn--primary" (click)="openCreateModal()">Cadastrar uma nova consulta</button>
+        @if (userType !== 'user') {
+          <button class="btn btn--primary" (click)="openCreateModal()">Cadastrar uma nova consulta</button>
+        }
       </div>
     }
   } @else if (activeTab === 'vacinas') {
     @if(pet_vacinas.length != 0) {
-      <app-vacinas-pet [pet_vacinas]="pet_vacinas" />
+      <app-vacinas-pet [pet_vacinas]="pet_vacinas" [userType]="userType" [pet_id]="pet_id" />
     } @else {
       <div class="tab-container-not-found">
         <h2>Nenhuma vacina cadastrada para este animal.</h2>
-        <button class="btn btn--primary">Cadastrar uma nova vacina</button>
+        @if (userType !== 'user') {
+          <button class="btn btn--primary" (click)="openCreateVacinaModal()">Cadastrar uma nova vacina</button>
+        }
       </div>
     }
   } @else if (activeTab === 'anexos') {
@@ -44,4 +48,7 @@
 @if (createModalOpen) {
   <app-consultas-pet-modal [pet_id]="pet_id" (close)="closeCreateModal()" (save)="handleConsultaCreated($event)" [editMode]="editModalOpen" />
 
+}
+@if (createVacinaModalOpen) {
+  <app-vacinas-pet-modal [pet_id]="pet_id" (close)="closeCreateVacinaModal()" (save)="handleVacinaCreated($event)" [editMode]="editVacinaModalOpen" />
 }

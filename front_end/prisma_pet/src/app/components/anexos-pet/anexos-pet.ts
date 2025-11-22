@@ -1,19 +1,21 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { VacinasPet } from "../vacinas/vacinas-pet/vacinas-pet";
+import { VacinasPetModal } from "../vacinas/vacinas-pet-modal/vacinas-pet-modal";
 import { OutrosAnexosPet } from "../outros-anexos-pet/outros-anexos-pet";
 import { ConsultasPet } from '../consultas/consultas-pet/consultas-pet';
 import { PetConsulta, PetVacina } from '../../interfaces';
 import { ConsultasPetModal } from '../consultas/consultas-pet-modal/consultas-pet-modal';
+import { UsuarioService } from '../../services/usuario-service';
 
 @Component({
   selector: 'app-anexos-pet',
-  imports: [ConsultasPet, VacinasPet, OutrosAnexosPet, ConsultasPetModal],
+  imports: [ConsultasPet, VacinasPet, OutrosAnexosPet, ConsultasPetModal, VacinasPetModal],
   templateUrl: './anexos-pet.html',
   styleUrl: './anexos-pet.scss',
   standalone: true,
 })
-export class AnexosPet {
+export class AnexosPet implements OnInit {
 
   @Input() pet_consultas: Array<PetConsulta> = [];
   @Input() pet_vacinas: Array<PetVacina> = [];
@@ -24,6 +26,25 @@ export class AnexosPet {
 
   createModalOpen = false;
   editModalOpen = false;
+  createVacinaModalOpen = false;
+  editVacinaModalOpen = false;
+
+  userType: string = '';
+
+  constructor(
+    private usuarioService: UsuarioService
+  ) { }
+
+  ngOnInit(): void {
+    this.usuarioService.getUserType().subscribe({
+      next: (res) => {
+        this.userType = res.type;
+      },
+      error: (err) => {
+        console.log('erro ao verificar tipo de usuário:', err);
+      }
+    });
+  }
 
   setActiveTab(tab: string) {
     this.activeTab = tab;
@@ -40,6 +61,20 @@ export class AnexosPet {
   handleConsultaCreated(newConsulta: PetConsulta) {
     this.pet_consultas = [...this.pet_consultas, newConsulta];
     this.closeCreateModal();
+  }
+
+  // Vacinas
+  openCreateVacinaModal() {
+    this.createVacinaModalOpen = true;
+  }
+
+  closeCreateVacinaModal() {
+    this.createVacinaModalOpen = false;
+  }
+
+  handleVacinaCreated(newVacina: PetVacina) {
+    this.pet_vacinas = [...this.pet_vacinas, newVacina];
+    this.closeCreateVacinaModal();
   }
 
 }
