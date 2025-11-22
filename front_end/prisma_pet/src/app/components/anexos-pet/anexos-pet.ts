@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { VacinasPet } from "../vacinas/vacinas-pet/vacinas-pet";
+import { VacinasPetModal } from "../vacinas/vacinas-pet-modal/vacinas-pet-modal";
 import { OutrosAnexosPet } from "../outros-anexos-pet/outros-anexos-pet";
 import { ConsultasPet } from '../consultas/consultas-pet/consultas-pet';
 import { PetConsulta, PetVacina } from '../../interfaces';
@@ -9,7 +10,7 @@ import { UsuarioService } from '../../services/usuario-service';
 
 @Component({
   selector: 'app-anexos-pet',
-  imports: [ConsultasPet, VacinasPet, OutrosAnexosPet, ConsultasPetModal],
+  imports: [ConsultasPet, VacinasPet, OutrosAnexosPet, ConsultasPetModal, VacinasPetModal],
   templateUrl: './anexos-pet.html',
   styleUrl: './anexos-pet.scss',
   standalone: true,
@@ -25,6 +26,8 @@ export class AnexosPet implements OnInit {
 
   createModalOpen = false;
   editModalOpen = false;
+  createVacinaModalOpen = false;
+  editVacinaModalOpen = false;
 
   userType: string = '';
 
@@ -58,6 +61,20 @@ export class AnexosPet implements OnInit {
   handleConsultaCreated(newConsulta: PetConsulta) {
     this.pet_consultas = [...this.pet_consultas, newConsulta];
     this.closeCreateModal();
+  }
+
+  // Vacinas
+  openCreateVacinaModal() {
+    this.createVacinaModalOpen = true;
+  }
+
+  closeCreateVacinaModal() {
+    this.createVacinaModalOpen = false;
+  }
+
+  handleVacinaCreated(newVacina: PetVacina) {
+    this.pet_vacinas = [...this.pet_vacinas, newVacina];
+    this.closeCreateVacinaModal();
   }
 
 }

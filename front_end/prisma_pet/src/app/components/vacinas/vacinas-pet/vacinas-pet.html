@@ -1,10 +1,12 @@
 <section class="tab-content">
   <div class="container_vacina">
     <h2>Vacinas do Pet:</h2>
-    <button class="add_vacina_button" type="button" aria-label="Cadastrar nova vacina">
-      <mat-icon aria-hidden="true">add</mat-icon>
-      <span>Cadastrar uma nova vacina</span>
-    </button>
+    @if (userType !== 'user') {
+      <button class="add_vacina_button" type="button" aria-label="Cadastrar nova vacina" (click)="openCreateModal()">
+        <mat-icon aria-hidden="true">add</mat-icon>
+        <span>Cadastrar uma nova vacina</span>
+      </button>
+    }
 
   </div>
 
@@ -28,7 +30,11 @@
   </div>
 
   @for (vacina of pet_vacinas; track vacina.id) {
-  <app-vacinas-pet-list [pet_vacina]="vacina" />
+  <app-vacinas-pet-list [pet_vacina]="vacina" [userType]="userType" (delete)="handleVacinaDeleted($event)" />
   }
 
 </section>
+
+@if (createModalOpen) {
+  <app-vacinas-pet-modal [pet_id]="pet_id" (close)="closeCreateModal()" (save)="handleVacinaCreated($event)" [editMode]="editModalOpen" />
+}
