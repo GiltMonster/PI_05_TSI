@@ -21,14 +21,20 @@
       </p>
     </div>
 
+
     <div class="btns_consulta">
-      <button type="button" class="btn_icon" (click)="onEdit()" aria-label="Editar cadastro">
+
+      @if (userType !== 'user') {
+      <button type="button" class="btn_icon" (click)="openUpdatedModal()" aria-label="Editar cadastro">
         <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">edit</mat-icon>
       </button>
+      }
 
-      <button type="button" class="btn_icon" (click)="onDelete()" aria-label="Excluir cadastro">
-        <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">delete</mat-icon>
-      </button>
+      @if (userType === 'admin') {
+        <button type="button" class="btn_icon" (click)="openModalDelete()" aria-label="Excluir cadastro">
+          <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">delete</mat-icon>
+        </button>
+      }
     </div>
   </div>
 
@@ -38,10 +44,28 @@
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-title> Anamneses: </mat-panel-title>
+        <mat-panel-title> Anamnese: </mat-panel-title>
       </mat-expansion-panel-header>
       <p>{{ pet_consulta.anamnese || 'Nenhuma anamneses cadastrada.' }}</p>
     </mat-expansion-panel>
 
   </div>
 </article>
+
+@if (editModalOpen) {
+<app-consultas-pet-modal [pet_id]="pet_consulta.pet_id" (close)="closeUpdatedModal()"
+  (save)="handleConsultaUpdated($event)" [editMode]="true" [consultaToEdit]="pet_consulta" />
+}
+
+
+@if (deleteModalOpen) {
+<app-modal-delete
+  [title]="'Excluir Consulta'"
+  [message]="`Tem certeza que deseja excluir a consulta: ${pet_consulta.nome_servico} do veterinário ${pet_consulta.nome_vet}? Esta ação não pode ser desfeita.`"
+  [confirmLabel]="'Excluir'"
+  [cancelLabel]="'Cancelar'"
+  (confirm)="handleConfirmDelete()"
+  (cancel)="closeDeleteModal()"
+></app-modal-delete>
+}
+

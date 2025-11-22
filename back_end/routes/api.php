@@ -76,7 +76,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::delete('/vet/deletarVacina/{id}', [VacinaPetController::class, 'deletarVacina']);
     });
 
-    Route::middleware(['role:admin|user'])->group(function () {
+    Route::middleware(['role:admin|user|vet'])->group(function () {
         Route::get('/cliente/getClienteById/{id}', [ClienteController::class, 'getClienteById']);
         Route::put('/cliente/editarCliente', [ClienteController::class, 'editCliente']);
 

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { CepInterface, PetInterface, UserInterface } from '../interfaces';
+import { CepInterface, UserInterface } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +19,10 @@ export class UsuarioService {
 
   getUserById(id: string) {
     return this.http.get(`${environment.API_URL_ADMIN_CLIENTE_BY_ID}/${id}`);
+  }
+
+    getTutorById(id: string) {
+    return this.http.get(`${environment.API_URL_CLIENTE_GET_CLIENTE_BY_ID}/${id}`);
   }
 
   updateUser(data: UserInterface) {

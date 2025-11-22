@@ -49,20 +49,29 @@ class ConsultaPetController extends Controller
 
     public function editarConsulta(Request $request)
     {
-        $validade = $request->validate([
-            'id' => 'required|numeric',
-            'pet_id' => 'sometimes|numeric',
-            'vet_id' => 'sometimes|numeric',
-            'servico_id' => 'sometimes|string',
-            'data_consulta' => 'sometimes|date',
-            'anamnese' => 'sometimes|string',
-        ]);
 
-        if ($validade['vet_id'] ?? false) {
-            $vet = Vet::whereIn('type', ['vet', 'admin'])->find($request->input('vet_id'));
-            if (!$vet) {
-                return response()->json(['error' => 'Veterinário não encontrado'], 404);
-            }
+        if(Pet::find($request->input('pet_id')) === null){
+            return response()->json(['error' => 'Pet não encontrado'], 404);
+        }
+
+        if (Vet::whereIn('type', ['vet', 'admin'])->find($request->input('vet_id')) === null) {
+            return response()->json(['error' => 'Veterinário não encontrado'], 404);
+        }
+
+        if(Servico::find($request->input('servico_id')) === null){
+            return response()->json(['error' => 'Serviço não encontrado'], 404);
+        }
+
+        if (!$request->has(['pet_id', 'vet_id', 'data_consulta', 'servico_id', 'anamnese'])) {
+            return response()->json(['error' => 'Parâmetros insuficientes'], 400);
+        }
+
+        if (!is_numeric($request->input('pet_id')) || !is_numeric($request->input('vet_id'))) {
+            return response()->json(['error' => 'IDs inválidos'], 400);
+        }
+
+        if (!strtotime($request->input('data_consulta'))) {
+            return response()->json(['error' => 'Data de consulta inválida'], 400);
         }
 
         $consulta = ConsultaPet::find($request->input('id'));
@@ -71,7 +80,13 @@ class ConsultaPetController extends Controller
             return response()->json(['error' => 'Consulta não encontrada'], 404);
         }
 
-        $consulta->update($validade);
+        $consulta->update([
+            'pet_id' => $request->input('pet_id'),
+            'vet_id' => $request->input('vet_id'),
+            'servico_id' => $request->input('servico_id'),
+            'data_consulta' => $request->input('data_consulta'),
+            'anamnese' => $request->input('anamnese'),
+        ]);
         return response()->json(['message' => 'Consulta atualizada com sucesso'], 200);
     }
 

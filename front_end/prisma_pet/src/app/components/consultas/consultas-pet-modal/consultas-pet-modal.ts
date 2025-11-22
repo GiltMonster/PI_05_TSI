@@ -17,6 +17,7 @@ export class ConsultasPetModal implements OnInit {
 
   @Input() editMode = false;
   @Input() pet_id: number = 0;
+  @Input() consultaToEdit: PetConsulta = {} as PetConsulta;
   @Output() close = new EventEmitter<void>();
   @Output() save = new EventEmitter<PetConsulta>();
 
@@ -39,9 +40,14 @@ export class ConsultasPetModal implements OnInit {
     this.getCurrentUser();
     this.getServicosList();
 
+    if (this.editMode && this.consultaToEdit) {
+      this.consulta = { ...this.consultaToEdit };
+    }
+
   }
 
   onSave() {
+
     this.consulta = {
       servico_id: this.consulta.servico_id,
       pet_id: this.pet_id,
@@ -52,18 +58,34 @@ export class ConsultasPetModal implements OnInit {
       id: this.consulta.id || 0,
     }
 
+    if (!this.editMode) {
     this.fichaService.cadastrarConsulta(this.consulta).subscribe({
-      next: (res) => {
-        this.notification.success('Consulta cadastrada com sucesso!');
-        console.log(res);
-        this.save.emit(this.consulta);
-      },
-      error: (err) => {
-        this.notification.error('Erro ao cadastrar consulta.');
-        console.log('erro ao cadastrar consulta:', err);
-        this.close.emit();
-      }
-    });
+        next: (res) => {
+          this.notification.success('Consulta cadastrada com sucesso!');
+          console.log(res);
+          this.save.emit(this.consulta);
+        },
+        error: (err) => {
+          this.notification.error('Erro ao cadastrar consulta.');
+          console.log('erro ao cadastrar consulta:', err);
+          this.close.emit();
+        }
+      });
+    } else {
+
+      this.fichaService.editarConsulta(this.consulta).subscribe({
+        next: (res) => {
+          this.notification.success('Consulta editada com sucesso!');
+          console.log(res);
+          this.save.emit(this.consulta);
+        },
+        error: (err) => {
+          this.notification.error('Erro ao editar consulta.');
+          console.log('erro ao editar consulta:', err);
+          this.close.emit();
+        }
+      });
+    }
 
   }
 

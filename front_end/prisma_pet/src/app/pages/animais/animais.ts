@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AnimalList } from '../../components/animal-list/animal-list';
 import { PetInterface } from '../../interfaces';
 import { PetService } from '../../services/pet-service';
-import { finalize } from 'rxjs';
+import { finalize, switchMap } from 'rxjs';
 import { Loading } from '../../components/loading/loading';
 
 @Component({
@@ -14,27 +14,63 @@ import { Loading } from '../../components/loading/loading';
   templateUrl: './animais.html',
   styleUrls: ['./animais.scss'],
 })
-export class Animais implements OnInit{
+export class Animais implements OnInit {
+  listPets: Array<PetInterface> = [];
+  loading = false;
 
+  constructor(private petService: PetService) {}
 
-    listPets: Array<PetInterface> = [];
-    loading = false;
+  ngOnInit(): void {
+    this.loading = true;
 
-    constructor(
-      private petService: PetService
-    ) { }
+    this.petService
+      .getUserType()
+      .pipe(
+        switchMap((res) => {
+          if (res.type === 'admin' || res.type === 'vet') {
+            return this.petService.getAllPets(); // vê tudo
+          }
+          return this.petService.getMyPets(); // vê só os pets do tutor logado
+        }),
+        finalize(() => (this.loading = false))
+      )
+      .subscribe({
+        next: (pets) => {
+          this.listPets = [...pets];
+        },
+        error: (err) => {
+          console.error('Erro ao carregar animais:', err);
+        },
+      });
+  }
 
-    ngOnInit(): void {
-      this.loadPets();
-    }
-
-    loadPets() {
-      this.loading = true;
-      this.petService.getAllPets().pipe(finalize(() => this.loading = false)).subscribe({
+  loadPets() {
+    this.loading = true;
+    this.petService
+      .getAllPets()
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe({
         next: (res) => {
           this.listPets = [...res];
         },
-        error: (err) => { console.error('Erro ao carregar animais:', err); }
+        error: (err) => {
+          console.error('Erro ao carregar animais:', err);
+        },
       });
-    }
+  }
+
+  loadMyPets() {
+    this.loading = true;
+    this.petService
+      .getMyPets()
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe({
+        next: (res) => {
+          this.listPets = [...res];
+        },
+        error: (err) => {
+          console.error('Erro ao carregar animais do tutor:', err);
+        },
+      });
+  }
 }

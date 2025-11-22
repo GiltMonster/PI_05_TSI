@@ -34,13 +34,16 @@
     </div>
 
     <div class="btns_vacina">
-      <button type="button" class="btn_icon" (click)="onEdit()" aria-label="Editar cadastro">
-        <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">edit</mat-icon>
-      </button>
-
-      <button type="button" class="btn_icon" (click)="onDelete()" aria-label="Excluir cadastro">
-        <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">delete</mat-icon>
-      </button>
+      @if (userType !== 'user') {
+        <button type="button" class="btn_icon" (click)="onEdit()" aria-label="Editar cadastro">
+          <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">edit</mat-icon>
+        </button>
+      }
+      @if (userType === 'admin') {
+        <button type="button" class="btn_icon" (click)="onDelete()" aria-label="Excluir cadastro">
+          <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">delete</mat-icon>
+        </button>
+      }
     </div>
   </div>
 
@@ -75,6 +78,11 @@
           {{ pet_vacina.fabricante || 'Não informado' }}
         </li>
 
+        <li>
+          <label>Observações:</label>
+          {{ pet_vacina.observacoes || 'Nenhuma observação adicionada.' }}
+        </li>
+
 
 
       </ul>
@@ -82,3 +90,18 @@
 
   </div>
 </article>
+
+@if (editModalOpen) {
+  <app-vacinas-pet-modal [pet_id]="pet_vacina.pet_id" (close)="closeEditModal()" (save)="handleVacinaUpdated($event)" [editMode]="true" [vacinaToEdit]="pet_vacina" />
+}
+
+@if (deleteModalOpen) {
+  <app-modal-delete
+    [title]="'Excluir Vacina'"
+    [message]="`Tem certeza que deseja excluir a vacina: ${pet_vacina.tipo_vacina}? Esta ação não pode ser desfeita.`"
+    [confirmLabel]="'Excluir'"
+    [cancelLabel]="'Cancelar'"
+    (confirm)="handleConfirmDelete()"
+    (cancel)="closeDeleteModal()"
+  ></app-modal-delete>
+}

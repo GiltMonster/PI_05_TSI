@@ -42,7 +42,7 @@
 h2 {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
-  color: var(--text-primary);
+  color: var(--text-secondary);
 }
 
 
@@ -82,7 +82,7 @@ button {
 }
 
 .btn--primary:hover {
-  background-color: var(--primary-dark);
+  background-color: var(--orange);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
@@ -93,3 +93,12 @@ button {
   align-items: center;
   gap: 1rem;
 }
+
+
+@media (max-width: 800px) {
+  h2 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+}
+

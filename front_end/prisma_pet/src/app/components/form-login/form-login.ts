@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import { AuthLogin } from '../../services/auth-login';
@@ -12,12 +12,16 @@ import { catchError, of } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Notification } from '../../services/notification';
 import { Loading } from '../loading/loading';
+import { DialogTermos } from '../dialog-termos/dialog-termos';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { DialogPrivacidade } from '../dialog-termos/dialog-privacidade/dialog-privacidade';
 
 
 @Component({
   selector: 'app-form-login',
-    standalone: true,
-  imports: [FontAwesomeModule, FormsModule, ReactiveFormsModule, MatIconModule, MatFormFieldModule, MatInputModule, CommonModule, Loading],
+  standalone: true,
+  imports: [FontAwesomeModule, FormsModule, ReactiveFormsModule, MatIconModule, MatFormFieldModule, MatInputModule, CommonModule, Loading, MatButtonModule, MatDialogModule,],
   templateUrl: './form-login.html',
   styleUrl: './form-login.scss'
 })
@@ -26,8 +30,8 @@ export class FormLogin {
   title = 'VeterinariosJA';
   icon_email = faEnvelope;
   icon_senha = faLock;
-  
-    loading = false;
+  readonly dialog = inject(MatDialog);
+  loading = false;
 
 protected loginForms!: FormGroup<{
     email: FormControl<string>;
@@ -49,6 +53,25 @@ protected loginForms!: FormGroup<{
 
   get emailCtrl()     { return this.loginForms.get('email') as FormControl<string>; }
   get passwordCtrl()  { return this.loginForms.get('password') as FormControl<string>; }
+
+
+  openDialogTermos() {
+    this.dialog.open(DialogTermos, {
+      width: '720px',
+      maxWidth: '95vw',
+      autoFocus: false,
+      restoreFocus: true,
+    });
+  }
+
+    openDialogPrivacidade() {
+    this.dialog.open(DialogPrivacidade, {
+      width: '720px',
+      maxWidth: '95vw',
+      autoFocus: false,
+      restoreFocus: true,
+    });
+  }
 
   login() {
     // ABNT 5.9: validar e informar claramente o erro, sem perder dados
@@ -85,7 +108,7 @@ protected loginForms!: FormGroup<{
       }
 
       this.loading = false;
-      
+
       setTimeout(() => window.location.reload(), 500);
       // window.location.reload();
       this.loginForms.reset();

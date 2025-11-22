@@ -4,10 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { UsuarioService } from '../../services/usuario-service';
 import { Notification } from '../../services/notification';
 import { Loading } from '../loading/loading';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-modal-edit',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule, Loading],
   templateUrl: './modal-edit.html',
   styleUrl: './modal-edit.scss',
 })
@@ -55,6 +56,8 @@ export class ModalEdit implements OnChanges {
 
   onSave() {
     this.loading = true;
+    console.log('Salvando usuário editado:', this.editedUser);
+    
     this.save.emit(this.editedUser);
     this.usuarioService.updateUser(this.editedUser).subscribe({
       next: (res) => {
