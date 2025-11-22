@@ -30,8 +30,17 @@ export class ConsultasPet {
   }
 
   handleConsultaCreated(newConsulta: PetConsulta) {
-    this.pet_consultas = [...this.pet_consultas, newConsulta];
-    this.closeCreateModal();
+    if (!this.editModalOpen) {
+      this.pet_consultas = [...this.pet_consultas, newConsulta];
+      this.closeCreateModal();
+    } else {
+      const index = this.pet_consultas.findIndex(c => c.id === newConsulta.id);
+      if (index !== -1) {
+        this.pet_consultas[index] = newConsulta;
+      }
+      this.closeCreateModal();
+    }
+
   }
 
 

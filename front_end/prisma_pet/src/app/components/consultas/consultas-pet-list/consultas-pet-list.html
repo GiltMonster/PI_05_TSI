@@ -22,7 +22,7 @@
     </div>
 
     <div class="btns_consulta">
-      <button type="button" class="btn_icon" (click)="onEdit()" aria-label="Editar cadastro">
+      <button type="button" class="btn_icon" (click)="openCreateModal()" aria-label="Editar cadastro">
         <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">edit</mat-icon>
       </button>
 
@@ -45,3 +45,13 @@
 
   </div>
 </article>
+
+@if (createModalOpen) {
+  <app-consultas-pet-modal
+    [pet_id]="pet_consulta.pet_id"
+    (close)="closeCreateModal()"
+    (save)="handleConsultaUpdated($event)"
+    [editMode]="true"
+    [consultaToEdit]="pet_consulta"
+  />
+}
