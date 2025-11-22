@@ -4,9 +4,6 @@ import { PetConsulta } from '../../../interfaces';
 import { CommonModule } from '@angular/common';
 import { MatIcon } from "@angular/material/icon";
 import { ConsultasPetModal } from "../consultas-pet-modal/consultas-pet-modal";
-import { UsuarioService } from '../../../services/usuario-service';
-
-
 
 @Component({
   selector: 'app-consultas-pet',
