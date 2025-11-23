@@ -7,6 +7,7 @@ import { UserInterface } from '../../interfaces';
 import { UsuarioService } from '../../services/usuario-service';
 import { ModalCreate } from '../modal-create/modal-create';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { UserTypeProviderService } from '../../shared/user-type-service';
 
 @Component({
   selector: 'app-vet-list',
@@ -29,12 +30,16 @@ export class VetList implements OnInit {
   createModalOpen = false;
 
   constructor(
-    private usuarioService: UsuarioService
+    // private usuarioService: UsuarioService
+        private userTypeService: UserTypeProviderService
   ) { }
 
   ngOnInit(): void {
     this.filteredVets = this.vets;
-    this.userTypeVerification();
+    // this.userTypeVerification();
+        this.userTypeService.userType$.subscribe(type => {
+      this.typeUser = type;
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -43,16 +48,16 @@ export class VetList implements OnInit {
     }
   }
 
-  userTypeVerification() {
-    this.usuarioService.getUserType().subscribe({
-      next: (res) => {
-        this.typeUser = res.type;
-      },
-      error: (err) => {
-        console.log('erro ao verificar tipo de usuário:', err);
-      }
-    });
-  }
+  // userTypeVerification() {
+  //   this.usuarioService.getUserType().subscribe({
+  //     next: (res) => {
+  //       this.typeUser = res.type;
+  //     },
+  //     error: (err) => {
+  //       console.log('erro ao verificar tipo de usuário:', err);
+  //     }
+  //   });
+  // }
 
   clearSearch() {
     this.searchValue = '';

@@ -10,6 +10,7 @@ import { Notification } from '../../services/notification';
 import { ModalDelete } from '../modal-delete/modal-delete';
 import { Loading } from '../loading/loading';
 import { PetService } from '../../services/pet-service';
+import { UserTypeProviderService } from '../../shared/user-type-service';
 
 @Component({
   selector: 'app-tutor-card',
@@ -35,11 +36,14 @@ export class TutorCard implements OnInit {
     private usuarioService: UsuarioService,
     private router: Router,
     private notification: Notification,
-    private petService: PetService
+    private petService: PetService,
+    private userTypeService: UserTypeProviderService
   ) { }
 
   ngOnInit(): void {
-    this.typeUser
+    this.userTypeService.userType$.subscribe(type => {
+      this.typeUser = type;
+    });
   }
 
   // goToFichaPet(tutorId: number) {

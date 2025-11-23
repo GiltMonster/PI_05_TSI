@@ -123,7 +123,7 @@ export interface PetInterface {
   user_id?: number;
   cor_pelagem?: string;
   casoClinico?: string;
-  tutorName?: string;
+  tutor_name?: string;
   consultas?: Array<PetConsulta>;
   vacinas?: Array<PetVacina>;
 }

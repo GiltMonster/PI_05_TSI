@@ -37,8 +37,7 @@
   <ul class="grid" role="list">
     @for (pet of pagedPets; track pet.id) {
     <li class="grid__item" role="listitem">
-      <app-animal-card [userPet]="pet" [typeUser]="typeUser" (petDeleted)="onPetDeleted($event)"
-        (tutorLoad)="onTutorLoad($event)" />
+      <app-animal-card [userPet]="pet" [typeUser]="typeUser" (petDeleted)="onPetDeleted($event)" />
     </li>
     }
   </ul>

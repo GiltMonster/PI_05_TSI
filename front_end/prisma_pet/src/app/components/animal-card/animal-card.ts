@@ -9,6 +9,7 @@ import { UsuarioService } from '../../services/usuario-service';
 import { ModalDelete } from '../modal-delete/modal-delete';
 import { Loading } from '../loading/loading';
 import { Router } from '@angular/router';
+import { UserTypeProviderService } from '../../shared/user-type-service';
 
 @Component({
   selector: 'app-animal-card',
@@ -22,45 +23,50 @@ export class AnimalCard implements OnInit {
   @Input() typeUser: string = '';
   @Output() petDeleted = new EventEmitter<number>();
   @Output() edit = new EventEmitter<PetInterface>();
-  @Output() tutorLoad = new EventEmitter<{ id: number; tutorName: string }>(); // enviar o nome do tutor pro animallist
+  // @Output() tutorLoad = new EventEmitter<{ id: number; tutorName: string }>(); // enviar o nome do tutor pro animallist
 
   editModalOpen = false;
   petToEdit?: PetInterface;
   loading = false;
+  deleteModalOpen = false;
+  petToDelete: PetInterface | null = null;
 
   tutorName = '';
 
   constructor(
     private petService: PetService,
     private notification: Notification,
-    private usuarioService: UsuarioService,
+    private userTypeService: UserTypeProviderService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.typeUser, this.loadTutorName();
-  }
-
-  private loadTutorName() {
-    if (!this.userPet.user_id) return;
-
-    this.usuarioService.getTutorById(String(this.userPet.user_id)).subscribe({
-      next: (user: any) => {
-        this.tutorName = user.name;
-
-        // avisa o componente quem é o tutor desse pet
-        this.tutorLoad.emit({
-          id: this.userPet.id,
-          tutorName: this.tutorName,
-        });
-      },
-      error: (err) => {
-        console.error('Erro ao buscar responsável do pet:', err);
-        this.notification.success('Erro ao buscar responsável do pet');
-        this.tutorName = '';
-      },
+    this.userTypeService.userType$.subscribe(type => {
+      this.typeUser = type;
     });
+    //  this.loadTutorName();
   }
+
+  // private loadTutorName() {
+  //   if (!this.userPet.user_id) return;
+
+  //   this.usuarioService.getTutorById(String(this.userPet.user_id)).subscribe({
+  //     next: (user: any) => {
+  //       this.tutorName = user.name;
+
+  //       // avisa o componente quem é o tutor desse pet
+  //       this.tutorLoad.emit({
+  //         id: this.userPet.id,
+  //         tutorName: this.tutorName,
+  //       });
+  //     },
+  //     error: (err) => {
+  //       console.error('Erro ao buscar responsável do pet:', err);
+  //       this.notification.success('Erro ao buscar responsável do pet');
+  //       this.tutorName = '';
+  //     },
+  //   });
+  // }
 
   findUserById(petId: number) {
     const tutorId = this.userPet.user_id;
@@ -126,8 +132,7 @@ export class AnimalCard implements OnInit {
       },
     });
   }
-  deleteModalOpen = false;
-  petToDelete: PetInterface | null = null;
+
 
   openDeleteModal(pet: PetInterface) {
     this.petToDelete = pet;
