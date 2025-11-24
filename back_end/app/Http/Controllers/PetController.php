@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ConsultaPet;
 use App\Models\Pet;
+use App\Models\PrescricaoPet;
 use App\Models\Servico;
 use App\Models\User;
 use App\Models\VacinaPet;
@@ -60,9 +61,19 @@ class PetController extends Controller
             }
         }
 
+        $prescricoes =  PrescricaoPet::whereIn('pet_id', $pets->pluck('id'))->get();
+
+        foreach ($prescricoes as $prescricao) {
+            $vet = User::find($prescricao->vet_id);
+            if ($vet) {
+                $prescricao->nome_vet = $vet->name;
+            }
+        }
+
         foreach ($pets as $pet) {
             $pet->consultas = $consultas->where('pet_id', $pet->id)->values();
             $pet->vacinas = $vacinas->where('pet_id', $pet->id)->values();
+            $pet->prescricoes = $prescricoes->where('pet_id', $pet->id)->values();
         }
 
         return response()->json([

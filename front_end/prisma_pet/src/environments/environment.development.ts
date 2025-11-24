@@ -73,4 +73,10 @@ export const environment = {
   API_URL_VET_CADASTRAR_VACINA: `${end_point_base}/vet/novaVacina`,
   API_URL_VET_EDITAR_VACINA: `${end_point_base}/vet/editarVacina`,
   API_URL_VET_DELETAR_VACINA: `${end_point_base}/vet/deletarVacina`, // + id
+
+  // --- Prescrição ---
+  API_URL_VET_BY_PET_ID: `${end_point_base}/prescricao/pet`, // + petId
+  API_URL_VET_CADASTRAR_PRESCRICAO: `${end_point_base}/prescricao/registrarPrescricao`,
+  API_URL_VET_EDITAR_PRESCRICAO: `${end_point_base}/prescricao/atualizarPrescricao`,
+  API_URL_VET_DELETAR_PRESCRICAO: `${end_point_base}/prescricao/deletarPrescricao`, // + id
 };

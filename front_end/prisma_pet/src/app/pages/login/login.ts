@@ -12,7 +12,7 @@ import { AuthLogin } from '../../services/auth-login';
 export class Login implements OnInit {
 
   constructor(
-    private authService: AuthLogin
+    private authService: AuthLogin,
   ) { }
 
   ngOnInit(): void {

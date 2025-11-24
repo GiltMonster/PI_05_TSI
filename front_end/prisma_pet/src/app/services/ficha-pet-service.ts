@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { PetConsulta, PetVacina } from '../interfaces';
+import { PetConsulta, PetPrescricao, PetVacina } from '../interfaces';
 import { environment } from '../../environments/environment.development';
 
 @Injectable({
@@ -38,4 +38,19 @@ export class FichaPetService {
     return this.http.delete<void>(`${environment.API_URL_VET_DELETAR_VACINA}/${id}`);
   }
 
+  // Prescrições:
+  listarPrescricoesPorPet(petId: number) {
+    return this.http.get<Array<PetPrescricao>>(`${environment.API_URL_VET_BY_PET_ID}/${petId}`);
+  }
+  cadastrarPrescricao(data: PetPrescricao) {
+    return this.http.post<PetPrescricao>(environment.API_URL_VET_CADASTRAR_PRESCRICAO, data);
+  }
+
+  editarPrescricao(data: PetPrescricao) {
+    return this.http.put<PetPrescricao>(environment.API_URL_VET_EDITAR_PRESCRICAO, data);
+  }
+
+  deletarPrescricao(id: number) {
+    return this.http.delete<void>(`${environment.API_URL_VET_DELETAR_PRESCRICAO}/${id}`);
+  }
 }

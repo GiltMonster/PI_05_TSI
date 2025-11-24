@@ -6,6 +6,7 @@ import { UserInterface } from '../../interfaces';
 import { VeterinarioService } from '../../services/veterinario-service';
 import { Loading } from '../../components/loading/loading';
 import { finalize } from 'rxjs';
+import { UserTypeProviderService } from '../../shared/user-type-service';
 
 
 @Component({
@@ -19,13 +20,25 @@ export class Veterinarios implements OnInit {
 
   listVets: Array<UserInterface> = [];
   loading = false;
+  typeUser = '';
 
   constructor(
-    private veterinarioService: VeterinarioService
+    private veterinarioService: VeterinarioService,
+    private userTypeService: UserTypeProviderService
   ) { }
 
   ngOnInit(): void {
-    this.loadVets();
+    // this.loadVets();
+    this.loading = true;
+
+    this.userTypeService.userType$.subscribe(type => {
+      this.typeUser = type;
+    });
+
+    if(this.typeUser === 'admin' || this.typeUser === 'vet') {
+      this.loadVets();
+      return;
+    }
   }
 
   loadVets() {

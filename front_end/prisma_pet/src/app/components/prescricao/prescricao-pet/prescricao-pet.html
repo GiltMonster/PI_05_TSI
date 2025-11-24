@@ -1,0 +1,20 @@
+<section class="tab-content">
+	<div class="container_prescricao">
+		<h2>Prescrições do Pet:</h2>
+		@if (userType !== 'user') {
+			<button class="add_prescricao_button" type="button" aria-label="Cadastrar nova prescrição" (click)="openCreateModal()">
+				<mat-icon aria-hidden="true">add</mat-icon>
+				<span>Cadastrar nova prescrição</span>
+			</button>
+		}
+	</div>
+
+	@for (prescricao of pet_prescricoes; track prescricao.id) {
+		<app-prescricao-pet-list [pet_prescricao]="prescricao" [userType]="userType" (delete)="handlePrescricaoDeleted($event)" />
+	}
+
+</section>
+
+@if (createModalOpen) {
+	<app-prescricao-pet-modal [pet_id]="pet_id" (close)="closeCreateModal()" (save)="handlePrescricaoCreated($event)" [editMode]="editModalOpen" />
+}

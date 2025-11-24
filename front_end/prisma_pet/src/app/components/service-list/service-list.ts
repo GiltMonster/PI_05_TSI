@@ -8,6 +8,7 @@ import { UsuarioService } from '../../services/usuario-service';
 import { ServicosService } from '../../services/servicos-service';
 import { ModalCreateServico } from '../modal-create-servico/modal-create-servico';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { UserTypeProviderService } from '../../shared/user-type-service';
 
 @Component({
   selector: 'app-service-list',
@@ -30,8 +31,9 @@ export class ServiceList implements OnInit {
   createModalOpen = false;
 
   constructor(
-    private servicoService: ServicosService,
-    private usuarioService: UsuarioService) {}
+    // private servicoService: ServicosService,
+    // private usuarioService: UsuarioService,
+    private userTypeService: UserTypeProviderService) {}
 
   onSubmit(event: Event) {
     event.preventDefault();
@@ -40,23 +42,26 @@ export class ServiceList implements OnInit {
 
   ngOnInit(): void {
     this.filteredServicos = this.servicos;
-    this.userTypeVerification();
+      this.userTypeService.userType$.subscribe(type => {
+      this.typeUser = type;
+    });
+    // this.userTypeVerification();
   }
 
   ngOnChanges(): void {
     this.filteredServicos = this.filterServicos();
   }
 
-  userTypeVerification() {
-    this.usuarioService.getUserType().subscribe({
-      next: (res) => {
-        this.typeUser = res.type;
-      },
-      error: (err) => {
-        console.log('erro ao verificar tipo de usuário:', err);
-      },
-    });
-  }
+  // userTypeVerification() {
+  //   this.usuarioService.getUserType().subscribe({
+  //     next: (res) => {
+  //       this.typeUser = res.type;
+  //     },
+  //     error: (err) => {
+  //       console.log('erro ao verificar tipo de usuário:', err);
+  //     },
+  //   });
+  // }
 
   clearSearch() {
     this.searchValue = '';

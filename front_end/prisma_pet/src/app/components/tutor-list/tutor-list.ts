@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { UsuarioService } from '../../services/usuario-service';
 import { ModalCreate } from '../modal-create/modal-create';
 import { MatPaginator } from "@angular/material/paginator";
+import { UserTypeProviderService } from '../../shared/user-type-service';
 
 @Component({
   selector: 'app-tutor-list',
@@ -29,12 +30,16 @@ export class TutorList implements OnInit {
   pageIndex = 0;
 
   constructor(
-    private usuarioService: UsuarioService
+    // private usuarioService: UsuarioService,
+    private userTypeService: UserTypeProviderService
   ) { }
 
   ngOnInit(): void {
     this.filteredTutores = this.tutores;
-    this.userTypeVerification();
+    this.userTypeService.userType$.subscribe(type => {
+      this.typeUser = type;
+    });
+    // this.userTypeVerification();
   }
 
   get pagedTutores(): UserInterface[] {
@@ -52,16 +57,16 @@ export class TutorList implements OnInit {
 
   }
 
-  userTypeVerification() {
-    this.usuarioService.getUserType().subscribe({
-      next: (res) => {
-        this.typeUser = res.type;
-      },
-      error: (err) => {
-        console.log("erro ao verificar tipo de usuário:", err);
-      }
-    });
-  }
+  // userTypeVerification() {
+  //   this.usuarioService.getUserType().subscribe({
+  //     next: (res) => {
+  //       this.typeUser = res.type;
+  //     },
+  //     error: (err) => {
+  //       console.log("erro ao verificar tipo de usuário:", err);
+  //     }
+  //   });
+  // }
 
   clearSearch() {
     this.searchValue = "";

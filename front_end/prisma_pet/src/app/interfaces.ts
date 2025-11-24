@@ -123,9 +123,10 @@ export interface PetInterface {
   user_id?: number;
   cor_pelagem?: string;
   casoClinico?: string;
-  tutorName?: string;
+  tutor_name?: string;
   consultas?: Array<PetConsulta>;
   vacinas?: Array<PetVacina>;
+  prescricoes?: Array<PetPrescricao>;
 }
 
 export interface PetConsulta {
@@ -153,6 +154,18 @@ export interface PetVacina {
   observacoes: string;
   estado_vacina: string;
   nome_vet: string;
+}
+
+export interface PetPrescricao {
+  id: number;
+  vet_id: number;
+  pet_id: number;
+  data_prescricao: Date;
+  nome_medicamento: string;
+  dosagem: string;
+  farmacia: string;
+  via: string;
+  posologia: string;
 }
 
 export interface ServicosInterface {
