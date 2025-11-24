@@ -33,7 +33,7 @@ export class Tutor implements OnInit {
       next: (res) => {
         this.listTutores = [...res];
       },
-      error: (err) => { console.error('Erro ao carregar tutores:', err); }
+      error: (err) => { console.error('Erro ao carregar responsáveis:', err); }
     });
   }
 }

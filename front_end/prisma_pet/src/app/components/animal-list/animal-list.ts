@@ -4,9 +4,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule, FormControl, FormsModule } from '@angular/forms';
 import { AnimalCard } from '../animal-card/animal-card';
 import { PetInterface } from '../../interfaces';
-import { PetService } from '../../services/pet-service';
 import { ModalCreatePet } from '../modal-create-pet/modal-create-pet';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { UserTypeProviderService } from '../../shared/user-type-service';
 
 @Component({
   selector: 'app-animal-list',
@@ -28,7 +28,9 @@ export class AnimalList implements OnInit {
   typeUser = '';
   createModalOpen = false;
 
-  constructor(private petService: PetService) { }
+  constructor(
+    private userTypeService: UserTypeProviderService
+  ) { }
 
   onSubmit(event: Event) {
     event.preventDefault();
@@ -36,23 +38,13 @@ export class AnimalList implements OnInit {
   }
 
   ngOnInit(): void {
-    this.filteredPets = this.pets;
-    this.userTypeVerification();
+    this.userTypeService.userType$.subscribe(type => {
+      this.typeUser = type;
+    });
   }
 
   ngOnChanges(): void {
     this.filteredPets = this.filterPets();
-  }
-
-  userTypeVerification() {
-    this.petService.getUserType().subscribe({
-      next: (res) => {
-        this.typeUser = res.type;
-      },
-      error: (err) => {
-        console.log('erro ao verificar tipo de usuário:', err);
-      },
-    });
   }
 
   clearSearch() {
@@ -82,12 +74,12 @@ export class AnimalList implements OnInit {
     this.pageSize = event.pageSize;
   }
 
-  onTutorLoad(event: { id: number; tutorName: string }) {
-    this.pets = this.pets.map(pet =>
-      pet.id === event.id ? { ...pet, tutorName: event.tutorName } : pet
-    );
-    this.filteredPets = this.filterPets();
-  }
+  // onTutorLoad(event: { id: number; tutorName: string }) {
+  //   this.pets = this.pets.map(pet =>
+  //     pet.id === event.id ? { ...pet, tutorName: event.tutorName } : pet
+  //   );
+  //   this.filteredPets = this.filterPets();
+  // }
 
   filterPets(): PetInterface[] {
     if (!this.searchValue) {
@@ -95,10 +87,9 @@ export class AnimalList implements OnInit {
     }
 
     const searchTerm = this.searchValue.toLowerCase();
-
     return this.pets.filter((pet) => {
       const sexoTexto = pet.sexo === true ? 'macho' : 'femea';
-      const tutorTexto = (pet.tutorName ?? '').toLowerCase();
+      const tutorTexto = (pet.tutor_name ?? '').toLowerCase();
 
       return (
         pet.nome.toLowerCase().includes(searchTerm) ||
@@ -116,8 +107,8 @@ export class AnimalList implements OnInit {
     this.createModalOpen = false;
   }
 
-  handlePetCreated(newPet: PetInterface) {
-    this.pets = [newPet, ...this.pets];
+  handlePetCreated({pet}: {pet: PetInterface}) {
+    this.pets = [pet, ...this.pets];
     this.filteredPets = this.filterPets();
     this.statusMsg = 'Animal cadastrado com sucesso.';
     this.createModalOpen = false;

@@ -6,6 +6,7 @@ import { PetInterface } from '../../interfaces';
 import { PetService } from '../../services/pet-service';
 import { finalize, switchMap } from 'rxjs';
 import { Loading } from '../../components/loading/loading';
+import { UserTypeProviderService } from '../../shared/user-type-service';
 
 @Component({
   selector: 'app-animais',
@@ -17,31 +18,27 @@ import { Loading } from '../../components/loading/loading';
 export class Animais implements OnInit {
   listPets: Array<PetInterface> = [];
   loading = false;
+  typeUser = '';
 
-  constructor(private petService: PetService) {}
+  constructor(
+    private petService: PetService,
+    private userTypeService: UserTypeProviderService
+  ) {}
 
   ngOnInit(): void {
     this.loading = true;
 
-    this.petService
-      .getUserType()
-      .pipe(
-        switchMap((res) => {
-          if (res.type === 'admin' || res.type === 'vet') {
-            return this.petService.getAllPets(); // vê tudo
-          }
-          return this.petService.getMyPets(); // vê só os pets do tutor logado
-        }),
-        finalize(() => (this.loading = false))
-      )
-      .subscribe({
-        next: (pets) => {
-          this.listPets = [...pets];
-        },
-        error: (err) => {
-          console.error('Erro ao carregar animais:', err);
-        },
-      });
+    this.userTypeService.userType$.subscribe(type => {
+      this.typeUser = type;
+    });
+
+    if(this.typeUser === 'admin' || this.typeUser === 'vet') {
+      this.loadPets();
+      return;
+    } else {
+      this.loadMyPets();
+      return;
+    }
   }
 
   loadPets() {
