@@ -10,6 +10,7 @@ import { PetPrescricao } from '../../interfaces';
 import { PetConsulta, PetVacina } from '../../interfaces';
 import { ConsultasPetModal } from '../consultas/consultas-pet-modal/consultas-pet-modal';
 import { UsuarioService } from '../../services/usuario-service';
+import { UserTypeProviderService } from '../../shared/user-type-service';
 
 @Component({
   selector: 'app-anexos-pet',
@@ -38,17 +39,13 @@ export class AnexosPet implements OnInit {
   userType: string = '';
 
   constructor(
-    private usuarioService: UsuarioService
+    // private usuarioService: UsuarioService
+    private userTypeService: UserTypeProviderService
   ) { }
 
   ngOnInit(): void {
-    this.usuarioService.getUserType().subscribe({
-      next: (res) => {
-        this.userType = res.type;
-      },
-      error: (err) => {
-        console.log('erro ao verificar tipo de usuário:', err);
-      }
+    this.userTypeService.userType$.subscribe(type => {
+      this.userType = type;
     });
   }
 

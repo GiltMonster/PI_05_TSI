@@ -51,6 +51,28 @@ export class Header {
     });
   }
 
+  openHome() {
+    this.loading = true;
+
+    this.menuService.getTypeMenuUser().subscribe({
+      next: (typeUser) => {
+        this.loading = false;
+
+        if (typeUser.type === 'admin') {
+          this.router.navigate(['/admin']);
+        } else if (typeUser.type === 'vet') {
+          this.router.navigate(['/vet']);
+        } else {
+          this.router.navigate(['/user']);
+        }
+      },
+      error: () => {
+        this.loading = false;
+        this.notification.error('Erro ao abrir a tela inicial.');
+      },
+    });
+  }
+
   logout() {
     this.loading = true;
     this.authService.logout().subscribe(

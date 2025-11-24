@@ -252,6 +252,10 @@ button {
 }
 
 @media (max-width: 480px) {
+
+  .pet-detail {
+    padding: 0;
+  }
   .pet-container {
     padding: 0.85rem;
   }

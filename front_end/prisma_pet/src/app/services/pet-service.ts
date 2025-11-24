@@ -12,6 +12,7 @@ export class PetService {
   constructor(private http: HttpClient, private userService: UsuarioService) {}
 
   getPetsByTutorId(tutorId: number): Observable<FichaPetInterface> {
+    
     return this.userService.getUserType().pipe(
       switchMap((res) => {
         if (res.type === 'admin') {

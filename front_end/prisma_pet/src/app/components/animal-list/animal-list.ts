@@ -107,12 +107,19 @@ export class AnimalList implements OnInit {
     this.createModalOpen = false;
   }
 
-  handlePetCreated({pet}: {pet: PetInterface}) {
-    this.pets = [pet, ...this.pets];
-    this.filteredPets = this.filterPets();
-    this.statusMsg = 'Animal cadastrado com sucesso.';
-    this.createModalOpen = false;
-  }
+  // handlePetCreated({pet}: {pet: PetInterface}) {
+  //   this.pets = [pet, ...this.pets];
+  //   this.filteredPets = this.filterPets();
+  //   this.statusMsg = 'Animal cadastrado com sucesso.';
+  //   this.createModalOpen = false;
+  // }
+
+  handlePetCreated(pet: PetInterface) {
+  this.pets = [pet, ...this.pets];
+  this.filteredPets = this.filterPets();
+  this.statusMsg = 'Animal cadastrado com sucesso.';
+  this.createModalOpen = false;
+}
 }
 
 
