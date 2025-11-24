@@ -20,8 +20,7 @@
       transition: background 0.2s;
 
       &:first-child {
-        border-top-left-radius: 8px;
-        border-bottom-left-radius: 8px;
+        border-radius: 5px;
       }
 
       &.active, &:hover {
@@ -31,9 +30,7 @@
       border-right: 1px solid rgba(255,255,255,0.2);
 
       &:last-child {
-        border-right: none;
-        border-top-right-radius: 8px;
-        border-bottom-right-radius: 8px;
+        border-radius: 5px;
       }
     }
   }
@@ -45,7 +42,6 @@ h2 {
   color: var(--text-secondary);
 }
 
-
 button {
   min-height: 0.35rem;
 }
@@ -53,7 +49,7 @@ button {
 .btn {
   padding: 0.5rem 0.5rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 5px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -87,18 +83,55 @@ button {
   box-shadow: var(--shadow-md);
 }
 
-.tab-container-not-found{
+.tab-container-not-found {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
 }
 
+@media (max-width: 870px) {
+  .pet-menu {
+    margin: 1.5rem 0 0.75rem;
+  }
 
-@media (max-width: 800px) {
+  .pet-menu ul {
+    flex-wrap: wrap;
+  }
+
+  .pet-menu ul li {
+    flex: 1 1 50%;
+    padding: 0.75rem 0.5rem;
+    font-size: 0.95rem;
+  }
+
   h2 {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     text-align: center;
   }
 }
 
+@media (max-width: 768px) {
+  .pet-menu {
+    margin: 1.25rem 0 0.5rem;
+    border-radius: 5px;
+  }
+}
+
+@media (max-width: 430px) {
+  .pet-menu {
+    margin: 1rem 0 0.5rem;
+    border-radius: 5px;
+  }
+
+  .pet-menu ul li {
+    flex: 1 1 auto;
+    padding: 0.6rem 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  h2 {
+    font-size: 1.15rem;
+    text-align: center;
+  }
+}

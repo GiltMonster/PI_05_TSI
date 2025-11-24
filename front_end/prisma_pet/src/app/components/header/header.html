@@ -1,7 +1,14 @@
 <!-- header semântico, alt do logo, aria-label nos links, aria-hidden nos ícones, binding [routerLink].
 Sessões ABNT: 5.2, 5.3, 5.7, 5.1. -->
 <header class="header_container" role="banner">
-  <img class="logo" [src]="logo" alt="Logo da VetJA" />
+  <img
+  class="logo"
+  (click)="openHome()"
+  [src]="logo"
+  alt="Logo da VetJA"
+  role="button"
+  tabindex="0"
+  (keyup.enter)="openHome()" />
 
   <div class="bloco2">
     <div class="whats">
@@ -22,7 +29,7 @@ Sessões ABNT: 5.2, 5.3, 5.7, 5.1. -->
 
     <div class="profile">
       @for (item of profile(); track $index) {
-      <a [routerLink]="item.rotaUrl" aria-label="Abrir perfil de {{ item.nome }}" (click)="openProfile()">
+      <a [routerLink]="item.rotaUrl" aria-label="Abrir perfil de {{ item.nome }}" (click)="openProfile()" role="button" tabindex="0" (keyup.enter)="openProfile()">
         @if (item.iconUrl) {
         <mat-icon class="icon_profile" aria-hidden="true">{{ item.iconUrl }}</mat-icon>
         }
