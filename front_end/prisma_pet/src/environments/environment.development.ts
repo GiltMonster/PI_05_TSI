@@ -1,5 +1,5 @@
-//  const end_point_base = 'https://prisma-pet-api.up.railway.app/api';
-const end_point_base = 'http://127.0.0.1:8000/api';
+ const end_point_base = 'https://prisma-pet-api.up.railway.app/api';
+// const end_point_base = 'http://127.0.0.1:8000/api';
 
 export const environment = {
   production: false,
