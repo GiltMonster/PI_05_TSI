@@ -1,0 +1,107 @@
+<article class="card_vacina_container" [attr.aria-labelledby]="'vacina-'">
+
+  <div class="info_vacina_container">
+
+    <div class="info_vacina_contant">
+      <h2 class="nome_vacina" [id]="'vacina'">
+        {{ pet_vacina.tipo_vacina || 'Vacina não informada' }}
+      </h2>
+      <p class="data_vacina">
+        <label>
+          Data vacinação:
+        </label>
+        {{ (pet_vacina.data_vacinacao | date:'dd/MM/yyyy') || 'Não informado' }}
+      </p>
+
+      <p class="vet_vacina">
+        <label>
+          Veterinário responsavel:
+        </label>
+        {{ pet_vacina.nome_vet || 'Não informado' }}
+      </p>
+
+      <div class="status_vacina">
+        <label>
+          Estado da vacina:
+        </label>
+
+        <p [class]="setStyleCorEstadoVacina()">
+          {{ pet_vacina.estado_vacina || 'Estado não informado' }}
+        </p>
+      </div>
+
+
+    </div>
+
+    <div class="btns_vacina">
+      @if (userType !== 'user') {
+        <button type="button" class="btn_icon" (click)="onEdit()" aria-label="Editar cadastro">
+          <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">edit</mat-icon>
+        </button>
+      }
+      @if (userType === 'admin') {
+        <button type="button" class="btn_icon" (click)="onDelete()" aria-label="Excluir cadastro">
+          <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">delete</mat-icon>
+        </button>
+      }
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="informacoes_vacina">
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Informações: </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <ul>
+
+        <li>
+          <label>Data de revacinação:</label>
+          {{ (pet_vacina.data_reforco| date:'dd/MM/yyyy') || 'Não informado' }}
+        </li>
+
+        <li>
+          <label>Dose atual:</label>
+          {{ pet_vacina.dose_atual || 'Não informado' }}
+        </li>
+
+        <li>
+          <label>Total de doses:</label>
+          {{ pet_vacina.dose_total || 'Não informado' }}
+        </li>
+
+        <li>
+          <label>Nome fabricante:</label>
+          {{ pet_vacina.fabricante || 'Não informado' }}
+        </li>
+
+        <li>
+          <label>Observações:</label>
+          {{ pet_vacina.observacoes || 'Nenhuma observação adicionada.' }}
+        </li>
+
+
+
+      </ul>
+    </mat-expansion-panel>
+
+  </div>
+</article>
+
+@if (editModalOpen) {
+  <app-vacinas-pet-modal [pet_id]="pet_vacina.pet_id" (close)="closeEditModal()" (save)="handleVacinaUpdated($event)" [editMode]="true" [vacinaToEdit]="pet_vacina" />
+}
+
+@if (deleteModalOpen) {
+  <app-modal-delete
+    [title]="'Excluir Vacina'"
+    [message]="`Tem certeza que deseja excluir a vacina: ${pet_vacina.tipo_vacina}? Esta ação não pode ser desfeita.`"
+    [confirmLabel]="'Excluir'"
+    [cancelLabel]="'Cancelar'"
+    (confirm)="handleConfirmDelete()"
+    (cancel)="closeDeleteModal()"
+  ></app-modal-delete>
+}

@@ -20,7 +20,7 @@ export class App implements OnInit {
   headerContato: HeaderContato[] = [{
     label: 'Fale Conosco',
     wpp: 'chat',
-    link: 'https://api.whatsapp.com/send?phone=5511955207242'
+    link: 'https://api.whatsapp.com/send?phone=5511998990829'
   }];
   headerProfile: HeaderProfile[] = [{}];
 

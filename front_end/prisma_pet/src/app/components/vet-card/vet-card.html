@@ -1,32 +1,51 @@
-<article class="card_vet_container"
-  [attr.aria-labelledby]="'vet-' + vetCard().id">
+<article class="card_vet_container" [attr.aria-labelledby]="'vet-' + userVet.id">
   <div class="info_vet">
-    <h3 class="nome_vet" [id]="'vet-' + vetCard().id">
-      {{ vetCard().nome }}
+    <h3 class="nome_vet" [id]="'vet-' + userVet.id">
+      {{ userVet.name }}
     </h3>
-    <p class="detalhes_vet">
-      {{ vetCard().crmv }}
-    </p>
-    <p class="especialidade_vet">
-      <strong>Especialidade:</strong> {{ vetCard().especialidade }}
-    </p>
+    <p class="detalhes_vet"><strong> CRMV: </strong>{{ userVet.crmv }}</p>
+    <!-- <p class="especialidade_vet">
+      <strong>Especialidade: </strong> {{ userVet.especialidade }}
+    </p> -->
   </div>
 
   <div class="botoes_vet">
-<button
-  type="button"
-  class="btn_cadastro"
-  (click)="onView()"
-  [attr.aria-label]="'Ver cadastro completo de ' + vetCard().nome">
-  <span class="btn-text btn-text--total">Abrir Cadastro</span>
-  <span class="btn-text btn-text--menor">Ver</span>
-</button>
-    <button type="button" class="btn_icon" (click)="onEdit()" aria-label="Editar cadastro">
+
+    @if (typeUser === 'admin') {
+    <button
+      type="button"
+      class="btn_icon"
+      (click)="openEditModal(userVet)"
+      aria-label="Editar cadastro"
+    >
       <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">edit</mat-icon>
     </button>
 
-    <button type="button" class="btn_icon" (click)="onDelete()" aria-label="Excluir cadastro">
+    <button
+      type="button"
+      class="btn_icon"
+      (click)="openDeleteModal(userVet)"
+      aria-label="Excluir cadastro"
+    >
       <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">delete</mat-icon>
     </button>
+    }
   </div>
+  <app-loading *ngIf="loading"></app-loading>
 </article>
+
+@if(editModalOpen){
+<app-modal-edit [user]="userVet" (close)="closeEditModal()" (save)="saveVet($event)" />
+}
+
+
+@if (deleteModalOpen) {
+<app-modal-delete
+  [title]="'Excluir Veterinário'"
+  [message]="'Tem certeza que deseja excluir ' + (vetToDelete?.name || 'este veterinário') + '?'"
+  [confirmLabel]="'Excluir'"
+  [cancelLabel]="'Cancelar'"
+  (confirm)="handleConfirmDelete()"
+  (cancel)="closeDeleteModal()"
+></app-modal-delete>
+}

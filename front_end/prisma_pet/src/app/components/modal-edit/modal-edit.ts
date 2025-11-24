@@ -2,10 +2,13 @@ import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from
 import { UserInterface } from '../../interfaces';
 import { FormsModule } from '@angular/forms';
 import { UsuarioService } from '../../services/usuario-service';
+import { Notification } from '../../services/notification';
+import { Loading } from '../loading/loading';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-modal-edit',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule, Loading],
   templateUrl: './modal-edit.html',
   styleUrl: './modal-edit.scss',
 })
@@ -17,29 +20,56 @@ export class ModalEdit implements OnChanges {
   editedUser: UserInterface = {} as UserInterface;
   class_is_required = '';
   class_group_full_option = '';
+  loading = false;
 
+  especialidadesVet: string[] = [
+    'Auxiliar',
+    'Cardiologista',
+    'Cirurgiã',
+    'Clínico Geral',
+    'Dermatologista',
+    'Endócrinologista',
+    'Fisioterapia',
+    'Nefrologista',
+    'Nutricionista',
+    'Oftalmologista',
+    'Raio X',
+    'Silvestres',
+    'Ultrassom',
+  ];
 
-  constructor(
-    private usuarioService: UsuarioService
-  ) { }
+  constructor(private usuarioService: UsuarioService, private notification: Notification) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['user'] && this.user) {
       this.editedUser = { ...this.user };
-      this.class_is_required = this.user.type !== 'admin' ? 'form-label form-label--required' : 'form-label';
-      this.class_group_full_option = this.user.type !== 'vet' ? 'form-group form-group--full' : 'form-group';
+      this.class_is_required =
+        this.user.type !== 'admin' ? 'form-label form-label--required' : 'form-label';
+      this.class_group_full_option =
+        this.user.type !== 'vet' ? 'form-group form-group--full' : 'form-group';
+
+      if (this.user.type === 'vet' && !this.editedUser.especialidade_vet) {
+        this.editedUser.especialidade_vet = '';
+      }
     }
   }
 
   onSave() {
+    this.loading = true;
+    console.log('Salvando usuário editado:', this.editedUser);
+    
     this.save.emit(this.editedUser);
     this.usuarioService.updateUser(this.editedUser).subscribe({
       next: (res) => {
         console.log('Usuário atualizado com sucesso', res);
+        this.notification.success('Usuário atualizado com sucesso.');
+        this.loading = false;
       },
       error: (err) => {
         console.log('Erro ao atualizar usuário', err);
-      }
+        this.notification.error('Erro ao atualizar usuário');
+        this.loading = false;
+      },
     });
     this.close.emit();
   }
@@ -84,12 +114,13 @@ export class ModalEdit implements OnChanges {
           endereco: res.street,
           cidade: res.city,
           estado: res.state,
-          bairro: res.neighborhood
+          bairro: res.neighborhood,
         };
       },
       error: (err) => {
         console.log('Erro ao buscar CEP', err);
-      }
+        this.notification.error('Erro ao buscar CEP');
+      },
     });
   }
 }

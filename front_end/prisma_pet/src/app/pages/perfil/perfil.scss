@@ -69,7 +69,6 @@
   font-size: 1rem;
 }
 
-/* Form Section */
 .form-section {
   background-color: var(--white);
   border-radius: 16px;
@@ -95,7 +94,7 @@
   grid-template-columns: 1fr;
 }
 
-/* Form Group */
+
 .form-group {
   display: flex;
   flex-direction: column;
@@ -184,7 +183,7 @@
 }
 
 .btn--primary:hover {
-  background-color: var(--primary-dark);
+  background-color: var(--orange);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }

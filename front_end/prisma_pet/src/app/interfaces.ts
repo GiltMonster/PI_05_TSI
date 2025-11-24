@@ -20,6 +20,7 @@ export interface UserInterface {
   complemento?: string;
   cpf: string;
   crmv?: string;
+  especialidade_vet?: string;
   pix?: string;
 }
 
@@ -90,7 +91,6 @@ export interface TutorListInterface {
   id: number;
   nome: string;
   telefone?: string;
-  // animal: string;
 }
 
 export interface VeterinarioListInterface {
@@ -106,25 +106,72 @@ export interface FichaPetInterface {
 }
 
 export interface PetInterface {
+  type?: string;
   id: number;
   nome: string;
-  especie?: boolean;
+  especie?: string;
   ano_nascimento?: Date;
   raca?: string;
+  sexo?: boolean;
   peso?: number;
-  temperamento: string;
+  temperamento?: string;
   possuiCarteirinha?: boolean;
-  cor_pelagem?: string;
-  sexo?: number;
-  castrado?: number;
+  castrado?: boolean;
   tutor?: string;
-  caso_clinico: string;
+  caso_clinico?: string;
   imagem?: string;
+  user_id?: number;
+  cor_pelagem?: string;
+  casoClinico?: string;
+  tutor_name?: string;
+  consultas?: Array<PetConsulta>;
+  vacinas?: Array<PetVacina>;
+  prescricoes?: Array<PetPrescricao>;
 }
 
-export interface ServicosListInterface {
+export interface PetConsulta {
   id: number;
-  titulo: string;
+  vet_id: number;
+  pet_id: number;
+  servico_id: number;
+  data_consulta: Date;
+  anamnese: string;
+  nome_vet?: string;
+  nome_servico?: string;
+  categoria_servico?: string;
+}
+
+export interface PetVacina {
+  id: number;
+  vet_id: number;
+  pet_id: number;
+  data_vacinacao: Date;
+  data_reforco: Date;
+  dose_atual: string;
+  dose_total: string;
+  tipo_vacina: string;
+  fabricante: string;
+  observacoes: string;
+  estado_vacina: string;
+  nome_vet: string;
+}
+
+export interface PetPrescricao {
+  id: number;
+  vet_id: number;
+  pet_id: number;
+  data_prescricao: Date;
+  nome_medicamento: string;
+  dosagem: string;
+  farmacia: string;
+  via: string;
+  posologia: string;
+}
+
+export interface ServicosInterface {
+  id: number;
+  type?: string;
+  nome: string;
   categoria: string;
-  valor: number;
+  preco: number;
 }

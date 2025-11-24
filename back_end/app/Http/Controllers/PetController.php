@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\ConsultaPet;
 use App\Models\Pet;
+use App\Models\PrescricaoPet;
+use App\Models\Servico;
 use App\Models\User;
+use App\Models\VacinaPet;
 use Illuminate\Http\Request;
 
 class PetController extends Controller
@@ -41,12 +44,42 @@ class PetController extends Controller
             if ($vet) {
                 $consulta->nome_vet = $vet->name;
             }
+
+            $servico = Servico::find($consulta->servico_id);
+            if ($servico) {
+                $consulta->nome_servico = $servico->nome;
+                $consulta->categoria_servico = $servico->categoria;
+            }
+        }
+
+        $vacinas = VacinaPet::whereIn('pet_id', $pets->pluck('id'))->get();
+
+        foreach ($vacinas as $vacina) {
+            $vet = User::find($vacina->vet_id);
+            if ($vet) {
+                $vacina->nome_vet = $vet->name;
+            }
+        }
+
+        $prescricoes =  PrescricaoPet::whereIn('pet_id', $pets->pluck('id'))->get();
+
+        foreach ($prescricoes as $prescricao) {
+            $vet = User::find($prescricao->vet_id);
+            if ($vet) {
+                $prescricao->nome_vet = $vet->name;
+            }
+        }
+
+        foreach ($pets as $pet) {
+            $pet->consultas = $consultas->where('pet_id', $pet->id)->values();
+            $pet->vacinas = $vacinas->where('pet_id', $pet->id)->values();
+            $pet->prescricoes = $prescricoes->where('pet_id', $pet->id)->values();
         }
 
         return response()->json([
             'tutor_name' => $user->name,
             'pets' => $pets,
-            'consultas' => $consultas
+            // 'consultas' => $consultas
         ], 200);
     }
 
@@ -56,6 +89,13 @@ class PetController extends Controller
 
         if ($pets->isEmpty()) {
             return response()->json(['message' => 'Nenhum pet encontrado.'], 404);
+        }
+
+        foreach ($pets as $pet) {
+            $user = User::find($pet->user_id);
+            if ($user) {
+                $pet->tutor_name = $user->name;
+            }
         }
 
         return response()->json($pets, 200);

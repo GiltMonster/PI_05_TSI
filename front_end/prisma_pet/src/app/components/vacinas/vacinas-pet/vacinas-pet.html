@@ -1,0 +1,40 @@
+<section class="tab-content">
+  <div class="container_vacina">
+    <h2>Vacinas do Pet:</h2>
+    @if (userType !== 'user') {
+      <button class="add_vacina_button" type="button" aria-label="Cadastrar nova vacina" (click)="openCreateModal()">
+        <mat-icon aria-hidden="true">add</mat-icon>
+        <span>Cadastrar uma nova vacina</span>
+      </button>
+    }
+
+  </div>
+
+  <div class="resume_vacinas">
+
+    <div class="card_resume">
+      <mat-icon aria-hidden="true" style="color: var(--success);">vaccines</mat-icon>
+      <h3>{{ vacinasAplicadas }} Aplicadas</h3>
+    </div>
+
+    <div class="card_resume">
+      <mat-icon aria-hidden="true" style="color: var(--error)">vaccines</mat-icon>
+      <h3>{{ vacinasAtrasadas }} Atrasadas</h3>
+    </div>
+
+    <div class="card_resume">
+      <mat-icon aria-hidden="true" style="color: var(--primary-color)">vaccines</mat-icon>
+      <h3>{{ vacinasProgramadas }} Programadas</h3>
+    </div>
+
+  </div>
+
+  @for (vacina of pet_vacinas; track vacina.id) {
+  <app-vacinas-pet-list [pet_vacina]="vacina" [userType]="userType" (delete)="handleVacinaDeleted($event)" />
+  }
+
+</section>
+
+@if (createModalOpen) {
+  <app-vacinas-pet-modal [pet_id]="pet_id" (close)="closeCreateModal()" (save)="handleVacinaCreated($event)" [editMode]="editModalOpen" />
+}

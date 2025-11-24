@@ -1,3 +1,6 @@
 <section class="lista_tutor" aria-label="Lista de Responsáveis">
   <app-tutor-list [tutores]="listTutores" />
 </section>
+@if (loading) {
+  <app-loading/>
+}

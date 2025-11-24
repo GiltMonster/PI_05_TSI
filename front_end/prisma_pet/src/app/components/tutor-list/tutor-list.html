@@ -1,11 +1,20 @@
-<section class="list_tutor_container" aria-label="Lista de animais">
+<section class="list_tutor_container" aria-label="Lista de responsáveis">
   <h1 class="list_title">Responsáveis</h1>
 
   <div class="header_list_tutor">
     <form class="search" role="search" (submit)="onSearch(); $event.preventDefault()">
-      <label class="sr-only" for="tutorSearch">Buscar Tutor</label>
-      <input id="tutorSearch" class="search__input" type="search" placeholder="Buscar Responsável" autocomplete="off"
-        aria-describedby="Buscar Tutor" [(ngModel)]="searchValue" name="searchValue" (ngModelChange)="onSearch()" />
+      <label class="sr-only" for="tutorSearch">Buscar Responsável</label>
+      <input
+        id="tutorSearch"
+        class="search__input"
+        type="search"
+        placeholder="Buscar Responsável"
+        autocomplete="off"
+        aria-describedby="Buscar Responsável"
+        [(ngModel)]="searchValue"
+        name="searchValue"
+        (ngModelChange)="onSearch()"
+      />
 
       @if(searchValue !== "") {
       <button type="button" class="search__clear" aria-label="Limpar busca" (click)="clearSearch()">
@@ -17,25 +26,56 @@
         <mat-icon aria-hidden="true">search</mat-icon>
       </button>
 
-      <span id="Buscar Tutor" class="sr-only" aria-live="polite">{{ statusMsg }}</span>
+      <span id="Buscar Responsável" class="sr-only" aria-live="polite">{{ statusMsg }}</span>
     </form>
 
-    <button class="add_tutor_button" type="button" aria-label="Cadastrar novo Responsável">
+    @if (typeUser === 'admin') {
+    <button
+      class="add_tutor_button"
+      type="button"
+      aria-label="Cadastrar novo Responsável"
+      (click)="openCreateModal()"
+    >
       <mat-icon aria-hidden="true">add</mat-icon>
       <span>Cadastrar Novo Responsável</span>
     </button>
+    }
   </div>
 
   @if (!filteredTutores || filteredTutores.length === 0){
-  <div class="empty" role="note" aria-live="polite">{{ emptyMessage }}</div>
+  <div class="empty" role="note" aria-live="polite">
+    {{ emptyMessage }}
+  </div>
 
   } @if (filteredTutores.length) {
   <ul class="grid" role="list">
-    @for (tutor of filteredTutores; track tutor.id) {
+    @for (tutor of pagedTutores; track tutor.id) {
     <li class="grid__item" role="listitem">
-      <app-tutor-card [userTutor]="tutor" [typeUser]="typeUser" (tutorDeleted)="onTutorDeleted($event)"/>
+      <app-tutor-card
+        [userTutor]="tutor"
+        [typeUser]="typeUser"
+        (tutorDeleted)="onTutorDeleted($event)"
+      />
     </li>
     }
   </ul>
+
+    <mat-paginator
+      class="paginator"
+      [length]="filteredTutores.length"
+      [pageSize]="pageSize"
+      [pageIndex]="pageIndex"
+      [pageSizeOptions]="[5, 10, 20]"
+      (page)="onPageChange($event)"
+      [ariaLabel]="'Paginação da lista de responsáveis'"
+      [showFirstLastButtons]="true"
+    />
+
+  } @if (createModalOpen) {
+  <app-modal-create
+    (close)="closeCreateModal()"
+    [userType]="'user'"
+    (save)="handleTutorCreated($event)"
+  />
   }
 </section>

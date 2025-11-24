@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { UserInterface } from '../interfaces';
+import { PetInterface, UserInterface } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -18,5 +18,8 @@ export class VeterinarioService {
   getAllTutors() {
     return this.http.get<Array<UserInterface>>(`${environment.API_URL_VET_GET_TUTORS_LIST}`);
   }
-
+  
+    getAllVets() {
+  return this.http.get<UserInterface[]>(environment.API_URL_ADMIN_VET_LIST);
+}
 }

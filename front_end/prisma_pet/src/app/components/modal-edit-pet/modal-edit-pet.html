@@ -1,0 +1,187 @@
+<div class="modal-backdrop">
+  <div class="modal-content">
+    <h2 class="form-section__title">Editar Animal</h2>
+
+    <form aria-label="Formulário de dados do animal" (ngSubmit)="onSave()">
+      <div class="form-grid">
+        <!-- Nome do Animal -->
+        <div class="form-group">
+          <label for="nome" class="form-label form-label--required">Nome do Animal</label>
+          <input
+            type="text"
+            id="nome"
+            name="nome"
+            class="form-input"
+            [(ngModel)]="editedPet.nome"
+            required
+            aria-required="true"
+            autocomplete="off"
+            placeholder="Digite o nome do animal..."
+          />
+        </div>
+
+        <!-- Espécie -->
+        <div class="form-group">
+          <label for="especie" class="form-label">Espécie</label>
+          <select
+            id="especie"
+            name="especie"
+            class="form-input"
+            [(ngModel)]="editedPet.especie"
+          >
+            <option value="">Selecione a espécie...</option>
+            <option *ngFor="let especie of especies" [value]="especie">
+              {{ especie }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Raça -->
+        <div class="form-group">
+          <label for="raca" class="form-label">Raça</label>
+          <input
+            type="text"
+            id="raca"
+            name="raca"
+            class="form-input"
+            [(ngModel)]="editedPet.raca"
+            autocomplete="off"
+            placeholder="Ex.: SRD, Golden Retriever, Siamês..."
+          />
+        </div>
+
+        <!-- Data de nascimento -->
+        <div class="form-group">
+          <label for="ano_nascimento" class="form-label">Data de nascimento</label>
+          <input
+            type="date"
+            id="ano_nascimento"
+            name="ano_nascimento"
+            class="form-input"
+            [(ngModel)]="editedPet.ano_nascimento"
+          />
+        </div>
+
+        <!-- Sexo -->
+        <div class="form-group">
+          <label for="sexo" class="form-label">Sexo</label>
+          <select id="sexo" name="sexo" class="form-input" [(ngModel)]="editedPet.sexo">
+            <option [ngValue]="null">Selecione...</option>
+            <option [ngValue]="true">Macho</option>
+            <option [ngValue]="false">Fêmea</option>
+          </select>
+        </div>
+
+        <!-- Peso Aproximado -->
+        <div class="form-group">
+          <label for="peso" class="form-label">Peso Aproximado</label>
+          <input
+            type="number"
+            step="0.01"
+            id="peso"
+            name="peso"
+            class="form-input"
+            [(ngModel)]="editedPet.peso"
+            autocomplete="off"
+            placeholder="Ex.: 4.5"
+          />
+        </div>
+
+        <!-- Castrado -->
+        <div class="form-group">
+          <label for="castrado" class="form-label">Castrado</label>
+          <select id="castrado" name="castrado" class="form-input" [(ngModel)]="editedPet.castrado">
+            <option [ngValue]="null">Selecione...</option>
+            <option [ngValue]="true">Sim</option>
+            <option [ngValue]="false">Não</option>
+          </select>
+        </div>
+
+        <!-- Temperamento -->
+        <div class="form-group">
+          <label for="temperamento" class="form-label">Temperamento</label>
+          <input
+            type="text"
+            id="temperamento"
+            name="temperamento"
+            class="form-input"
+            [(ngModel)]="editedPet.temperamento"
+            autocomplete="off"
+            placeholder="Ex.: Calmo, Agitado, Medroso..."
+          />
+        </div>
+
+        <!-- Cor da Pelagem -->
+        <div class="form-group">
+          <label for="cor_pelagem" class="form-label">Cor da Pelagem</label>
+          <input
+            type="text"
+            id="cor_pelagem"
+            name="cor_pelagem"
+            class="form-input"
+            [(ngModel)]="editedPet.cor_pelagem"
+            autocomplete="off"
+            placeholder="Ex.: Branco, Tigrado, Preto com manchas..."
+          />
+        </div>
+
+        <!-- Responsável -->
+        <div class="form-group">
+          <label for="tutor" class="form-label">Responsável</label>
+          <select id="tutor" name="tutor" class="form-input" [(ngModel)]="editedPet.user_id">
+            <option [ngValue]="null" selected>Selecione o Responsável...</option>
+
+            <option *ngFor="let tutor of tutores" [ngValue]="tutor.id">
+              {{ tutor.name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Caso Clínico -->
+        <div class="form-group form-group--full">
+          <label for="casoClinico" class="form-label">Caso Clínico</label>
+          <textarea
+            id="casoClinico"
+            name="casoClinico"
+            class="form-input"
+            [(ngModel)]="editedPet.casoClinico"
+            rows="4"
+            placeholder="Descreva o histórico e o caso clínico do animal..."
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="button-group">
+        <button type="button" class="btn btn--secondary" (click)="onCancel()">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+          Cancelar
+        </button>
+
+        <button type="submit" class="btn btn--primary">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          Salvar Alterações
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

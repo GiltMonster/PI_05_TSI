@@ -1,52 +1,119 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { ReactiveFormsModule, FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { ReactiveFormsModule, FormControl, FormsModule } from '@angular/forms';
 import { AnimalCard } from '../animal-card/animal-card';
-import { PetListInterface } from '../../interfaces';
+import { PetInterface } from '../../interfaces';
+import { ModalCreatePet } from '../modal-create-pet/modal-create-pet';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { UserTypeProviderService } from '../../shared/user-type-service';
 
 @Component({
   selector: 'app-animal-list',
   standalone: true,
-  imports: [CommonModule, MatIconModule, ReactiveFormsModule, AnimalCard],
+  imports: [CommonModule, MatIconModule, ReactiveFormsModule, AnimalCard, FormsModule, ModalCreatePet, MatPaginatorModule],
   templateUrl: './animal-list.html',
-  styleUrls: ['./animal-list.scss']
+  styleUrls: ['./animal-list.scss'],
 })
 export class AnimalList implements OnInit {
-  @Input() pets: PetListInterface[] = [];
-  @Input() loading = false;
-  @Input() emptyMessage = 'Nenhum pet cadastrado';
-  @Input() columns = 1;
-  @Input() gap = 12;
-  @Input() searchPlaceholder = 'Buscar Animais';
+  @Input() pets: PetInterface[] = [];
+  @Input() emptyMessage = 'Nenhum animal cadastrado';
 
-  @Output() searchChange = new EventEmitter<string>();
-  @Output() viewPet  = new EventEmitter<PetListInterface>();
-  @Output() editPet  = new EventEmitter<PetListInterface>();
-  @Output() deletePet= new EventEmitter<PetListInterface>();
-  @Output() addPet   = new EventEmitter<void>();
+  pageSize = 5;
+  pageIndex = 0;
 
-  searchCtrl = new FormControl<string>('', { nonNullable: true });
+  searchValue = '';
   statusMsg = '';
+  filteredPets: PetInterface[] = [];
+  typeUser = '';
+  createModalOpen = false;
 
-  ngOnInit(): void {
-    this.searchCtrl.valueChanges
-      .pipe(debounceTime(250), distinctUntilChanged())
-      .subscribe(term => {
-        this.searchChange.emit(term);
-        this.statusMsg = term ? `Filtrando por: ${term}.` : 'Filtro limpo.';
-      });
+  constructor(
+    private userTypeService: UserTypeProviderService
+  ) { }
+
+  onSubmit(event: Event) {
+    event.preventDefault();
+    this.onSearch();
   }
 
-  onSubmit(e: Event) { e.preventDefault(); this.searchChange.emit(this.searchCtrl.value); }
-  clearSearch()      { this.searchCtrl.setValue(''); }
+  ngOnInit(): void {
+    this.userTypeService.userType$.subscribe(type => {
+      this.typeUser = type;
+    });
+  }
 
-  onViewPet(p: PetListInterface)   { this.viewPet.emit(p); }
-  onEditPet(p: PetListInterface)   { this.editPet.emit(p); }
-  onDeletePet(p: PetListInterface) { this.deletePet.emit(p); }
-  onAddPet()                       { this.addPet.emit(); }
+  ngOnChanges(): void {
+    this.filteredPets = this.filterPets();
+  }
 
-  getGridTemplate() { return `repeat(${Math.max(1, this.columns)}, minmax(0,1fr))`; }
-  trackById = (index: number, p: PetListInterface) => (p as any).id ?? p.nome;
+  clearSearch() {
+    this.searchValue = '';
+    this.filteredPets = this.pets;
+  }
+
+  onSearch() {
+    this.filteredPets = this.filterPets();
+    this.pageIndex = 0;
+  }
+
+  onPetDeleted(petId: number) {
+    this.pets = this.pets.filter((pet) => pet.id !== petId);
+    this.filteredPets = this.filterPets();
+    if (this.pageIndex > 0 && this.pagedPets.length === 0) {
+      this.pageIndex--;
+    }
+  }
+  get pagedPets(): PetInterface[] {
+    const start = this.pageIndex * this.pageSize;
+    return this.filteredPets.slice(start, start + this.pageSize);
+  }
+
+  onPageChange(event: any) {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+  }
+
+  // onTutorLoad(event: { id: number; tutorName: string }) {
+  //   this.pets = this.pets.map(pet =>
+  //     pet.id === event.id ? { ...pet, tutorName: event.tutorName } : pet
+  //   );
+  //   this.filteredPets = this.filterPets();
+  // }
+
+  filterPets(): PetInterface[] {
+    if (!this.searchValue) {
+      return this.pets;
+    }
+
+    const searchTerm = this.searchValue.toLowerCase();
+    return this.pets.filter((pet) => {
+      const sexoTexto = pet.sexo === true ? 'macho' : 'femea';
+      const tutorTexto = (pet.tutor_name ?? '').toLowerCase();
+
+      return (
+        pet.nome.toLowerCase().includes(searchTerm) ||
+        tutorTexto.includes(searchTerm) ||
+        sexoTexto.includes(searchTerm)
+      );
+    });
+  }
+
+  openCreateModal() {
+    this.createModalOpen = true;
+  }
+
+  closeCreateModal() {
+    this.createModalOpen = false;
+  }
+
+  handlePetCreated({pet}: {pet: PetInterface}) {
+    this.pets = [pet, ...this.pets];
+    this.filteredPets = this.filterPets();
+    this.statusMsg = 'Animal cadastrado com sucesso.';
+    this.createModalOpen = false;
+  }
 }
+
+
+

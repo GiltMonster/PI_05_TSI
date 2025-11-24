@@ -34,4 +34,14 @@ class Pet extends Model
         return $this->hasMany(ConsultaPet::class, 'pet_id');
     }
 
+    public function vacinas()
+    {
+        return $this->hasMany(VacinaPet::class, 'pet_id');
+    }
+
+    public function prescricoes()
+    {
+        return $this->hasMany(PrescricaoPet::class, 'pet_id');
+    }
+
 }

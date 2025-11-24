@@ -4,6 +4,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { LoginResponse, VerifyTokenResponse } from '../interfaces';
 import { environment } from '../../environments/environment.development';
 import { Router } from '@angular/router';
+import { UserTypeProviderService } from '../shared/user-type-service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class AuthLogin {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private userTypeService: UserTypeProviderService
   ) { }
 
   login(email: string, password: string) {
@@ -35,6 +37,7 @@ export class AuthLogin {
       tap({
         next: (res) => {
           if (res.valid) {
+            this.userTypeService.updateUserType(res.user.type);
             if (res.user.type === 'admin' || res.user.type === 'user' || res.user.type === 'vet') {
               this.router.navigate(['/' + res.user.type]);
             } else {

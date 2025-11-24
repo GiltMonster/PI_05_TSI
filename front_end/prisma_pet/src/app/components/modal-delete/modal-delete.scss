@@ -1,0 +1,117 @@
+/* === BASE: exatamente o que você já usa nos outros modais === */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgb(0 0 0 / 50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 720px;
+  max-height: 90vh;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.form-section__title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  justify-content: flex-end;
+}
+
+.btn {
+  padding: 0.875rem 2rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.btn--primary {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.btn--primary:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn--secondary {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 2px solid var(--border-color);
+}
+
+.btn--secondary:hover {
+  background-color: var(--background);
+  border-color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .button-group {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 1.25rem;
+    border-radius: 12px;
+  }
+}
+
+.modal-delete__body {
+  margin-top: 0.75rem;
+}
+
+.modal-delete__message {
+  font-size: 0.98rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.btn--danger {
+  background-color: var(--error);
+}
+
+.btn--danger:hover {
+  background-color: #be123c;
+}

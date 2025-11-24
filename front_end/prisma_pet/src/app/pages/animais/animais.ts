@@ -1,82 +1,73 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import { PetListInterface } from '../../interfaces';
 import { AnimalList } from '../../components/animal-list/animal-list';
+import { PetInterface } from '../../interfaces';
+import { PetService } from '../../services/pet-service';
+import { finalize, switchMap } from 'rxjs';
+import { Loading } from '../../components/loading/loading';
+import { UserTypeProviderService } from '../../shared/user-type-service';
 
 @Component({
   selector: 'app-animais',
   standalone: true,
-  imports: [CommonModule, MatIconModule, AnimalList],
+  imports: [CommonModule, MatIconModule, AnimalList, Loading],
   templateUrl: './animais.html',
   styleUrls: ['./animais.scss'],
 })
-export class Animais {
+export class Animais implements OnInit {
+  listPets: Array<PetInterface> = [];
+  loading = false;
+  typeUser = '';
 
-  constructor() { }
+  constructor(
+    private petService: PetService,
+    private userTypeService: UserTypeProviderService
+  ) {}
 
-  listAnimais: PetListInterface[] = [
-    {
-      id: 1,
-      especie: 'Cachorro',
-      nome: 'Luma',
-      sexo: 'F',
-      idade: '5 anos',
-      tutor: 'Luciene Angelo',
-    },
-    {
-      id: 2,
-      especie: 'Gato',
-      nome: 'Simba',
-      sexo: 'M',
-      idade: '5 anos',
-      tutor: 'Giovanna Piccinato',
-    },
-    {
-      id: 3,
-      especie: 'Gato',
-      nome: 'Tereza',
-      sexo: 'F',
-      idade: '4 anos',
-      tutor: '  Pedro Marques',
-    },
-    { id: 4, especie: 'gato', nome: 'Nicolas', sexo: 'M', idade: '2 anos', tutor: 'Pedro Marques' },
-    {
-      id: 5,
-      especie: 'cachorro',
-      nome: 'Evair',
-      sexo: 'M',
-      idade: '2 anos',
-      tutor: 'Andrea Marques',
-    },
-  ];
+  ngOnInit(): void {
+    this.loading = true;
 
-  filtered: PetListInterface[] = [...this.listAnimais];
+    this.userTypeService.userType$.subscribe(type => {
+      this.typeUser = type;
+    });
 
-  private norm(t = '') {
-    return t
-      .toLowerCase()
-      .normalize('NFD')
-      .replace(/\p{Diacritic}/gu, '')
-      .trim();
+    if(this.typeUser === 'admin' || this.typeUser === 'vet') {
+      this.loadPets();
+      return;
+    } else {
+      this.loadMyPets();
+      return;
+    }
   }
 
-  onSearch(term: string) {
-    const q = this.norm(term);
-    this.filtered = !q
-      ? [...this.listAnimais]
-      : this.listAnimais.filter(
-        (p) => this.norm(p.tutor).includes(q) || this.norm(p.nome).includes(q)
-      );
+  loadPets() {
+    this.loading = true;
+    this.petService
+      .getAllPets()
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe({
+        next: (res) => {
+          this.listPets = [...res];
+        },
+        error: (err) => {
+          console.error('Erro ao carregar animais:', err);
+        },
+      });
   }
 
-  onViewPet(p: PetListInterface) {
-    /* navegar/abrir modal */
-  }
-  onEditPet(p: PetListInterface) {
-    /* editar */
-  }
-  onDeletePet(p: PetListInterface) {
-    /* confirmar exclusão */
+  loadMyPets() {
+    this.loading = true;
+    this.petService
+      .getMyPets()
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe({
+        next: (res) => {
+          this.listPets = [...res];
+        },
+        error: (err) => {
+          console.error('Erro ao carregar animais do tutor:', err);
+        },
+      });
   }
 }

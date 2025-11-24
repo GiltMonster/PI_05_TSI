@@ -1,41 +1,71 @@
-<article class="card_pet_container"
-  [attr.aria-labelledby]="'pet-' + petCard().id">
+<article class="card_pet_container" [attr.aria-labelledby]="'pet-' + userPet.id">
   <div class="img_especie">
     <img
       [src]="getEspeciesIcon()"
-      [alt]="'Espécie: ' + (petCard().especie || 'desconhecida')"
+      [alt]="'Espécie: ' + (userPet.especie || 'desconhecida')"
       loading="lazy"
       decoding="async"
-      width="64" height="64" />
+      width="64"
+      height="64"
+    />
   </div>
 
   <div class="info_pet">
-    <h3 class="nome_pet" [id]="'pet-' + petCard().id">
-      {{ petCard().nome }}
+    <h3 class="nome_pet" [id]="'pet-' + userPet.id">
+      {{ userPet.nome }}
     </h3>
     <p class="detalhes_pet">
-      {{ getSexoLabel() }} • {{ petCard().idade }}
+      {{ getSexoLabel() }}
     </p>
-    <p class="tutor_pet">
-      Tutor(a): {{ petCard().tutor }}
-    </p>
+    <!-- <p class="tutor_pet">Responsável: {{ userPet.tutor_name }}</p> -->
   </div>
 
   <div class="botoes_pet">
-<button
-  type="button"
-  class="btn_cadastro"
-  (click)="onView()"
-  [attr.aria-label]="'Ver cadastro completo de ' + petCard().nome">
-  <span class="btn-text btn-text--total">Abrir Cadastro</span>
-  <span class="btn-text btn-text--menor">Ver</span>
-</button>
-    <button type="button" class="btn_icon" (click)="onEdit()" aria-label="Editar cadastro">
+    <button
+      type="button"
+      class="btn_cadastro"
+      (click)="findUserById(userPet.id)"
+      [attr.aria-label]="'Ver cadastro completo de ' + userPet.nome"
+    >
+      <span class="btn-text btn-text--total">Abrir Cadastro</span>
+      <span class="btn-text btn-text--menor">Ver</span>
+    </button>
+
+    @if (typeUser === 'admin') {
+    <button
+      type="button"
+      class="btn_icon"
+      (click)="openEditModal(userPet)"
+      aria-label="Editar cadastro"
+    >
       <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">edit</mat-icon>
     </button>
 
-    <button type="button" class="btn_icon" (click)="onDelete()" aria-label="Excluir cadastro">
-      <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">delete</mat-icon>
+    <button
+      type="button"
+      class="btn_icon"
+      (click)="openDeleteModal(userPet)"
+      aria-label="Excluir cadastro"
+    >
+      <mat-icon fontSet="material-symbols-outlined" aria-hidden="true"> delete </mat-icon>
     </button>
+    }
   </div>
+
+  <app-loading *ngIf="loading"></app-loading>
 </article>
+
+@if(editModalOpen){
+<app-modal-edit-pet [pet]="petToEdit!" (close)="closeEditModal()" (save)="savePet($event)" />
+}
+
+@if (deleteModalOpen) {
+<app-modal-delete
+  [title]="'Excluir Animal'"
+  [message]="'Tem certeza que deseja excluir ' + (petToDelete?.nome || 'este animal') + '?'"
+  [confirmLabel]="'Excluir'"
+  [cancelLabel]="'Cancelar'"
+  (confirm)="handleConfirmDelete()"
+  (cancel)="closeDeleteModal()"
+></app-modal-delete>
+}

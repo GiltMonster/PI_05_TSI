@@ -1,0 +1,88 @@
+<div class="modal-backdrop">
+	<div class="modal-content">
+		@if (editMode) {
+			<h2 class="form-section__title">Editar Vacina</h2>
+		} @else {
+			<h2 class="form-section__title">Cadastrar Vacina</h2>
+		}
+
+		<form aria-label="Formulário de vacina">
+			<div class="form-grid">
+
+				<!-- Nome do Veterinário -->
+				<div class="form-group">
+					<label for="nome_vet" class="form-label">Nome do Veterinário</label>
+					<input type="text" id="nome_vet" name="nome_vet" class="form-input" [(ngModel)]="userOperator.name"
+								 placeholder="Nome do veterinário" disabled />
+				</div>
+
+				<!-- Tipo de Vacina -->
+				<div class="form-group">
+					<label for="tipo_vacina" class="form-label form-label--required">Tipo de Vacina</label>
+					<input type="text" id="tipo_vacina" name="tipo_vacina" class="form-input" [(ngModel)]="vacina.tipo_vacina"
+								 required aria-required="true" placeholder="Ex: V8, Antirrábica" />
+				</div>
+
+				<!-- Data Vacinação -->
+				<div class="form-group">
+					<label for="data_vacinacao" class="form-label form-label--required">Data da Vacinação</label>
+					<input type="date" id="data_vacinacao" name="data_vacinacao" class="form-input" [(ngModel)]="vacina.data_vacinacao"
+								 required aria-required="true" />
+				</div>
+
+				<!-- Data Reforço -->
+				<div class="form-group">
+					<label for="data_reforco" class="form-label">Data de Reforço</label>
+					<input type="date" id="data_reforco" name="data_reforco" class="form-input" [(ngModel)]="vacina.data_reforco" />
+				</div>
+
+				<!-- Dose Atual -->
+				<div class="form-group">
+					<label for="dose_atual" class="form-label">Dose Atual</label>
+					<input type="text" id="dose_atual" name="dose_atual" class="form-input" [(ngModel)]="vacina.dose_atual"
+								 placeholder="Ex: 1" />
+				</div>
+
+				<!-- Dose Total -->
+				<div class="form-group">
+					<label for="dose_total" class="form-label">Total de Doses</label>
+					<input type="text" id="dose_total" name="dose_total" class="form-input" [(ngModel)]="vacina.dose_total"
+								 placeholder="Ex: 3" />
+				</div>
+
+				<!-- Fabricante -->
+				<div class="form-group">
+					<label for="fabricante" class="form-label">Fabricante</label>
+					<input type="text" id="fabricante" name="fabricante" class="form-input" [(ngModel)]="vacina.fabricante"
+								 placeholder="Nome do fabricante" />
+				</div>
+
+				<!-- Estado Vacina -->
+				<div class="form-group">
+					<label for="estado_vacina" class="form-label">Estado da Vacina</label>
+					<select id="estado_vacina" name="estado_vacina" class="form-input" [(ngModel)]="vacina.estado_vacina">
+						<option value="programada">Programada</option>
+						<option value="aplicada">Aplicada</option>
+						<option value="atrasada">Atrasada</option>
+					</select>
+				</div>
+
+				<!-- Observações -->
+				<div class="form-group form-group--full">
+					<label for="observacoes" class="form-label">Observações</label>
+						<textarea id="observacoes" name="observacoes" class="form-input" [(ngModel)]="vacina.observacoes"
+											placeholder="Observações adicionais..."></textarea>
+				</div>
+			</div>
+
+			<div class="button-group">
+				<button type="button" class="btn btn--secondary" (click)="onCancel()">
+					Cancelar
+				</button>
+				<button type="submit" class="btn btn--primary" (click)="onSave()">
+					Salvar Alterações
+				</button>
+			</div>
+		</form>
+	</div>
+</div>

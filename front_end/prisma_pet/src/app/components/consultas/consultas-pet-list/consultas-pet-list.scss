@@ -1,0 +1,234 @@
+.card_consulta_container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--gray-light);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  background-color: var(--white);
+}
+
+.info_consulta_container {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.info_consulta_contant {
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+  }
+
+  p {
+    margin: 0.25rem 0;
+
+    label {
+      font-weight: 600;
+    }
+
+    font-size: 1rem;
+    color: var(--text-secondary);
+  }
+}
+
+.anamneses_consulta {
+
+  mat-expansion-panel {
+    box-shadow: none;
+    border: 1px solid var(--gray-light);
+    border-radius: 8px;
+  }
+
+  mat-panel-title {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+  }
+
+  p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    white-space: pre-wrap;
+  }
+}
+
+.btns_consulta {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.btn_cadastro {
+  background: #fff;
+  color: #004AAD;
+  border: 1.5px solid #004AAD;
+  border-radius: 10px;
+  height: 40px;
+  padding: 0 14px;
+  font-weight: 600;
+  line-height: 40px;
+  cursor: pointer;
+  transition: background-color .15s ease, box-shadow .15s ease;
+
+  &:hover {
+    background: #FF914D;
+    color: #fff;
+    border-color: #FF914D;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(43, 108, 176, .35);
+  }
+}
+
+.btn_icon {
+  appearance: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1.5px solid #004AAD;
+  background: #fff;
+  color: #004AAD;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background-color .15s ease, box-shadow .15s ease;
+
+  &:hover {
+    background: #FF914D;
+    color: #fff;
+    border-color: #FF914D;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(43, 108, 176, .35);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    line-height: 1;
+  }
+}
+
+
+@media (max-width: 1024px) {
+  .card_consulta_container {
+    padding: 0.85rem;
+  }
+
+  .info_consulta_container {
+    gap: 0.75rem;
+  }
+
+  .info_consulta_contant h2 {
+    font-size: 1.15rem;
+  }
+
+  .info_consulta_contant p {
+    font-size: 0.95rem;
+  }
+
+  .anamneses_consulta mat-panel-title {
+    font-size: 1.1rem;
+  }
+
+  .anamneses_consulta p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .card_consulta_container {
+    padding: 0.75rem;
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .info_consulta_container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .info_consulta_contant h2 {
+    font-size: 1.05rem;
+  }
+
+  .info_consulta_contant p {
+    font-size: 0.9rem;
+  }
+
+  .anamneses_consulta mat-expansion-panel {
+    margin-top: 0.5rem;
+  }
+
+  .btns_consulta {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 0.5rem;
+  }
+
+  .btn_cadastro {
+    padding: 0 10px;
+    height: 36px;
+    line-height: 36px;
+    font-size: 0.9rem;
+  }
+
+  .btn_icon {
+    width: 36px;
+    height: 36px;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+
+@media (max-width: 480px) {
+  .card_consulta_container {
+    padding: 0.65rem;
+    border-radius: 6px;
+  }
+
+  .info_consulta_contant h2 {
+    font-size: 1rem;
+  }
+
+  .info_consulta_contant p {
+    font-size: 0.85rem;
+  }
+
+  .btns_consulta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn_cadastro {
+    width: 100%;
+    text-align: center;
+  }
+
+  .btn_icon {
+    align-self: flex-start;
+  }
+}

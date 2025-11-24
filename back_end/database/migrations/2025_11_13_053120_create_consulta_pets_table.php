@@ -16,8 +16,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('pet_id')->constrained('pets')->onDelete('cascade');
             $table->foreignId('vet_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('servico_id')->constrained('servicos')->onDelete('cascade');
             $table->date('data_consulta');
-            $table->string('tipo_consulta');
             $table->text('anamnese');
         });
     }

@@ -1,0 +1,64 @@
+<!-- src/app/components/modal-create-service/modal-create-service.html -->
+<div class="modal-backdrop">
+  <div class="modal-content">
+    <h2 class="form-section__title">Cadastrar novo serviço</h2>
+
+    <form (ngSubmit)="onSave()">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="nome" class="form-label form-label--required">Nome do serviço</label>
+          <input
+            id="nome"
+            name="nome"
+            type="text"
+            class="form-input"
+            [(ngModel)]="createServico.nome"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="categoria" class="form-label">Categoria</label>
+          <select
+            id="categoria"
+            name="categoria"
+            class="form-input"
+            [(ngModel)]="createServico.categoria"
+          >
+            <option value="">Selecione a categoria...</option>
+            <option *ngFor="let categoria of categorias" [value]="categoria">
+              {{ categoria }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="preco" class="form-label form-label--required">Preço</label>
+          <input
+            id="preco"
+            name="preco"
+            type="number"
+            step="0.01"
+            class="form-input"
+            [(ngModel)]="createServico.preco"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button type="button" class="btn btn--secondary" (click)="onCancel()">
+          Cancelar
+        </button>
+
+        <button type="submit" class="btn btn--primary">
+          Salvar serviço
+        </button>
+      </div>
+
+      <div class="loading-overlay" *ngIf="loading">
+        <app-loading></app-loading>
+      </div>
+    </form>
+  </div>
+</div>

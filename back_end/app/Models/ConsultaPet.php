@@ -12,16 +12,12 @@ class ConsultaPet extends Model
         'consulta_id',
         'pet_id',
         'vet_id',
+        'servico_id',
         'data_consulta',
-        'tipo_consulta',
         'anamnese',
     ];
 
     public $timestamps = false;
-
-    public $hidden = [
-        'pet_id'
-    ];
 
     public function pet()
     {
@@ -31,5 +27,10 @@ class ConsultaPet extends Model
     public function veterinario()
     {
         return $this->belongsTo(Vet::class, 'veterinario_id');
+    }
+
+    public function servico()
+    {
+        return $this->belongsTo(Servico::class, 'servico_id');
     }
 }

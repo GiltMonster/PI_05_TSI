@@ -4,6 +4,8 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MenuService } from '../../services/menu-service';
+import { Notification } from '../../services/notification';
+import { UserTypeProviderService } from '../../shared/user-type-service';
 
 @Component({
   selector: 'app-menu-left',
@@ -22,7 +24,9 @@ export class MenuLeft {
 
   constructor(
     menuService: MenuService,
-    private router: Router
+    private router: Router,
+    private notification: Notification,
+    private userTypeService: UserTypeProviderService
   ) {
     // Quando o menu "abrir" (collapsed === true), foca o primeiro link
     effect(() => {
@@ -31,40 +35,45 @@ export class MenuLeft {
       }
     });
 
-    menuService.getTypeMenuUser().subscribe(
-      (typeUser) => {
-        if (typeUser.type === 'admin') {
+    this.userTypeService.userType$.subscribe(type => {
+      if (type === 'admin') {
           this.itens = [
             { label: 'Home', link: '/admin', icon: 'home' },
-            { label: 'Tutores', link: '/admin/tutores', icon: 'people' },
-            { label: 'Pets', link: '/admin/pets', icon: 'pets' },
+            { label: 'Responsáveis', link: '/admin/tutores', icon: 'people' },
+            { label: 'Animais', link: '/admin/pets', icon: 'pets' },
             { label: 'Veterinários', link: '/admin/veterinarios', icon: 'medical_services' },
             { label: 'Serviços', link: '/admin/services', icon: 'list_alt' },
             { label: 'Meus Dados', link: '/admin/perfil', icon: 'person' }
           ];
-        } else if (typeUser.type === 'vet') {
+        } else if (type === 'vet') {
           this.itens = [
             { label: 'Home', link: '/vet', icon: 'home' },
             { label: 'Animais', link: '/vet/pets', icon: 'pets' },
-            { label: 'Tutores', link: '/vet/tutors', icon: 'people' },
+            { label: 'Responsáveis', link: '/vet/tutors', icon: 'people' },
             { label: 'Serviços', link: '/vet/services', icon: 'list_alt' },
             { label: 'Meus Dados', link: '/vet/perfil', icon: 'person' }
           ];
-        } else if (typeUser.type === 'user') {
+        } else if (type === 'user') {
           this.itens = [
             { label: 'Home', link: '/user', icon: 'home' },
-            { label: 'Meus Pets', link: '/user/pets', icon: 'pets' },
+            { label: 'Meus Animais', link: '/user/pets', icon: 'pets' },
             { label: 'Meus Dados', link: '/user/perfil', icon: 'person' },
           ];
         }
-      },
-      (error) => {
-        console.error('Erro ao obter o tipo de usuário para o menu:', error);
-        this.itens = [
-          { label: 'login', link: '/login', icon: 'login' }
-        ];
-      }
-    );
+    });
+
+    // menuService.getTypeMenuUser().subscribe(
+    //   (typeUser) => {
+
+    //   },
+    //   (error) => {
+    //     console.error('Erro ao obter o tipo de usuário para o menu:', error);
+    //     this.notification.error('Erro ao obter o tipo de usuário para o menu:');
+    //     this.itens = [
+    //       { label: 'login', link: '/login', icon: 'login' }
+    //     ];
+    //   }
+    // );
   }
 
   @HostListener('keydown.escape', ['$event'])
@@ -82,5 +91,9 @@ export class MenuLeft {
 
   goToLink(link: string) {
     this.router.navigate([link]);
+  }
+
+    isActive(link: string): boolean {
+    return this.router.url === link; // Verifica se a rota atual é igual ao link fornecido - pra ativar o active do menu
   }
 }

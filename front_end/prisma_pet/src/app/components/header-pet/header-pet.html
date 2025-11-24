@@ -4,7 +4,8 @@
       <div class="header-content">
         <div class="pet-avatar">
           <div class="pet-avatar__image" aria-label="Avatar do pet">
-            <!-- IMG do pet -->
+            <img [src]="getEspeciesIcon()" [alt]="'Espécie: ' + (petsList.pets[indexPet].especie)" loading="lazy"
+              decoding="async" width="64" height="64" />
           </div>
         </div>
         <div class="pet-info">
@@ -18,7 +19,7 @@
           </div>
           } @else {
           <h1>Nenhum pet cadastrado</h1>
-          <button class="btn btn--primary">Cadastrar um NOVO pet?</button>
+          <button class="btn btn--primary">Cadastrar um novo pet?</button>
           }
         </div>
       </div>
@@ -65,11 +66,13 @@
         </div>
         <div class="pet-detail">
           <label>Sexo:</label>
-          <p>{{petsList.pets[indexPet].sexo === 1 ? 'Macho' : petsList.pets[indexPet].sexo === 2 ? 'Fêmea' : '-'}}</p>
+          <p>{{isFemale(petsList.pets[indexPet].sexo) === true ? 'Macho' : isFemale(petsList.pets[indexPet].sexo) === false ? 'Fêmea' :
+            '-'}}</p>
         </div>
         <div class="pet-detail">
           <label>Castrado:</label>
-          <p>{{petsList.pets[indexPet].castrado === 1 ? 'Sim' : petsList.pets[indexPet].castrado === 2 ? 'Não' : '-'}}
+          <p>{{isCastrado(petsList.pets[indexPet].castrado) === true ? 'Sim' : isCastrado(petsList.pets[indexPet].castrado) === false ? 'Não' :
+            '-'}}
           </p>
         </div>
         <div class="pet-detail">
@@ -87,6 +90,11 @@
   </div>
 
   <div class="pet-container">
-    <app-anexos-pet />
+    <app-anexos-pet
+    [pet_id]="petsList.pets[indexPet].id"
+    [pet_consultas]="petsList.pets[indexPet].consultas || []"
+    [pet_vacinas]="petsList.pets[indexPet].vacinas || []"
+    [pet_prescricoes]="petsList.pets[indexPet].prescricoes || []"
+     />
   </div>
 </section>

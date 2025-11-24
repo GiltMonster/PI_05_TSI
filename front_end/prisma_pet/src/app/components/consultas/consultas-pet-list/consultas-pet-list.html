@@ -1,0 +1,71 @@
+<article class="card_consulta_container" [attr.aria-labelledby]="'consulta-'">
+
+  <div class="info_consulta_container">
+
+    <div class="info_consulta_contant">
+      <h2 class="nome_consulta" [id]="'consulta'">
+        {{ pet_consulta.nome_servico || 'Serviço não informado' }}
+      </h2>
+      <p class="data_consulta">
+        <label>
+          Data:
+        </label>
+        {{ (pet_consulta.data_consulta | date:'dd/MM/yyyy') || 'Não informado' }}
+      </p>
+
+      <p class="vet_consulta">
+        <label>
+          Veterinário responsavel:
+        </label>
+        {{ pet_consulta.nome_vet || 'Não informado' }}
+      </p>
+    </div>
+
+
+    <div class="btns_consulta">
+
+      @if (userType !== 'user') {
+      <button type="button" class="btn_icon" (click)="openUpdatedModal()" aria-label="Editar cadastro">
+        <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">edit</mat-icon>
+      </button>
+      }
+
+      @if (userType === 'admin') {
+        <button type="button" class="btn_icon" (click)="openModalDelete()" aria-label="Excluir cadastro">
+          <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">delete</mat-icon>
+        </button>
+      }
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="anamneses_consulta">
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Anamnese: </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>{{ pet_consulta.anamnese || 'Nenhuma anamneses cadastrada.' }}</p>
+    </mat-expansion-panel>
+
+  </div>
+</article>
+
+@if (editModalOpen) {
+<app-consultas-pet-modal [pet_id]="pet_consulta.pet_id" (close)="closeUpdatedModal()"
+  (save)="handleConsultaUpdated($event)" [editMode]="true" [consultaToEdit]="pet_consulta" />
+}
+
+
+@if (deleteModalOpen) {
+<app-modal-delete
+  [title]="'Excluir Consulta'"
+  [message]="`Tem certeza que deseja excluir a consulta: ${pet_consulta.nome_servico} do veterinário ${pet_consulta.nome_vet}? Esta ação não pode ser desfeita.`"
+  [confirmLabel]="'Excluir'"
+  [cancelLabel]="'Cancelar'"
+  (confirm)="handleConfirmDelete()"
+  (cancel)="closeDeleteModal()"
+></app-modal-delete>
+}
+

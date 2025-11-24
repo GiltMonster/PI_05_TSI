@@ -56,6 +56,7 @@ class VetController extends Controller
         $vet->cpf = $newVetData->cpf;
         $vet->crmv = $newVetData->crmv;
         $vet->pix = $newVetData->pix;
+        $vet->especialidade_vet = $newVetData->especialidade_vet;
 
 
         $vet->save();

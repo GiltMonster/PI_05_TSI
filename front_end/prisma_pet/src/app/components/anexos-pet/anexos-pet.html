@@ -2,17 +2,68 @@
   <ul>
     <li [class.active]="activeTab === 'consultas'" (click)="setActiveTab('consultas')">Consultas</li>
     <li [class.active]="activeTab === 'vacinas'" (click)="setActiveTab('vacinas')">Vacinas</li>
+    <li [class.active]="activeTab === 'prescricoes'" (click)="setActiveTab('prescricoes')">Prescrições</li>
     <li [class.active]="activeTab === 'anexos'" (click)="setActiveTab('anexos')">Anexos</li>
   </ul>
 </nav>
 
 <hr>
 
-@if (activeTab === 'consultas') {
-  <app-consultas-pet/>
-} @else if (activeTab === 'vacinas') {
-  <app-vacinas-pet/>
-} @else if (activeTab === 'anexos') {
-  <app-outros-anexos-pet/>
-}
+<div class="tab-content">
 
+  @if (activeTab === 'consultas') {
+
+    @if(pet_consultas.length != 0) {
+      <app-consultas-pet [pet_id]="pet_id" [userType]="userType" [pet_consultas]="pet_consultas" />
+    } @else {
+      <div class="tab-container-not-found">
+        <h2>Nenhuma consulta cadastrada para este animal.</h2>
+        @if (userType !== 'user') {
+          <button class="btn btn--primary" (click)="openCreateModal()">Cadastrar uma nova consulta</button>
+        }
+      </div>
+    }
+  } @else if (activeTab === 'vacinas') {
+    @if(pet_vacinas.length != 0) {
+      <app-vacinas-pet [pet_vacinas]="pet_vacinas" [userType]="userType" [pet_id]="pet_id" />
+    } @else {
+      <div class="tab-container-not-found">
+        <h2>Nenhuma vacina cadastrada para este animal.</h2>
+        @if (userType !== 'user') {
+          <button class="btn btn--primary" (click)="openCreateVacinaModal()">Cadastrar uma nova vacina</button>
+        }
+      </div>
+    }
+  } @else if (activeTab === 'prescricoes') {
+    @if(pet_prescricoes.length != 0) {
+      <app-prescricao-pet [pet_prescricoes]="pet_prescricoes" [userType]="userType" [pet_id]="pet_id" />
+    } @else {
+      <div class="tab-container-not-found">
+        <h2>Nenhuma prescrição cadastrada para este animal.</h2>
+        @if (userType !== 'user') {
+          <button class="btn btn--primary" (click)="openCreatePrescricaoModal()">Cadastrar uma nova prescrição</button>
+        }
+      </div>
+    }
+  } @else if (activeTab === 'anexos') {
+    @if(pet_anexos.length != 0) {
+      <app-outros-anexos-pet />
+    } @else {
+      <div class="tab-container-not-found">
+        <h2>Esse animal não possui anexos cadastrados.</h2>
+        <button class="btn btn--primary">Adicionar um novo anexo</button>
+      </div>
+    }
+  }
+</div>
+
+@if (createModalOpen) {
+  <app-consultas-pet-modal [pet_id]="pet_id" (close)="closeCreateModal()" (save)="handleConsultaCreated($event)" [editMode]="editModalOpen" />
+
+}
+@if (createVacinaModalOpen) {
+  <app-vacinas-pet-modal [pet_id]="pet_id" (close)="closeCreateVacinaModal()" (save)="handleVacinaCreated($event)" [editMode]="editVacinaModalOpen" />
+}
+@if (createPrescricaoModalOpen) {
+  <app-prescricao-pet-modal [pet_id]="pet_id" (close)="closeCreatePrescricaoModal()" (save)="handlePrescricaoCreated($event)" [editMode]="editPrescricaoModalOpen" />
+}

@@ -1,52 +1,118 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { VetCard } from '../vet-card/vet-card';
-import { VeterinarioListInterface } from '../../interfaces';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { UserInterface } from '../../interfaces';
+import { UsuarioService } from '../../services/usuario-service';
+import { ModalCreate } from '../modal-create/modal-create';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { UserTypeProviderService } from '../../shared/user-type-service';
 
 @Component({
   selector: 'app-vet-list',
   standalone: true,
-  imports: [CommonModule, MatIconModule, ReactiveFormsModule, VetCard],
+  imports: [CommonModule, FormsModule, MatIconModule, ReactiveFormsModule, VetCard, ModalCreate, MatPaginatorModule],
   templateUrl: './vet-list.html',
   styleUrl: './vet-list.scss'
 })
-export class VetList {
-  @Input() veterinarios: VeterinarioListInterface[] = [];
-  @Input() loading = false;
-  @Input() emptyMessage = 'Nenhum Veterinário cadastrado';
-  @Input() columns = 1;
-  @Input() gap = 12;
-  @Input() searchPlaceholder = 'Buscar Veterinário';
+export class VetList implements OnInit {
+  @Input() vets: UserInterface[] = [];
+  @Input() emptyMessage = 'Nenhum veterinário cadastrado';
 
-  @Output() searchChange = new EventEmitter<string>();
-  @Output() viewVet  = new EventEmitter<VeterinarioListInterface>();
-  @Output() editVet  = new EventEmitter<VeterinarioListInterface>();
-  @Output() deleteVet= new EventEmitter<VeterinarioListInterface>();
-  @Output() addVet   = new EventEmitter<void>();
+  pageSize = 5;
+  pageIndex = 0;
 
-  searchCtrl = new FormControl<string>('', { nonNullable: true });
+  searchValue = '';
   statusMsg = '';
+  filteredVets: UserInterface[] = [];
+  typeUser = '';
+  createModalOpen = false;
+
+  constructor(
+    // private usuarioService: UsuarioService
+        private userTypeService: UserTypeProviderService
+  ) { }
 
   ngOnInit(): void {
-    this.searchCtrl.valueChanges
-      .pipe(debounceTime(250), distinctUntilChanged())
-      .subscribe(term => {
-        this.searchChange.emit(term);
-        this.statusMsg = term ? `Filtrando por: ${term}.` : 'Filtro limpo.';
-      });
+    this.filteredVets = this.vets;
+    // this.userTypeVerification();
+        this.userTypeService.userType$.subscribe(type => {
+      this.typeUser = type;
+    });
   }
 
-  onSubmit(e: Event) { e.preventDefault(); this.searchChange.emit(this.searchCtrl.value); }
-  clearSearch()      { this.searchCtrl.setValue(''); }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['vets']) {
+      this.filteredVets = this.filterVets();
+    }
+  }
 
-  onViewVet(p: VeterinarioListInterface)   { this.viewVet.emit(p); }
-  onEditVet(p: VeterinarioListInterface)   { this.editVet.emit(p); }
-  onDeleteVet(p: VeterinarioListInterface) { this.deleteVet.emit(p); }
-  onAddVet()                       { this.addVet.emit(); }
+  // userTypeVerification() {
+  //   this.usuarioService.getUserType().subscribe({
+  //     next: (res) => {
+  //       this.typeUser = res.type;
+  //     },
+  //     error: (err) => {
+  //       console.log('erro ao verificar tipo de usuário:', err);
+  //     }
+  //   });
+  // }
 
-  getGridTemplate() { return `repeat(${Math.max(1, this.columns)}, minmax(0,1fr))`; }
-  trackById = (index: number, p: VeterinarioListInterface) => (p as any).id ?? p.nome;
+  clearSearch() {
+    this.searchValue = '';
+    this.filteredVets = this.vets;
+  }
+
+  onSearch() {
+    this.filteredVets = this.filterVets();
+    this.pageIndex = 0;
+  }
+
+  onVetDeleted(vetId: number) {
+    this.vets = this.vets.filter(vet => vet.id !== vetId);
+    this.filteredVets = this.filterVets();
+    if (this.pageIndex > 0 && this.pagedVets.length === 0) {
+      this.pageIndex--;
+    }
+  }
+  get pagedVets(): UserInterface[] {
+    const start = this.pageIndex * this.pageSize;
+    return this.filteredVets.slice(start, start + this.pageSize);
+  }
+
+  onPageChange(event: any) {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+  }
+
+  filterVets(): UserInterface[] {
+    if (!this.searchValue) {
+      return this.vets;
+    }
+
+    const searchTerm = this.searchValue.toLowerCase();
+
+    return this.vets.filter(vet =>
+      vet.name.toLowerCase().includes(searchTerm) ||
+      vet.crmv?.toLowerCase().includes(searchTerm) ||
+      vet.especialidade_vet?.toLowerCase().includes(searchTerm)
+    );
+  }
+
+  openCreateModal() {
+    this.createModalOpen = true;
+  }
+
+  closeCreateModal() {
+    this.createModalOpen = false;
+  }
+
+
+  handleVetCreated(newVet: UserInterface) {
+    this.vets = [newVet, ...this.vets];
+    this.filteredVets = this.filterVets();
+    this.statusMsg = 'Veterinário cadastrado com sucesso.';
+    this.createModalOpen = false;
+  }
 }

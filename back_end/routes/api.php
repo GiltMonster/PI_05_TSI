@@ -5,8 +5,12 @@ use App\Http\Controllers\ConsultaPetController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\PetController;
+use App\Http\Controllers\ServicoController;
+use App\Http\Controllers\VacinaPetController;
 use App\Http\Controllers\VetController;
+use App\Http\Controllers\PrescricaoPetController;
 use GuzzleHttp\Client;
 
 Route::get('/ping', function () {
@@ -46,6 +50,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/adm/novaConsulta', [ConsultaPetController::class, 'novaConsulta']);
         Route::put('/adm/editarConsulta', [ConsultaPetController::class, 'editarConsulta']);
         Route::delete('/adm/deletarConsulta/{id}', [ConsultaPetController::class, 'deletarConsulta']);
+
+        Route::post('/adm/novaVacina', [VacinaPetController::class, 'novaVacina']);
+        Route::get('/adm/getVacinaById/{id}', [VacinaPetController::class, 'getVacinaById']);
+        Route::put('/adm/editarVacina', [VacinaPetController::class, 'editarVacina']);
+        Route::delete('/adm/deletarVacina/{id}', [VacinaPetController::class, 'deletarVacina']);
     });
 
     Route::middleware(['role:admin|vet'])->group(function () {
@@ -54,6 +63,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
         Route::get('/vet/getPetById/{id}', [PetController::class, 'getPetById']);
         Route::get('/vet/getAllTutors', [ClienteController::class, 'getClientes']);
+        Route::get('/vet/getPets', [PetController::class, 'getPets']);
         Route::get('/vet/getPetsByUserId/{user_id}', [PetController::class, 'getPetsByUserId']);
         Route::post('/vet/registrarPet', [PetController::class, 'registrarPet']);
         Route::put('/vet/editarPet', [PetController::class, 'editarPet']);
@@ -61,9 +71,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/vet/novaConsulta', [ConsultaPetController::class, 'novaConsulta']);
         Route::put('/vet/editarConsulta', [ConsultaPetController::class, 'editarConsulta']);
         Route::delete('/vet/deletarConsulta/{id}', [ConsultaPetController::class, 'deletarConsulta']);
+
+        Route::post('/vet/novaVacina', [VacinaPetController::class, 'novaVacina']);
+        Route::get('/vet/getVacinaById/{id}', [VacinaPetController::class, 'getVacinaById']);
+        Route::put('/vet/editarVacina', [VacinaPetController::class, 'editarVacina']);
+        Route::delete('/vet/deletarVacina/{id}', [VacinaPetController::class, 'deletarVacina']);
     });
 
-    Route::middleware(['role:admin|user'])->group(function () {
+    Route::middleware(['role:admin|user|vet'])->group(function () {
         Route::get('/cliente/getClienteById/{id}', [ClienteController::class, 'getClienteById']);
         Route::put('/cliente/editarCliente', [ClienteController::class, 'editCliente']);
 
@@ -73,4 +88,26 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('/cliente/editarPet', [PetController::class, 'editarPet']);
         Route::delete('/cliente/deletarPet/{id}', [PetController::class, 'deletarPet']);
     });
+
+    Route::middleware(['role:admin|vet'])->group(function () {
+        Route::get('/servico/all', [ServicoController::class, 'listarServicos']);
+        Route::get('/servico/{id}', [ServicoController::class, 'getServicoById']);
+        Route::post('/servico/novo', [ServicoController::class, 'criarServico']);
+        Route::put('/servico/editar', [ServicoController::class, 'editarServico']);
+        Route::delete('/servico/deletar/{id}', [ServicoController::class, 'deletarServico']);
+    });
+
+    Route::middleware(['role:admin|user|vet'])->group(function () {
+        Route::get('/prescricao/pet/{petId}', [PrescricaoPetController::class, 'listarPrescricoesPorPet']);
+        Route::post('/prescricao/registrarPrescricao', [PrescricaoPetController::class, 'cadastrarPrescricao']);
+        Route::put('/prescricao/atualizarPrescricao', [PrescricaoPetController::class, 'atualizarPrescricao']);
+        Route::delete('/prescricao/deletarPrescricao/{id}', [PrescricaoPetController::class, 'deletarPrescricao']);
+    });
+
+    Route::middleware(['role:admin|vet|user'])->group(function () {
+        Route::get('/file/download/{filename}', [FileController::class, 'downloadFile']);
+        Route::post('/file/upload', [FileController::class, 'upload']);
+        Route::delete('/file/delete/{filename}', [FileController::class, 'deleteFile']);
+    });
+
 });

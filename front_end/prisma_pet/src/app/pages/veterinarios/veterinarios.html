@@ -1,5 +1,4 @@
 <section class="lista_vet" aria-label="Lista de veterinarios">
-  <app-vet-list [veterinarios]="filtered" [loading]="false" [columns]="1" [gap]="12" (searchChange)="onSearch($event)"
-    (viewVet)="onViewVet($event)" (editVet)="onEditVet($event)" (deleteVet)="onDeleteVet($event)">
-  </app-vet-list>
+  <app-vet-list [vets]="listVets" />
 </section>
+<app-loading *ngIf="loading"></app-loading>

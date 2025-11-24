@@ -1,64 +1,78 @@
-<section class="list_servico_container" aria-label="Lista de animais">
+<section class="list_servico_container" aria-label="Lista de serviços">
   <h1 class="list_title">Serviços</h1>
 
   <div class="header_list_servico">
-    <form class="search" role="search" (submit)="onSubmit($event)">
+    <form class="search" role="search" (submit)="onSearch(); $event.preventDefault()">
       <label class="sr-only" for="servicoSearch">Buscar Serviço</label>
       <input
         id="servicoSearch"
         class="search__input"
         type="search"
-        [placeholder]="searchPlaceholder"
-        [formControl]="searchCtrl"
+        placeholder="Buscar Serviço"
         autocomplete="off"
         aria-describedby="Buscar Serviço"
+        [(ngModel)]="searchValue"
+        name="searchValue"
+        (ngModelChange)="onSearch()"
       />
-      <button
-        *ngIf="searchCtrl.value"
-        type="button"
-        class="search__clear"
-        (click)="clearSearch()"
-        aria-label="Limpar busca"
-      >
+
+      @if (searchValue !== "") {
+      <button type="button" class="search__clear" aria-label="Limpar busca" (click)="clearSearch()">
         <mat-icon aria-hidden="true">close</mat-icon>
       </button>
-      
+      }
+
       <button type="submit" class="search__btn" aria-label="Buscar">
         <mat-icon aria-hidden="true">search</mat-icon>
       </button>
-      
+
       <span id="Buscar Serviço" class="sr-only" aria-live="polite">{{ statusMsg }}</span>
     </form>
 
+    @if (typeUser === 'admin') {
     <button
       class="add_servico_button"
       type="button"
-      (click)="onAddServico()"
       aria-label="Cadastrar novo Serviço"
+      (click)="openCreateModal()"
     >
       <mat-icon aria-hidden="true">add</mat-icon>
       <span>Cadastrar Novo Serviço</span>
     </button>
+    }
   </div>
 
-  @if (loading) {
-  <div class="status" role="status" aria-live="polite">Carregando lista…</div>
+  @if (!filteredServicos || filteredServicos.length === 0) {
+  <div class="empty" role="note" aria-live="polite">
+    {{ emptyMessage }}
+  </div>
 
-  } @if (!loading && (!servicos || servicos.length === 0)) {
-  <div class="empty" role="note" aria-live="polite">{{ emptyMessage }}</div>
-
-  } @if (!loading && servicos.length) {
-  <ul class="grid" role="list" [style.gridTemplateColumns]="getGridTemplate()" [style.gap.px]="gap">
-    @for (p of servicos; track trackById($index, p)) {
+  } @if (filteredServicos.length) {
+  <ul class="grid" role="list">
+    @for (servico of pagedServicos; track servico.id) {
     <li class="grid__item" role="listitem">
       <app-service-card
-        [servicoCard]="p"
-        (editClick)="onEditServico($event)"
-        (deleteClick)="onDeleteServico($event)"
+        [servicoCard]="servico"
+        [typeUser]="typeUser"
+        (servicoDeleted)="onServicoDeleted($event)"
       >
       </app-service-card>
     </li>
     }
   </ul>
+    <mat-paginator
+      class="paginator"
+      [length]="filteredServicos.length"
+      [pageSize]="pageSize"
+      [pageIndex]="pageIndex"
+      [pageSizeOptions]="[5, 10, 20]"
+      (page)="onPageChange($event)"
+      [ariaLabel]="'Paginação da lista de serviços'"
+      [showFirstLastButtons]="true"
+    />
+
+  } @if (createModalOpen) {
+  <app-modal-create-servico (close)="closeCreateModal()" (save)="handleServicoCreated($event)">
+  </app-modal-create-servico>
   }
 </section>
