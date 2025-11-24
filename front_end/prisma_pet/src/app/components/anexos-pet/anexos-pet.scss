@@ -23,14 +23,19 @@
         border-radius: 5px;
       }
 
-      &.active, &:hover {
+      &.active,
+      &:hover {
         background: var(--orange);
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
       }
 
-      border-right: 1px solid rgba(255,255,255,0.2);
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
 
       &:last-child {
         border-radius: 5px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
       }
     }
   }
