@@ -30,7 +30,7 @@ class PrescricaoPetController extends Controller
     }
 
     function cadastrarPrescricao(Request $request) {
-        $validade = $request->validate([
+        $validate = $request->validate([
             'pet_id' => 'required|integer|exists:pets,id',
             'vet_id' => 'required|integer|exists:users,id',
             'data_prescricao' => 'required|date',
@@ -41,22 +41,22 @@ class PrescricaoPetController extends Controller
             'posologia' => 'required|string|max:500',
         ]);
 
-        if (PrescricaoPet::where('pet_id', $validade['pet_id'])
-            ->where('nome_medicamento', $validade['nome_medicamento'])
-            ->where('data_prescricao', $validade['data_prescricao'])
+        if (PrescricaoPet::where('pet_id', $validate['pet_id'])
+            ->where('nome_medicamento', $validate['nome_medicamento'])
+            ->where('data_prescricao', $validate['data_prescricao'])
             ->exists()) {
             return response()->json([
                 'message' => 'Prescrição já cadastrada para este pet com o mesmo medicamento na mesma data.',
             ], 409);
         }
 
-        if ($validade) {
+        if (!$validate) {
             return response()->json([
-                'message' => 'Dados fonrnecidos inválidos.',
+                'message' => 'Os dados fornecidos são inválidos.',
             ], 400);
         }
 
-        $prescricao = PrescricaoPet::create($validade);
+        $prescricao = PrescricaoPet::create($validate);
 
         return response()->json([
             'message' => 'Prescrição cadastrada com sucesso!',
