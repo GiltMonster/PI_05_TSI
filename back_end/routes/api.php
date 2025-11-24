@@ -96,7 +96,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('/servico/editar', [ServicoController::class, 'editarServico']);
         Route::delete('/servico/deletar/{id}', [ServicoController::class, 'deletarServico']);
     });
-
+  
     Route::middleware(['role:admin|user|vet'])->group(function () {
         Route::get('/prescricao/pet/{petId}', [PrescricaoPetController::class, 'listarPrescricoesPorPet']);
         Route::post('/prescricao/registrarPrescricao', [PrescricaoPetController::class, 'cadastrarPrescricao']);
