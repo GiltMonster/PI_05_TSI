@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 import { Notification } from '../../services/notification';
 import { ModalDelete } from '../modal-delete/modal-delete';
 import { Loading } from '../loading/loading';
-import { PetService } from '../../services/pet-service';
-import { UserTypeProviderService } from '../../shared/user-type-service';
+// import { PetService } from '../../services/pet-service';
+// import { UserTypeProviderService } from '../../shared/user-type-service';
 
 @Component({
   selector: 'app-tutor-card',
@@ -35,15 +35,13 @@ export class TutorCard implements OnInit {
   constructor(
     private usuarioService: UsuarioService,
     private router: Router,
-    private notification: Notification,
-    private petService: PetService,
-    private userTypeService: UserTypeProviderService
+    private notification: Notification
   ) { }
 
   ngOnInit(): void {
-    this.userTypeService.userType$.subscribe(type => {
-      this.typeUser = type;
-    });
+    // this.userTypeService.userType$.subscribe(type => {
+    //   this.typeUser = type;
+    // });
   }
 
   // goToFichaPet(tutorId: number) {
@@ -57,39 +55,54 @@ export class TutorCard implements OnInit {
   //   }
   // }
 
-  goToFichaPet(tutorId: number) {
-    this.loading = true;
+  // goToFichaPet(tutorId: number) {
+  //   this.loading = true;
 
-    this.petService.getPetsByTutorId(tutorId).subscribe({
-      next: (res) => {
-        const hasPets = res && Array.isArray(res.pets) && res.pets.length > 0;
+  //   this.petService.getPetsByTutorId(tutorId).subscribe({
+  //     next: (res) => {
+  //       const hasPets = res && Array.isArray(res.pets) && res.pets.length > 0;
 
-        if (!hasPets) {
-          this.notification.error('Este responsável ainda não possui nenhum animal cadastrado.');
-          this.loading = false;
-          return;
-        }
+  //       if (!hasPets) {
+  //         this.notification.error('Este responsável ainda não possui nenhum animal cadastrado.');
+  //         this.loading = false;
+  //         return;
+  //       }
 
-        if (this.typeUser === 'vet') {
-          this.router.navigate([`/vet/ficha/${tutorId}`]);
-        } else if (this.typeUser === 'admin') {
-          this.router.navigate([`/admin/ficha/${tutorId}`]);
-        } else {
-          this.router.navigate([`/user/ficha/${tutorId}`]);
-        }
+  //       if (this.typeUser === 'vet') {
+  //         this.router.navigate([`/vet/ficha/${tutorId}`]);
+  //       } else if (this.typeUser === 'admin') {
+  //         this.router.navigate([`/admin/ficha/${tutorId}`]);
+  //       } else {
+  //         this.router.navigate([`/user/ficha/${tutorId}`]);
+  //       }
 
-        this.loading = false;
-      },
-      error: (err) => {
-        console.error('Erro ao buscar pets do responsável:', err);
-        if (err.status === 404) {
-          this.notification.error('Este responsável ainda não possui nenhum animal cadastrado.');
-        } else {
-          this.notification.error('Não foi possível verificar os animais deste responsável.');
-        }
-        this.loading = false;
-      }
-    });
+  //       this.loading = false;
+  //     },
+  //     error: (err) => {
+  //       console.error('Erro ao buscar pets do responsável:', err);
+  //       if (err.status === 404) {
+  //         this.notification.error('Este responsável ainda não possui nenhum animal cadastrado.');
+  //       } else {
+  //         this.notification.error('Não foi possível verificar os animais deste responsável.');
+  //       }
+  //       this.loading = false;
+  //     }
+  //   });
+  // }
+
+  // responsável apenas por fazer a navegação
+    goToFichaPet(tutorId: number) {
+    let baseRoute = '';
+
+    if (this.typeUser === 'vet') {
+      baseRoute = '/vet/ficha';
+    } else if (this.typeUser === 'admin') {
+      baseRoute = '/admin/ficha';
+    } else {
+      baseRoute = '/user/ficha';
+    }
+
+    this.router.navigate([`${baseRoute}/${tutorId}`]);
   }
 
   deleteTutor(tutorId: number) {

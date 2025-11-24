@@ -4,7 +4,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { TutorCard } from '../tutor-card/tutor-card';
 import { UserInterface } from '../../interfaces';
 import { FormsModule } from '@angular/forms';
-import { UsuarioService } from '../../services/usuario-service';
 import { ModalCreate } from '../modal-create/modal-create';
 import { MatPaginator } from "@angular/material/paginator";
 import { UserTypeProviderService } from '../../shared/user-type-service';

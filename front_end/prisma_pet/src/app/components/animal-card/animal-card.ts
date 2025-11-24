@@ -36,16 +36,11 @@ export class AnimalCard implements OnInit {
   constructor(
     private petService: PetService,
     private notification: Notification,
-    private userTypeService: UserTypeProviderService,
+    // private userTypeService: UserTypeProviderService,
     private router: Router
   ) {}
 
-  ngOnInit(): void {
-    this.userTypeService.userType$.subscribe(type => {
-      this.typeUser = type;
-    });
-    //  this.loadTutorName();
-  }
+  ngOnInit(): void {}
 
   // private loadTutorName() {
   //   if (!this.userPet.user_id) return;
@@ -68,53 +63,76 @@ export class AnimalCard implements OnInit {
   //   });
   // }
 
+  // findUserById(petId: number) {
+  //   const tutorId = this.userPet.user_id;
+
+  //   if (!tutorId) {
+  //     this.notification.error('Não foi possível identificar o responsável deste animal.');
+  //     return;
+  //   }
+
+  //   this.loading = true;
+
+  //   this.petService.getPetsByTutorId(tutorId).subscribe({
+  //     next: (res) => {
+  //       const hasPets = res && Array.isArray(res.pets) && res.pets.length > 0;
+
+  //       if (!hasPets) {
+  //         this.notification.error('Este responsável ainda não possui nenhum animal cadastrado.');
+  //         this.loading = false;
+  //         return;
+  //       }
+
+  //       let baseRoute = '';
+
+  //       if (this.typeUser === 'vet') {
+  //         baseRoute = '/vet/ficha';
+  //       } else if (this.typeUser === 'admin') {
+  //         baseRoute = '/admin/ficha';
+  //       } else if (this.typeUser === 'user') {
+  //         baseRoute = '/user/ficha';
+  //       }
+
+  //       this.router.navigate([`${baseRoute}/${tutorId}`], {
+  //         queryParams: { petId },
+  //       });
+
+  //       this.loading = false;
+  //     },
+  //     error: (err) => {
+  //       console.error('Erro ao buscar pets do responsável:', err);
+  //       if (err.status === 404) {
+  //         this.notification.error('Este responsável ainda não possui nenhum animal cadastrado.');
+  //       } else {
+  //         this.notification.error('Não foi possível verificar os animais deste responsável.');
+  //       }
+  //       this.loading = false;
+  //     },
+  //   });
+  // }
+
   findUserById(petId: number) {
-    const tutorId = this.userPet.user_id;
+  const tutorId = this.userPet.user_id;
 
-    if (!tutorId) {
-      this.notification.error('Não foi possível identificar o responsável deste animal.');
-      return;
-    }
-
-    this.loading = true;
-
-    this.petService.getPetsByTutorId(tutorId).subscribe({
-      next: (res) => {
-        const hasPets = res && Array.isArray(res.pets) && res.pets.length > 0;
-
-        if (!hasPets) {
-          this.notification.error('Este responsável ainda não possui nenhum animal cadastrado.');
-          this.loading = false;
-          return;
-        }
-
-        let baseRoute = '';
-
-        if (this.typeUser === 'vet') {
-          baseRoute = '/vet/ficha';
-        } else if (this.typeUser === 'admin') {
-          baseRoute = '/admin/ficha';
-        } else if (this.typeUser === 'user') {
-          baseRoute = '/user/ficha';
-        }
-
-        this.router.navigate([`${baseRoute}/${tutorId}`], {
-          queryParams: { petId },
-        });
-
-        this.loading = false;
-      },
-      error: (err) => {
-        console.error('Erro ao buscar pets do responsável:', err);
-        if (err.status === 404) {
-          this.notification.error('Este responsável ainda não possui nenhum animal cadastrado.');
-        } else {
-          this.notification.error('Não foi possível verificar os animais deste responsável.');
-        }
-        this.loading = false;
-      },
-    });
+  if (!tutorId) {
+    this.notification.error('Não foi possível identificar o responsável deste animal.');
+    return;
   }
+
+  let baseRoute = '';
+
+  if (this.typeUser === 'vet') {
+    baseRoute = '/vet/ficha';
+  } else if (this.typeUser === 'admin') {
+    baseRoute = '/admin/ficha';
+  } else if (this.typeUser === 'user') {
+    baseRoute = '/user/ficha';
+  }
+
+  this.router.navigate([`${baseRoute}/${tutorId}`], {
+    queryParams: { petId },
+  });
+}
 
   deletePet(petId: number) {
     this.loading = true;

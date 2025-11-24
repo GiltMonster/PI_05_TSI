@@ -293,3 +293,61 @@
     row-gap: 0.25rem;
   }
 }
+
+
+@media (max-width: 430px) {
+  :host ::ng-deep .paginator .mat-mdc-paginator-container,
+  :host ::ng-deep .paginator .mat-paginator-container {
+    padding: 0.35rem 0.75rem;
+    flex-direction: column;
+    align-items: stretch;
+    row-gap: 0.35rem;
+    justify-content: center;
+  }
+
+  :host ::ng-deep .paginator .mat-mdc-paginator-page-size,
+  :host ::ng-deep .paginator .mat-paginator-page-size {
+    width: 100%;
+    justify-content: center;
+  }
+
+  :host ::ng-deep .paginator .mat-mdc-paginator-page-size,
+  :host ::ng-deep .paginator .mat-paginator-page-size {
+    display: none;
+  }
+
+  :host ::ng-deep .paginator .mat-mdc-paginator-range-label,
+  :host ::ng-deep .paginator .mat-paginator-range-label {
+    text-align: center;
+    width: 100%;
+    margin: 0;
+    font-size: 0.7rem;
+  }
+
+  :host ::ng-deep .paginator .mat-mdc-paginator-range-actions,
+  :host ::ng-deep .paginator .mat-paginator-range-actions {
+    width: 100%;
+    justify-content: center;
+  }
+
+  :host ::ng-deep .paginator .mat-mdc-icon-button,
+  :host ::ng-deep .paginator .mat-paginator-navigation-previous,
+  :host ::ng-deep .paginator .mat-paginator-navigation-next {
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+    margin: 0 1px;
+  }
+
+  :host ::ng-deep .paginator .mat-mdc-paginator-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  :host ::ng-deep .paginator .mat-mdc-paginator-page-size-label,
+  :host ::ng-deep .paginator .mat-mdc-paginator-range-label,
+  :host ::ng-deep .paginator .mat-paginator-page-size-label,
+  :host ::ng-deep .paginator .mat-paginator-range-label {
+    font-size: 0.7rem;
+  }
+}

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FichaPetInterface, PetInterface } from '../../interfaces';
 import { DatePipe } from '@angular/common';
-import { AnexosPet } from "../anexos-pet/anexos-pet";
+import { AnexosPet } from '../anexos-pet/anexos-pet';
 
 @Component({
   selector: 'app-header-pet',
@@ -11,24 +11,27 @@ import { AnexosPet } from "../anexos-pet/anexos-pet";
   standalone: true,
 })
 export class HeaderPet implements OnInit {
-
   @Input() petsList: FichaPetInterface = {
-    tutor_name: '', pets: [
+    tutor_name: '',
+    pets: [
       {
-        id: 0, nome: '', tutor: '', consultas: [], vacinas: []
-      }
-    ]
+        id: 0,
+        nome: '',
+        tutor: '',
+        consultas: [],
+        vacinas: [],
+      },
+    ],
   };
   indexPet: number = 0;
+  @Input() typeUser: string = '';
 
   class_btn_next: string = 'btn btn--primary';
   class_btn_prev: string = 'btn btn--primary';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   calcIdadePet(data_nascimento?: Date): string | number {
     if (data_nascimento) {
@@ -83,7 +86,7 @@ export class HeaderPet implements OnInit {
   }
 
   private norm(t?: string): string {
-    return (t ?? '')  // se vier undefined/null, vira string vazia
+    return (t ?? '') // se vier undefined/null, vira string vazia
       .toLowerCase() // tudo minúsculo
       .normalize('NFD') // separa letras dos acentos
       .replace(/\p{Diacritic}/gu, '') // remove os acentos via regex
