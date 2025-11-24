@@ -2,6 +2,7 @@
   <ul>
     <li [class.active]="activeTab === 'consultas'" (click)="setActiveTab('consultas')">Consultas</li>
     <li [class.active]="activeTab === 'vacinas'" (click)="setActiveTab('vacinas')">Vacinas</li>
+    <li [class.active]="activeTab === 'prescricoes'" (click)="setActiveTab('prescricoes')">Prescrições</li>
     <li [class.active]="activeTab === 'anexos'" (click)="setActiveTab('anexos')">Anexos</li>
   </ul>
 </nav>
@@ -33,6 +34,17 @@
         }
       </div>
     }
+  } @else if (activeTab === 'prescricoes') {
+    @if(pet_prescricoes.length != 0) {
+      <app-prescricao-pet [pet_prescricoes]="pet_prescricoes" [userType]="userType" [pet_id]="pet_id" />
+    } @else {
+      <div class="tab-container-not-found">
+        <h2>Nenhuma prescrição cadastrada para este animal.</h2>
+        @if (userType !== 'user') {
+          <button class="btn btn--primary" (click)="openCreatePrescricaoModal()">Cadastrar uma nova prescrição</button>
+        }
+      </div>
+    }
   } @else if (activeTab === 'anexos') {
     @if(pet_anexos.length != 0) {
       <app-outros-anexos-pet />
@@ -51,4 +63,7 @@
 }
 @if (createVacinaModalOpen) {
   <app-vacinas-pet-modal [pet_id]="pet_id" (close)="closeCreateVacinaModal()" (save)="handleVacinaCreated($event)" [editMode]="editVacinaModalOpen" />
+}
+@if (createPrescricaoModalOpen) {
+  <app-prescricao-pet-modal [pet_id]="pet_id" (close)="closeCreatePrescricaoModal()" (save)="handlePrescricaoCreated($event)" [editMode]="editPrescricaoModalOpen" />
 }

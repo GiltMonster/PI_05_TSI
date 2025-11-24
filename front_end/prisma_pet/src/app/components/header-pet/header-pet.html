@@ -90,6 +90,11 @@
   </div>
 
   <div class="pet-container">
-    <app-anexos-pet [pet_id]="petsList.pets[indexPet].id" [pet_consultas]="petsList.pets[indexPet].consultas || []" [pet_vacinas]="petsList.pets[indexPet].vacinas || []" />
+    <app-anexos-pet
+    [pet_id]="petsList.pets[indexPet].id"
+    [pet_consultas]="petsList.pets[indexPet].consultas || []"
+    [pet_vacinas]="petsList.pets[indexPet].vacinas || []"
+    [pet_prescricoes]="petsList.pets[indexPet].prescricoes || []"
+     />
   </div>
 </section>
