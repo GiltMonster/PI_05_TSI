@@ -10,6 +10,7 @@ use App\Http\Controllers\PetController;
 use App\Http\Controllers\ServicoController;
 use App\Http\Controllers\VacinaPetController;
 use App\Http\Controllers\VetController;
+use App\Http\Controllers\PrescricaoPetController;
 use GuzzleHttp\Client;
 
 Route::get('/ping', function () {
@@ -96,7 +97,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::delete('/servico/deletar/{id}', [ServicoController::class, 'deletarServico']);
     });
 
-    Route::middleware(['role:admin|vet'])->group(function () {
+    Route::middleware(['role:admin|user|vet'])->group(function () {
+        Route::get('/prescricao/pet/{petId}', [PrescricaoPetController::class, 'listarPrescricoesPorPet']);
+        Route::post('/prescricao/registrarPrescricao', [PrescricaoPetController::class, 'cadastrarPrescricao']);
+        Route::put('/prescricao/atualizarPrescricao', [PrescricaoPetController::class, 'atualizarPrescricao']);
+        Route::delete('/prescricao/deletarPrescricao/{id}', [PrescricaoPetController::class, 'deletarPrescricao']);
+    });
+
+    Route::middleware(['role:admin|vet|user'])->group(function () {
         Route::get('/file/download/{filename}', [FileController::class, 'downloadFile']);
         Route::post('/file/upload', [FileController::class, 'upload']);
         Route::delete('/file/delete/{filename}', [FileController::class, 'deleteFile']);
