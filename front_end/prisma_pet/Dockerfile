@@ -23,8 +23,8 @@ RUN rm -rf /usr/share/nginx/html/*
 # O builder @angular/build:application gera em dist/<project>/browser
 COPY --from=build /app/dist/prisma_pet/browser /usr/share/nginx/html
 
-# Adiciona config personalizada
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copia configuração customizada do NGINX
+COPY default.conf.template /etc/nginx/templates/default.conf.template
 
 EXPOSE 80
 
