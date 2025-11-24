@@ -1,20 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 .feature-card {
-  background: #262626;
+  background: transparent;
   border-radius: 16px;
   padding: 32px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease;
   max-width: 350px;
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   }
 }
 
@@ -31,7 +29,7 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: brightness(0) saturate(100%) invert(26%) sepia(92%) saturate(3089%) hue-rotate(209deg) brightness(97%) contrast(100%);
+  filter: brightness(0) saturate(100%) invert(100%);
 }
 
 .content-section {
@@ -44,7 +42,7 @@
   font-family: 'Poppins', sans-serif;
   font-size: 20px;
   font-weight: 700;
-  color: #004AAD;
+  color: white;
   margin: 0;
   line-height: 1.2;
 }
@@ -53,9 +51,10 @@
   font-family: 'Poppins', sans-serif;
   font-size: 14px;
   font-weight: 400;
-  color: #7B7B7B;
+  color: white;
   margin: 0;
   line-height: 1.6;
+  opacity: 0.95;
 }
 
 @media (max-width: 768px) {

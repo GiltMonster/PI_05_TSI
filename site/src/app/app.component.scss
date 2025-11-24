@@ -8,3 +8,13 @@ body {
   font-family: 'Poppins', sans-serif;
   color: #262626;
 }
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+router-outlet {
+  flex: 1;
+}

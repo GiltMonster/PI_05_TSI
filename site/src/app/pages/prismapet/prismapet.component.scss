@@ -1,0 +1,739 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.page-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+// Hero Section
+.hero-section {
+  background: linear-gradient(135deg, #6B9FE8 0%, #8BB5F0 100%);
+  background-image: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
+  padding: 0;
+  width: 100%;
+  margin: 0;
+  border-bottom: 1px solid #E0E6ED;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cats-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+// About Section
+.about-section {
+  background: #F8F9FA;
+  padding: 100px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 60px;
+}
+
+.about-content {
+  flex: 2;
+}
+
+.about-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #6B6B6B;
+
+  p {
+    margin: 0 0 20px 0;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    strong {
+      color: #5B8FD8;
+      font-weight: 600;
+    }
+  }
+}
+
+.about-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.prisma-logo {
+  max-width: 100%;
+  max-height: 400px;
+  height: auto;
+  object-fit: contain;
+}
+
+// Services Section
+.services-section {
+  background: white;
+  padding: 100px 5%;
+  max-width: 1400px;
+  margin: 0 auto;
+  border-top: 1px solid #E0E6ED;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  margin-top: 40px;
+}
+
+// Help Title Section
+.help-title-section {
+  background: white;
+  padding: 60px 5% 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  border-top: 1px solid #E0E6ED;
+  text-align: center;
+}
+
+.prisma-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+// Help Section
+.help-section {
+  background: linear-gradient(135deg, #6B9FE8 0%, #8BB5F0 100%);
+  padding: 60px 5%;
+  max-width: 1400px;
+  margin: 0 auto;
+  border-bottom: 1px solid #E0E6ED;
+}
+
+.help-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.section-title-white {
+  font-family: 'Inter', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  margin: 0 0 40px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+// Digital Section
+.digital-section {
+  background: #F8F9FA;
+  padding: 100px 5%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.digital-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+}
+
+.digital-text {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.digital-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #6B6B6B;
+  margin: 24px 0 32px 0;
+
+  p {
+    margin: 0 0 16px 0;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.diamond-icon-blue {
+  color: #5B8FD8;
+  font-size: 24px;
+  margin: 0 8px;
+}
+
+.prismapet-text {
+  color: #5B8FD8;
+  font-weight: 700;
+}
+
+.cta-button {
+  background: #FFB366;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 16px 40px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(255, 179, 102, 0.25);
+
+  &:hover {
+    background: #FFC085;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 179, 102, 0.35);
+  }
+}
+
+.digital-mockup {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-bottom: 40px;
+}
+
+.computer-frame {
+  background: #E0E0E0;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  max-width: 1200px;
+  width: 100%;
+}
+
+.computer-screen {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+// Header do Prontuário
+.prontuario-header {
+  background: white;
+  padding: 24px;
+  border-bottom: 1px solid #E0E6ED;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pet-icon-name {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pet-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.pet-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #3B3838;
+  margin: 0;
+}
+
+// Conteúdo do Prontuário
+.prontuario-content {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.pet-info-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.info-card {
+  background: #F8F9FA;
+  border: 1px solid #E0E6ED;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #9B9B9B;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.info-value {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #3B3838;
+}
+
+.notes-section {
+  margin-top: 24px;
+}
+
+.notes-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #3B3838;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.notes-content {
+  background: #F8F9FA;
+  border: 1px solid #E0E6ED;
+  border-radius: 8px;
+  padding: 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #6B6B6B;
+  line-height: 1.6;
+  min-height: 80px;
+}
+
+// Conteúdo das Abas
+.tab-content {
+  padding: 0;
+}
+
+.section-page-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #5B8FD8;
+  margin: 0 0 24px 0;
+}
+
+// Cards de Consulta e Vacina
+.consultation-card,
+.vaccine-card {
+  background: white;
+  border: 1px solid #E0E6ED;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.card-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #3B3838;
+  margin: 0;
+}
+
+.card-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.action-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.card-details {
+  margin-bottom: 24px;
+}
+
+.detail-row {
+  display: flex;
+  margin-bottom: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #3B3838;
+  margin-right: 8px;
+}
+
+.detail-value {
+  color: #6B6B6B;
+}
+
+.status-applied {
+  color: #4CAF50;
+  font-weight: 600;
+}
+
+// Seção de Anamnese
+.anamnese-section {
+  margin-top: 24px;
+}
+
+.anamnese-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #5B8FD8;
+  margin: 0 0 12px 0;
+}
+
+.anamnese-content {
+  background: #F8F9FA;
+  border: 1px solid #E0E6ED;
+  border-radius: 8px;
+  padding: 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #6B6B6B;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  max-height: 200px;
+  overflow-y: auto;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Cards de Resumo (Vacinas)
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.summary-card {
+  background: white;
+  border: 1px solid #E0E6ED;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  &.applied {
+    .summary-icon {
+      filter: brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);
+    }
+  }
+
+  &.delayed {
+    .summary-icon {
+      filter: brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
+    }
+  }
+
+  &.scheduled {
+    .summary-icon {
+      filter: brightness(0) saturate(100%) invert(40%) sepia(98%) saturate(1352%) hue-rotate(189deg) brightness(97%) contrast(96%);
+    }
+  }
+}
+
+.summary-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.summary-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #3B3838;
+}
+
+// Seção de Informações (Vacinas)
+.info-section {
+  margin-top: 24px;
+}
+
+.info-section-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #5B8FD8;
+  margin: 0 0 16px 0;
+}
+
+.info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-row {
+  display: flex;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+.info-label {
+  font-weight: 600;
+  color: #3B3838;
+  margin-right: 8px;
+  min-width: 150px;
+}
+
+.info-value {
+  color: #6B6B6B;
+}
+
+.content-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.list-item {
+  background: #F8F9FA;
+  border: 1px solid #E0E6ED;
+  border-radius: 8px;
+  padding: 20px;
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.item-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #3B3838;
+  margin: 0;
+}
+
+.item-date {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #9B9B9B;
+}
+
+.item-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #6B6B6B;
+  line-height: 1.6;
+  margin: 0;
+}
+
+// Navegação Inferior
+.prontuario-nav {
+  background: #5B8FD8;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 12px 16px;
+  border-top: 1px solid #E0E6ED;
+}
+
+.nav-item {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: white;
+  text-decoration: none;
+  padding: 8px 8px;
+  position: relative;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+  text-align: center;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &.active {
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 3px;
+      background: #FFB366;
+      border-radius: 2px;
+    }
+  }
+}
+
+// Plans Section
+.plans-section {
+  background: linear-gradient(135deg, #6B9FE8 0%, #8BB5F0 100%);
+  padding: 100px 5%;
+  max-width: 1400px;
+  margin: 0 auto;
+  border-top: 1px solid #E0E6ED;
+}
+
+.plans-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  max-width: 1000px;
+  margin: 40px auto 0;
+}
+
+// Section Title
+.section-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: #5B8FD8;
+  margin: 0 0 40px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+// Responsive
+@media (max-width: 1024px) {
+  .about-section {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .digital-content {
+    gap: 40px;
+  }
+
+  .services-grid,
+  .help-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .plans-container {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-title {
+    font-size: 56px;
+  }
+
+  .section-title,
+  .section-title-white {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section,
+  .about-section,
+  .services-section,
+  .help-section,
+  .digital-section,
+  .plans-section {
+    padding: 60px 24px;
+  }
+
+  .hero-title {
+    font-size: 42px;
+  }
+
+  .section-title,
+  .section-title-white {
+    font-size: 28px;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .about-text,
+  .digital-description {
+    font-size: 16px;
+  }
+
+  .pet-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .computer-frame {
+    max-width: 100%;
+  }
+
+  .nav-item {
+    font-size: 10px;
+    padding: 6px 2px;
+  }
+
+  .item-title {
+    font-size: 16px;
+  }
+
+  .item-date {
+    font-size: 12px;
+  }
+
+  .section-page-title {
+    font-size: 20px;
+  }
+
+  .summary-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .card-title {
+    font-size: 18px;
+  }
+
+  .info-label {
+    min-width: 120px;
+  }
+}
+

@@ -1,9 +1,134 @@
 <div class="page-container">
-  <h1>Home</h1>
-  
-  <app-promo-banner 
-    title="Atendimento exclusivo e especializado desde o primeiro contato!"
-    description="Faça seu agendamento via WhatsApp ou E-mail, iremos cuidar do seu caso com profissionalismo e cuidado">
-  </app-promo-banner>
-</div>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Tecnologia e Veterinária: Uma Combinação que Transforma Cuidados</h1>
+      <p class="hero-subtitle">
+        Descubra como a inovação digital está revolucionando o cuidado animal, 
+        tornando os serviços veterinários mais acessíveis, eficientes e humanizados.
+      </p>
+    </div>
+    <div class="hero-image">
+      <img src="assets/hero_tech_vet.svg" alt="Tecnologia e Veterinária" class="hero-illustration">
+    </div>
+  </section>
 
+  <!-- Por que Tecnologia + Veterinária Section -->
+  <section class="why-section">
+    <h2 class="section-title">Por que Tecnologia + Veterinária é uma Excelente Ideia?</h2>
+    
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <img src="assets/icon_acessibilidade.svg" alt="Acessibilidade">
+        </div>
+        <h3 class="benefit-title">Acessibilidade Ampliada</h3>
+        <p class="benefit-description">
+          A tecnologia permite que serviços veterinários cheguem até a casa dos tutores, 
+          eliminando barreiras geográficas e facilitando o acesso a cuidados especializados 
+          para pets que têm dificuldade de locomoção ou tutores com mobilidade reduzida.
+        </p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <img src="assets/icon_eficiência.svg" alt="Eficiência">
+        </div>
+        <h3 class="benefit-title">Eficiência e Organização</h3>
+        <p class="benefit-description">
+          Sistemas digitais de prontuário e gestão permitem que veterinários organizem 
+          melhor seus atendimentos, reduzam erros, tenham acesso rápido ao histórico 
+          completo do paciente e otimizem seu tempo de trabalho.
+        </p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <img src="assets/icon_transparencia_home.svg" alt="Transparência">
+        </div>
+        <h3 class="benefit-title">Transparência para Tutores</h3>
+        <p class="benefit-description">
+          Tutores podem acompanhar o histórico completo de seus pets, exames, vacinas 
+          e tratamentos de forma transparente e segura, promovendo maior confiança 
+          e envolvimento no cuidado com o animal.
+        </p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <img src="assets/icon_inovacao.svg" alt="Inovação">
+        </div>
+        <h3 class="benefit-title">Inovação Contínua</h3>
+        <p class="benefit-description">
+          A tecnologia permite a evolução constante dos serviços, com atualizações, 
+          melhorias e novas funcionalidades que se adaptam às necessidades do mercado 
+          e às melhores práticas veterinárias.
+        </p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <img src="assets/icon_segurancca_home.svg" alt="Segurança">
+        </div>
+        <h3 class="benefit-title">Segurança de Dados</h3>
+        <p class="benefit-description">
+          Sistemas digitais modernos garantem a segurança e privacidade das informações 
+          dos pacientes, seguindo normas como LGPD e regulamentações do CRMV, protegendo 
+          tanto tutores quanto profissionais.
+        </p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <img src="assets/icon_experiencia.svg" alt="Experiência">
+        </div>
+        <h3 class="benefit-title">Melhor Experiência</h3>
+        <p class="benefit-description">
+          Atendimentos em domicílio proporcionam maior conforto para os pets, reduzindo 
+          o estresse e ansiedade. A tecnologia facilita o agendamento, comunicação e 
+          acompanhamento, criando uma experiência mais humanizada.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Transformação Digital Section -->
+  <section class="transformation-section">
+    <div class="transformation-content">
+      <div class="transformation-text">
+        <h2 class="section-title-white">A Transformação Digital na Veterinária</h2>
+        <p class="transformation-description">
+          Estamos vivendo uma revolução no cuidado animal. A combinação de tecnologia 
+          avançada com conhecimento veterinário está criando novas possibilidades e 
+          melhorando significativamente a qualidade dos serviços oferecidos.
+        </p>
+        <p class="transformation-description">
+          Na <strong>TechVet</strong>, acreditamos que a tecnologia deve ser uma aliada 
+          dos profissionais veterinários e dos tutores, simplificando processos, 
+          aumentando a eficiência e, principalmente, melhorando o bem-estar dos animais.
+        </p>
+        <p class="transformation-description">
+          Nossas soluções são desenvolvidas pensando nas necessidades reais do mercado 
+          de atendimento domiciliar, oferecendo ferramentas práticas, seguras e acessíveis 
+          que realmente fazem a diferença no dia a dia.
+        </p>
+      </div>
+      <div class="transformation-image">
+        <img src="assets/transformacao_digital.svg" alt="Transformação Digital" class="transformation-illustration">
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <h2 class="cta-title">Pronto para Transformar seu Atendimento?</h2>
+    <p class="cta-description">
+      Conheça o PrismaPet e descubra como a tecnologia pode revolucionar 
+      a forma como você cuida dos seus pacientes.
+    </p>
+    <div class="cta-buttons">
+      <button class="cta-button primary" (click)="navigateToPrismapet()">Conhecer o PrismaPet</button>
+      <button class="cta-button secondary" (click)="navigateToContato()">Entre em Contato</button>
+    </div>
+  </section>
+</div>

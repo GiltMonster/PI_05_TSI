@@ -1,20 +1,323 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 .page-container {
-  min-height: calc(100vh - 82px);
+  width: 100%;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+// Hero Section
+.hero-section {
+  background: linear-gradient(135deg, #6B9FE8 0%, #8BB5F0 100%);
+  padding: 40px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 60px;
+  border-bottom: 1px solid #E0E6ED;
+}
+
+.hero-content {
+  flex: 2;
+  color: white;
+}
+
+.hero-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  margin: 0 0 24px 0;
+  color: white;
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.6;
+  margin: 0;
+  opacity: 0.95;
+}
+
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-illustration {
+  max-width: 100%;
+  max-height: 300px;
+  height: auto;
+  object-fit: contain;
+}
+
+// Why Section
+.why-section {
+  background: #F8F9FA;
+  padding: 100px 5%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: #5B8FD8;
+  text-align: center;
+  margin: 0 0 60px 0;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.benefit-card {
+  background: white;
+  border: 1px solid #E0E6ED;
+  border-radius: 16px;
+  padding: 40px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 12px rgba(91, 143, 216, 0.08);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding: 40px;
-  background-color: #F1F1E6;
+  text-align: center;
 
-  h1 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 48px;
-    font-weight: 700;
-    color: #262626;
-    margin-bottom: 40px;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(91, 143, 216, 0.15);
+    border-color: #8BB5F0;
   }
 }
 
+.benefit-icon {
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.benefit-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #5B8FD8;
+  margin: 0 0 16px 0;
+  text-align: center;
+}
+
+.benefit-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #6B6B6B;
+  line-height: 1.6;
+  margin: 0;
+  text-align: center;
+}
+
+// Transformation Section
+.transformation-section {
+  background: linear-gradient(135deg, #6B9FE8 0%, #8BB5F0 100%);
+  padding: 100px 5%;
+  max-width: 1400px;
+  margin: 0 auto;
+  border-top: 1px solid #E0E6ED;
+  border-bottom: 1px solid #E0E6ED;
+}
+
+.transformation-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+.transformation-text {
+  flex: 2;
+  color: white;
+}
+
+.section-title-white {
+  font-family: 'Inter', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 32px 0;
+}
+
+.transformation-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.8;
+  color: white;
+  margin: 0 0 20px 0;
+  opacity: 0.95;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  strong {
+    font-weight: 700;
+    opacity: 1;
+  }
+}
+
+.transformation-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.transformation-illustration {
+  max-width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
+}
+
+// CTA Section
+.cta-section {
+  background: #F0F4F8;
+  padding: 100px 5%;
+  text-align: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.cta-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: #5B8FD8;
+  margin: 0 0 24px 0;
+}
+
+.cta-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: #6B6B6B;
+  margin: 0 0 40px 0;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-button {
+  border: none;
+  border-radius: 12px;
+  padding: 16px 40px;
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+
+  &.primary {
+    background: #FFB366;
+    color: white;
+    box-shadow: 0 4px 16px rgba(255, 179, 102, 0.25);
+
+    &:hover {
+      background: #FFC085;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 179, 102, 0.35);
+    }
+  }
+
+  &.secondary {
+    background: #5B8FD8;
+    color: white;
+    box-shadow: 0 4px 16px rgba(91, 143, 216, 0.25);
+
+    &:hover {
+      background: #6B9FE8;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(91, 143, 216, 0.35);
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 1024px) {
+  .hero-section,
+  .transformation-content {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero-title,
+  .section-title,
+  .section-title-white,
+  .cta-title {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section,
+  .why-section,
+  .transformation-section,
+  .cta-section {
+    padding: 60px 24px;
+  }
+
+  .hero-title {
+    font-size: 32px;
+  }
+
+  .section-title,
+  .section-title-white,
+  .cta-title {
+    font-size: 28px;
+  }
+
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .benefit-card {
+    padding: 24px;
+  }
+
+  .transformation-description {
+    font-size: 16px;
+  }
+
+  .cta-description {
+    font-size: 18px;
+  }
+}

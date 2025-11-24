@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+.info-strip {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.info-block {
+  flex: 1 1 50%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 32px;
+  color: white;
+  box-sizing: border-box;
+}
+
+.schedule-block {
+  background: #004AAD;
+  justify-content: flex-end;
+  padding-right: 5%;
+}
+
+.whatsapp-block {
+  background: #FF914D;
+  justify-content: flex-start;
+  padding-left: 5%;
+}
+
+.info-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.info-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+.info-value {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .info-strip {
+    flex-direction: column;
+  }
+
+  .info-block {
+    padding: 16px 24px;
+    gap: 12px;
+  }
+
+  .info-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .info-label {
+    font-size: 12px;
+  }
+
+  .info-value {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .info-block {
+    padding: 14px 20px;
+  }
+
+  .info-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .info-label {
+    font-size: 11px;
+  }
+
+  .info-value {
+    font-size: 14px;
+  }
+}
+

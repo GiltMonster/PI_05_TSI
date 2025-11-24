@@ -1,4 +1,139 @@
 <div class="page-container">
-  <h1>Quem Somos</h1>
-</div>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <h1 class="hero-title">Quem Somos</h1>
+    <p class="hero-subtitle">
+      Conheça a TechVet e nossa missão de transformar o cuidado animal 
+      através da tecnologia
+    </p>
+  </section>
 
+  <!-- Nossa História Section -->
+  <section class="history-section">
+    <div class="history-content">
+      <div class="history-text">
+        <h2 class="section-title">Nossa História</h2>
+        <p class="history-description">
+          A <strong>TechVet</strong> nasceu da paixão por tecnologia e pelo cuidado animal. 
+          Identificamos uma necessidade real no mercado: unir a excelência dos serviços 
+          veterinários com a praticidade e eficiência que a tecnologia moderna pode oferecer.
+        </p>
+        <p class="history-description">
+          Fundada por profissionais que entendem tanto de tecnologia quanto de veterinária, 
+          nossa empresa foi criada com o objetivo de desenvolver soluções digitais que 
+          realmente façam a diferença no dia a dia de tutores, veterinários e equipes de gestão.
+        </p>
+        <p class="history-description">
+          Acreditamos que o atendimento domiciliar é o futuro da veterinária, oferecendo 
+          maior conforto para os pets e praticidade para os tutores. Por isso, todas as 
+          nossas soluções são pensadas especificamente para esse modelo de atendimento.
+        </p>
+      </div>
+      <div class="history-image">
+        <img src="assets/cat_with_sign.svg" alt="Equipe TechVet" class="team-illustration">
+      </div>
+    </div>
+  </section>
+
+  <!-- Equipe Section -->
+  <section class="team-section">
+    <h2 class="section-title">Nossa Equipe</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <h3 class="member-name">Lucas Santos</h3>
+      </div>
+      <div class="team-member">
+        <h3 class="member-name">Giovanna Piccinato</h3>
+      </div>
+      <div class="team-member">
+        <h3 class="member-name">Gabriele Lopes</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- Missão, Visão e Valores Section -->
+  <section class="values-section">
+    <h2 class="section-title-white">Nossos Pilares</h2>
+    
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">
+          <img src="assets/icon_missao.svg" alt="Missão">
+        </div>
+        <h3 class="value-title">Missão</h3>
+        <p class="value-description">
+          Desenvolver soluções tecnológicas inovadoras que simplifiquem e melhorem 
+          os serviços veterinários domiciliares, promovendo o bem-estar animal e 
+          facilitando o trabalho dos profissionais da área.
+        </p>
+      </div>
+
+      <div class="value-card">
+        <div class="value-icon">
+          <img src="assets/icon_visao.svg" alt="Visão">
+        </div>
+        <h3 class="value-title">Visão</h3>
+        <p class="value-description">
+          Ser referência nacional em tecnologia para serviços veterinários, 
+          transformando a forma como o cuidado animal é prestado e tornando 
+          os serviços mais acessíveis e eficientes para todos.
+        </p>
+      </div>
+
+      <div class="value-card">
+        <div class="value-icon">
+          <img src="assets/icon_valores.svg" alt="Valores">
+        </div>
+        <h3 class="value-title">Valores</h3>
+        <p class="value-description">
+          <strong>Inovação:</strong> Buscamos constantemente novas formas de melhorar nossos produtos.<br>
+          <strong>Transparência:</strong> Mantemos comunicação clara e honesta com nossos clientes.<br>
+          <strong>Qualidade:</strong> Comprometimento com excelência em tudo que fazemos.<br>
+          <strong>Ética:</strong> Respeito às normas e regulamentações do setor.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- O que Fazemos Section -->
+  <section class="what-we-do-section">
+    <h2 class="section-title">O que Fazemos</h2>
+    
+    <div class="what-we-do-content">
+      <div class="what-we-do-text">
+        <p class="what-we-do-description">
+          Na <strong>TechVet</strong>, desenvolvemos e oferecemos o <strong>PrismaPet</strong>, 
+          um sistema completo de prontuário digital desenvolvido especificamente para 
+          atendimentos veterinários domiciliares.
+        </p>
+        <p class="what-we-do-description">
+          Nossa plataforma permite que veterinários organizem seus atendimentos de forma 
+          digital, mantenham histórico completo dos pacientes, gerenciem informações dos 
+          tutores e ofereçam transparência total através de acesso seguro para os tutores.
+        </p>
+        <p class="what-we-do-description">
+          Trabalhamos continuamente para melhorar nossas soluções, sempre ouvindo o 
+          feedback de veterinários e tutores para garantir que estamos atendendo às 
+          necessidades reais do mercado.
+        </p>
+      </div>
+      <div class="what-we-do-image">
+        <img src="assets/o_que_fazemos.svg" alt="O que fazemos" class="what-we-do-illustration">
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <h2 class="cta-title">Faça Parte da Nossa História</h2>
+    <p class="cta-description">
+      Se você é veterinário ou tutor, venha conhecer nossas soluções e 
+      descubra como podemos transformar juntos o cuidado animal.
+    </p>
+    <div class="cta-buttons">
+      <button class="cta-button primary" (click)="navigateToPrismapet()">Conhecer o PrismaPet</button>
+      <button class="cta-button secondary" (click)="navigateToPlanos()">Ver Planos</button>
+      <button class="cta-button tertiary" (click)="navigateToContato()">Entre em Contato</button>
+    </div>
+  </section>
+</div>

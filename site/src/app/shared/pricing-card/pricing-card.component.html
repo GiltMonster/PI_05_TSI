@@ -1,0 +1,16 @@
+<div class="pricing-card" [class.pro]="isPro">
+  <div class="icon-section">
+    <img [src]="iconSrc" [alt]="title" class="pricing-icon">
+  </div>
+  
+  <h3 class="pricing-title">{{ title }}</h3>
+  <div class="price-section">
+    <span class="price">{{ price }}</span>
+  </div>
+  
+  <button *ngIf="buttonText" class="pricing-button" (click)="navigateToPlanos()">{{ buttonText }}</button>
+  
+  <ul class="features-list">
+    <li *ngFor="let feature of features" class="feature-item">{{ feature }}</li>
+  </ul>
+</div>

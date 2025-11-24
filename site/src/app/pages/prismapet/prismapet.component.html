@@ -1,0 +1,468 @@
+<div class="page-container">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <img src="assets/hero_cats.svg" alt="Prisma Pet" class="cats-image">
+  </section>
+
+  <!-- O que é o PrismaPet Section -->
+  <section class="about-section">
+    <div class="about-content">
+      <h2 class="section-title">O que é o PrismaPet:</h2>
+      <div class="about-text">
+        <p>
+          O <strong>PrismaPet</strong> é uma plataforma digital inovadora que pretende unir <strong>clínicas</strong>, 
+          <strong>veterinários</strong> e <strong>clientes</strong> de forma rápida e simples, revolucionando a forma 
+          como o cuidado animal é prestado.
+        </p>
+        <p>
+          Nossa plataforma foi desenvolvida especificamente para o atendimento veterinário domiciliar, oferecendo 
+          ferramentas práticas e intuitivas que facilitam o dia a dia de todos os envolvidos. Com o PrismaPet, 
+          veterinários podem gerenciar seus atendimentos de forma digital, clínicas podem organizar suas operações 
+          com mais eficiência e clientes têm acesso transparente ao histórico completo de seus pets.
+        </p>
+        <p>
+          Acreditamos que a tecnologia deve simplificar processos, não complicá-los. Por isso, o PrismaPet foi 
+          pensado para ser acessível, seguro e fácil de usar, garantindo que todos possam se beneficiar das 
+          vantagens de um prontuário digital moderno.
+        </p>
+      </div>
+    </div>
+    <div class="about-image">
+      <img src="assets/prisma.svg" alt="PrismaPet" class="prisma-logo">
+    </div>
+  </section>
+
+  <!-- Serviços Section -->
+  <section class="services-section">
+    <h2 class="section-title">Serviços que o PrismaPet Oferece aos Veterinários</h2>
+    <div class="services-grid">
+      <app-service-card
+        imageSrc="assets/icon_prontuario.svg"
+        title="Prontuário Padronizado"
+        description="Campos clínicos estruturados (anamnese, vacinas, anexos)">
+      </app-service-card>
+
+      <app-service-card
+        imageSrc="assets/icon_responsavel.svg"
+        title="Informações do Responsável"
+        description="Dados dos responsáveis e animais de forma clara">
+      </app-service-card>
+
+      <app-service-card
+        imageSrc="assets/icon_seguranca.svg"
+        title="Segurança e conformidade"
+        description="Desenvolvido com atenção à LGPD e as normas do CRMV">
+      </app-service-card>
+
+      <app-service-card
+        imageSrc="assets/icon_upload.svg"
+        title="Uploads de exames e documentos"
+        description="Exames, receitas, atestados e imagens podem ser anexados na ficha do pet.">
+      </app-service-card>
+
+      <app-service-card
+        imageSrc="assets/icon_transparencia.svg"
+        title="Transparência para o tutor"
+        description="O tutor tem acesso em leitura ao histórico do animal por meio de acesso seguro">
+      </app-service-card>
+
+      <app-service-card
+        imageSrc="assets/icon_servicos.svg"
+        title="Cadastro de Serviços"
+        description="Cadastro dos serviços para ter um controle de valores claro e que facilite o atendimento.">
+      </app-service-card>
+    </div>
+  </section>
+
+  <!-- Como pode ajudar Section -->
+  <section class="help-title-section">
+    <h2 class="section-title">
+      <img src="assets/prisma2.svg" alt="PrismaPet" class="prisma-icon">
+      Como a PrismaPet pode te ajudar no dia a dia?
+    </h2>
+  </section>
+
+  <section class="help-section">
+    <div class="help-cards">
+      <app-feature-card
+        iconSrc="assets/icon_prontuario_phone.svg"
+        title="Prontuário"
+        description="Otimize seu atendimento médico de forma prática e digital. Reduzem erros e organizam o atendimento sem burocracia.">
+      </app-feature-card>
+
+      <app-feature-card
+        iconSrc="assets/icon_homecare.svg"
+        title="Foco total em home care veterinário"
+        description="O PrismaPet foi pensado desde o início para atendimentos em domicílio, com fluxos alinhados à realidade de profissionais.">
+      </app-feature-card>
+
+      <app-feature-card
+        iconSrc="assets/icon_planos.svg"
+        title="Planos acessíveis"
+        description="Planos para todos os bolsos e tipos de profissionais que realizam atendimento domiciliar.">
+      </app-feature-card>
+    </div>
+  </section>
+
+  <!-- Prontuário Digital Section -->
+  <section class="digital-section">
+    <div class="digital-content">
+      <div class="digital-text">
+        <h2 class="section-title">
+          Seu Prontuário Digital
+        </h2>
+        <div class="digital-description">
+          <p>
+            O PrismaPet organiza todo o histórico clínico do seu pet de forma digital e segura. 
+            Centralize informações, tenha agilidade no atendimento domiciliar e padronize processos 
+            para garantir segurança e eficiência.
+          </p>
+          <p>
+            Com o PrismaPet, você tem acesso rápido a todo o histórico do animal, facilitando 
+            o diagnóstico e o acompanhamento do tratamento.
+          </p>
+        </div>
+      </div>
+      <div class="digital-mockup">
+        <div class="computer-frame">
+          <div class="computer-screen">
+            <!-- Header do Prontuário -->
+            <div class="prontuario-header">
+              <div class="pet-icon-name">
+                <img src="assets/icon_cat.svg" alt="Pet" class="pet-icon">
+                <h3 class="pet-name">Nome</h3>
+              </div>
+            </div>
+
+            <!-- Conteúdo do Prontuário -->
+            <div class="prontuario-content">
+              <!-- Seção Animal -->
+              <div *ngIf="activeTab === 'animal'" class="tab-content">
+                <div class="pet-info-grid">
+                  <div class="info-card">
+                    <label class="info-label">Espécie</label>
+                  </div>
+                  <div class="info-card">
+                    <label class="info-label">Idade</label>
+                  </div>
+                  <div class="info-card">
+                    <label class="info-label">Raça</label>
+                  </div>
+                  <div class="info-card">
+                    <label class="info-label">Peso</label>
+                  </div>
+                  <div class="info-card">
+                    <label class="info-label">Temperamento</label>
+                  </div>
+                  <div class="info-card">
+                    <label class="info-label">Possui Carteirinha</label>
+                  </div>
+                  <div class="info-card">
+                    <label class="info-label">Cor da Pelagem</label>
+                  </div>
+                  <div class="info-card">
+                    <label class="info-label">Sexo</label>
+                  </div>
+                  <div class="info-card">
+                    <label class="info-label">Castrado</label>
+                  </div>
+                  <div class="info-card">
+                    <label class="info-label">Nome do Tutor</label>
+                  </div>
+                </div>
+
+                <div class="notes-section">
+                  <label class="notes-label">Observações</label>
+                  <div class="notes-content">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Consultas -->
+              <div *ngIf="activeTab === 'consultas'" class="tab-content">
+                <h3 class="section-page-title">Consultas Realizadas</h3>
+                <div class="consultation-card">
+                  <div class="card-header">
+                    <h4 class="card-title">Consulta Clínica</h4>
+                  </div>
+                  <div class="card-details">
+                    <div class="detail-row">
+                      <span class="detail-label">Data:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Veterinária Responsável:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Diagnóstico:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Observação:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Prescrições:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Atestados:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Vacinas -->
+              <div *ngIf="activeTab === 'vacinas'" class="tab-content">
+                <h3 class="section-page-title">Vacinas</h3>
+                <div class="summary-cards">
+                  <div class="summary-card applied">
+                    <img src="assets/icon_vacin.svg" alt="Aplicadas" class="summary-icon">
+                    <span class="summary-text">Aplicadas</span>
+                  </div>
+                  <div class="summary-card delayed">
+                    <img src="assets/icon_vacin.svg" alt="Atrasadas" class="summary-icon">
+                    <span class="summary-text">Atrasadas</span>
+                  </div>
+                  <div class="summary-card scheduled">
+                    <img src="assets/icon_vacin.svg" alt="Programadas" class="summary-icon">
+                    <span class="summary-text">Programadas</span>
+                  </div>
+                </div>
+                <div class="vaccine-card">
+                  <div class="card-header">
+                    <h4 class="card-title">Vacina V10</h4>
+                  </div>
+                  <div class="card-details">
+                    <div class="detail-row">
+                      <span class="detail-label">Data:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Veterinária Responsável:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Estado da Vacina:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                  </div>
+                  <div class="info-section">
+                    <h5 class="info-section-title">Informações</h5>
+                    <div class="info-grid">
+                      <div class="info-row">
+                        <span class="info-label">Tipo da Vacina:</span>
+                        <span class="info-value"></span>
+                      </div>
+                      <div class="info-row">
+                        <span class="info-label">Nome do Produto:</span>
+                        <span class="info-value"></span>
+                      </div>
+                      <div class="info-row">
+                        <span class="info-label">Dose Atual:</span>
+                        <span class="info-value"></span>
+                      </div>
+                      <div class="info-row">
+                        <span class="info-label">Total de Doses:</span>
+                        <span class="info-value"></span>
+                      </div>
+                      <div class="info-row">
+                        <span class="info-label">Nome do Fabricante:</span>
+                        <span class="info-value"></span>
+                      </div>
+                      <div class="info-row">
+                        <span class="info-label">Data de Revacinação:</span>
+                        <span class="info-value"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Prescrições -->
+              <div *ngIf="activeTab === 'prescricoes'" class="tab-content">
+                <h3 class="section-page-title">Prescrições Realizadas</h3>
+                <div class="consultation-card">
+                  <div class="card-header">
+                    <h4 class="card-title">Prescrição</h4>
+                  </div>
+                  <div class="card-details">
+                    <div class="detail-row">
+                      <span class="detail-label">Data:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Veterinária Responsável:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Diagnóstico:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Observação:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Prescrições:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Atestados:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Exames -->
+              <div *ngIf="activeTab === 'exames'" class="tab-content">
+                <h3 class="section-page-title">Exames Realizados</h3>
+                <div class="consultation-card">
+                  <div class="card-header">
+                    <h4 class="card-title">Exame</h4>
+                  </div>
+                  <div class="card-details">
+                    <div class="detail-row">
+                      <span class="detail-label">Data:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Veterinária Responsável:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Diagnóstico:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Observação:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Prescrições:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Atestados:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Atestados de Saúde -->
+              <div *ngIf="activeTab === 'atestados'" class="tab-content">
+                <h3 class="section-page-title">Atestados de Saúde Realizados</h3>
+                <div class="consultation-card">
+                  <div class="card-header">
+                    <h4 class="card-title">Atestado de Saúde</h4>
+                  </div>
+                  <div class="card-details">
+                    <div class="detail-row">
+                      <span class="detail-label">Data:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Veterinária Responsável:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Diagnóstico:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Observação:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Prescrições:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Atestados:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cirurgias -->
+              <div *ngIf="activeTab === 'cirurgias'" class="tab-content">
+                <h3 class="section-page-title">Cirurgias Realizadas</h3>
+                <div class="consultation-card">
+                  <div class="card-header">
+                    <h4 class="card-title">Cirurgia</h4>
+                  </div>
+                  <div class="card-details">
+                    <div class="detail-row">
+                      <span class="detail-label">Data:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Veterinária Responsável:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Diagnóstico:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Observação:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Prescrições:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Atestados:</span>
+                      <span class="detail-value"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Navegação Inferior -->
+            <div class="prontuario-nav">
+              <span class="nav-item" [class.active]="activeTab === 'animal'" (click)="setActiveTab('animal')">Animal</span>
+              <span class="nav-item" [class.active]="activeTab === 'consultas'" (click)="setActiveTab('consultas')">Consultas</span>
+              <span class="nav-item" [class.active]="activeTab === 'vacinas'" (click)="setActiveTab('vacinas')">Vacinas</span>
+              <span class="nav-item" [class.active]="activeTab === 'prescricoes'" (click)="setActiveTab('prescricoes')">Prescrições</span>
+              <span class="nav-item" [class.active]="activeTab === 'exames'" (click)="setActiveTab('exames')">Exames</span>
+              <span class="nav-item" [class.active]="activeTab === 'atestados'" (click)="setActiveTab('atestados')">Atestados de Saúde</span>
+              <span class="nav-item" [class.active]="activeTab === 'cirurgias'" (click)="setActiveTab('cirurgias')">Cirurgias</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Planos Section -->
+  <section class="plans-section">
+    <h2 class="section-title-white">Escolha o melhor plano para você</h2>
+    <div class="plans-container">
+      <app-pricing-card
+        iconSrc="assets/icon_paw_blue.svg"
+        title="Prontuário Básica"
+        price="R$ 0,00"
+        buttonText="Conheça mais"
+        [features]="basicFeatures"
+        [isPro]="false">
+      </app-pricing-card>
+
+      <app-pricing-card
+        iconSrc="assets/icon_star_blue.svg"
+        title="Prontuário PRO"
+        price="R$ 50,00"
+        buttonText="Conheça mais"
+        [features]="proFeatures"
+        [isPro]="true">
+      </app-pricing-card>
+    </div>
+  </section>
+</div>

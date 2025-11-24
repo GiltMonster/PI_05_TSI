@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.page-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+.plans-section {
+  background: linear-gradient(135deg, #6B9FE8 0%, #8BB5F0 100%);
+  padding: 100px 5%;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: calc(100vh - 82px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section-title-white {
+  font-family: 'Inter', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  margin: 0 0 60px 0;
+}
+
+.plans-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto 60px;
+}
+
+// Tabela Comparativa
+.comparison-table-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.comparison-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #5B8FD8;
+  text-align: center;
+  margin: 0 0 32px 0;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Inter', sans-serif;
+}
+
+.comparison-table thead {
+  background: linear-gradient(135deg, #6B9FE8 0%, #8BB5F0 100%);
+}
+
+.comparison-table th {
+  padding: 16px;
+  text-align: left;
+  font-weight: 700;
+  color: white;
+  font-size: 18px;
+}
+
+.comparison-table .feature-column {
+  width: 50%;
+}
+
+.comparison-table .plan-column {
+  width: 25%;
+  text-align: center;
+}
+
+.comparison-table .pro-column {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.comparison-table tbody tr {
+  border-bottom: 1px solid #E0E6ED;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #F8F9FA;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.comparison-table td {
+  padding: 16px;
+  font-size: 16px;
+}
+
+.comparison-table .feature-name {
+  font-weight: 600;
+  color: #3B3838;
+}
+
+.comparison-table .plan-value {
+  text-align: center;
+  color: #6B6B6B;
+}
+
+.comparison-table .pro-value {
+  color: #5B8FD8;
+  font-weight: 600;
+}
+
+.comparison-table .plan-value::before {
+  content: '';
+}
+
+@media (max-width: 1024px) {
+  .plans-container {
+    grid-template-columns: 1fr;
+  }
+
+  .section-title-white {
+    font-size: 36px;
+  }
+
+  .comparison-table-container {
+    padding: 24px;
+  }
+
+  .comparison-title {
+    font-size: 28px;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .plans-section {
+    padding: 60px 24px;
+  }
+
+  .section-title-white {
+    font-size: 28px;
+  }
+
+  .comparison-table-container {
+    padding: 20px;
+    overflow-x: auto;
+  }
+
+  .comparison-title {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+
+  .comparison-table {
+    font-size: 12px;
+    min-width: 600px;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 10px 8px;
+    font-size: 12px;
+  }
+}
+

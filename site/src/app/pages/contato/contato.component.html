@@ -1,0 +1,70 @@
+<div class="page-container">
+  <section class="contact-hero">
+    <h1 class="hero-title">Entre em Contato</h1>
+    <p class="hero-subtitle">Estamos aqui para ajudar você. Entre em contato conosco através dos canais abaixo.</p>
+  </section>
+
+  <section class="contact-section">
+    <div class="contact-container">
+      <div class="contact-info">
+        <div class="info-card">
+          <div class="info-icon">
+            <img src="assets/icon_whats.svg" alt="WhatsApp" class="icon">
+          </div>
+          <h3 class="info-title">WhatsApp</h3>
+          <p class="info-text">Fale conosco pelo WhatsApp</p>
+          <a href="https://wa.me/5511998990629" target="_blank" rel="noopener noreferrer" class="info-link">
+            (11) 99899-0629
+          </a>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="#5B8FD8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="L22 6L12 13L2 6" stroke="#5B8FD8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="info-title">E-mail</h3>
+          <p class="info-text">Envie-nos um e-mail</p>
+          <a href="mailto:contato@techvet.com" class="info-link">
+            contato&#64;techvet.com
+          </a>
+        </div>
+
+      </div>
+
+      <div class="contact-form-container">
+        <h2 class="form-title">Envie sua Mensagem</h2>
+        <form class="contact-form" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="name" class="form-label">Nome</label>
+            <input type="text" id="name" name="name" class="form-input" placeholder="Seu nome completo" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">E-mail</label>
+            <input type="email" id="email" name="email" class="form-input" placeholder="seu@email.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="phone" class="form-label">Telefone</label>
+            <input type="tel" id="phone" name="phone" class="form-input" placeholder="(11) 99999-9999">
+          </div>
+
+          <div class="form-group">
+            <label for="subject" class="form-label">Assunto</label>
+            <input type="text" id="subject" name="subject" class="form-input" placeholder="Assunto da mensagem" required>
+          </div>
+
+          <div class="form-group">
+            <label for="message" class="form-label">Mensagem</label>
+            <textarea id="message" name="message" class="form-textarea" rows="6" placeholder="Sua mensagem..." required></textarea>
+          </div>
+
+          <button type="submit" class="submit-button">Enviar Mensagem</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>

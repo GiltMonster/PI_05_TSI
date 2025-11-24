@@ -1,0 +1,103 @@
+<div class="page-container">
+  <section class="plans-section">
+    <h2 class="section-title-white">Escolha o melhor plano para você</h2>
+    <div class="plans-container">
+      <app-pricing-card
+        iconSrc="assets/icon_paw_blue.svg"
+        title="Prontuário Básica"
+        price="R$ 0,00"
+        [features]="basicFeatures"
+        [isPro]="false">
+      </app-pricing-card>
+
+      <app-pricing-card
+        iconSrc="assets/icon_star_blue.svg"
+        title="Prontuário PRO"
+        price="R$ 50,00"
+        [features]="proFeatures"
+        [isPro]="true">
+      </app-pricing-card>
+    </div>
+
+    <!-- Tabela Comparativa -->
+    <div class="comparison-table-container">
+      <h3 class="comparison-title">Compare os Planos</h3>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th class="feature-column">Funcionalidade</th>
+            <th class="plan-column">Básica</th>
+            <th class="plan-column pro-column">PRO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feature-name">Número de Usuários</td>
+            <td class="plan-value">Até 30</td>
+            <td class="plan-value pro-value">Ilimitado</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Permissões de Usuário</td>
+            <td class="plan-value">Limitado</td>
+            <td class="plan-value pro-value">Ilimitado</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Perfil Detalhado do Paciente</td>
+            <td class="plan-value">✓</td>
+            <td class="plan-value pro-value">✓</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Informações do Responsável</td>
+            <td class="plan-value">✓</td>
+            <td class="plan-value pro-value">✓</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Atendimento do Paciente</td>
+            <td class="plan-value">✓</td>
+            <td class="plan-value pro-value">✓</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Cadastro de Animais</td>
+            <td class="plan-value">100 cadastros</td>
+            <td class="plan-value pro-value">Ilimitado</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Indexação de Exames</td>
+            <td class="plan-value">5 por mês</td>
+            <td class="plan-value pro-value">Ilimitado</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Protocolo de Vacina</td>
+            <td class="plan-value">-</td>
+            <td class="plan-value pro-value">✓</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Cadastro de Serviços</td>
+            <td class="plan-value">-</td>
+            <td class="plan-value pro-value">✓</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Upload de Documentos</td>
+            <td class="plan-value">✓</td>
+            <td class="plan-value pro-value">✓</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Histórico Completo</td>
+            <td class="plan-value">✓</td>
+            <td class="plan-value pro-value">✓</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Acesso do Tutor</td>
+            <td class="plan-value">✓</td>
+            <td class="plan-value pro-value">✓</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Suporte</td>
+            <td class="plan-value">Básico</td>
+            <td class="plan-value pro-value">Prioritário</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
