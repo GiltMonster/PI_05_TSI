@@ -5,6 +5,7 @@ use App\Http\Controllers\ConsultaPetController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\PetController;
 use App\Http\Controllers\ServicoController;
 use App\Http\Controllers\VacinaPetController;
@@ -93,6 +94,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/servico/novo', [ServicoController::class, 'criarServico']);
         Route::put('/servico/editar', [ServicoController::class, 'editarServico']);
         Route::delete('/servico/deletar/{id}', [ServicoController::class, 'deletarServico']);
+    });
+
+    Route::middleware(['role:admin|vet'])->group(function () {
+        Route::get('/file/download/{filename}', [FileController::class, 'downloadFile']);
+        Route::post('/file/upload', [FileController::class, 'upload']);
+        Route::delete('/file/delete/{filename}', [FileController::class, 'deleteFile']);
     });
 
 });
