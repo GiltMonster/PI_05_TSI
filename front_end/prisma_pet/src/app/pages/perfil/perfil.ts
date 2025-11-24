@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Notification } from '../../services/notification';
 import { Loading } from '../../components/loading/loading';
+import { AuthLogin } from '../../services/auth-login';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
@@ -31,6 +33,8 @@ export class Perfil implements OnInit {
   constructor(
     private usuarioService: UsuarioService,
     private notification: Notification,
+    private authService: AuthLogin,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -137,6 +141,24 @@ export class Perfil implements OnInit {
         this.notification.error('Cep não encontrado!');
       }
     });
+  }
+
+    logout() {
+    this.loading = true;
+    this.authService.logout().subscribe(
+      (res) => {
+        localStorage.clear();
+        window.location.reload();
+        this.router.navigate(['/']);
+        this.notification.success('Logout realizado com sucesso.');
+        this.loading = false;
+      },
+      (err) => {
+        console.log('Erro ao fazer logout:', err);
+        this.notification.error('Erro ao fazer logout - Tente novamente.');
+        this.loading = false;
+      }
+    );
   }
 
 }

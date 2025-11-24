@@ -62,17 +62,19 @@
   font-size: 2rem;
   margin-bottom: 0.25rem;
   color: var(--text-primary);
+  line-height: 1;
 }
 
 .profile-info p {
   color: var(--text-secondary);
   font-size: 1rem;
+  line-height: 1;
 }
 
 .form-section {
   background-color: var(--white);
   border-radius: 16px;
-  padding: 2.5rem;
+  padding: 2.0rem;
   box-shadow: var(--shadow-sm);
 }
 
@@ -82,6 +84,7 @@
   color: var(--text-primary);
   padding-bottom: 1rem;
   border-bottom: 2px solid var(--border-color);
+  line-height: 1;
 }
 
 .form-grid {
@@ -197,6 +200,18 @@
 .btn--secondary:hover {
   background-color: var(--background);
   border-color: var(--text-secondary);
+}
+
+.btn--deslogar {
+  background-color: var(--error);
+  color: var(--white);
+  border: 2px solid var(--border-color);
+}
+
+.btn--deslogar:hover {
+  background-color: var(--error-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 /* Responsive */
