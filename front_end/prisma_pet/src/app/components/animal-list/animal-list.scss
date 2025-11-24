@@ -21,7 +21,6 @@
   list-style: none;
 }
 
-/* HEADER: busca + botão */
 .header_list_pet {
   display: flex;
   align-items: center;
@@ -29,7 +28,6 @@
   margin: 12px 0 24px;
 }
 
-/* BUSCA – mesma classe .search */
 .search {
   position: relative;
   display: flex;
@@ -146,7 +144,6 @@
   display: none;
 }
 
-/* botão laranja */
 .add_pet_button {
   display: flex;
   font-size: 1rem;
@@ -190,7 +187,6 @@
   }
 }
 
-/* leitor de tela */
 .sr-only {
   position: absolute !important;
   width: 1px !important;
@@ -203,7 +199,7 @@
   border: 0 !important;
 }
 
-/* responsivo */
+
 @media (max-width: 870px) {
   .list_pet_container {
     padding: 24px 16px 32px;

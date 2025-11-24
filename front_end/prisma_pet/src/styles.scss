@@ -26,8 +26,9 @@ body {
   color: var(--text-primary);
   line-height: 1.6;
   min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
-
 
 html {
   @include mat.theme((color: (primary: mat.$azure-palette,
