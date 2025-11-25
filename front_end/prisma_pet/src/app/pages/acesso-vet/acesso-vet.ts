@@ -18,7 +18,7 @@ export class AcessoVet {
   cardsVet: CardInterface[] = [
     {
       titulo: 'Passo 1',
-      subtitulo: 'Acessar o tutor ou animal que você irá realizar ou já realizou um atendimento',
+      subtitulo: 'Acessar o responsável ou animal que você irá realizar ou já realizou um atendimento',
       imagem: 'assets/imagens/img-card1-vet.png',
     },
     {
@@ -30,7 +30,7 @@ export class AcessoVet {
     {
       titulo: 'Passo 3',
       subtitulo:
-        'Instruir e tirar dúvidas do tutor sobre o atendimento e se necessário novas prescrições, não se esqueça de anexar no prontuário.',
+        'Instruir e tirar dúvidas do responsável sobre o atendimento e se necessário novas prescrições, não se esqueça de anexar no prontuário.',
       imagem: 'assets/imagens/img-card3-vet.png',
     },
   ];

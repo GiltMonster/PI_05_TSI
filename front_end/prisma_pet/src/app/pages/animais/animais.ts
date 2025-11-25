@@ -66,7 +66,7 @@ export class Animais implements OnInit {
           this.listPets = [...res];
         },
         error: (err) => {
-          console.error('Erro ao carregar animais do tutor:', err);
+          console.error('Erro ao carregar animais do responsável:', err);
         },
       });
   }

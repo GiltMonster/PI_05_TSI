@@ -1,7 +1,7 @@
 
 .card_pet_container {
   display: grid;
-  grid-template-columns: 80px 1fr auto; 
+  grid-template-columns: 80px 1fr auto;
   align-items: center;
   gap: 18px;
   padding: 18px 20px;
@@ -20,7 +20,7 @@
   font-weight: 700;
   font-size: 1.35rem;
   line-height: 1.2;
-  color: #004AAD; 
+  color: #004AAD;
 }
 .detalhes_pet,
 .tutor_pet {
@@ -47,12 +47,13 @@
   height: 40px;
   padding: 0 14px;
   font-weight: 600;
+  font-family: 'Poppins';
   line-height: 40px;
   cursor: pointer;
   transition: background-color .15s ease, box-shadow .15s ease;
 
-  &:hover { 
-    background: #FF914D; 
+  &:hover {
+    background: #FF914D;
     color: #fff;
     border-color: #FF914D;
   }
@@ -78,7 +79,7 @@
   transition: background-color .15s ease, box-shadow .15s ease;
 
   &:hover {
-    background: #FF914D; 
+    background: #FF914D;
     color: #fff;
     border-color: #FF914D;
   }
