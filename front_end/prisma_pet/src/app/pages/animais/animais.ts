@@ -70,4 +70,10 @@ export class Animais implements OnInit {
         },
       });
   }
+
+  // Resonsável por garantir que a lista de pets seja atualizada quando um novo pet for criado
+    onPetCreated(pet: PetInterface) {
+      this.listPets = [pet, ...this.listPets];
+      this.loadPets();
+    }
 }

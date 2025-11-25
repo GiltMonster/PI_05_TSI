@@ -35,4 +35,9 @@ export class Servicos implements OnInit {
       },
     });
   }
+
+    onServicoCreated(newServico: ServicosInterface) {
+      this.listServicos = [newServico, ...this.listServicos];
+      this.loadServicos();
+    }
 }

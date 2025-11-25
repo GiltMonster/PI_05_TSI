@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { TutorCard } from '../tutor-card/tutor-card';
 import { UserInterface } from '../../interfaces';
 import { FormsModule } from '@angular/forms';
 import { ModalCreate } from '../modal-create/modal-create';
-import { MatPaginator } from "@angular/material/paginator";
+import { MatPaginator } from '@angular/material/paginator';
 import { UserTypeProviderService } from '../../shared/user-type-service';
 
 @Component({
@@ -13,13 +13,14 @@ import { UserTypeProviderService } from '../../shared/user-type-service';
   standalone: true,
   imports: [CommonModule, MatIconModule, TutorCard, FormsModule, ModalCreate, MatPaginator],
   templateUrl: './tutor-list.html',
-  styleUrls: ['./tutor-list.scss']
+  styleUrls: ['./tutor-list.scss'],
 })
 export class TutorList implements OnInit {
   @Input() tutores: UserInterface[] = [];
   @Input() emptyMessage = 'Nenhum Responsável cadastrado';
+  @Output() tutorCreated = new EventEmitter<UserInterface>();
 
-  searchValue = "";
+  searchValue = '';
   statusMsg = '';
   filteredTutores: UserInterface[] = [];
   typeUser = '';
@@ -31,11 +32,11 @@ export class TutorList implements OnInit {
   constructor(
     // private usuarioService: UsuarioService,
     private userTypeService: UserTypeProviderService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.filteredTutores = this.tutores;
-    this.userTypeService.userType$.subscribe(type => {
+    this.userTypeService.userType$.subscribe((type) => {
       this.typeUser = type;
     });
     // this.userTypeVerification();
@@ -53,7 +54,6 @@ export class TutorList implements OnInit {
 
   ngOnChanges(): void {
     this.filteredTutores = this.filterTutors();
-
   }
 
   // userTypeVerification() {
@@ -68,7 +68,7 @@ export class TutorList implements OnInit {
   // }
 
   clearSearch() {
-    this.searchValue = "";
+    this.searchValue = '';
     this.filteredTutores = this.tutores;
   }
 
@@ -78,7 +78,7 @@ export class TutorList implements OnInit {
   }
 
   onTutorDeleted(tutorId: number) {
-    this.tutores = this.tutores.filter(tutor => tutor.id !== tutorId);
+    this.tutores = this.tutores.filter((tutor) => tutor.id !== tutorId);
     this.filteredTutores = this.filterTutors();
     if (this.pageIndex > 0 && this.pagedTutores.length === 0) {
       this.pageIndex--;
@@ -91,10 +91,11 @@ export class TutorList implements OnInit {
     }
 
     const searchTerm = this.searchValue.toLowerCase();
-    return this.tutores.filter(tutor =>
-      tutor.name.toLowerCase().includes(searchTerm) ||
-      tutor.email.toLowerCase().includes(searchTerm) ||
-      (tutor.phone && tutor.phone.toLowerCase().includes(searchTerm))
+    return this.tutores.filter(
+      (tutor) =>
+        tutor.name.toLowerCase().includes(searchTerm) ||
+        tutor.email.toLowerCase().includes(searchTerm) ||
+        (tutor.phone && tutor.phone.toLowerCase().includes(searchTerm))
     );
   }
 
@@ -106,9 +107,20 @@ export class TutorList implements OnInit {
     this.createModalOpen = false;
   }
 
+  // handleTutorCreated(newTutor: UserInterface) {
+  //   this.tutores = [newTutor, ...this.tutores];
+  //   this.filteredTutores = this.filterTutors();
+  //   this.statusMsg = 'Responsável cadastrado com sucesso.';
+  //   this.createModalOpen = false;
+  // }
+
+  //Responsável por emitir o evento de criação de tutor para o componente pai (tutor.ts)
   handleTutorCreated(newTutor: UserInterface) {
+    this.tutorCreated.emit(newTutor);
+
     this.tutores = [newTutor, ...this.tutores];
     this.filteredTutores = this.filterTutors();
+
     this.statusMsg = 'Responsável cadastrado com sucesso.';
     this.createModalOpen = false;
   }

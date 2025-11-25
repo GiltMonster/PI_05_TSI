@@ -1,5 +1,5 @@
 <section class="lista_tutor" aria-label="Lista de Responsáveis">
-  <app-tutor-list [tutores]="listTutores" />
+  <app-tutor-list [tutores]="listTutores" (tutorCreated)="onTutorCreated($event)" />
 </section>
 @if (loading) {
   <app-loading/>

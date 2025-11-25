@@ -51,4 +51,8 @@ export class Veterinarios implements OnInit {
     });
   }
 
+    onVetCreated(newTutor: UserInterface) {
+    this.listVets = [newTutor, ...this.listVets];
+    this.loadVets();
+  }
 }
