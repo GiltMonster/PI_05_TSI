@@ -58,9 +58,7 @@ class PrescricaoPetController extends Controller
 
         $prescricao = PrescricaoPet::create($validate);
 
-        return response()->json(
-            $prescricao,
-            201);
+        return response()->json($prescricao, 201);
     }
 
     function atualizarPrescricao(Request $request){
@@ -83,10 +81,8 @@ class PrescricaoPetController extends Controller
 
         PrescricaoPet::where('id', $request->id)->update($validate);
 
-        return response()->json(
-            $validate,
-            200
-        );
+        $prescricaoAtualizada = PrescricaoPet::find($request->id);
+        return response()->json($prescricaoAtualizada, 200);
 
     }
 

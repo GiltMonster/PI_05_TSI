@@ -62,6 +62,7 @@ export class VacinasPetModal implements OnInit {
       this.fichaPetService.cadastrarVacina(this.vacina).subscribe({
         next: (res) => {
           this.notification.success('Vacina cadastrada com sucesso!');
+          this.vacina = res;
           this.save.emit(this.vacina);
         },
         error: (err) => {
@@ -74,6 +75,7 @@ export class VacinasPetModal implements OnInit {
       this.fichaPetService.editarVacina(this.vacina).subscribe({
         next: (res) => {
           this.notification.success('Vacina editada com sucesso!');
+          this.vacina = res;
           this.save.emit(this.vacina);
         },
         error: (err) => {
