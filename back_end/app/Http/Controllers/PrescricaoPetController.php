@@ -58,10 +58,9 @@ class PrescricaoPetController extends Controller
 
         $prescricao = PrescricaoPet::create($validate);
 
-        return response()->json([
-            'message' => 'Prescrição cadastrada com sucesso!',
-            'prescricao' => $prescricao,
-        ], 201);
+        return response()->json(
+            $prescricao,
+            201);
     }
 
     function atualizarPrescricao(Request $request){
@@ -83,6 +82,12 @@ class PrescricaoPetController extends Controller
         ]);
 
         PrescricaoPet::where('id', $request->id)->update($validate);
+
+        return response()->json(
+            $validate,
+            200
+        );
+
     }
 
     function deletarPrescricao($id){

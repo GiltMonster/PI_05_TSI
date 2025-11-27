@@ -63,12 +63,27 @@ class PetController extends Controller
 
         $prescricoes =  PrescricaoPet::whereIn('pet_id', $pets->pluck('id'))->get();
 
+        $anexos = FileController::getListAnexos();
+
         foreach ($prescricoes as $prescricao) {
             $vet = User::find($prescricao->vet_id);
             if ($vet) {
                 $prescricao->nome_vet = $vet->name;
             }
+
+            if (isset($anexos)) {
+                foreach ($anexos->original as $fileName) {
+                    $filteredAnexo = str_starts_with($fileName, $prescricao->pet_id . '_' . $prescricao->id . '_');
+                    if ($filteredAnexo) {
+                        $prescricao->anexoUrl = url('/api/file/download/' . $fileName);
+                        break;
+                    }
+                }
+            } else {
+                $prescricao->anexoUrl = '';
+            }
         }
+
 
         foreach ($pets as $pet) {
             $pet->consultas = $consultas->where('pet_id', $pet->id)->values();
