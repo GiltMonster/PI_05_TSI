@@ -13,7 +13,8 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [env('FRONTEND_URL', '*')],
+    // Permite múltiplas origens via env ALLOWED_ORIGINS separado por vírgulas
+    'allowed_origins' => array_map('trim', explode(',', env('ALLOWED_ORIGINS', 'http://localhost:4200,https://prismapet.up.railway.app'))),
 
     'allowed_origins_patterns' => [],
 
@@ -23,5 +24,6 @@ return [
 
     'max_age' => 3600,
 
-    'supports_credentials' => true,
+    // Use true apenas se usar cookies; com '*' isso quebra o CORS
+    'supports_credentials' => false,
 ];
