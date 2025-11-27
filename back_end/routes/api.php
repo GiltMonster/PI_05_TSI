@@ -12,6 +12,7 @@ use App\Http\Controllers\VacinaPetController;
 use App\Http\Controllers\VetController;
 use App\Http\Controllers\PrescricaoPetController;
 use Illuminate\Http\Request;
+
 Route::get('/file/download/{filename}', [FileController::class, 'downloadFile']);
 Route::options('/file/download/{filename}', function(Request $request) {
     $origin = $request->headers->get('Origin');
@@ -32,7 +33,6 @@ Route::get('/ping', function () {
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::get('/file/download/{filename}', [FileController::class, 'downloadFile']);
 
 
 Route::middleware(['auth:sanctum'])->group(function () {

@@ -46,19 +46,12 @@ class FileController extends Controller
     }
 
 
-    function downloadFile(Request $request, $filename)
+    function downloadFile($filename)
     {
         $filePath = 'uploads/' . $filename;
 
         if (Storage::exists($filePath)) {
-            $response = Storage::download($filePath);
-            $origin = $request->headers->get('Origin');
-            $allowed = array_map('trim', explode(',', env('ALLOWED_ORIGINS', 'http://localhost:4200,https://prismapet.up.railway.app')));
-            if (in_array($origin, $allowed, true)) {
-                $response->headers->set('Access-Control-Allow-Origin', $origin);
-            }
-            $response->headers->set('Access-Control-Expose-Headers', 'Content-Disposition');
-            return $response;
+            return Storage::download($filePath);
         } else {
             return response()->json([
                 'message' => 'Arquivo não encontrado.',

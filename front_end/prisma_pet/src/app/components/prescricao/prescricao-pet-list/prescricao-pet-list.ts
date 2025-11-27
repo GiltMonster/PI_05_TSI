@@ -53,21 +53,15 @@ export class PrescricaoPetList {
   }
 
   downloadAnexo(anexoUrl: string) {
-    this.fichaService.downloadPrescricaoFile(anexoUrl).subscribe({
-      next: (blob) => {
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = anexoUrl.split('/').pop() || 'anexo_prescricao';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(url);
-      },
-      error: (err) => {
-        console.error('Erro ao baixar o anexo:', err);
-        this.notification.error('Erro ao baixar o anexo.');
-      }
-    });
+    if (!anexoUrl) {
+      this.notification.error('URL do anexo inválida.');
+      return;
+    }
+    try {
+      window.open(anexoUrl, '_blank');
+    } catch (err) {
+      console.error('Erro ao abrir o anexo:', err);
+      this.notification.error('Erro ao abrir o anexo.');
+    }
   }
 }
