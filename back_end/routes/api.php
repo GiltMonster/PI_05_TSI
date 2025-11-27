@@ -11,7 +11,6 @@ use App\Http\Controllers\ServicoController;
 use App\Http\Controllers\VacinaPetController;
 use App\Http\Controllers\VetController;
 use App\Http\Controllers\PrescricaoPetController;
-use GuzzleHttp\Client;
 
 Route::get('/ping', function () {
     return response()->json(['message' => 'API funcionando!']);
@@ -19,6 +18,8 @@ Route::get('/ping', function () {
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::get('/file/download/{filename}', [FileController::class, 'downloadFile']);
+
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/me', [AuthController::class, 'me']);
@@ -105,7 +106,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
 
     Route::middleware(['role:admin|vet|user'])->group(function () {
-        Route::get('/file/download/{filename}', [FileController::class, 'downloadFile']);
+        Route::get('/file/listAnexos', [FileController::class, 'getListAnexos']);
+        Route::get('/file/anexosByPetId/{petId}', [FileController::class, 'getAnexosByPetId']);
         Route::post('/file/upload', [FileController::class, 'upload']);
         Route::delete('/file/delete/{filename}', [FileController::class, 'deleteFile']);
     });

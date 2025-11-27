@@ -1,59 +1,65 @@
 <article class="card_prescricao_container" [attr.aria-labelledby]="'prescricao-'">
-	<div class="info_prescricao_container">
-		<div class="info_prescricao_content">
+  <div class="info_prescricao_container">
+    <div class="info_prescricao_content">
 			<h2 class="nome_medicamento" [id]="'prescricao'">{{ pet_prescricao.nome_medicamento || 'Medicamento não informado' }}</h2>
-			<p class="data_prescricao">
-				<label>Data:</label>
-				{{ (pet_prescricao.data_prescricao | date:'dd/MM/yyyy') || 'Não informado' }}
-			</p>
-			<p class="dosagem_prescricao">
-				<label>Dosagem:</label>
-				{{ pet_prescricao.dosagem || 'Não informado' }}
-			</p>
-		</div>
-		<div class="btns_prescricao">
-			@if (userType !== 'user') {
-				<button type="button" class="btn_icon" (click)="onEdit()" aria-label="Editar prescrição">
-					<mat-icon fontSet="material-symbols-outlined" aria-hidden="true">edit</mat-icon>
-				</button>
-			}
-			@if (userType === 'admin') {
-				<button type="button" class="btn_icon" (click)="onDelete()" aria-label="Excluir prescrição">
-					<mat-icon fontSet="material-symbols-outlined" aria-hidden="true">delete</mat-icon>
-				</button>
-			}
-		</div>
-	</div>
+      <p class="data_prescricao">
+        <label>Data:</label>
+        {{ (pet_prescricao.data_prescricao | date:'dd/MM/yyyy') || 'Não informado' }}
+      </p>
+      <p class="dosagem_prescricao">
+        <label>Dosagem:</label>
+        {{ pet_prescricao.dosagem || 'Não informado' }}
+      </p>
+    </div>
+    <div class="btns_prescricao">
+      @if (userType !== 'user') {
+      <button type="button" class="btn_icon" (click)="onEdit()" aria-label="Editar prescrição">
+        <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">edit</mat-icon>
+      </button>
+      }
+      @if (userType === 'admin') {
+      <button type="button" class="btn_icon" (click)="onDelete()" aria-label="Excluir prescrição">
+        <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">delete</mat-icon>
+      </button>
+      }
+    </div>
+  </div>
 
-	<hr>
+  <hr>
 
-	<div class="detalhes_prescricao">
-		<mat-expansion-panel>
-			<mat-expansion-panel-header>
-				<mat-panel-title>Detalhes</mat-panel-title>
-			</mat-expansion-panel-header>
-			<ul>
-				<li><label>Via:</label> {{ pet_prescricao.via || 'Não informado' }}</li>
-				<li><label>Posologia:</label> {{ pet_prescricao.posologia || 'Não informado' }}</li>
-				<li><label>Farmácia:</label> {{ pet_prescricao.farmacia || 'Não informado' }}</li>
-				<!-- Área de Upload futura -->
-				<li><label>Anexos:</label> (Upload de arquivos será adicionado posteriormente)</li>
-			</ul>
-		</mat-expansion-panel>
-	</div>
+  <div class="detalhes_prescricao">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Detalhes</mat-panel-title>
+      </mat-expansion-panel-header>
+      <ul>
+        <li><label>Via:</label> {{ pet_prescricao.via || 'Não informado' }}</li>
+        <li><label>Posologia:</label> {{ pet_prescricao.posologia || 'Não informado' }}</li>
+        <li><label>Farmácia:</label> {{ pet_prescricao.farmacia || 'Não informado' }}</li>
+        @if (pet_prescricao.anexoUrl) {
+        <li>
+          <label>Anexos:</label>
+          <a type="button" class="btn" (click)="downloadAnexo(pet_prescricao.anexoUrl)">
+            Baixar Anexo
+          </a>
+        </li>
+        } @else {
+        <li><label>Anexos:</label> Não há anexos</li>
+        }
+
+      </ul>
+    </mat-expansion-panel>
+  </div>
 </article>
 
 @if (editModalOpen) {
-	<app-prescricao-pet-modal [pet_id]="pet_prescricao.pet_id" [editMode]="true" [prescricaoToEdit]="pet_prescricao" (close)="closeEditModal()" (save)="handlePrescricaoUpdated($event)" />
+<app-prescricao-pet-modal [pet_id]="pet_prescricao.pet_id" [editMode]="true" [prescricaoToEdit]="pet_prescricao"
+  (close)="closeEditModal()" (save)="handlePrescricaoUpdated($event)" />
 }
 
 @if (deleteModalOpen) {
-	<app-modal-delete
-		[title]="'Excluir Prescrição'"
-		[message]="`Tem certeza que deseja excluir a prescrição: ${pet_prescricao.nome_medicamento}? Esta ação não pode ser desfeita.`"
-		[confirmLabel]="'Excluir'"
-		[cancelLabel]="'Cancelar'"
-		(confirm)="handleConfirmDelete()"
-		(cancel)="closeDeleteModal()"
-	></app-modal-delete>
+<app-modal-delete [title]="'Excluir Prescrição'"
+  [message]="`Tem certeza que deseja excluir a prescrição: ${pet_prescricao.nome_medicamento}? Esta ação não pode ser desfeita.`"
+  [confirmLabel]="'Excluir'" [cancelLabel]="'Cancelar'" (confirm)="handleConfirmDelete()"
+  (cancel)="closeDeleteModal()"></app-modal-delete>
 }

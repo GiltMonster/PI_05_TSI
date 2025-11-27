@@ -51,4 +51,17 @@ export class PrescricaoPetList {
       }
     });
   }
+
+  downloadAnexo(anexoUrl: string) {
+    if (!anexoUrl) {
+      this.notification.error('URL do anexo inválida.');
+      return;
+    }
+    try {
+      window.open(anexoUrl, '_blank');
+    } catch (err) {
+      console.error('Erro ao abrir o anexo:', err);
+      this.notification.error('Erro ao abrir o anexo.');
+    }
+  }
 }

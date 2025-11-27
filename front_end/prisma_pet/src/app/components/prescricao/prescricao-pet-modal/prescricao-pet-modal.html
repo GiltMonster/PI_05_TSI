@@ -44,8 +44,18 @@
             [(ngModel)]="prescricao.data_prescricao" />
         </div>
         <div class="form-group form-group--full">
-          <label class="form-label">Anexos (upload futuro)</label>
-          <div class="upload-placeholder">Área para upload de arquivos (a implementar)</div>
+          <label class="form-label">Anexos (opcional - até 20MB)</label>
+          <div class="upload-placeholder">
+            <input type="file" id="fileInput" (change)="onFileSelected($event)" hidden />
+            <label for="fileInput" class="upload-label">
+              @if (!selectedFileName) {
+                <span>Clique AQUI para anexar um arquivo</span>
+              } @else {
+                <span>Arquivo selecionado: {{ selectedFileName }}</span>
+              }
+            </label>
+
+          </div>
         </div>
       </div>
       <div class="button-group">

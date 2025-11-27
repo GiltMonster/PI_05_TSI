@@ -18,5 +18,6 @@ php artisan migrate --force || echo "⚠️ Migrations já aplicadas ou com erro
 echo "🚀 Cacheando configuração..."
 php artisan config:cache
 
-echo "✅ Servidor Laravel iniciado via PHP embutido"
-php -S 0.0.0.0:8080 -t public
+echo "✅ Servidor Laravel iniciado via PHP embutido (com roteador)"
+# Usa o index.php como roteador para que URLs como /api/* não retornem 404 do servidor embutido
+php -S 0.0.0.0:8080 -t public public/index.php
