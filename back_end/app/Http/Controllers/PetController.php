@@ -75,7 +75,7 @@ class PetController extends Controller
                 foreach ($anexos->original as $fileName) {
                     $filteredAnexo = str_starts_with($fileName, $prescricao->pet_id . '_' . $prescricao->id . '_');
                     if ($filteredAnexo) {
-                        $prescricao->anexoUrl = url('/api/file/download/' . $fileName);
+                        $prescricao->anexoUrl = secure_url('api/file/download/' . $fileName);
                         break;
                     }
                 }
