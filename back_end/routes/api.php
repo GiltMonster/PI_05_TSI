@@ -11,21 +11,6 @@ use App\Http\Controllers\ServicoController;
 use App\Http\Controllers\VacinaPetController;
 use App\Http\Controllers\VetController;
 use App\Http\Controllers\PrescricaoPetController;
-use Illuminate\Http\Request;
-
-Route::get('/file/download/{filename}', [FileController::class, 'downloadFile']);
-Route::options('/file/download/{filename}', function(Request $request) {
-    $origin = $request->headers->get('Origin');
-    $allowed = array_map('trim', explode(',', env('ALLOWED_ORIGINS', 'http://localhost:4200,https://prismapet.up.railway.app')));
-    $allowOrigin = in_array($origin, $allowed, true) ? $origin : (count($allowed) ? $allowed[0] : '*');
-
-    return response('', 204)->withHeaders([
-        'Access-Control-Allow-Origin' => $allowOrigin,
-        'Access-Control-Allow-Methods' => 'GET, OPTIONS',
-        'Access-Control-Allow-Headers' => 'Origin, Content-Type, Accept, Authorization',
-        'Access-Control-Max-Age' => '3600',
-    ]);
-});
 
 Route::get('/ping', function () {
     return response()->json(['message' => 'API funcionando!']);
@@ -33,6 +18,7 @@ Route::get('/ping', function () {
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::get('/file/download/{filename}', [FileController::class, 'downloadFile']);
 
 
 Route::middleware(['auth:sanctum'])->group(function () {

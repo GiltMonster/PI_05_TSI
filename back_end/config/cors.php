@@ -9,12 +9,12 @@ return [
     | FRONTEND_URL deve estar definido no ambiente de produção.
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => ['*'],
 
     'allowed_methods' => ['*'],
 
     // Permite múltiplas origens via env ALLOWED_ORIGINS separado por vírgulas
-    'allowed_origins' => array_map('trim', explode(',', env('ALLOWED_ORIGINS', 'http://localhost:4200,https://prismapet.up.railway.app'))),
+    'allowed_origins' => ['*'],
 
     'allowed_origins_patterns' => [],
 
