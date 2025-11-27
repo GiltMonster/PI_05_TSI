@@ -12,25 +12,26 @@ class FileController extends Controller
     {
         $files = Storage::files('uploads');
 
-        $filesNameOnly = array_map(function($filePath) {
+        $filesNameOnly = array_map(function ($filePath) {
             return basename($filePath);
         }, $files);
 
         return response()->json(
             $filesNameOnly,
-            200);
+            200
+        );
     }
 
-    function getAnexosByPetId($petId)
+    static function getAnexoByPrescricaoId($id)
     {
         $files = Storage::files('uploads');
 
-        $filteredFiles = array_filter($files, function($filePath) use ($petId) {
+        $filteredFiles = array_filter($files, function ($filePath) use ($id) {
             $fileName = basename($filePath);
-            return str_starts_with($fileName, $petId . '_');
+            return str_starts_with($fileName, $id . '_');
         });
 
-        $filesNameOnly = array_map(function($filePath) {
+        $filesNameOnly = array_map(function ($filePath) {
             return basename($filePath);
         }, $filteredFiles);
 
@@ -42,7 +43,33 @@ class FileController extends Controller
 
         return response()->json(
             $filesNameOnly,
-            200);
+            200
+        );
+    }
+
+    function getAnexosByPetId($petId)
+    {
+        $files = Storage::files('uploads');
+
+        $filteredFiles = array_filter($files, function ($filePath) use ($petId) {
+            $fileName = basename($filePath);
+            return str_starts_with($fileName, $petId . '_');
+        });
+
+        $filesNameOnly = array_map(function ($filePath) {
+            return basename($filePath);
+        }, $filteredFiles);
+
+        if (empty($filesNameOnly)) {
+            return response()->json([
+                'message' => 'Nenhum arquivo encontrado para o pet ID especificado.',
+            ], 404);
+        }
+
+        return response()->json(
+            $filesNameOnly,
+            200
+        );
     }
 
 
@@ -57,7 +84,6 @@ class FileController extends Controller
                 'message' => 'Arquivo não encontrado.',
             ], 404);
         }
-
     }
 
     function upload(Request $request)
@@ -83,7 +109,6 @@ class FileController extends Controller
                 'filename' => $finalName,
                 'pet_id' => $petId,
             ], 200);
-
         } else {
             return response()->json([
                 'message' => 'Falha ao enviar o arquivo.',
@@ -107,5 +132,4 @@ class FileController extends Controller
             ], 404);
         }
     }
-
 }

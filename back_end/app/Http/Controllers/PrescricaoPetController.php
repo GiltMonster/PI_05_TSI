@@ -58,9 +58,18 @@ class PrescricaoPetController extends Controller
 
         $prescricao = PrescricaoPet::create($validate);
 
-        return response()->json(
-            $prescricao,
-            201);
+        if ($prescricao instanceof PrescricaoPet) {
+            $filename = FileController::getAnexoByPrescricaoId($prescricao->id);
+            $prescricaoData = $prescricao->toArray();
+            if (!empty($filename)) {
+                // Caminho correto: /api/file/download/{filename}
+                $prescricaoData['anexoUrl'] = secure_url('api/file/download/' . $filename);
+            }
+
+            return response()->json($prescricaoData, 201);
+        }
+
+        return response()->json($prescricao, 201);
     }
 
     function atualizarPrescricao(Request $request){
@@ -83,10 +92,8 @@ class PrescricaoPetController extends Controller
 
         PrescricaoPet::where('id', $request->id)->update($validate);
 
-        return response()->json(
-            $validate,
-            200
-        );
+        $prescricaoAtualizada = PrescricaoPet::find($request->id);
+        return response()->json($prescricaoAtualizada, 200);
 
     }
 
