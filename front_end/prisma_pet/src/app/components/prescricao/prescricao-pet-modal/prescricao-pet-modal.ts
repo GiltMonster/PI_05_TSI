@@ -64,12 +64,14 @@ export class PrescricaoPetModal implements OnInit {
         next: (res) => {
           this.notification.success('Prescrição cadastrada com sucesso!');
           this.prescricao = res;
-          this.save.emit(this.prescricao);
+          console.log(res);
+
 
           if (this.fileToUpload) {
             this.fichaService.uploadPrescricaoFile(this.fileToUpload, this.pet_id, res.id).subscribe({
               next: () => {
                 this.notification.success('Arquivo da prescrição enviado com sucesso!');
+                this.save.emit(this.prescricao);
               },
               error: (err) => {
                 console.log('Erro ao enviar arquivo da prescrição:', err);
