@@ -3,7 +3,7 @@
     <li [class.active]="activeTab === 'consultas'" (click)="setActiveTab('consultas')">Consultas</li>
     <li [class.active]="activeTab === 'vacinas'" (click)="setActiveTab('vacinas')">Vacinas</li>
     <li [class.active]="activeTab === 'prescricoes'" (click)="setActiveTab('prescricoes')">Prescrições</li>
-    <li [class.active]="activeTab === 'anexos'" (click)="setActiveTab('anexos')">Anexos</li>
+    <!-- <li [class.active]="activeTab === 'anexos'" (click)="setActiveTab('anexos')">Anexos</li> -->
   </ul>
 </nav>
 
@@ -45,7 +45,8 @@
         }
       </div>
     }
-  } @else if (activeTab === 'anexos') {
+  }
+  <!-- @else if (activeTab === 'anexos') {
     @if(pet_anexos.length != 0) {
       <app-outros-anexos-pet />
     } @else {
@@ -54,7 +55,7 @@
         <button class="btn btn--primary">Adicionar um novo anexo</button>
       </div>
     }
-  }
+  } -->
 </div>
 
 @if (createModalOpen) {
