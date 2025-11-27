@@ -133,3 +133,20 @@ mat-paginator {
   justify-content: center;
   border-radius: 8px;
 }
+
+.empty{
+  background-color: var(--background-light);
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-top: 2rem;
+  transition: background-color 0.3s ease;
+}
+
+.empty:hover{
+  background-color: var(--primary-light);
+}
