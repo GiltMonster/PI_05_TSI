@@ -62,7 +62,7 @@ export class ConsultasPetModal implements OnInit {
     this.fichaService.cadastrarConsulta(this.consulta).subscribe({
         next: (res) => {
           this.notification.success('Consulta cadastrada com sucesso!');
-          console.log(res);
+          this.consulta = res;
           this.save.emit(this.consulta);
         },
         error: (err) => {
@@ -76,7 +76,7 @@ export class ConsultasPetModal implements OnInit {
       this.fichaService.editarConsulta(this.consulta).subscribe({
         next: (res) => {
           this.notification.success('Consulta editada com sucesso!');
-          console.log(res);
+          this.consulta = res;
           this.save.emit(this.consulta);
         },
         error: (err) => {

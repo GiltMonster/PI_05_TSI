@@ -36,15 +36,14 @@ class ConsultaPetController extends Controller
             return response()->json(['error' => 'Data de consulta inválida'], 400);
         }
 
-        ConsultaPet::create([
+        $consulta = ConsultaPet::create([
             'pet_id' => $request->input('pet_id'),
             'vet_id' => $request->input('vet_id'),
             'servico_id' => $request->input('servico_id'),
             'data_consulta' => $request->input('data_consulta'),
             'anamnese' => $request->input('anamnese'),
         ]);
-
-        return response()->json(['message' => 'Consulta registrada com sucesso'], 201);
+        return response()->json($consulta, 201);
     }
 
     public function editarConsulta(Request $request)
@@ -87,7 +86,8 @@ class ConsultaPetController extends Controller
             'data_consulta' => $request->input('data_consulta'),
             'anamnese' => $request->input('anamnese'),
         ]);
-        return response()->json(['message' => 'Consulta atualizada com sucesso'], 200);
+        $consultaAtualizada = ConsultaPet::find($consulta->id);
+        return response()->json($consultaAtualizada, 200);
     }
 
     function deletarConsulta($id)

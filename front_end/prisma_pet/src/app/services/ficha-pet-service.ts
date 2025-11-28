@@ -42,6 +42,7 @@ export class FichaPetService {
   listarPrescricoesPorPet(petId: number) {
     return this.http.get<Array<PetPrescricao>>(`${environment.API_URL_VET_BY_PET_ID}/${petId}`);
   }
+
   cadastrarPrescricao(data: PetPrescricao) {
     return this.http.post<PetPrescricao>(environment.API_URL_VET_CADASTRAR_PRESCRICAO, data);
   }
@@ -52,5 +53,18 @@ export class FichaPetService {
 
   deletarPrescricao(id: number) {
     return this.http.delete<void>(`${environment.API_URL_VET_DELETAR_PRESCRICAO}/${id}`);
+  }
+
+  uploadPrescricaoFile(file: File, petId: number, prescricaoId: number) {
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+    formData.append('pet_id', String(petId));
+    formData.append('prescricao_id', String(prescricaoId));
+
+    return this.http.post<void>(`${environment.API_URL_FILE_UPLOAD}`, formData);
+  }
+
+  downloadPrescricaoFile(fileUrl: string) {
+    return this.http.get(fileUrl, { responseType: 'blob' });
   }
 }

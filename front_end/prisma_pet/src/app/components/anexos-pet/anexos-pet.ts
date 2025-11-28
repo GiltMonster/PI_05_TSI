@@ -14,7 +14,7 @@ import { UserTypeProviderService } from '../../shared/user-type-service';
 
 @Component({
   selector: 'app-anexos-pet',
-  imports: [ConsultasPet, VacinasPet, OutrosAnexosPet, ConsultasPetModal, VacinasPetModal, PrescricaoPet, PrescricaoPetModal],
+  imports: [ConsultasPet, VacinasPet, ConsultasPetModal, VacinasPetModal, PrescricaoPet, PrescricaoPetModal],
   templateUrl: './anexos-pet.html',
   styleUrl: './anexos-pet.scss',
   standalone: true,

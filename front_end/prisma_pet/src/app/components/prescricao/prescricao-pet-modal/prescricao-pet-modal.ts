@@ -20,17 +20,10 @@ export class PrescricaoPetModal implements OnInit {
 
   userOperator: UserInterface = {} as UserInterface;
 
-  prescricao: PetPrescricao = {
-    id: 0,
-    vet_id: 0,
-    pet_id: 0,
-    data_prescricao: undefined as any,
-    nome_medicamento: '',
-    dosagem: '',
-    farmacia: '',
-    via: '',
-    posologia: '',
-  };
+  fileToUpload!: File;
+  selectedFileName: string = '';
+
+  prescricao: PetPrescricao = { } as PetPrescricao;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -45,18 +38,47 @@ export class PrescricaoPetModal implements OnInit {
     }
   }
 
+  onFileSelected(event: any) {
+    this.fileToUpload = event.target.files[0];
+    this.selectedFileName = this.fileToUpload ? this.fileToUpload.name : '';
+
+  }
+
   onSave() {
-    this.prescricao = {
-      ...this.prescricao,
-      pet_id: this.pet_id,
-      vet_id: this.userOperator.id,
-    };
+    console.log(this.fileToUpload);
+    if (!this.prescricao.nome_medicamento || !this.prescricao.dosagem ||
+        !this.prescricao.via || !this.prescricao.posologia || !this.prescricao.farmacia ||
+        !this.prescricao.data_prescricao ) {
+      this.notification.error('Dados da prescrição incompletos.');
+      return;
+    }
 
     if (!this.editMode) {
+      this.prescricao = {
+        ...this.prescricao,
+        pet_id: this.pet_id,
+        vet_id: this.userOperator.id,
+      };
+
       this.fichaService.cadastrarPrescricao(this.prescricao).subscribe({
-        next: () => {
+        next: (res) => {
           this.notification.success('Prescrição cadastrada com sucesso!');
-          this.save.emit(this.prescricao);
+          this.prescricao = res;
+          console.log(res);
+
+
+          if (this.fileToUpload) {
+            this.fichaService.uploadPrescricaoFile(this.fileToUpload, this.pet_id, res.id).subscribe({
+              next: () => {
+                this.notification.success('Arquivo da prescrição enviado com sucesso!');
+                this.save.emit(this.prescricao);
+              },
+              error: (err) => {
+                console.log('Erro ao enviar arquivo da prescrição:', err);
+                this.notification.error('Erro ao enviar arquivo da prescrição.');
+              }
+            });
+          }
         },
         error: (err) => {
           console.log('Erro ao cadastrar prescrição:', err);
@@ -64,6 +86,7 @@ export class PrescricaoPetModal implements OnInit {
           this.close.emit();
         }
       });
+
     } else {
       this.fichaService.editarPrescricao(this.prescricao).subscribe({
         next: () => {

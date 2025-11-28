@@ -1,5 +1,5 @@
-const end_point_base = 'https://prisma-pet-api.up.railway.app/api';
-// const end_point_base = 'http://127.0.0.1:8000/api';
+// const end_point_base = 'https://prisma-pet-api.up.railway.app/api';
+const end_point_base = 'http://127.0.0.1:8000/api';
 
 export const environment = {
   production: false,
@@ -79,4 +79,7 @@ export const environment = {
   API_URL_VET_CADASTRAR_PRESCRICAO: `${end_point_base}/prescricao/registrarPrescricao`,
   API_URL_VET_EDITAR_PRESCRICAO: `${end_point_base}/prescricao/atualizarPrescricao`,
   API_URL_VET_DELETAR_PRESCRICAO: `${end_point_base}/prescricao/deletarPrescricao`, // + id
+
+  // --- Arquivos ---
+  API_URL_FILE_UPLOAD: `${end_point_base}/file/upload`,
 };

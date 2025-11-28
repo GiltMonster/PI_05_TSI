@@ -166,6 +166,7 @@ export interface PetPrescricao {
   farmacia: string;
   via: string;
   posologia: string;
+  anexoUrl?: string;
 }
 
 export interface ServicosInterface {

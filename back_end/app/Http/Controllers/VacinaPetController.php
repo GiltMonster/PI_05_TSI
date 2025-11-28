@@ -41,7 +41,7 @@ class VacinaPetController extends Controller
             return response()->json(['error' => 'Parâmetros inválidos'], 400);
         }
 
-        VacinaPet::create([
+        $vacina = VacinaPet::create([
             'pet_id' => $validate['pet_id'],
             'vet_id' => $validate['vet_id'],
             'data_vacinacao' => $validate['data_vacinacao'],
@@ -53,8 +53,7 @@ class VacinaPetController extends Controller
             'observacoes' => $validate['observacoes'],
             'estado_vacina' => $validate['estado_vacina'],
         ]);
-
-        return response()->json(['message' => 'Vacina registrada com sucesso'], 201);
+        return response()->json($vacina, 201);
     }
 
     function getVacinaById($id)
@@ -103,7 +102,8 @@ class VacinaPetController extends Controller
         }
 
         $vacina->update($validate);
-        return response()->json(['message' => 'Vacina atualizada com sucesso'], 200);
+        $vacinaAtualizada = VacinaPet::find($vacina->id);
+        return response()->json($vacinaAtualizada, 200);
     }
 
     function deletarVacina($id)
