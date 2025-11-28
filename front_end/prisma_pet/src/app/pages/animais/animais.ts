@@ -66,8 +66,14 @@ export class Animais implements OnInit {
           this.listPets = [...res];
         },
         error: (err) => {
-          console.error('Erro ao carregar animais do tutor:', err);
+          console.error('Erro ao carregar animais do responsável:', err);
         },
       });
   }
+
+  // Resonsável por garantir que a lista de pets seja atualizada quando um novo pet for criado
+    onPetCreated(pet: PetInterface) {
+      this.listPets = [pet, ...this.listPets];
+      this.loadPets();
+    }
 }

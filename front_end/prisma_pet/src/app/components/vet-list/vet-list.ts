@@ -19,6 +19,7 @@ import { UserTypeProviderService } from '../../shared/user-type-service';
 export class VetList implements OnInit {
   @Input() vets: UserInterface[] = [];
   @Input() emptyMessage = 'Nenhum veterinário cadastrado';
+  @Output() vetCreated = new EventEmitter<UserInterface>();
 
   pageSize = 5;
   pageIndex = 0;
@@ -109,7 +110,15 @@ export class VetList implements OnInit {
   }
 
 
+  // handleVetCreated(newVet: UserInterface) {
+  //   this.vets = [newVet, ...this.vets];
+  //   this.filteredVets = this.filterVets();
+  //   this.statusMsg = 'Veterinário cadastrado com sucesso.';
+  //   this.createModalOpen = false;
+  // }
+
   handleVetCreated(newVet: UserInterface) {
+    this.vetCreated.emit(newVet);
     this.vets = [newVet, ...this.vets];
     this.filteredVets = this.filterVets();
     this.statusMsg = 'Veterinário cadastrado com sucesso.';

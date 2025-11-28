@@ -37,7 +37,7 @@ export class AcessoTutor {
     {
       imagem: 'assets/imagens/img-acesso-tutor.png',
       titulo: 'A VetJA existe por você!',
-      subtitulo: 'Olá querido tutor, a VetJA preza por um atendimento humanizado, claro e profissional. Nossos pacientes merecem um atendimento premium, satisfatório e seguro, contamos com o seu feedback para sempre entregarmos o melhor, caso tenha alguma dúvida sobre a plataforma ou sobre o caso do seu melhor amigo, nossa equipe estará a sua disposição! '
+      subtitulo: 'Olá querido responsável, a VetJA preza por um atendimento humanizado, claro e profissional. Nossos pacientes merecem um atendimento premium, satisfatório e seguro, contamos com o seu feedback para sempre entregarmos o melhor, caso tenha alguma dúvida sobre a plataforma ou sobre o caso do seu melhor amigo, nossa equipe estará a sua disposição! '
     }
   ];
 }

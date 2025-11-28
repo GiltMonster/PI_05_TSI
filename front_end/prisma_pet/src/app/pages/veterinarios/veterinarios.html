@@ -1,4 +1,4 @@
 <section class="lista_vet" aria-label="Lista de veterinarios">
-  <app-vet-list [vets]="listVets" />
+  <app-vet-list [vets]="listVets" (vetCreated)="onVetCreated($event)"/>
 </section>
 <app-loading *ngIf="loading"></app-loading>

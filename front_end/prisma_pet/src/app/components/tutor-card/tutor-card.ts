@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { UserInterface } from '../../interfaces';
+import { FichaPetInterface, UserInterface } from '../../interfaces';
 import { UsuarioService } from '../../services/usuario-service';
 import { FormatPhonePipe } from '../../pipes/format-phone-pipe';
 import { ModalEdit } from '../modal-edit/modal-edit';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { Notification } from '../../services/notification';
 import { ModalDelete } from '../modal-delete/modal-delete';
 import { Loading } from '../loading/loading';
-// import { PetService } from '../../services/pet-service';
+import { PetService } from '../../services/pet-service';
 // import { UserTypeProviderService } from '../../shared/user-type-service';
 
 @Component({
@@ -17,10 +17,9 @@ import { Loading } from '../loading/loading';
   imports: [CommonModule, MatIconModule, FormatPhonePipe, ModalEdit, ModalDelete, Loading],
   standalone: true,
   templateUrl: './tutor-card.html',
-  styleUrls: ['./tutor-card.scss']
+  styleUrls: ['./tutor-card.scss'],
 })
 export class TutorCard implements OnInit {
-
   @Input() userTutor!: UserInterface;
   @Input() typeUser: string = '';
   @Output() tutorDeleted = new EventEmitter<number>();
@@ -35,8 +34,9 @@ export class TutorCard implements OnInit {
   constructor(
     private usuarioService: UsuarioService,
     private router: Router,
-    private notification: Notification
-  ) { }
+    private notification: Notification,
+    private petService: PetService
+  ) {}
 
   ngOnInit(): void {
     // this.userTypeService.userType$.subscribe(type => {
@@ -91,18 +91,61 @@ export class TutorCard implements OnInit {
   // }
 
   // responsável apenas por fazer a navegação
-    goToFichaPet(tutorId: number) {
-    let baseRoute = '';
+  //   goToFichaPet(tutorId: number) {
+  //   let baseRoute = '';
 
-    if (this.typeUser === 'vet') {
-      baseRoute = '/vet/ficha';
-    } else if (this.typeUser === 'admin') {
-      baseRoute = '/admin/ficha';
-    } else {
-      baseRoute = '/user/ficha';
-    }
+  //   if (this.typeUser === 'vet') {
+  //     baseRoute = '/vet/ficha';
+  //   } else if (this.typeUser === 'admin') {
+  //     baseRoute = '/admin/ficha';
+  //   } else {
+  //     baseRoute = '/user/ficha';
+  //   }
 
-    this.router.navigate([`${baseRoute}/${tutorId}`]);
+  //   this.router.navigate([`${baseRoute}/${tutorId}`]);
+  // }
+
+  goToFichaPet(tutorId: number) {
+    this.loading = true;
+
+    this.petService.getPetsByTutorId(tutorId).subscribe({
+      next: (res: FichaPetInterface) => {
+        const hasPets = Array.isArray(res?.pets) && res.pets.length > 0;
+
+        if (!hasPets) {
+          this.notification.error('Este responsável ainda não possui nenhum animal cadastrado.');
+          this.loading = false;
+          return;
+        }
+
+        let baseRoute = '';
+
+        if (this.typeUser === 'vet') {
+          baseRoute = '/vet/ficha';
+        } else if (this.typeUser === 'admin') {
+          baseRoute = '/admin/ficha';
+        } else {
+          baseRoute = '/user/ficha';
+        }
+
+        this.router.navigate([`${baseRoute}/${tutorId}`], {
+          state: { ficha: res },
+        });
+
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Erro ao buscar pets do responsável:', err);
+
+        if (err.status === 404) {
+          this.notification.error('Este responsável ainda não possui nenhum animal cadastrado.');
+        } else {
+          this.notification.error('Não foi possível verificar os animais deste responsável.');
+        }
+
+        this.loading = false;
+      },
+    });
   }
 
   deleteTutor(tutorId: number) {
@@ -115,29 +158,29 @@ export class TutorCard implements OnInit {
         this.loading = false;
       },
       error: (err) => {
-        console.log("erro ao deletar tutor:", err);
+        console.log('erro ao deletar tutor:', err);
         this.notification.error('Erro ao deletar responsável');
         this.loading = false;
-      }
+      },
     });
   }
 
-    openDeleteModal(tutor: UserInterface) {
-      this.tutorToDelete = tutor;
-      this.deleteModalOpen = true;
-    }
+  openDeleteModal(tutor: UserInterface) {
+    this.tutorToDelete = tutor;
+    this.deleteModalOpen = true;
+  }
 
-    closeDeleteModal() {
-      this.deleteModalOpen = false;
-      this.tutorToDelete = null;
-    }
+  closeDeleteModal() {
+    this.deleteModalOpen = false;
+    this.tutorToDelete = null;
+  }
 
-    handleConfirmDelete() {
-      if (!this.tutorToDelete) return;
-      this.deleteTutor(this.tutorToDelete.id);
+  handleConfirmDelete() {
+    if (!this.tutorToDelete) return;
+    this.deleteTutor(this.tutorToDelete.id);
 
-      this.closeDeleteModal();
-    }
+    this.closeDeleteModal();
+  }
 
   editTutor(tutorId: number) {
     this.edit.emit(this.userTutor);
@@ -177,5 +220,4 @@ export class TutorCard implements OnInit {
 
     this.closeEditModal();
   }
-
 }

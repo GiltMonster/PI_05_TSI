@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule, FormControl, FormsModule } from '@angular/forms';
 import { AnimalCard } from '../animal-card/animal-card';
@@ -18,6 +18,7 @@ import { UserTypeProviderService } from '../../shared/user-type-service';
 export class AnimalList implements OnInit {
   @Input() pets: PetInterface[] = [];
   @Input() emptyMessage = 'Nenhum animal cadastrado';
+  @Output() petCreated = new EventEmitter<PetInterface>();
 
   pageSize = 5;
   pageIndex = 0;
@@ -108,6 +109,7 @@ export class AnimalList implements OnInit {
   }
 
   handlePetCreated({pet}: {pet: PetInterface}) {
+    this.petCreated.emit(pet);
     this.pets = [pet, ...this.pets];
     this.filteredPets = this.filterPets();
     this.statusMsg = 'Animal cadastrado com sucesso.';

@@ -36,4 +36,10 @@ export class Tutor implements OnInit {
       error: (err) => { console.error('Erro ao carregar responsáveis:', err); }
     });
   }
+
+  // Resonsável por garantir que a lista de tutores seja atualizada quando um novo tutor for criado
+  onTutorCreated(newTutor: UserInterface) {
+    this.listTutores = [newTutor, ...this.listTutores];
+    this.loadTutores();
+  }
 }

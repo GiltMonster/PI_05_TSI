@@ -20,6 +20,7 @@ import { UserTypeProviderService } from '../../shared/user-type-service';
 export class ServiceList implements OnInit {
   @Input() servicos: ServicosInterface[] = [];
   @Input() emptyMessage = 'Nenhum serviço cadastrado';
+  @Output() servicoCreated = new EventEmitter<ServicosInterface>();
 
   pageSize = 5;
   pageIndex = 0;
@@ -116,9 +117,21 @@ export class ServiceList implements OnInit {
       this.createModalOpen = false;
     }
 
+    // handleServicoCreated(newServico: ServicosInterface) {
+    //   this.servicos = [newServico, ...this.servicos];
+    //   this.filteredServicos = this.filterServicos();
+    //   this.statusMsg = 'Serviço cadastrado com sucesso.';
+    //   this.createModalOpen = false;
+    // }
+
+
+  
     handleServicoCreated(newServico: ServicosInterface) {
+      this.servicoCreated.emit(newServico);
+
       this.servicos = [newServico, ...this.servicos];
       this.filteredServicos = this.filterServicos();
+
       this.statusMsg = 'Serviço cadastrado com sucesso.';
       this.createModalOpen = false;
     }
