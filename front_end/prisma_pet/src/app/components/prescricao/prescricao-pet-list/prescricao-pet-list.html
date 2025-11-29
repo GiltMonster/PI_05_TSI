@@ -80,10 +80,13 @@
             <label>Anexos:</label>
             <button
               type="button"
-              class="btn"
+              class="btn btn_icon"
               (click)="downloadAnexo(pet_prescricao.anexoUrl)"
             >
-              Baixar Anexo
+              <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">
+                download
+              </mat-icon>
+              Baixar anexo
             </button>
           </li>
         } @else {

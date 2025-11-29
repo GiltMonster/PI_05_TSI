@@ -68,17 +68,12 @@
       font-size: 1rem;
     }
 
-    a {
-      cursor: pointer;
+    .btn {
+      width: 100%;
       margin-top: 0.5rem;
-      font-size: 1rem;
-      color: var(--primary-color);
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-      }
+      padding: 0.25rem 0.5rem;
     }
+
   }
 }
 
