@@ -12,7 +12,6 @@ export class PetService {
   constructor(private http: HttpClient, private userService: UsuarioService) {}
 
   getPetsByTutorId(tutorId: number): Observable<FichaPetInterface> {
-
     return this.userService.getUserType().pipe(
       switchMap((res) => {
         if (res.type === 'admin') {
@@ -45,27 +44,31 @@ export class PetService {
       return this.http.put(environment.API_URL_ADMIN_PET_UPDATE, data);
     } else if (data.type === 'vet') {
       return this.http.put(environment.API_URL_VET_PET_UPDATE, data);
-    } else{
+    } else {
       return this.http.put(environment.API_URL_CLIENTE_PET_UPDATE, data);
     }
   }
 
   deleteAccountPet(id: number) {
-    return this.http.delete(`${environment.API_URL_ADMIN_PET_DELETE}/${id}`);
+    return this.http.delete(`${environment.API_URL_CLIENTE_PET_DELETE}/${id}`);
   }
 
   createPet(data: PetInterface) {
     return this.http.post<PetInterface>(environment.API_URL_ADMIN_PET_REGISTER, data);
   }
 
-getMyPets(): Observable<PetInterface[]> {
-  return this.userService.getUserData().pipe( // obter dados do usuário logado
-    switchMap((user) => // usar os dados do usuário para obter os pets
-      this.http.get<FichaPetInterface>( // obter ficha dos pets do usuário logado
-        `${environment.API_URL_CLIENTE_GET_PETS_BY_USER_ID}/${user.id}` // usar user.id para buscar pets
-      )
-    ),
-    map((ficha) => ficha.pets ?? []) // extrair array de pets da ficha
-  );
-}
+  getMyPets(): Observable<PetInterface[]> {
+    return this.userService.getUserData().pipe(
+      // obter dados do usuário logado
+      switchMap(
+        (
+          user // usar os dados do usuário para obter os pets
+        ) =>
+          this.http.get<FichaPetInterface>( // obter ficha dos pets do usuário logado
+            `${environment.API_URL_CLIENTE_GET_PETS_BY_USER_ID}/${user.id}` // usar user.id para buscar pets
+          )
+      ),
+      map((ficha) => ficha.pets ?? []) // extrair array de pets da ficha
+    );
+  }
 }
