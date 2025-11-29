@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ServicosInterface } from '../../interfaces';
 import { ServicosService } from '../../services/servicos-service';
@@ -16,6 +16,7 @@ export class ModalEditServicos implements OnChanges {
   @Input() servico!: ServicosInterface;
   @Output() close = new EventEmitter<void>();
   @Output() save = new EventEmitter<ServicosInterface>();
+  @ViewChild('modalTitle', { static: true }) modalTitle!: ElementRef<HTMLHeadingElement>;
 
   editedServico: ServicosInterface = {} as ServicosInterface;
   class_is_required = '';

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { PetConsulta, ServicosInterface, UserInterface } from '../../../interfaces';
 import { FormsModule } from '@angular/forms';
 import { UsuarioService } from '../../../services/usuario-service';
@@ -20,6 +20,7 @@ export class ConsultasPetModal implements OnInit {
   @Input() consultaToEdit: PetConsulta = {} as PetConsulta;
   @Output() close = new EventEmitter<void>();
   @Output() save = new EventEmitter<PetConsulta>();
+  @ViewChild('modalTitle', { static: true }) modalTitle!: ElementRef<HTMLHeadingElement>;
   loading = false;
 
   consulta: PetConsulta = {
@@ -47,22 +48,21 @@ export class ConsultasPetModal implements OnInit {
   }
 
   onSave() {
+    this.consulta = {
+    ...this.consulta,
+    pet_id: this.pet_id,
+    vet_id: this.userOperator.id,
+    nome_vet: this.userOperator.name,
+    nome_servico:
+      this.servicosList.find((s) => s.id === Number(this.consulta.servico_id))?.nome ||
+      this.consulta.nome_servico ||
+      '',
+  };
     if (!this.consulta.nome_vet || !this.consulta.data_consulta || !this.consulta.anamnese) {
-      this.notification.error('Dados da prescrição incompletos.');
+      this.notification.error('Dados da consulta incompletos.');
       return;
     }
     this.loading = true;
-    this.consulta = {
-      servico_id: this.consulta.servico_id,
-      pet_id: this.pet_id,
-      vet_id: this.userOperator.id,
-      nome_vet: this.userOperator.name,
-      nome_servico:
-        this.servicosList.find((s) => s.id === Number(this.consulta.servico_id))?.nome || '',
-      data_consulta: this.consulta.data_consulta,
-      anamnese: this.consulta.anamnese,
-      id: this.consulta.id || 0,
-    };
 
     if (!this.editMode) {
       this.loading = true;

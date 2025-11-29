@@ -4,9 +4,9 @@
   }
   <div class="modal-content">
     @if (editMode) {
-    <h2 class="form-section__title">Editar Vacina</h2>
+    <h2 tabindex="-1" #modalTitle class="form-section__title">Editar Vacina</h2>
     } @else {
-    <h2 class="form-section__title">Cadastrar Vacina</h2>
+    <h2 tabindex="-1" #modalTitle class="form-section__title">Cadastrar Vacina</h2>
     }
 
     <form aria-label="Formulário de vacina">
@@ -58,7 +58,7 @@
 
         <!-- Data Reforço -->
         <div class="form-group">
-          <label for="data_reforco" class="form-label form-label--required" >Data de Reforço</label>
+          <label for="data_reforco" class="form-label form-label--required">Data de Reforço</label>
           <input
             type="date"
             id="data_reforco"
@@ -117,7 +117,9 @@
 
         <!-- Estado Vacina -->
         <div class="form-group">
-          <label for="estado_vacina" class="form-label form-label--required">Estado da Vacina</label>
+          <label for="estado_vacina" class="form-label form-label--required"
+            >Estado da Vacina</label
+          >
           <select
             id="estado_vacina"
             name="estado_vacina"
@@ -149,10 +151,35 @@
 
       <div class="button-group">
         <button type="button" class="btn btn--secondary" (click)="onCancel()" [disabled]="loading">
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
           Cancelar
         </button>
         <button type="submit" class="btn btn--primary" (click)="onSave()" [disabled]="loading">
-          Salvar Alterações
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          Salvar
         </button>
       </div>
     </form>

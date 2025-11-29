@@ -1,50 +1,94 @@
 <div class="modal-backdrop">
   @if (loading) {
   <app-loading></app-loading>
-}
+  }
   <div class="modal-content">
-    @if (editMode) { <h2 class="form-section__title">Editar Prescrição</h2> } @else { <h2 class="form-section__title">
-      Cadastrar Prescrição</h2> }
+    @if (editMode) {
+    <h2 tabindex="-1" #modalTitle class="form-section__title">Editar Prescrição</h2>
+    } @else {
+    <h2 tabindex="-1" #modalTitle class="form-section__title">Cadastrar Prescrição</h2>
+    }
 
     <form aria-label="Formulário de prescrição">
       <div class="form-grid">
-
         <div class="form-group">
           <label for="nome_vet" class="form-label">Nome do Veterinário</label>
-          <input type="text" id="nome_vet" name="nome_vet" class="form-input" [(ngModel)]="userOperator.name"
-            placeholder="Nome do veterinário" disabled />
+          <input
+            type="text"
+            id="nome_vet"
+            name="nome_vet"
+            class="form-input"
+            [(ngModel)]="userOperator.name"
+            placeholder="Nome do veterinário"
+            disabled
+          />
         </div>
 
         <div class="form-group">
           <label class="form-label" for="nome_medicamento">Medicamento</label>
-          <input id="nome_medicamento" name="nome_medicamento" class="form-input" type="text"
-            [(ngModel)]="prescricao.nome_medicamento" placeholder="Nome do medicamento" />
+          <input
+            id="nome_medicamento"
+            name="nome_medicamento"
+            class="form-input"
+            type="text"
+            [(ngModel)]="prescricao.nome_medicamento"
+            placeholder="Nome do medicamento"
+          />
         </div>
 
         <div class="form-group">
           <label class="form-label" for="dosagem">Dosagem</label>
-          <input id="dosagem" name="dosagem" class="form-input" type="text" [(ngModel)]="prescricao.dosagem"
-            placeholder="Ex: 20mg" />
+          <input
+            id="dosagem"
+            name="dosagem"
+            class="form-input"
+            type="text"
+            [(ngModel)]="prescricao.dosagem"
+            placeholder="Ex: 20mg"
+          />
         </div>
         <div class="form-group">
           <label class="form-label" for="via">Via</label>
-          <input id="via" name="via" class="form-input" type="text" [(ngModel)]="prescricao.via"
-            placeholder="Oral, IM, IV..." />
+          <input
+            id="via"
+            name="via"
+            class="form-input"
+            type="text"
+            [(ngModel)]="prescricao.via"
+            placeholder="Oral, IM, IV..."
+          />
         </div>
         <div class="form-group">
           <label class="form-label" for="posologia">Posologia</label>
-          <input id="posologia" name="posologia" class="form-input" type="text" [(ngModel)]="prescricao.posologia"
-            placeholder="1x ao dia por 5 dias" />
+          <input
+            id="posologia"
+            name="posologia"
+            class="form-input"
+            type="text"
+            [(ngModel)]="prescricao.posologia"
+            placeholder="1x ao dia por 5 dias"
+          />
         </div>
         <div class="form-group">
           <label class="form-label" for="farmacia">Farmácia</label>
-          <input id="farmacia" name="farmacia" class="form-input" type="text" [(ngModel)]="prescricao.farmacia"
-            placeholder="Nome da farmácia" />
+          <input
+            id="farmacia"
+            name="farmacia"
+            class="form-input"
+            type="text"
+            [(ngModel)]="prescricao.farmacia"
+            placeholder="Nome da farmácia"
+          />
         </div>
         <div class="form-group">
           <label class="form-label" for="data_prescricao">Data</label>
-          <input id="data_prescricao" name="data_prescricao" class="form-input" type="date"
-            [(ngModel)]="prescricao.data_prescricao" />
+          <input
+            id="data_prescricao"
+            name="data_prescricao"
+            class="form-input"
+            type="date"
+            [(ngModel)]="prescricao.data_prescricao"
+          />
         </div>
         <div class="form-group form-group--full">
           <label class="form-label">Anexos (opcional - até 20MB)</label>
@@ -52,18 +96,46 @@
             <input type="file" id="fileInput" (change)="onFileSelected($event)" hidden />
             <label for="fileInput" class="upload-label">
               @if (!selectedFileName) {
-                <span>Clique AQUI para anexar um arquivo</span>
+              <span>Clique AQUI para anexar um arquivo</span>
               } @else {
-                <span>Arquivo selecionado: {{ selectedFileName }}</span>
+              <span>Arquivo selecionado: {{ selectedFileName }}</span>
               }
             </label>
-
           </div>
         </div>
       </div>
       <div class="button-group">
-        <button type="button" class="btn btn--secondary" (click)="onCancel()">Cancelar</button>
-        <button type="submit" class="btn btn--primary" (click)="onSave()" [disabled]="loading">Salvar</button>
+        <button type="button" class="btn btn--secondary" (click)="onCancel()">
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+          Cancelar
+        </button>
+        <button type="submit" class="btn btn--primary" (click)="onSave()" [disabled]="loading">
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          Salvar
+        </button>
       </div>
     </form>
   </div>

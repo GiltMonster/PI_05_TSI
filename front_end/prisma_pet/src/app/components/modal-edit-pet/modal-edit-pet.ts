@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PetInterface, UserInterface } from '../../interfaces';
 import { PetService } from '../../services/pet-service';
@@ -18,6 +18,7 @@ export class ModalEditPet implements OnChanges {
   @Input() typeUser: string = '';
   @Output() close = new EventEmitter<void>();
   @Output() save = new EventEmitter<PetInterface>();
+  @ViewChild('modalTitle', { static: true }) modalTitle!: ElementRef<HTMLHeadingElement>;
 
   editedPet: PetInterface = {} as PetInterface;
   tutores: UserInterface[] = [];

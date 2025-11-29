@@ -51,6 +51,12 @@ export class VacinasPetModal implements OnInit {
   }
 
   onSave() {
+    this.vacina = {
+      ...this.vacina,
+      pet_id: this.pet_id,
+      vet_id: this.userOperator.id,
+      nome_vet: this.userOperator.name,
+    };
     if (
       !this.vacina.nome_vet ||
       !this.vacina.tipo_vacina ||
@@ -62,17 +68,11 @@ export class VacinasPetModal implements OnInit {
       !this.vacina.estado_vacina ||
       !this.vacina.observacoes
     ) {
-      this.notification.error('Dados da prescrição incompletos.');
+      this.notification.error('Dados da vacina incompletos.');
       return;
     }
     // Monta objeto final
     this.loading = true;
-    this.vacina = {
-      ...this.vacina,
-      pet_id: this.pet_id,
-      vet_id: this.userOperator.id,
-      nome_vet: this.userOperator.name,
-    };
 
     if (!this.editMode) {
       this.fichaPetService.cadastrarVacina(this.vacina).subscribe({
@@ -99,7 +99,11 @@ export class VacinasPetModal implements OnInit {
       this.fichaPetService.editarVacina(this.vacina).subscribe({
         next: (res) => {
           this.notification.success('Vacina editada com sucesso!');
-          this.vacina = res;
+          this.vacina = {
+            ...res,
+            vet_id: this.userOperator.id,
+            nome_vet: this.userOperator.name,
+          };
           this.save.emit(this.vacina);
           this.loading = false;
         },

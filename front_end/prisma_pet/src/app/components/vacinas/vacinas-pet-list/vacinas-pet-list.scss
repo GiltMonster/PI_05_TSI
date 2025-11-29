@@ -37,7 +37,6 @@
 }
 
 .informacoes_vacina {
-
   mat-expansion-panel {
     box-shadow: none;
     border: 1px solid var(--gray-light);
@@ -56,7 +55,6 @@
   }
 
   ul {
-
     label {
       font-weight: 600;
       font-size: 1rem;
@@ -68,7 +66,6 @@
       color: var(--text-secondary);
       gap: 0.25rem;
       font-size: 1rem;
-
     }
   }
 }
@@ -81,8 +78,8 @@
 
 .btn_cadastro {
   background: #fff;
-  color: #004AAD;
-  border: 1.5px solid #004AAD;
+  color: #004aad;
+  border: 1.5px solid #004aad;
   border-radius: 10px;
   height: 40px;
   padding: 0 14px;
@@ -90,12 +87,12 @@
   line-height: 40px;
   cursor: pointer;
   font-family: 'Poppins';
-  transition: background-color .15s ease, box-shadow .15s ease;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
 
   &:hover {
-    background: #FF914D;
+    background: #ff914d;
     color: #fff;
-    border-color: #FF914D;
+    border-color: #ff914d;
   }
 
   &:active {
@@ -104,7 +101,7 @@
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(43, 108, 176, .35);
+    box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.35);
   }
 }
 
@@ -113,23 +110,23 @@
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  border: 1.5px solid #004AAD;
+  border: 1.5px solid #004aad;
   background: #fff;
-  color: #004AAD;
+  color: #004aad;
   display: grid;
   place-items: center;
   cursor: pointer;
-  transition: background-color .15s ease, box-shadow .15s ease;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
 
   &:hover {
-    background: #FF914D;
+    background: #ff914d;
     color: #fff;
-    border-color: #FF914D;
+    border-color: #ff914d;
   }
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(43, 108, 176, .35);
+    box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.35);
   }
 
   &:active {
@@ -153,7 +150,6 @@
     font-weight: 600;
     font-size: 1rem;
     color: var(--text-secondary);
-
   }
 
   .estado-aplicada {
@@ -175,3 +171,37 @@
   }
 }
 
+@media (max-width: 600px) {
+  .informacoes_vacina {
+    mat-panel-title {
+      font-size: 1rem;
+    }
+  }
+
+  .info_vacina_contant {
+    p {
+      font-size: 0.9rem;
+    }
+  }
+
+  .mat-expansion-panel-body {
+    padding: 0;
+  }
+
+  .status_vacina {
+    label {
+      font-size: 0.9rem;
+    }
+    .estado-aplicada {
+      font-size: 0.9rem;
+    }
+
+    .estado-atrasada {
+      font-size: 0.9rem;
+    }
+
+    .estado-programada {
+      font-size: 0.9rem;
+    }
+  }
+}

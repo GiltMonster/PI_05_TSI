@@ -46,7 +46,6 @@
   background-color: #4c892d;
   transition: background-color 0.3s ease;
 }
-
 .profile {
   display: flex;
   align-items: center;
@@ -66,9 +65,8 @@
     line-height: 1.2;
   }
 
-
   .user-info {
-    p{
+    p {
       font-size: 1.2rem;
       color: #004aad;
       font-weight: bold;
@@ -79,11 +77,26 @@
     .logout {
       font-size: 0.9rem;
       color: #ff4d4d;
+      font-weight: bold;
+      background-color: transparent;
+      border: none;
+      padding: 2px 0;
+      text-align: left;
+      cursor: pointer;
+
+      display: inline-flex;
+      align-items: center;
+      align-self: flex-start;
+      min-height: 0;
     }
 
     .logout:hover {
       text-decoration: underline;
-      cursor: pointer;
+    }
+
+    .logout:focus-visible {
+      outline: 3px solid #005FCC;
+      outline-offset: 2px;
     }
   }
 

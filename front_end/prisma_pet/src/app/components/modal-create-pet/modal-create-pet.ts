@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -18,6 +18,7 @@ import { Loading } from '../loading/loading';
 export class ModalCreatePet implements OnInit {
   @Output() close = new EventEmitter<void>();
   @Output() save  = new EventEmitter<PetInterface>();
+  @ViewChild('modalTitle', { static: true }) modalTitle!: ElementRef<HTMLHeadingElement>;
   loading = false;
 
   createPet: PetInterface = {
@@ -72,7 +73,7 @@ export class ModalCreatePet implements OnInit {
       },
     });
   }
-  
+
 
 private calculaIdade() {
     if (this.idade == null || this.idade < 0) {

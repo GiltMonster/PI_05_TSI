@@ -1,27 +1,39 @@
-<section class="tab-content">
+<section
+  class="tab-content"
+  [id]="'tab-consultas'"
+  role="tabpanel"
+  aria-labelledby="tab-consultas-btn"
+>
   <div class="container_consulta">
-    <h2>Consultas do Animal:</h2>
+    <h2 id="consultas-heading">Consultas do Animal:</h2>
 
     @if (userType !== 'user') {
-    <button class="add_consulta_button" type="button" aria-label="Cadastrar nova consulta" (click)="openCreateModal()">
-      <mat-icon aria-hidden="true">add</mat-icon>
-      <span>Cadastrar uma nova consulta</span>
-    </button>
+      <button
+        class="add_consulta_button"
+        type="button"
+        aria-label="Cadastrar nova consulta"
+        (click)="openCreateModal()"
+      >
+        <mat-icon aria-hidden="true">add</mat-icon>
+        <span>Cadastrar uma nova consulta</span>
+      </button>
     }
   </div>
 
   @for (consulta of pet_consultas; track consulta.id) {
-  <app-consultas-pet-list
-  [pet_consulta]="consulta"
-  [userType]="userType" (delete)="handleConsultaDeleted($event)" />
+    <app-consultas-pet-list
+      [pet_consulta]="consulta"
+      [userType]="userType"
+      (delete)="handleConsultaDeleted($event)"
+    />
   }
-
 </section>
 
 @if (createModalOpen) {
-<app-consultas-pet-modal
-[pet_id]="pet_id"
-(close)="closeCreateModal()"
-(save)="handleConsultaCreated($event)"
-[editMode]="editModalOpen" />
+  <app-consultas-pet-modal
+    [pet_id]="pet_id"
+    (close)="closeCreateModal()"
+    (save)="handleConsultaCreated($event)"
+    [editMode]="editModalOpen"
+  />
 }
