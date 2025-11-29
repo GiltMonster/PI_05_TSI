@@ -21,6 +21,7 @@ export class FichaPet implements OnInit {
   pets: FichaPetInterface = { tutor_name: '', pets: [] };
   loading = false;
   typeUser = '';
+  petId: number | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -43,6 +44,8 @@ export class FichaPet implements OnInit {
     this.userTypeService.userType$.subscribe((type) => {
       this.typeUser = type;
     });
+
+    this.getPetIdByRouteParam();
 
     // this.getPetDetails();
     // this.userTypeService.userType$.subscribe((type) => {
@@ -72,6 +75,9 @@ export class FichaPet implements OnInit {
       next: (res) => {
         this.pets = res;
         this.loading = false;
+        if (this.petId) {
+          this.orderPetsById(this.petId);
+        }
       },
       error: (err) => {
         console.log(err?.error?.message || err);
@@ -79,5 +85,18 @@ export class FichaPet implements OnInit {
         this.loading = false;
       },
     });
+  }
+
+  orderPetsById(id: number) {
+    this.pets.pets.sort((a, b) => {
+      if (a.id === id) return -1;
+      if (b.id === id) return 1;
+      return 0;
+    });
+  }
+
+  getPetIdByRouteParam(){
+    const petIdParam = this.route.snapshot.queryParamMap.get('petId');
+    this.petId = petIdParam !== null ? Number(petIdParam) : null;
   }
 }
