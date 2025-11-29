@@ -1,4 +1,7 @@
 <div class="modal-backdrop">
+  @if (loading) {
+  <app-loading></app-loading>
+}
   <div class="modal-content">
     @if (editMode) { <h2 class="form-section__title">Editar Prescrição</h2> } @else { <h2 class="form-section__title">
       Cadastrar Prescrição</h2> }
@@ -60,7 +63,7 @@
       </div>
       <div class="button-group">
         <button type="button" class="btn btn--secondary" (click)="onCancel()">Cancelar</button>
-        <button type="submit" class="btn btn--primary" (click)="onSave()">Salvar</button>
+        <button type="submit" class="btn btn--primary" (click)="onSave()" [disabled]="loading">Salvar</button>
       </div>
     </form>
   </div>

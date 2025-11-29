@@ -6,20 +6,21 @@ import { ServicosService } from '../../../services/servicos-service';
 import { Notification } from '../../../services/notification';
 import { CurrencyPipe } from '@angular/common';
 import { FichaPetService } from '../../../services/ficha-pet-service';
+import { Loading } from '../../loading/loading';
 
 @Component({
   selector: 'app-consultas-pet-modal',
-  imports: [FormsModule, CurrencyPipe],
+  imports: [FormsModule, CurrencyPipe, Loading],
   templateUrl: './consultas-pet-modal.html',
   styleUrl: './consultas-pet-modal.scss',
 })
 export class ConsultasPetModal implements OnInit {
-
   @Input() editMode = false;
   @Input() pet_id: number = 0;
   @Input() consultaToEdit: PetConsulta = {} as PetConsulta;
   @Output() close = new EventEmitter<void>();
   @Output() save = new EventEmitter<PetConsulta>();
+  loading = false;
 
   consulta: PetConsulta = {
     servico_id: 0,
@@ -34,7 +35,7 @@ export class ConsultasPetModal implements OnInit {
     private usuarioService: UsuarioService,
     private servicosService: ServicosService,
     private notification: Notification
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getCurrentUser();
@@ -43,50 +44,74 @@ export class ConsultasPetModal implements OnInit {
     if (this.editMode && this.consultaToEdit) {
       this.consulta = { ...this.consultaToEdit };
     }
-
   }
 
   onSave() {
-
+    if (!this.consulta.nome_vet || !this.consulta.data_consulta || !this.consulta.anamnese) {
+      this.notification.error('Dados da prescrição incompletos.');
+      return;
+    }
+    this.loading = true;
     this.consulta = {
       servico_id: this.consulta.servico_id,
       pet_id: this.pet_id,
       vet_id: this.userOperator.id,
       nome_vet: this.userOperator.name,
-      nome_servico: this.servicosList.find(s => s.id === Number(this.consulta.servico_id))?.nome || '', data_consulta: this.consulta.data_consulta,
+      nome_servico:
+        this.servicosList.find((s) => s.id === Number(this.consulta.servico_id))?.nome || '',
+      data_consulta: this.consulta.data_consulta,
       anamnese: this.consulta.anamnese,
       id: this.consulta.id || 0,
-    }
+    };
 
     if (!this.editMode) {
-    this.fichaService.cadastrarConsulta(this.consulta).subscribe({
+      this.loading = true;
+      this.fichaService.cadastrarConsulta(this.consulta).subscribe({
         next: (res) => {
           this.notification.success('Consulta cadastrada com sucesso!');
-          this.consulta = res;
+          // this.consulta = res;
+          this.consulta = {
+            ...res,
+            vet_id: this.userOperator.id,
+            nome_vet: this.userOperator.name,
+            nome_servico:
+              this.servicosList.find((s) => s.id === Number(this.consulta.servico_id))?.nome ||
+              res.nome_servico,
+          };
           this.save.emit(this.consulta);
+          this.loading = false;
         },
         error: (err) => {
           this.notification.error('Erro ao cadastrar consulta.');
           console.log('erro ao cadastrar consulta:', err);
           this.close.emit();
-        }
+          this.loading = false;
+        },
       });
     } else {
-
       this.fichaService.editarConsulta(this.consulta).subscribe({
         next: (res) => {
           this.notification.success('Consulta editada com sucesso!');
-          this.consulta = res;
+          // this.consulta = res;
+          this.consulta = {
+            ...res,
+            vet_id: this.userOperator.id,
+            nome_vet: this.userOperator.name,
+            nome_servico:
+              this.servicosList.find((s) => s.id === Number(this.consulta.servico_id))?.nome ||
+              res.nome_servico,
+          };
           this.save.emit(this.consulta);
+          this.loading = false;
         },
         error: (err) => {
           this.notification.error('Erro ao editar consulta.');
           console.log('erro ao editar consulta:', err);
           this.close.emit();
-        }
+          this.loading = false;
+        },
       });
     }
-
   }
 
   onCancel() {
@@ -99,11 +124,10 @@ export class ConsultasPetModal implements OnInit {
         this.userOperator = res;
         console.log(this.userOperator);
         console.log(`Pet ID recebido: ${this.pet_id}`);
-
       },
       error: (err) => {
         console.log('erro ao obter dados do usuário:', err);
-      }
+      },
     });
   }
 
@@ -113,13 +137,11 @@ export class ConsultasPetModal implements OnInit {
         this.servicosList = res;
         console.log(this.servicosList);
         console.log(`Pet ID recebido: ${this.pet_id}`);
-
       },
       error: (err) => {
         console.log('erro ao obter lista de serviços:', err);
         this.notification.error('Erro ao obter lista de serviços');
-      }
+      },
     });
   }
-
 }

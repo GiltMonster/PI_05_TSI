@@ -12,7 +12,7 @@ export class PetService {
   constructor(private http: HttpClient, private userService: UsuarioService) {}
 
   getPetsByTutorId(tutorId: number): Observable<FichaPetInterface> {
-    
+
     return this.userService.getUserType().pipe(
       switchMap((res) => {
         if (res.type === 'admin') {
@@ -45,7 +45,7 @@ export class PetService {
       return this.http.put(environment.API_URL_ADMIN_PET_UPDATE, data);
     } else if (data.type === 'vet') {
       return this.http.put(environment.API_URL_VET_PET_UPDATE, data);
-    } else {
+    } else{
       return this.http.put(environment.API_URL_CLIENTE_PET_UPDATE, data);
     }
   }

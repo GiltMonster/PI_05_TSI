@@ -42,7 +42,7 @@ export class App implements OnInit {
         this.isLogado = res.valid;
         this.headerProfile[0] = {
           nome: res.user.name,
-          tipoUsu: res.user.type === 'admin' ? 'Administrador' : res.user.type === 'user' ? 'Tutor' : 'Veterinário',
+          tipoUsu: res.user.type === 'admin' ? 'Administrador' : res.user.type === 'user' ? 'Responsável' : 'Veterinário',
           rotaUrl: '/meu_perfil',
           iconUrl: 'account_circle'
         };

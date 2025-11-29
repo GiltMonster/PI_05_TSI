@@ -1,4 +1,7 @@
 <div class="modal-backdrop">
+      @if (loading) {
+    <app-loading></app-loading>
+  }
   <div class="modal-content">
     @if (editMode) {
       <h2 class="form-section__title">Editar Consulta</h2>
@@ -18,10 +21,10 @@
 
         <!-- Serviço -->
         <div class="form-group">
-          <label for="servico_list" class="form-label">Serviços:</label>
+          <label for="servico_list" class="form-label form-label--required">Serviços:</label>
           <select id="servico_list" name="servico_list" class="form-input" [(ngModel)]="consulta.servico_id"
-            placeholder="Selecione a especialidade...">
-            <option value="0" selected>Selecione a especialidade...</option>
+            placeholder="Selecione o serviço...">
+            <option value="0" selected>Selecione o serviço...</option>
             @for (servico of servicosList; track servico.id) {
             <option [value]="servico.id">
               {{ servico.nome }} - {{ servico.preco | currency:'BRL':'symbol':'1.2-2' }}
@@ -39,8 +42,8 @@
 
         <!-- Anamnese -->
         <div class="form-group">
-          <label for="anamnese" class="form-label">Anamnese</label>
-          <textarea id="anamnese" name="anamnese" class="form-input" [(ngModel)]="consulta.anamnese"
+          <label for="anamnese" class="form-label form-label--required">Anamnese</label>
+          <textarea id="anamnese" name="anamnese" class="form-input" [(ngModel)]="consulta.anamnese" required aria-required="true"
             placeholder="Descreva a anamnese..."></textarea>
         </div>
 
@@ -48,14 +51,14 @@
 
       <!-- Buttons -->
       <div class="button-group">
-        <button type="button" class="btn btn--secondary" (click)="onCancel()">
+        <button type="button" class="btn btn--secondary" (click)="onCancel()" [disabled]="loading">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
           Cancelar
         </button>
-        <button type="submit" class="btn btn--primary" (click)="onSave()">
+        <button type="submit" class="btn btn--primary" (click)="onSave()" [disabled]="loading">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="20 6 9 17 4 12"></polyline>
           </svg>

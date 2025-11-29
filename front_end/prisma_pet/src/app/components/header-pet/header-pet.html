@@ -12,14 +12,14 @@
           @if(petsList.pets.length > 0 && petsList.pets[indexPet]) {
           <h1>{{petsList.pets[indexPet].nome}}</h1>
           <div class="button-group">
-            <button [class]="getPrevBtnClass()" (click)="onChangePrevPet()" [disabled]="btnPrevDisabled()">&lt; Pet
+            <button [class]="getPrevBtnClass()" (click)="onChangePrevPet()" [disabled]="btnPrevDisabled()">&lt; Animal
               anterior</button>
-            <button [class]="getNextBtnClass()" (click)="onChangeNextPet()" [disabled]="btnNextDisabled()">Próximo pet
+            <button [class]="getNextBtnClass()" (click)="onChangeNextPet()" [disabled]="btnNextDisabled()">Próximo animal
               &gt;</button>
           </div>
           } @else {
-          <h1>Nenhum pet cadastrado</h1>
-          <button class="btn btn--primary">Cadastrar um novo pet?</button>
+          <h1>Nenhum animal cadastrado</h1>
+          <button class="btn btn--primary">Cadastrar um novo animal?</button>
           }
         </div>
       </div>

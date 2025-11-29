@@ -13,7 +13,7 @@ class VacinaPetController extends Controller
     {
 
         if (Pet::find($request->input('pet_id')) === null) {
-            return response()->json(['error' => 'Pet não encontrado'], 404);
+            return response()->json(['error' => 'Animal não encontrado'], 404);
         }
 
         if (Vet::whereIn('type', ['vet', 'admin'])->find($request->input('vet_id')) === null) {
@@ -97,7 +97,7 @@ class VacinaPetController extends Controller
 
             $pet = Pet::find($validate['pet_id']);
             if (!$pet) {
-                return response()->json(['error' => 'Pet não encontrado'], 404);
+                return response()->json(['error' => 'Animal não encontrado'], 404);
             }
         }
 

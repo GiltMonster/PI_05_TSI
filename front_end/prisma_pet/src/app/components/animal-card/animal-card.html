@@ -10,6 +10,7 @@
     />
   </div>
 
+
   <div class="info_pet">
     <h3 class="nome_pet" [id]="'pet-' + userPet.id">
       {{ userPet.nome }}
@@ -17,8 +18,27 @@
     <!-- <p class="detalhes_pet">
       {{ getSexoLabel() }}
     </p> -->
+    @if (typeUser === 'admin' || typeUser === 'vet') {
     <p class="tutor_pet">Responsável: {{ userPet.tutor_name }}</p>
+    }
+@if (typeUser === 'user') {
+  <p class="tutor_pet">
+    Idade:
+    {{
+      userPet.ano_nascimento
+        ? calcIdadePet(userPet.ano_nascimento)
+        : '-'
+    }}
+    anos -
+    {{
+      userPet.ano_nascimento
+        ? (userPet.ano_nascimento | date:'dd/MM/yyyy')
+        : '-'
+    }}
+  </p>
+}
   </div>
+
 
   <div class="botoes_pet">
     <button
@@ -31,7 +51,7 @@
       <span class="btn-text btn-text--menor">Ver</span>
     </button>
 
-    @if (typeUser === 'admin') {
+    @if (typeUser === 'admin' || typeUser === 'user') {
     <button
       type="button"
       class="btn_icon"
@@ -56,7 +76,11 @@
 </article>
 
 @if(editModalOpen){
-<app-modal-edit-pet [pet]="petToEdit!" (close)="closeEditModal()" (save)="savePet($event)" />
+<app-modal-edit-pet
+[pet]="petToEdit!"
+[typeUser]="typeUser"
+(close)="closeEditModal()"
+(save)="savePet($event)" />
 }
 
 @if (deleteModalOpen) {

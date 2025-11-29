@@ -1,4 +1,7 @@
 <article class="card_prescricao_container" [attr.aria-labelledby]="'prescricao-'">
+  @if (loading) {
+    <app-loading></app-loading>
+  }
   <div class="info_prescricao_container">
     <div class="info_prescricao_content">
 			<h2 class="nome_medicamento" [id]="'prescricao'">{{ pet_prescricao.nome_medicamento || 'Medicamento não informado' }}</h2>
@@ -18,7 +21,7 @@
       </button>
       }
       @if (userType === 'admin') {
-      <button type="button" class="btn_icon" (click)="onDelete()" aria-label="Excluir prescrição">
+      <button type="button" class="btn_icon" (click)="onDelete()" aria-label="Excluir prescrição" [disabled]="loading">
         <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">delete</mat-icon>
       </button>
       }

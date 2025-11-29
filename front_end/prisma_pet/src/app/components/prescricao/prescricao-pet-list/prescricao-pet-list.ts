@@ -7,10 +7,11 @@ import { PrescricaoPetModal } from '../prescricao-pet-modal/prescricao-pet-modal
 import { ModalDelete } from '../../modal-delete/modal-delete';
 import { FichaPetService } from '../../../services/ficha-pet-service';
 import { Notification } from '../../../services/notification';
+import { Loading } from '../../loading/loading';
 
 @Component({
   selector: 'app-prescricao-pet-list',
-  imports: [MatIcon, DatePipe, MatExpansionModule, PrescricaoPetModal, ModalDelete],
+  imports: [MatIcon, DatePipe, MatExpansionModule, PrescricaoPetModal, ModalDelete, Loading],
   templateUrl: './prescricao-pet-list.html',
   styleUrl: './prescricao-pet-list.scss',
 })
@@ -21,6 +22,7 @@ export class PrescricaoPetList {
 
   editModalOpen = false;
   deleteModalOpen = false;
+  loading = false;
 
   constructor(
     private fichaService: FichaPetService,
@@ -39,15 +41,18 @@ export class PrescricaoPetList {
   closeDeleteModal() { this.deleteModalOpen = false; }
 
   handleConfirmDelete() {
+    this.loading = true;
     this.fichaService.deletarPrescricao(this.pet_prescricao.id).subscribe({
       next: () => {
         this.notification.success('Prescrição deletada com sucesso!');
         this.delete.emit(this.pet_prescricao);
         this.deleteModalOpen = false;
+        this.loading = false;
       },
       error: (err) => {
         console.log('Erro ao deletar prescrição:', err);
         this.notification.error('Erro ao deletar prescrição.');
+        this.loading = false;
       }
     });
   }

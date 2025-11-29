@@ -15,6 +15,7 @@ import { VeterinarioService } from '../../services/veterinario-service';
 })
 export class ModalEditPet implements OnChanges {
   @Input() pet!: PetInterface;
+  @Input() typeUser: string = '';
   @Output() close = new EventEmitter<void>();
   @Output() save = new EventEmitter<PetInterface>();
 
@@ -39,7 +40,9 @@ export class ModalEditPet implements OnChanges {
       }
 
       // carrega lista de tutores quando o modal abre
+      if (this.typeUser === 'admin') {
       this.loadTutores();
+    }
 
       const sexo: any = this.pet.sexo;
       if (sexo === 1 || sexo === '1' || sexo === true) {
