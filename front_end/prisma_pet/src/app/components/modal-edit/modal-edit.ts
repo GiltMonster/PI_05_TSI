@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
 import { UserInterface } from '../../interfaces';
 import { FormsModule } from '@angular/forms';
 import { UsuarioService } from '../../services/usuario-service';
@@ -16,6 +16,7 @@ export class ModalEdit implements OnChanges {
   @Input() user!: UserInterface;
   @Output() close = new EventEmitter<void>();
   @Output() save = new EventEmitter<UserInterface>();
+  @ViewChild('modalTitle', { static: true }) modalTitle!: ElementRef<HTMLHeadingElement>;
 
   editedUser: UserInterface = {} as UserInterface;
   class_is_required = '';
@@ -57,7 +58,7 @@ export class ModalEdit implements OnChanges {
   onSave() {
     this.loading = true;
     console.log('Salvando usuário editado:', this.editedUser);
-    
+
     this.save.emit(this.editedUser);
     this.usuarioService.updateUser(this.editedUser).subscribe({
       next: (res) => {

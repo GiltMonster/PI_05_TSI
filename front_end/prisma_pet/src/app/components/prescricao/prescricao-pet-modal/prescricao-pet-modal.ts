@@ -4,10 +4,11 @@ import { PetPrescricao, UserInterface } from '../../../interfaces';
 import { UsuarioService } from '../../../services/usuario-service';
 import { FichaPetService } from '../../../services/ficha-pet-service';
 import { Notification } from '../../../services/notification';
+import { Loading } from '../../loading/loading';
 
 @Component({
   selector: 'app-prescricao-pet-modal',
-  imports: [FormsModule],
+  imports: [FormsModule, Loading],
   templateUrl: './prescricao-pet-modal.html',
   styleUrl: './prescricao-pet-modal.scss',
 })
@@ -22,8 +23,9 @@ export class PrescricaoPetModal implements OnInit {
 
   fileToUpload!: File;
   selectedFileName: string = '';
+  loading = false;
 
-  prescricao: PetPrescricao = { } as PetPrescricao;
+  prescricao: PetPrescricao = {} as PetPrescricao;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -41,17 +43,24 @@ export class PrescricaoPetModal implements OnInit {
   onFileSelected(event: any) {
     this.fileToUpload = event.target.files[0];
     this.selectedFileName = this.fileToUpload ? this.fileToUpload.name : '';
-
   }
 
   onSave() {
     console.log(this.fileToUpload);
-    if (!this.prescricao.nome_medicamento || !this.prescricao.dosagem ||
-        !this.prescricao.via || !this.prescricao.posologia || !this.prescricao.farmacia ||
-        !this.prescricao.data_prescricao ) {
+
+    if (
+      !this.prescricao.nome_medicamento ||
+      !this.prescricao.dosagem ||
+      !this.prescricao.via ||
+      !this.prescricao.posologia ||
+      !this.prescricao.farmacia ||
+      !this.prescricao.data_prescricao
+    ) {
       this.notification.error('Dados da prescrição incompletos.');
       return;
     }
+
+    this.loading = true;
 
     if (!this.editMode) {
       this.prescricao = {
@@ -62,52 +71,84 @@ export class PrescricaoPetModal implements OnInit {
 
       this.fichaService.cadastrarPrescricao(this.prescricao).subscribe({
         next: (res) => {
-          this.notification.success('Prescrição cadastrada com sucesso!');
-          this.prescricao = res;
-          console.log(res);
-
+          // this.prescricao = res;
+          this.prescricao = {
+            ...res,
+            pet_id: this.pet_id,
+            vet_id: this.userOperator.id,
+          };
 
           if (this.fileToUpload) {
-            this.fichaService.uploadPrescricaoFile(this.fileToUpload, this.pet_id, res.id).subscribe({
-              next: () => {
-                this.notification.success('Arquivo da prescrição enviado com sucesso!');
-                this.save.emit(this.prescricao);
-              },
-              error: (err) => {
-                console.log('Erro ao enviar arquivo da prescrição:', err);
-                this.notification.error('Erro ao enviar arquivo da prescrição.');
-              }
-            });
+            this.fichaService
+              .uploadPrescricaoFile(this.fileToUpload, this.pet_id, res.id)
+              .subscribe({
+                next: () => {
+                  this.notification.success('Prescrição cadastrada e arquivo enviado com sucesso!');
+                  this.save.emit(this.prescricao);
+                  this.loading = false;
+                  this.close.emit();
+                },
+                error: (err) => {
+                  console.log('Erro ao enviar arquivo da prescrição:', err);
+                  this.notification.error(
+                    'Prescrição cadastrada, mas houve erro ao enviar o arquivo.'
+                  );
+                  this.save.emit(this.prescricao);
+                  this.loading = false;
+                  this.close.emit();
+                },
+              });
+          } else {
+            this.notification.success('Prescrição cadastrada com sucesso!');
+            this.save.emit(this.prescricao);
+            this.loading = false;
+            this.close.emit();
           }
         },
         error: (err) => {
           console.log('Erro ao cadastrar prescrição:', err);
           this.notification.error('Erro ao cadastrar prescrição.');
+          this.loading = false;
           this.close.emit();
-        }
+        },
       });
-
     } else {
+      this.prescricao = {
+        ...this.prescricao,
+        pet_id: this.pet_id,
+        vet_id: this.userOperator.id,
+      };
       this.fichaService.editarPrescricao(this.prescricao).subscribe({
         next: () => {
           this.notification.success('Prescrição editada com sucesso!');
           this.save.emit(this.prescricao);
+          this.loading = false;
+          this.close.emit();
         },
         error: (err) => {
           console.log('Erro ao editar prescrição:', err);
           this.notification.error('Erro ao editar prescrição.');
+          this.loading = false;
           this.close.emit();
-        }
+        },
       });
     }
   }
 
-  onCancel() { this.close.emit(); }
+  onCancel() {
+    if (!this.loading) {
+      this.close.emit();
+    }
+  }
 
   getCurrentUser() {
     this.usuarioService.getUserData().subscribe({
-      next: (res) => { this.userOperator = res; },
-      error: (err) => { console.log('Erro ao obter usuário:', err); }
+      next: (res) => {
+        this.userOperator = res;
+      },
+      error: (err) => {
+        console.log('Erro ao obter usuário:', err);
+      },
     });
   }
 }

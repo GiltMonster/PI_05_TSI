@@ -3,25 +3,43 @@
 
   <div class="header_list_pet">
     <form class="search" role="search" (submit)="onSubmit($event)">
-      <label class="sr-only" for="petSearch">Buscar animais</label>
-      <input id="petSearch" class="search__input" type="search" placeholder="Buscar Animal" autocomplete="off"
-        aria-describedby="Buscar Animal" [(ngModel)]="searchValue" name="searchValue" (ngModelChange)="onSearch()" />
+      <label class="sr-only" for="petSearch" id="petSearchLabel"> Buscar animais </label>
 
-      @if(searchValue !== "") {
+      <input
+        id="petSearch"
+        class="search__input"
+        type="search"
+        placeholder="Buscar animal"
+        autocomplete="off"
+        aria-labelledby="petSearchLabel"
+        aria-describedby="petSearchStatus"
+        [(ngModel)]="searchValue"
+        name="searchValue"
+        (ngModelChange)="onSearch()"
+      />
+
+      @if (searchValue !== "") {
       <button type="button" class="search__clear" aria-label="Limpar busca" (click)="clearSearch()">
         <mat-icon aria-hidden="true">close</mat-icon>
       </button>
       }
 
-      <button type="submit" class="search__btn" aria-label="Buscar">
+      <button type="submit" class="search__btn" aria-label="Buscar animais">
         <mat-icon aria-hidden="true">search</mat-icon>
       </button>
 
-      <span id="Buscar Animais" class="sr-only" aria-live="polite">{{ statusMsg }}</span>
+      <span id="petSearchStatus" class="sr-only" aria-live="polite">
+        {{ statusMsg }}
+      </span>
     </form>
 
     @if (typeUser === 'admin') {
-    <button class="add_pet_button" type="button" aria-label="Cadastrar novo animal" (click)="openCreateModal()">
+    <button
+      class="add_pet_button"
+      type="button"
+      aria-label="Cadastrar novo animal"
+      (click)="openCreateModal()"
+    >
       <mat-icon aria-hidden="true">add</mat-icon>
       <span>Cadastrar Novo Animal</span>
     </button>
@@ -49,11 +67,10 @@
     [pageSizeOptions]="[5, 10, 20]"
     (page)="onPageChange($event)"
     [ariaLabel]="'Paginação da lista de animais'"
-    [showFirstLastButtons]="true">
+    [showFirstLastButtons]="true"
+  >
   </mat-paginator>
-}
-
-  @if (createModalOpen) {
+  } @if (createModalOpen) {
   <app-modal-create-pet (close)="closeCreateModal()" (save)="handlePetCreated({ pet: $event })">
   </app-modal-create-pet>
   }

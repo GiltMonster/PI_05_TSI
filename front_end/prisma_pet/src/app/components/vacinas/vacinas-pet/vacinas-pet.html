@@ -1,19 +1,28 @@
-<section class="tab-content">
+<section
+  class="tab-content"
+  [id]="'tab-vacinas'"
+  role="tabpanel"
+  aria-labelledby="tab-vacinas-btn"
+>
   <div class="container_vacina">
-    <h2>Vacinas do Pet:</h2>
+    <h2 id="vacinas-heading">Vacinas do Animal:</h2>
+
     @if (userType !== 'user') {
-      <button class="add_vacina_button" type="button" aria-label="Cadastrar nova vacina" (click)="openCreateModal()">
+      <button
+        class="add_vacina_button"
+        type="button"
+        aria-label="Cadastrar nova vacina"
+        (click)="openCreateModal()"
+      >
         <mat-icon aria-hidden="true">add</mat-icon>
         <span>Cadastrar uma nova vacina</span>
       </button>
     }
-
   </div>
 
   <div class="resume_vacinas">
-
     <div class="card_resume">
-      <mat-icon aria-hidden="true" style="color: var(--success);">vaccines</mat-icon>
+      <mat-icon aria-hidden="true" style="color: var(--success)">vaccines</mat-icon>
       <h3>{{ vacinasAplicadas }} Aplicadas</h3>
     </div>
 
@@ -26,15 +35,22 @@
       <mat-icon aria-hidden="true" style="color: var(--primary-color)">vaccines</mat-icon>
       <h3>{{ vacinasProgramadas }} Programadas</h3>
     </div>
-
   </div>
 
   @for (vacina of pet_vacinas; track vacina.id) {
-  <app-vacinas-pet-list [pet_vacina]="vacina" [userType]="userType" (delete)="handleVacinaDeleted($event)" />
+    <app-vacinas-pet-list
+      [pet_vacina]="vacina"
+      [userType]="userType"
+      (delete)="handleVacinaDeleted($event)"
+    />
   }
-
 </section>
 
 @if (createModalOpen) {
-  <app-vacinas-pet-modal [pet_id]="pet_id" (close)="closeCreateModal()" (save)="handleVacinaCreated($event)" [editMode]="editModalOpen" />
+  <app-vacinas-pet-modal
+    [pet_id]="pet_id"
+    (close)="closeCreateModal()"
+    (save)="handleVacinaCreated($event)"
+    [editMode]="editModalOpen"
+  />
 }

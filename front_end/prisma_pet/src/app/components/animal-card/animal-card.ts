@@ -5,11 +5,9 @@ import { PetInterface } from '../../interfaces';
 import { PetService } from '../../services/pet-service';
 import { Notification } from '../../services/notification';
 import { ModalEditPet } from '../modal-edit-pet/modal-edit-pet';
-import { UsuarioService } from '../../services/usuario-service';
 import { ModalDelete } from '../modal-delete/modal-delete';
 import { Loading } from '../loading/loading';
 import { Router } from '@angular/router';
-import { UserTypeProviderService } from '../../shared/user-type-service';
 
 @Component({
   selector: 'app-animal-card',
@@ -23,7 +21,6 @@ export class AnimalCard implements OnInit {
   @Input() typeUser: string = '';
   @Output() petDeleted = new EventEmitter<number>();
   @Output() edit = new EventEmitter<PetInterface>();
-  // @Output() tutorLoad = new EventEmitter<{ id: number; tutorName: string }>(); // enviar o nome do tutor pro animallist
 
   editModalOpen = false;
   petToEdit?: PetInterface;
@@ -36,80 +33,10 @@ export class AnimalCard implements OnInit {
   constructor(
     private petService: PetService,
     private notification: Notification,
-    // private userTypeService: UserTypeProviderService,
     private router: Router
   ) {}
 
   ngOnInit(): void {}
-
-  // private loadTutorName() {
-  //   if (!this.userPet.user_id) return;
-
-  //   this.usuarioService.getTutorById(String(this.userPet.user_id)).subscribe({
-  //     next: (user: any) => {
-  //       this.tutorName = user.name;
-
-  //       // avisa o componente quem é o tutor desse pet
-  //       this.tutorLoad.emit({
-  //         id: this.userPet.id,
-  //         tutorName: this.tutorName,
-  //       });
-  //     },
-  //     error: (err) => {
-  //       console.error('Erro ao buscar responsável do pet:', err);
-  //       this.notification.success('Erro ao buscar responsável do pet');
-  //       this.tutorName = '';
-  //     },
-  //   });
-  // }
-
-  // findUserById(petId: number) {
-  //   const tutorId = this.userPet.user_id;
-
-  //   if (!tutorId) {
-  //     this.notification.error('Não foi possível identificar o responsável deste animal.');
-  //     return;
-  //   }
-
-  //   this.loading = true;
-
-  //   this.petService.getPetsByTutorId(tutorId).subscribe({
-  //     next: (res) => {
-  //       const hasPets = res && Array.isArray(res.pets) && res.pets.length > 0;
-
-  //       if (!hasPets) {
-  //         this.notification.error('Este responsável ainda não possui nenhum animal cadastrado.');
-  //         this.loading = false;
-  //         return;
-  //       }
-
-  //       let baseRoute = '';
-
-  //       if (this.typeUser === 'vet') {
-  //         baseRoute = '/vet/ficha';
-  //       } else if (this.typeUser === 'admin') {
-  //         baseRoute = '/admin/ficha';
-  //       } else if (this.typeUser === 'user') {
-  //         baseRoute = '/user/ficha';
-  //       }
-
-  //       this.router.navigate([`${baseRoute}/${tutorId}`], {
-  //         queryParams: { petId },
-  //       });
-
-  //       this.loading = false;
-  //     },
-  //     error: (err) => {
-  //       console.error('Erro ao buscar pets do responsável:', err);
-  //       if (err.status === 404) {
-  //         this.notification.error('Este responsável ainda não possui nenhum animal cadastrado.');
-  //       } else {
-  //         this.notification.error('Não foi possível verificar os animais deste responsável.');
-  //       }
-  //       this.loading = false;
-  //     },
-  //   });
-  // }
 
   findUserById(petId: number) {
   const tutorId = this.userPet.user_id;
@@ -188,7 +115,7 @@ export class AnimalCard implements OnInit {
     this.loading = true;
     // Atualiza a lista de animais com os dados editados
     editedPet.id = this.userPet.id;
-    editedPet.type = editedPet.type || 'vet';
+    editedPet.type = editedPet.type || 'user';
 
     this.petService.updatePet(editedPet).subscribe({
       next: (res) => {
@@ -235,5 +162,21 @@ export class AnimalCard implements OnInit {
       return 'assets/imagens/gato.png';
     }
     return 'assets/imagens/pet-generico.png';
+  }
+
+    calcIdadePet(data_nascimento?: Date): string | number {
+    if (data_nascimento) {
+      const nascimento = new Date(data_nascimento);
+      const hoje = new Date();
+      let idade = hoje.getFullYear() - nascimento.getFullYear();
+      const mes = hoje.getMonth() - nascimento.getMonth();
+
+      if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
+        idade--;
+      }
+
+      return idade;
+    }
+    return '';
   }
 }

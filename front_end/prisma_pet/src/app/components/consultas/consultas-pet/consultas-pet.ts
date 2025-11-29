@@ -1,4 +1,4 @@
-import { Component, input, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ConsultasPetList } from "../consultas-pet-list/consultas-pet-list";
 import { PetConsulta } from '../../../interfaces';
 import { CommonModule } from '@angular/common';
@@ -39,7 +39,12 @@ export class ConsultasPet {
       }
       this.closeCreateModal();
     }
+  }
 
+    handleConsultaUpdated(updated: PetConsulta) {
+    this.pet_consultas = this.pet_consultas.map(c =>
+      c.id === updated.id ? updated : c
+    );
   }
 
   handleConsultaDeleted(deletedPetConsulta: PetConsulta) {

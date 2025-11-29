@@ -53,7 +53,7 @@
   grid-template-columns: 1fr;
 }
 
-/* Form Group */
+
 .form-group {
   display: flex;
   flex-direction: column;
@@ -109,7 +109,6 @@
   color: var(--text-secondary);
 }
 
-/* Button Group */
 .button-group {
   display: flex;
   gap: 1rem;
@@ -164,7 +163,6 @@ textarea.form-input {
 }
 
 
-/* Responsive */
 @media (max-width: 1024px) {
   .sidebar {
     width: 240px;
@@ -208,13 +206,11 @@ textarea.form-input {
   }
 }
 
-/* Focus Visible for Keyboard Navigation */
 *:focus-visible {
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;
 }
 
-/* Screen Reader Only */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -232,4 +228,18 @@ textarea.form-input {
     padding: 1.25rem;
     border-radius: 12px;
   }
+
+  .form-input {
+  width: 100%;
+  padding: 0.6rem 0;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  background-color: var(--white);
 }
+}
+
+

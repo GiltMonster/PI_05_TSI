@@ -1,6 +1,6 @@
 <div class="modal-backdrop">
   <div class="modal-content">
-    <h2 class="form-section__title">Editar Animal</h2>
+    <h2 tabindex="-1" #modalTitle class="form-section__title">Editar Animal</h2>
 
     <form aria-label="Formulário de dados do animal" (ngSubmit)="onSave()">
       <div class="form-grid">
@@ -23,12 +23,7 @@
         <!-- Espécie -->
         <div class="form-group">
           <label for="especie" class="form-label">Espécie</label>
-          <select
-            id="especie"
-            name="especie"
-            class="form-input"
-            [(ngModel)]="editedPet.especie"
-          >
+          <select id="especie" name="especie" class="form-input" [(ngModel)]="editedPet.especie">
             <option value="">Selecione a espécie...</option>
             <option *ngFor="let especie of especies" [value]="especie">
               {{ especie }}
@@ -125,6 +120,7 @@
           />
         </div>
 
+        @if (typeUser === 'admin') {
         <!-- Responsável -->
         <div class="form-group">
           <label for="tutor" class="form-label">Responsável</label>
@@ -149,6 +145,7 @@
             placeholder="Descreva o histórico e o caso clínico do animal..."
           ></textarea>
         </div>
+        }
       </div>
 
       <!-- Buttons -->

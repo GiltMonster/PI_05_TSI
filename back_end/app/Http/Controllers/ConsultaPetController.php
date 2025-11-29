@@ -13,7 +13,7 @@ class ConsultaPetController extends Controller
     public function novaConsulta(Request $request)
     {
         if(Pet::find($request->input('pet_id')) === null){
-            return response()->json(['error' => 'Pet não encontrado'], 404);
+            return response()->json(['error' => 'Animal não encontrado'], 404);
         }
 
         if (Vet::whereIn('type', ['vet', 'admin'])->find($request->input('vet_id')) === null) {
@@ -50,7 +50,7 @@ class ConsultaPetController extends Controller
     {
 
         if(Pet::find($request->input('pet_id')) === null){
-            return response()->json(['error' => 'Pet não encontrado'], 404);
+            return response()->json(['error' => 'Animal não encontrado'], 404);
         }
 
         if (Vet::whereIn('type', ['vet', 'admin'])->find($request->input('vet_id')) === null) {

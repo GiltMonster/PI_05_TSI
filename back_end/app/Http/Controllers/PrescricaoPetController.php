@@ -20,7 +20,7 @@ class PrescricaoPetController extends Controller
 
         if (!Pet::where('id', $petId)->exists()) {
             return response()->json([
-                'message' => 'Pet não encontrado.',
+                'message' => 'Animal não encontrado.',
             ], 404);
         }
 

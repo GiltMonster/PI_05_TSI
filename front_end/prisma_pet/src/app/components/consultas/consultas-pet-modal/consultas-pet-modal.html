@@ -1,65 +1,157 @@
 <div class="modal-backdrop">
-  <div class="modal-content">
-    @if (editMode) {
-      <h2 class="form-section__title">Editar Consulta</h2>
-    } @else {
-      <h2 class="form-section__title">Cadastrar Consulta</h2>
+  @if (loading) {
+    <app-loading></app-loading>
+  }
 
+  <div
+    class="modal-content"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="consulta-modal-title"
+  >
+    @if (editMode) {
+      <h2
+        id="consulta-modal-title"
+        class="form-section__title"
+        tabindex="-1"
+      >
+        Editar Consulta
+      </h2>
+    } @else {
+      <h2
+        id="consulta-modal-title"
+        class="form-section__title"
+        tabindex="-1"
+        #modalTitle
+      >
+        Cadastrar Consulta
+      </h2>
     }
+
     <form aria-label="Formulário de consulta">
       <div class="form-grid">
-
-        <!-- Nome do Veterinário (ou operador que pode ser adm) -->
+        <!-- Nome do Veterinário -->
         <div class="form-group">
           <label for="nome_vet" class="form-label">Nome do Veterinário</label>
-          <input type="text" id="nome_vet" name="nome_vet" class="form-input" [(ngModel)]="userOperator.name"
-            placeholder="Nome do veterinário" disabled />
+          <input
+            type="text"
+            id="nome_vet"
+            name="nome_vet"
+            class="form-input"
+            [(ngModel)]="userOperator.name"
+            placeholder="Nome do veterinário"
+            disabled
+          />
         </div>
 
         <!-- Serviço -->
         <div class="form-group">
-          <label for="servico_list" class="form-label">Serviços:</label>
-          <select id="servico_list" name="servico_list" class="form-input" [(ngModel)]="consulta.servico_id"
-            placeholder="Selecione a especialidade...">
-            <option value="0" selected>Selecione a especialidade...</option>
+          <label
+            for="servico_list"
+            class="form-label form-label--required"
+          >
+            Serviços:
+          </label>
+          <select
+            id="servico_list"
+            name="servico_list"
+            class="form-input"
+            [(ngModel)]="consulta.servico_id"
+            required
+            aria-required="true"
+          >
+            <option value="" disabled selected>Selecione o serviço...</option>
             @for (servico of servicosList; track servico.id) {
-            <option [value]="servico.id">
-              {{ servico.nome }} - {{ servico.preco | currency:'BRL':'symbol':'1.2-2' }}
-            </option>
+              <option [value]="servico.id">
+                {{ servico.nome }} -
+                {{ servico.preco | currency:'BRL':'symbol':'1.2-2' }}
+              </option>
             }
           </select>
         </div>
 
         <!-- Data da Consulta -->
         <div class="form-group">
-          <label for="data_consulta" class="form-label form-label--required">Data da Consulta</label>
-          <input type="date" id="data_consulta" name="data_consulta" class="form-input"
-            [(ngModel)]="consulta.data_consulta" required aria-required="true" />
+          <label
+            for="data_consulta"
+            class="form-label form-label--required"
+          >
+            Data da Consulta
+          </label>
+          <input
+            type="date"
+            id="data_consulta"
+            name="data_consulta"
+            class="form-input"
+            [(ngModel)]="consulta.data_consulta"
+            required
+            aria-required="true"
+          />
         </div>
 
         <!-- Anamnese -->
         <div class="form-group">
-          <label for="anamnese" class="form-label">Anamnese</label>
-          <textarea id="anamnese" name="anamnese" class="form-input" [(ngModel)]="consulta.anamnese"
-            placeholder="Descreva a anamnese..."></textarea>
+          <label
+            for="anamnese"
+            class="form-label form-label--required"
+          >
+            Anamnese
+          </label>
+          <textarea
+            id="anamnese"
+            name="anamnese"
+            class="form-input"
+            [(ngModel)]="consulta.anamnese"
+            required
+            aria-required="true"
+            placeholder="Descreva a anamnese..."
+          ></textarea>
         </div>
-
       </div>
 
       <!-- Buttons -->
       <div class="button-group">
-        <button type="button" class="btn btn--secondary" (click)="onCancel()">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <button
+          type="button"
+          class="btn btn--secondary"
+          (click)="onCancel()"
+          [disabled]="loading"
+        >
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
           Cancelar
         </button>
-        <button type="submit" class="btn btn--primary" (click)="onSave()">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+        <button
+          type="submit"
+          class="btn btn--primary"
+          (click)="onSave()"
+          [disabled]="loading"
+        >
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
             <polyline points="20 6 9 17 4 12"></polyline>
           </svg>
-          Salvar Alterações
+          Salvar
         </button>
       </div>
     </form>

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PetInterface, UserInterface } from '../../interfaces';
 import { PetService } from '../../services/pet-service';
@@ -15,8 +15,10 @@ import { VeterinarioService } from '../../services/veterinario-service';
 })
 export class ModalEditPet implements OnChanges {
   @Input() pet!: PetInterface;
+  @Input() typeUser: string = '';
   @Output() close = new EventEmitter<void>();
   @Output() save = new EventEmitter<PetInterface>();
+  @ViewChild('modalTitle', { static: true }) modalTitle!: ElementRef<HTMLHeadingElement>;
 
   editedPet: PetInterface = {} as PetInterface;
   tutores: UserInterface[] = [];
@@ -39,7 +41,9 @@ export class ModalEditPet implements OnChanges {
       }
 
       // carrega lista de tutores quando o modal abre
+      if (this.typeUser === 'admin') {
       this.loadTutores();
+    }
 
       const sexo: any = this.pet.sexo;
       if (sexo === 1 || sexo === '1' || sexo === true) {

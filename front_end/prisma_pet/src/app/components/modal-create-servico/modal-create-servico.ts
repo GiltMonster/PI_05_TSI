@@ -1,5 +1,5 @@
 // src/app/components/modal-create-service/modal-create-service.ts
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ServicosInterface } from '../../interfaces';
@@ -16,7 +16,8 @@ import { ServicosService } from '../../services/servicos-service';
 })
 export class ModalCreateServico {
   @Output() close = new EventEmitter<void>();
-  @Output() save  = new EventEmitter<ServicosInterface>(); 
+  @Output() save  = new EventEmitter<ServicosInterface>();
+  @ViewChild('modalTitle', { static: true }) modalTitle!: ElementRef<HTMLHeadingElement>;
 
   loading = false;
 

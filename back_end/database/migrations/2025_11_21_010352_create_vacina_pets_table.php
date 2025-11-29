@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('dose_total');
             $table->string('tipo_vacina');
             $table->string('fabricante');
-            $table->string('observacoes');
+            $table->string('observacoes')->nullable();
             $table->string('estado_vacina');
         });
     }

@@ -5,6 +5,30 @@ Sessões ABNT: 5.7, 5.1, 5.3. -->
   <!-- Landmark de navegação com id para aria-controls do botão (ABNT 5.3/5.7) -->
   <nav class="nav_menu_left" id="menu-lateral" aria-label="Menu principal">
     <ul class="ul_menu_left">
+      @for (item of itens; track item) {
+        <li
+          class="li_menu_left"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          #rla="routerLinkActive"
+        >
+          <a
+            [routerLink]="item.link"
+            [attr.aria-current]="rla.isActive ? 'page' : null"
+            (click)="close.emit()"
+          >
+            @if (item.icon) {
+              <mat-icon aria-hidden="true">{{ item.icon }}</mat-icon>
+            }
+            <span>{{ item.label }}</span>
+          </a>
+        </li>
+      }
+    </ul>
+  </nav>
+
+  <!-- <nav class="nav_menu_left" id="menu-lateral" aria-label="Menu principal">
+    <ul class="ul_menu_left">
       @for(item of itens; track item){
       <li
         class="li_menu_left"
@@ -22,5 +46,5 @@ Sessões ABNT: 5.7, 5.1, 5.3. -->
       </li>
       }
     </ul>
-  </nav>
+  </nav> -->
 </section>

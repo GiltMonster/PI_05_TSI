@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserInterface } from '../../interfaces';
@@ -17,6 +17,11 @@ export class ModalCreate {
   @Input() userType: 'user' | 'vet' | 'admin' = 'user';
   @Output() close = new EventEmitter<void>();
   @Output() save  = new EventEmitter<UserInterface>();
+  @ViewChild('modalTitle', { static: true }) modalTitle!: ElementRef<HTMLHeadingElement>;
+
+ngAfterViewInit(): void {
+  this.modalTitle.nativeElement.focus();
+}
 
   createUser: UserInterface = {
     id: 0,
